@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://c3bqbcmkw82u4"]
+
+[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="1_ge2ll"]
+[ext_resource type="Script" uid="uid://b1ryviv2255l7" path="res://Scripts/Components/stats_components.gd" id="2_ygq1y"]
+[ext_resource type="Script" uid="uid://opfqo20o5g51" path="res://Scripts/Components/combat_component.gd" id="3_tx8ge"]
+
+[node name="Enemy" type="Node2D" unique_id=997333012]
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=308569417]
+modulate = Color(1, 0.29803923, 0.4745098, 1)
+texture = ExtResource("1_ge2ll")
+
+[node name="StatsComponent" type="Node" parent="." unique_id=1576638500]
+script = ExtResource("2_ygq1y")
+metadata/_custom_type_script = "uid://b1ryviv2255l7"
+
+[node name="CombatComponent" type="Node" parent="." unique_id=1196188736]
+script = ExtResource("3_tx8ge")
+metadata/_custom_type_script = "uid://opfqo20o5g51"

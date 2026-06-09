@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://dj1icy3xbuxup"]
+
+[ext_resource type="PackedScene" uid="uid://dcsymxftich17" path="res://Scenes/Entities/player.tscn" id="1_k5nkd"]
+[ext_resource type="PackedScene" uid="uid://c3bqbcmkw82u4" path="res://Scenes/Entities/enemy.tscn" id="2_xowij"]
+
+[sub_resource type="Gradient" id="Gradient_rocca"]
+colors = PackedColorArray(0.6, 1, 0.7254902, 1, 0.5882353, 0.84705883, 0.35686275, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2hgl1"]
+gradient = SubResource("Gradient_rocca")
+fill_from = Vector2(0.87391305, 0)
+fill_to = Vector2(0.5173913, 1)
+
+[node name="BattleFieldLayer" type="Node2D" unique_id=397275695]
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=143553374]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 640.0
+offset_top = 360.0
+offset_right = 704.0
+offset_bottom = 424.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_2hgl1")
+
+[node name="PlayerAnchor" type="Marker2D" parent="." unique_id=1393002125]
+position = Vector2(320, 420)
+
+[node name="Player" parent="PlayerAnchor" unique_id=2098688620 instance=ExtResource("1_k5nkd")]
+
+[node name="EnemyAnchor" type="Marker2D" parent="." unique_id=489211444]
+position = Vector2(960, 260)
+
+[node name="Enemy" parent="EnemyAnchor" unique_id=997333012 instance=ExtResource("2_xowij")]

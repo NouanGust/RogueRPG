@@ -1,0 +1,154 @@
+[gd_scene format=3 uid="uid://gt7myqe23rhv"]
+
+[node name="BattleUi" type="Control" unique_id=1435846653]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1642304888]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1635075477]
+layout_mode = 2
+theme_override_constants/separation = 16
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1977733960]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 32
+text = "Batalha"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1276651031]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="PlayerPanel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2061620391]
+custom_minimum_size = Vector2(280, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerPanel" unique_id=1581148003]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerPanel/MarginContainer" unique_id=1966536360]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="PlayerNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerPanel/MarginContainer/VBoxContainer" unique_id=1143244387]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Jogador"
+
+[node name="PlayerHpLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerPanel/MarginContainer/VBoxContainer" unique_id=1907911430]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "HP: 20/20"
+
+[node name="PlayerHpBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/PlayerPanel/MarginContainer/VBoxContainer" unique_id=1394800633]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+max_value = 20.0
+value = 20.0
+show_percentage = false
+
+[node name="EnemyPanel" type="Panel" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=2138346209]
+custom_minimum_size = Vector2(280, 140)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyPanel" unique_id=935391053]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyPanel/MarginContainer" unique_id=1937666543]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="EnemyNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyPanel/MarginContainer/VBoxContainer" unique_id=1683712426]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Inimigo"
+
+[node name="EnemyHpLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyPanel/MarginContainer/VBoxContainer" unique_id=248554296]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "HP: 20/20"
+
+[node name="EnemyHpBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/HBoxContainer/EnemyPanel/MarginContainer/VBoxContainer" unique_id=1319372561]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+max_value = 20.0
+value = 20.0
+show_percentage = false
+
+[node name="LogLabel" type="RichTextLabel" parent="MarginContainer/VBoxContainer" unique_id=352711630]
+custom_minimum_size = Vector2(0, 80)
+layout_mode = 2
+size_flags_vertical = 4
+text = "Logs de batalha"
+
+[node name="Actions" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=369448294]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/Actions" unique_id=588854370]
+layout_mode = 2
+theme_override_constants/margin_left = 12
+theme_override_constants/margin_top = 12
+theme_override_constants/margin_right = 12
+theme_override_constants/margin_bottom = 12
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Actions/MarginContainer" unique_id=1899547934]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Attackbutton" type="Button" parent="MarginContainer/VBoxContainer/Actions/MarginContainer/HBoxContainer" unique_id=20062870]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "ATACAR"
+
+[node name="ItemButton" type="Button" parent="MarginContainer/VBoxContainer/Actions/MarginContainer/HBoxContainer" unique_id=1507528298]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "USAR ITEM"
+
+[node name="EscapeButton" type="Button" parent="MarginContainer/VBoxContainer/Actions/MarginContainer/HBoxContainer" unique_id=110234325]
+custom_minimum_size = Vector2(120, 40)
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+text = "FUGIR"
