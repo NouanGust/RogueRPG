@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="ClassData" format=3 uid="uid://464nrwl5bdmt"]
+
+[ext_resource type="Script" uid="uid://dykg8obmcya8q" path="res://scripts/resources/class_data.gd" id="1_o2r3k"]
+[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="2_qru43"]
+
+[resource]
+script = ExtResource("1_o2r3k")
+id = &"Cleric"
+display_name = "Clérigo"
+sprite = ExtResource("2_qru43")
+base_hp = 8
+base_attack = 2
+base_defense = 2
+strength_dice = 4
+faith_dice = 10
+metadata/_custom_type_script = "uid://dykg8obmcya8q"

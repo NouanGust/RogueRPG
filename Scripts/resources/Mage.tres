@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="ClassData" format=3 uid="uid://djde6f2om1shn"]
+
+[ext_resource type="Script" uid="uid://dykg8obmcya8q" path="res://scripts/resources/class_data.gd" id="1_gr8qq"]
+[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="2_isrnl"]
+
+[resource]
+script = ExtResource("1_gr8qq")
+id = &"Mage"
+display_name = "Mago"
+sprite = ExtResource("2_isrnl")
+base_hp = 6
+base_attack = 2
+strength_dice = 4
+intelligence_dice = 10
+metadata/_custom_type_script = "uid://dykg8obmcya8q"

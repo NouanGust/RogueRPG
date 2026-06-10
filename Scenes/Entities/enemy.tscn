@@ -1,19 +1,28 @@
-[gd_scene format=3 uid="uid://c3bqbcmkw82u4"]
+[gd_scene format=3 uid="uid://rysxpsnha4xb"]
 
-[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="1_ge2ll"]
-[ext_resource type="Script" uid="uid://b1ryviv2255l7" path="res://Scripts/Components/stats_components.gd" id="2_ygq1y"]
-[ext_resource type="Script" uid="uid://opfqo20o5g51" path="res://Scripts/Components/combat_component.gd" id="3_tx8ge"]
+[ext_resource type="Script" uid="uid://kdhw0c46qma0" path="res://scenes/entities/enemy.gd" id="1_jr1g6"]
+[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="2_hlb8m"]
+[ext_resource type="Script" uid="uid://cvctj0pw14gwt" path="res://scripts/components/stats_component.gd" id="3_4fpkd"]
+[ext_resource type="Script" uid="uid://d3tx70s82u3ma" path="res://scripts/components/health_component.gd" id="4_wqw0c"]
+[ext_resource type="Script" uid="uid://b5js5veqeeo81" path="res://scripts/components/combat_component.gd" id="5_onntj"]
 
-[node name="Enemy" type="Node2D" unique_id=997333012]
+[node name="Enemy" type="Node2D" unique_id=384965974]
+script = ExtResource("1_jr1g6")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=308569417]
-modulate = Color(1, 0.29803923, 0.4745098, 1)
-texture = ExtResource("1_ge2ll")
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=924286466]
+modulate = Color(0.72986937, 0.00044790478, 0.7385625, 1)
+texture = ExtResource("2_hlb8m")
 
-[node name="StatsComponent" type="Node" parent="." unique_id=1576638500]
-script = ExtResource("2_ygq1y")
-metadata/_custom_type_script = "uid://b1ryviv2255l7"
+[node name="StatsComponent" type="Node" parent="." unique_id=2031318885]
+script = ExtResource("3_4fpkd")
+metadata/_custom_type_script = "uid://cvctj0pw14gwt"
 
-[node name="CombatComponent" type="Node" parent="." unique_id=1196188736]
-script = ExtResource("3_tx8ge")
-metadata/_custom_type_script = "uid://opfqo20o5g51"
+[node name="HealthComponent" type="Node" parent="." unique_id=401518352]
+script = ExtResource("4_wqw0c")
+metadata/_custom_type_script = "uid://d3tx70s82u3ma"
+
+[node name="CombatComponent" type="Node" parent="." unique_id=1397586298 node_paths=PackedStringArray("stats_component", "health_component")]
+script = ExtResource("5_onntj")
+stats_component = NodePath("../StatsComponent")
+health_component = NodePath("../HealthComponent")
+metadata/_custom_type_script = "uid://b5js5veqeeo81"
