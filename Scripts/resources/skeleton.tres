@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://bfwcvfw2jbpkl"]
+
+[ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://scripts/resources/enemy_data.gd" id="1_is4do"]
+[ext_resource type="Texture2D" uid="uid://eus2n2mjuv0h" path="res://Assets/Images/esqueleto.png" id="2_4xt3r"]
+
+[resource]
+script = ExtResource("1_is4do")
+id = &"Skeleton"
+display_name = "Esqueleto"
+sprite = ExtResource("2_4xt3r")
+base_hp = 10
+base_attack = 2
+stats_dice = 6
+metadata/_custom_type_script = "uid://hcscc6dcxeho"

@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://iaes6od38a84"]
+
+[ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://scripts/resources/enemy_data.gd" id="1_y8p16"]
+[ext_resource type="Texture2D" uid="uid://32xo586sltnc" path="res://Assets/Images/sombra.png" id="2_mtkjo"]
+
+[resource]
+script = ExtResource("1_y8p16")
+id = &"Dark Shadow"
+display_name = "Sombra sombria"
+sprite = ExtResource("2_mtkjo")
+base_hp = 10
+base_attack = 4
+xp_reward = 12
+metadata/_custom_type_script = "uid://hcscc6dcxeho"

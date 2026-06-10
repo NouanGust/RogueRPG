@@ -17,6 +17,8 @@ signal xp_awarded(amount: int)
 @export var player_xp: int = 1
 
 func start_battle(player_class: ClassData, rolled_attributes: Dictionary) -> void:
+	if not GameState.can_enter_battle(): return 
+	
 	player_node.setup(player_class, rolled_attributes)
 	_spawn_enemy_for_level(current_level)
 	
@@ -88,21 +90,22 @@ func enemy_act() -> String:
 	
 
 func _on_player_died() -> void:
-	var reward = enemy_node.enemy_data.xp_reward * current_level
-	player_xp += reward
-	xp_awarded.emit(reward)
-	
-	if current_level >= 3:
-		battle_finished.emit(true)
-		return
-	
-	current_level += 1
-	_spawn_enemy_for_level(current_level)
-	current_turn = "player"
-	turn_chanhed.emit(current_turn)
+	GameState.complete_run(false)
+	battle_finished.emit(false)
 	
 	
 	
 func _on_enemy_died() -> void:
-	battle_finished.emit(false)
+	var reward = enemy_node.enemy_data.xp_reward * GameState.current_level
+	GameState.add_xp(reward)
+	
+	if GameState.is_last_level():
+		GameState.complete_run(true)
+		battle_finished.emit(true)
+		return
+	
+	GameState.advance_level()
+	_spawn_enemy_for_level(GameState.current_level)
+	current_turn = "player"
+	turn_chanhed.emit(current_turn)
 	
