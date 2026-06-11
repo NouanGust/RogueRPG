@@ -1,5 +1,12 @@
 [gd_scene format=3 uid="uid://c6qysnfhwpqvr"]
 
+[ext_resource type="Script" uid="uid://df2h3a3u4fpmf" path="res://Scripts/controllers/class_selection_scene.gd" id="1_6qnta"]
+[ext_resource type="Script" uid="uid://dykg8obmcya8q" path="res://Scripts/resources/class_data.gd" id="2_p326f"]
+[ext_resource type="Resource" uid="uid://djde6f2om1shn" path="res://Scripts/resources/Mage.tres" id="3_4was5"]
+[ext_resource type="Resource" uid="uid://464nrwl5bdmt" path="res://Scripts/resources/Cleric.tres" id="4_uwdue"]
+[ext_resource type="Resource" uid="uid://bqq5xq0x0ap4b" path="res://Scripts/resources/Warrior.tres" id="5_4k4ei"]
+[ext_resource type="PackedScene" uid="uid://dpp2bmi4k3s3o" path="res://Scenes/Run/class_card.tscn" id="6_x7nlm"]
+
 [node name="ClassSelectionScene" type="Control" unique_id=1408903552]
 layout_mode = 3
 anchors_preset = 15
@@ -7,6 +14,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6qnta")
+available_classes = Array[ExtResource("2_p326f")]([ExtResource("3_4was5"), ExtResource("4_uwdue"), ExtResource("5_4k4ei")])
+class_card_scene = ExtResource("6_x7nlm")
 
 [node name="BackgroundPanel" type="Panel" parent="." unique_id=916520412]
 layout_mode = 1

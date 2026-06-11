@@ -21,7 +21,21 @@ func _ready() -> void:
 
 
 func setup(data: ClassData) -> void:
-	pass
+	class_data = data
+	name_label.text = class_data.display_name
+	portrait_rect.texture = class_data.sprite
+	stats_label.text = (
+		"HP Base: %d\nAtaque Base: %d\nDefesa Base: %d\n\nForça d%d\nInteligência d%d\nFé d%d\nAgilidade d%d"
+		% [
+			class_data.base_hp,
+			class_data.base_attack,
+			class_data.base_defense,
+			class_data.strength_dice,
+			class_data.intelligence_dice,
+			class_data.faith_dice,
+			class_data.agility_dice
+		]
+	)
 
 func _on_selected_button_pressed() -> void:
-	pass
+	class_chosen.emit(class_data)
