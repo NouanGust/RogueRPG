@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://dsj1epdnvjd1e"]
 
+[ext_resource type="Script" uid="uid://beii0cjd5fqyo" path="res://scripts/controllers/attribute_roll_scene.gd" id="1_6rb0p"]
+
 [node name="AttributeRollScene" type="Control" unique_id=1832293318]
 layout_mode = 3
 anchors_preset = 15
@@ -7,11 +9,197 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_6rb0p")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=851625227]
+[node name="BackgroundRect" type="ColorRect" parent="." unique_id=851625227]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.45456666, 0.3723694, 0.9252971, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=895129620]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1432379974]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=242992966]
+layout_mode = 2
+theme_override_font_sizes/font_size = 44
+text = "ROLAGEM DE ATRIBUTOS"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ClassInfoPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1959010428]
+layout_mode = 2
+
+[node name="ClassInfoMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel" unique_id=856557975]
+layout_mode = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 16
+
+[node name="ClassInfoVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin" unique_id=1448473365]
+layout_mode = 2
+
+[node name="SelectedClassLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox" unique_id=2143109509]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "CLASSE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InstructionsLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox" unique_id=2094289545]
+layout_mode = 2
+text = "blablab"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AttributeGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox" unique_id=55607732]
+layout_mode = 2
+theme_override_constants/h_separation = 20
+columns = 4
+
+[node name="StrengthPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=546558568]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel" unique_id=1957859108]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="StrengthVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer" unique_id=486052973]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="StrengthNameLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer/StrengthVBox" unique_id=203166615]
+layout_mode = 2
+text = "FORÇA"
+
+[node name="StrengthDiceLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer/StrengthVBox" unique_id=335517596]
+layout_mode = 2
+text = "D5"
+
+[node name="StrengtValueLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer/StrengthVBox" unique_id=1995689002]
+layout_mode = 2
+text = "10"
+
+[node name="StrengthRollButton" type="Button" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer/StrengthVBox" unique_id=1364773458]
+layout_mode = 2
+text = "ROLAR"
+
+[node name="IntelligencePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=1497257100]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel" unique_id=72480854]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="IntelligenceVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer" unique_id=2060915432]
+layout_mode = 2
+
+[node name="IntelligenceNameLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer/IntelligenceVBox" unique_id=1651419781]
+layout_mode = 2
+text = "INTELIGÊNCIA"
+
+[node name="IntelligenceDiceLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer/IntelligenceVBox" unique_id=920615106]
+layout_mode = 2
+
+[node name="IntelligenceValueLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer/IntelligenceVBox" unique_id=571549749]
+layout_mode = 2
+
+[node name="IntelligenceRollButton" type="Button" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer/IntelligenceVBox" unique_id=973262848]
+layout_mode = 2
+text = "ROLAR"
+
+[node name="FaithPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=112933627]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel" unique_id=1912585791]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="FaithVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer" unique_id=373136494]
+layout_mode = 2
+
+[node name="FaithNameLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer/FaithVBox" unique_id=1191998960]
+layout_mode = 2
+text = "FÉ"
+
+[node name="FaithDiceLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer/FaithVBox" unique_id=516275579]
+layout_mode = 2
+
+[node name="FaithValueLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer/FaithVBox" unique_id=1627090927]
+layout_mode = 2
+
+[node name="FaithRollButton" type="Button" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer/FaithVBox" unique_id=377073778]
+layout_mode = 2
+text = "ROLAR"
+
+[node name="AgilityPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=590187000]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel" unique_id=1314678791]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="AgilityVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer" unique_id=1969007213]
+layout_mode = 2
+
+[node name="AgilityNameLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer/AgilityVBox" unique_id=232423830]
+layout_mode = 2
+text = "AGILIDADE"
+
+[node name="AgilityDiceLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer/AgilityVBox" unique_id=1557008438]
+layout_mode = 2
+
+[node name="AgilityValueLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer/AgilityVBox" unique_id=1223201474]
+layout_mode = 2
+
+[node name="AgilityRollButton" type="Button" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer/AgilityVBox" unique_id=1965109648]
+layout_mode = 2
+text = "ROLAR"
+
+[node name="BottomBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1726602811]
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_constants/separation = 20
+alignment = 1
+
+[node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/BottomBar" unique_id=1477633044]
+layout_mode = 2
+text = "VOLTAR"
+
+[node name="RollAllButton" type="Button" parent="MarginContainer/VBoxContainer/BottomBar" unique_id=1105890484]
+layout_mode = 2
+text = "ROLAR TODOS"
+
+[node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer/BottomBar" unique_id=842131318]
+layout_mode = 2
+disabled = true
+text = "CONFIRMAR"
