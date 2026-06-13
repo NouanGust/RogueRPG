@@ -1,6 +1,38 @@
 [gd_scene format=3 uid="uid://dsj1epdnvjd1e"]
 
 [ext_resource type="Script" uid="uid://beii0cjd5fqyo" path="res://scripts/controllers/attribute_roll_scene.gd" id="1_6rb0p"]
+[ext_resource type="PackedScene" uid="uid://bjl1db2okea7h" path="res://scenes/battle/BattleScene.tscn" id="2_8af8v"]
+[ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="2_qltqm"]
+[ext_resource type="PackedScene" uid="uid://c6qysnfhwpqvr" path="res://scenes/run/class_selection_scene.tscn" id="3_axkud"]
+[ext_resource type="Texture2D" uid="uid://bk2fd1a1tnv88" path="res://Assets/UI/dice-solid.png" id="3_q0xwv"]
+[ext_resource type="StyleBox" uid="uid://jwjs7u0sndse" path="res://Assets/Themes/chose_button.tres" id="3_vo54a"]
+[ext_resource type="StyleBox" uid="uid://b4mai6yv25014" path="res://Assets/Themes/chose_button_hover.tres" id="4_2sv62"]
+[ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="6_8af8v"]
+[ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="7_axkud"]
+[ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="8_dvr6p"]
+[ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="9_d1fbd"]
+[ext_resource type="StyleBox" uid="uid://deqy0stw5v850" path="res://Assets/Themes/confirm_button_disable.tres" id="10_d6plq"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qltqm"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2p5jr"]
+bg_color = Color(0, 0, 0, 0.5019608)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b4ehy"]
+texture = ExtResource("2_qltqm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7xcpr"]
+texture = ExtResource("2_qltqm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vo54a"]
+texture = ExtResource("2_qltqm")
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2sv62"]
+texture = ExtResource("2_qltqm")
 
 [node name="AttributeRollScene" type="Control" unique_id=1832293318]
 layout_mode = 3
@@ -10,6 +42,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_6rb0p")
+battle_scene = ExtResource("2_8af8v")
+class_selection_scene = ExtResource("3_axkud")
 
 [node name="BackgroundRect" type="ColorRect" parent="." unique_id=851625227]
 layout_mode = 1
@@ -18,7 +52,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.45456666, 0.3723694, 0.9252971, 1)
+color = Color(0, 0, 0, 1)
+
+[node name="Panel" type="Panel" parent="BackgroundRect" unique_id=652906336]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qltqm")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=895129620]
 layout_mode = 1
@@ -44,6 +87,7 @@ vertical_alignment = 1
 
 [node name="ClassInfoPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1959010428]
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_2p5jr")
 
 [node name="ClassInfoMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel" unique_id=856557975]
 layout_mode = 2
@@ -58,30 +102,34 @@ layout_mode = 2
 [node name="SelectedClassLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox" unique_id=2143109509]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "CLASSE"
+text = "CLASSES"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="InstructionsLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox" unique_id=2094289545]
 layout_mode = 2
-text = "blablab"
+text = "Role os dados e defina os atributos do seu personagem."
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="AttributeGrid" type="GridContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox" unique_id=55607732]
 layout_mode = 2
-theme_override_constants/h_separation = 20
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 60
+theme_override_constants/v_separation = 10
 columns = 4
 
 [node name="StrengthPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=546558568]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_b4ehy")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel" unique_id=1957859108]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="StrengthVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer" unique_id=486052973]
 layout_mode = 2
@@ -91,99 +139,155 @@ alignment = 1
 [node name="StrengthNameLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer/StrengthVBox" unique_id=203166615]
 layout_mode = 2
 text = "FORÇA"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StrengthDiceLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer/StrengthVBox" unique_id=335517596]
 layout_mode = 2
 text = "D5"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StrengtValueLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer/StrengthVBox" unique_id=1995689002]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
 text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="StrengthRollButton" type="Button" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer/StrengthVBox" unique_id=1364773458]
 layout_mode = 2
+size_flags_vertical = 0
+theme_override_styles/normal = ExtResource("3_vo54a")
+theme_override_styles/hover = ExtResource("4_2sv62")
 text = "ROLAR"
+icon = ExtResource("3_q0xwv")
+expand_icon = true
 
 [node name="IntelligencePanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=1497257100]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_7xcpr")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel" unique_id=72480854]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="IntelligenceVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer" unique_id=2060915432]
 layout_mode = 2
+alignment = 1
 
 [node name="IntelligenceNameLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer/IntelligenceVBox" unique_id=1651419781]
 layout_mode = 2
 text = "INTELIGÊNCIA"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="IntelligenceDiceLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer/IntelligenceVBox" unique_id=920615106]
 layout_mode = 2
+text = "D5"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="IntelligenceValueLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer/IntelligenceVBox" unique_id=571549749]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "10"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="IntelligenceRollButton" type="Button" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer/IntelligenceVBox" unique_id=973262848]
 layout_mode = 2
+theme_override_icons/icon = ExtResource("3_q0xwv")
+theme_override_styles/normal = ExtResource("3_vo54a")
+theme_override_styles/hover = ExtResource("4_2sv62")
 text = "ROLAR"
+expand_icon = true
 
 [node name="FaithPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=112933627]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_vo54a")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel" unique_id=1912585791]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="FaithVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer" unique_id=373136494]
 layout_mode = 2
+alignment = 1
 
 [node name="FaithNameLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer/FaithVBox" unique_id=1191998960]
 layout_mode = 2
 text = "FÉ"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="FaithDiceLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer/FaithVBox" unique_id=516275579]
 layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="FaithValueLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer/FaithVBox" unique_id=1627090927]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="FaithRollButton" type="Button" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer/FaithVBox" unique_id=377073778]
 layout_mode = 2
+theme_override_icons/icon = ExtResource("3_q0xwv")
+theme_override_styles/normal = ExtResource("3_vo54a")
+theme_override_styles/hover = ExtResource("4_2sv62")
 text = "ROLAR"
+expand_icon = true
 
 [node name="AgilityPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=590187000]
+custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_2sv62")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel" unique_id=1314678791]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="AgilityVBox" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer" unique_id=1969007213]
 layout_mode = 2
+alignment = 1
 
 [node name="AgilityNameLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer/AgilityVBox" unique_id=232423830]
 layout_mode = 2
 text = "AGILIDADE"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AgilityDiceLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer/AgilityVBox" unique_id=1557008438]
 layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AgilityValueLabel" type="Label" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer/AgilityVBox" unique_id=1223201474]
 layout_mode = 2
+theme_override_font_sizes/font_size = 30
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="AgilityRollButton" type="Button" parent="MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer/AgilityVBox" unique_id=1965109648]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("3_vo54a")
+theme_override_styles/hover = ExtResource("4_2sv62")
 text = "ROLAR"
+icon = ExtResource("3_q0xwv")
+expand_icon = true
 
 [node name="BottomBar" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1726602811]
 layout_mode = 2
@@ -193,13 +297,20 @@ alignment = 1
 
 [node name="BackButton" type="Button" parent="MarginContainer/VBoxContainer/BottomBar" unique_id=1477633044]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("6_8af8v")
+theme_override_styles/hover = ExtResource("7_axkud")
 text = "VOLTAR"
 
 [node name="RollAllButton" type="Button" parent="MarginContainer/VBoxContainer/BottomBar" unique_id=1105890484]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("3_vo54a")
+theme_override_styles/hover = ExtResource("4_2sv62")
 text = "ROLAR TODOS"
 
 [node name="ConfirmButton" type="Button" parent="MarginContainer/VBoxContainer/BottomBar" unique_id=842131318]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("8_dvr6p")
+theme_override_styles/hover = ExtResource("9_d1fbd")
+theme_override_styles/disabled = ExtResource("10_d6plq")
 disabled = true
 text = "CONFIRMAR"

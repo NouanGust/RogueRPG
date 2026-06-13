@@ -1,8 +1,8 @@
 class_name AttributeRollSceneController
 extends Control
 
-@export var battle_scene_path: String = "res://scenes/battle/BattleScene.tscn"
-@export var class_selection_scene_path: String = "res://scenes/run/class_selection_scene.tscn"
+@export var battle_scene: PackedScene
+@export var class_selection_scene: PackedScene
 
 @onready var selected_class_label: Label = $MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/SelectedClassLabel
 @onready var instruction_label: Label = $MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/InstructionsLabel
@@ -38,7 +38,7 @@ var rolled_attributes := {
 
 func _ready() -> void:
 	if GameState.selected_class == null:
-		get_tree().change_scene_to_file(class_selection_scene_path)
+		get_tree().change_scene_to_packed(class_selection_scene)
 		return
 
 	selected_class = GameState.selected_class
@@ -117,7 +117,7 @@ func _on_roll_all_button_pressed() -> void:
 
 func _on_confirm_button_pressed() -> void:
 	GameState.set_rolled_attributes(rolled_attributes)
-	get_tree().change_scene_to_file(battle_scene_path)
+	get_tree().change_scene_to_packed(battle_scene)
 
 func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_file(class_selection_scene_path)
+	get_tree().change_scene_to_packed(class_selection_scene)

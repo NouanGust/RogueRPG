@@ -9,25 +9,11 @@
 [ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://scripts/resources/enemy_data.gd" id="6_qcili"]
 [ext_resource type="Resource" uid="uid://bfwcvfw2jbpkl" path="res://scripts/resources/skeleton.tres" id="7_4ro08"]
 [ext_resource type="Resource" uid="uid://iaes6od38a84" path="res://scripts/resources/shadow.tres" id="8_5u8xp"]
+[ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="9_vvcci"]
 [ext_resource type="Resource" uid="uid://c3vlvd4lj2v86" path="res://scripts/resources/stone_golem.tres" id="9_yvj2l"]
 
 [node name="BattleScene" type="Node2D" unique_id=635572344]
 script = ExtResource("1_t3o3d")
-
-[node name="BattleFieldLayer" type="Node2D" parent="." unique_id=1225463337]
-
-[node name="Background" type="Sprite2D" parent="BattleFieldLayer" unique_id=1197639576]
-position = Vector2(640, 360)
-
-[node name="PlayerAnchor" type="Marker2D" parent="BattleFieldLayer" unique_id=1894067600]
-position = Vector2(260, 360)
-
-[node name="Player" parent="BattleFieldLayer/PlayerAnchor" unique_id=1420870020 instance=ExtResource("2_rpe18")]
-
-[node name="EnemyAnchor" type="Marker2D" parent="BattleFieldLayer" unique_id=2028461806]
-position = Vector2(1010, 240)
-
-[node name="Enemy" parent="BattleFieldLayer/EnemyAnchor" unique_id=384965974 instance=ExtResource("3_vvcci")]
 
 [node name="DiceRoller" type="Node" parent="." unique_id=654538813]
 script = ExtResource("1_jb5ws")
@@ -48,6 +34,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("4_rjp4h")
+
+[node name="ColorRect" type="ColorRect" parent="UILayer/BattleUI" unique_id=745007374]
+visible = false
+z_index = -1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer/BattleUI" unique_id=369604433]
 layout_mode = 1
@@ -131,3 +128,25 @@ text = "ITEM"
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "FUGIR"
+
+[node name="BattleFieldLayer" type="Node2D" parent="." unique_id=1225463337]
+z_index = 3
+
+[node name="Background" type="Sprite2D" parent="BattleFieldLayer" unique_id=1197639576]
+position = Vector2(642.00006, 360.00003)
+scale = Vector2(13.291666, 7.4583344)
+texture = ExtResource("9_vvcci")
+
+[node name="PlayerAnchor" type="Marker2D" parent="BattleFieldLayer" unique_id=1894067600]
+z_index = 3
+position = Vector2(260, 360)
+
+[node name="Player" parent="BattleFieldLayer/PlayerAnchor" unique_id=1420870020 instance=ExtResource("2_rpe18")]
+z_index = 3
+
+[node name="EnemyAnchor" type="Marker2D" parent="BattleFieldLayer" unique_id=2028461806]
+z_index = 3
+position = Vector2(1010, 240)
+
+[node name="Enemy" parent="BattleFieldLayer/EnemyAnchor" unique_id=384965974 instance=ExtResource("3_vvcci")]
+z_index = 3
