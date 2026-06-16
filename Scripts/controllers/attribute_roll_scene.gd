@@ -27,7 +27,6 @@ extends Control
 @onready var roll_all_button: Button = $MarginContainer/VBoxContainer/BottomBar/RollAllButton
 @onready var confirm_button: Button = $MarginContainer/VBoxContainer/BottomBar/ConfirmButton
 
-var rng := RandomNumberGenerator.new()
 var selected_class: ClassData
 var rolled_attributes := {
 	"strength": null,
@@ -42,8 +41,6 @@ func _ready() -> void:
 		return
 
 	selected_class = GameState.selected_class
-	rng.randomize()
-
 	_setup_ui()
 	_connect_buttons()
 
@@ -75,7 +72,7 @@ func _reset_value_labels() -> void:
 	agility_value_label.text = "-"
 
 func _roll_die(sides: int) -> int:
-	return rng.randi_range(1, max(1, sides))
+	return randi_range(1, max(1, sides))
 
 func _update_confirm_state() -> void:
 	confirm_button.disabled = (

@@ -1,16 +1,22 @@
 [gd_scene format=3 uid="uid://blkvvo4kpqyln"]
 
 [ext_resource type="Script" uid="uid://dpni8vpt21kxk" path="res://scenes/entities/player.gd" id="1_d4qa6"]
+[ext_resource type="Shader" uid="uid://bv5mxen2on5ev" path="res://scenes/entities/hit_flash.gdshader" id="2_dnykm"]
 [ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="2_ss7kx"]
 [ext_resource type="Script" uid="uid://cvctj0pw14gwt" path="res://scripts/components/stats_component.gd" id="3_dnykm"]
 [ext_resource type="Script" uid="uid://d3tx70s82u3ma" path="res://scripts/components/health_component.gd" id="4_c5rqy"]
 [ext_resource type="Script" uid="uid://b5js5veqeeo81" path="res://scripts/components/combat_component.gd" id="5_b6tgf"]
 [ext_resource type="Script" uid="uid://bo8sk2d1tobjf" path="res://scripts/components/inventory_component.gd" id="6_73kkf"]
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5rqy"]
+shader = ExtResource("2_dnykm")
+shader_parameter/active = false
+
 [node name="Player" type="Node2D" unique_id=1420870020]
 script = ExtResource("1_d4qa6")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1853199939]
+material = SubResource("ShaderMaterial_c5rqy")
 texture = ExtResource("2_ss7kx")
 
 [node name="StatsComponent" type="Node" parent="." unique_id=2001141586]

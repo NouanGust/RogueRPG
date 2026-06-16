@@ -16,9 +16,10 @@ var current_level: int = 1
 var current_turn: String = "player"
 var player_xp: int = 0
 var battle_active: bool = false
+var action_in_progress: bool = false
 
 const MAX_LEVEL: int = 3
-const ENEMY_TURN_DELAY := 0.8
+const ENEMY_TURN_DELAY := 2
 
 func _ready() -> void:
 	if player_node == null:
@@ -59,7 +60,10 @@ func start_battle() -> void:
 		player_node.health_component.died.connect(_on_player_died)
 	if not enemy_node.health_component.died.is_connected(_on_enemy_died):
 		enemy_node.health_component.died.connect(_on_enemy_died)
-
+	
+	if not player_node.inventory_component.item_used.is_connected(_on_item_used):
+		player_node.inventory_component.item_used.connect(_on_item_used)
+		
 	_on_player_health_changed(player_node.health_component.current_hp, player_node.health_component.max_hp)
 	_on_enemy_health_changed(enemy_node.health_component.current_hp, enemy_node.health_component.max_hp)
 
@@ -82,8 +86,8 @@ func _spawn_enemy_for_level(level: int) -> void:
 
 func _get_level_dice(level: int) -> int:
 	match level:
-		1: return 6
-		2: return 10
+		1: return 4
+		2: return 6
 		3: return 20
 		_: return 20
 
@@ -93,6 +97,7 @@ func _set_turn(new_turn: String) -> void:
 
 	current_turn = new_turn
 	turn_changed.emit(current_turn)
+	
 
 	if current_turn == "enemy":
 		ui.set_turn_text("Turno do inimigo")
@@ -100,54 +105,95 @@ func _set_turn(new_turn: String) -> void:
 		if battle_active and current_turn == "enemy":
 			await enemy_act()
 	else:
+		player_node.stats_component.tick_buffs()
 		ui.set_turn_text("Sua vez")
 
-func player_attack() -> String:
-	if not battle_active or current_turn != "player":
-		return ""
-
+func player_attack() -> void:
+	if not battle_active or current_turn != "player" or action_in_progress:
+		return
+	
+	action_in_progress = true
 	var damage := player_node.combat_component.attack(enemy_node.stats_component, enemy_node.health_component)
-	ui.log_str("Você atacou e causou %d de dano." % damage)
+	
+	trigger_hit_pause(0.08)
+	
+	ui.log_damage("Você atacou e causou %d de dano." % damage)
 
 	if enemy_node.health_component.current_hp <= 0:
-		return "enemy_dead"
+		action_in_progress = false
+		return
 
 	await _set_turn("enemy")
-	return "attack_resolved"
+	action_in_progress = false
 
 func player_use_item() -> void:
 	if not battle_active or current_turn != "player":
 		return
 	ui.open_item_menu()
 
-func player_escape() -> String:
-	if not battle_active or current_turn != "player":
-		return ""
-
+func player_escape() -> void:
+	if not battle_active:
+		get_tree().change_scene_to_file("res://scenes/run/main_menu_scene.tscn")
+		return
+	
+	
+	if not battle_active or current_turn != "player" or action_in_progress:
+		return 
+		
+	action_in_progress = true
+	
 	var result := dice_roller.roll(20)
 	if result >= 10:
 		ui.log_str("Você fugiu da batalha.")
 		battle_active = false
 		GameState.complete_run(false)
 		battle_finished.emit(false)
-		return "escaped"
+		action_in_progress = false
+		return 
 
 	ui.log_str("Falha ao fugir. Você perdeu o turno.")
 	await _set_turn("enemy")
-	return "escape_failed"
+	action_in_progress = false
 
-func enemy_act() -> String:
+func enemy_act() -> void:
 	if not battle_active or current_turn != "enemy":
-		return ""
+		return 
 
 	var damage := enemy_node.combat_component.attack(player_node.stats_component, player_node.health_component)
-	ui.log_str("O inimigo atacou e causou %d de dano." % damage)
-
+	ui.log_damage("O inimigo atacou e causou %d de dano." % damage)
+	
+	trigger_hit_pause(0.08)
+	
 	if player_node.health_component.current_hp <= 0:
-		return "player_dead"
+		return 
 
 	await _set_turn("player")
-	return "enemy_resolved"
+
+
+func use_specific_item(id: int) -> void:
+	if not battle_active or current_turn != "player" or action_in_progress:
+		return
+	
+	action_in_progress = true
+	var item_used_sucessfully: bool = false
+	
+	if id == 0:
+		item_used_sucessfully = player_node.inventory_component.use_potions(player_node.health_component)
+	elif id == 1:
+		item_used_sucessfully = player_node.inventory_component.use_elixir(player_node.stats_component)
+	
+	if item_used_sucessfully:
+		await _set_turn("enemy")
+	else:
+		ui.log_str("Não foi possivel usar o item.")
+		
+	action_in_progress = false
+	
+
+func _on_item_used(item_id: StringName, message: String) -> void:
+	ui.log_heal(message)
+
+
 
 func _on_enemy_died() -> void:
 	if not battle_active:
@@ -157,6 +203,17 @@ func _on_enemy_died() -> void:
 	GameState.add_xp(reward)
 	player_xp += reward
 	ui.log_str("Inimigo derrotado! +%d XP." % reward)
+	
+	var drop_roll: float = randf()
+	if drop_roll <= 0.4:
+		var is_potion: float = randf()
+		if is_potion:
+			player_node.inventory_component.potions += 1
+			ui.log_str("O inimigo dropou uma Poção!")
+		else:
+			player_node.inventory_component.elixirs += 1
+			ui.log_str("O inimigo dropou um Elixir!")
+	
 
 	if current_level >= MAX_LEVEL:
 		battle_active = false
@@ -176,7 +233,7 @@ func _on_player_died() -> void:
 		return
 
 	battle_active = false
-	ui.log_str("Você foi derrotado. Permadeath.")
+	ui.log_damage("Você foi derrotado. Permadeath.")
 	GameState.complete_run(false)
 	battle_finished.emit(false)
 
@@ -185,3 +242,12 @@ func _on_player_health_changed(current: int, maximum: int) -> void:
 
 func _on_enemy_health_changed(current: int, maximum: int) -> void:
 	ui.update_enemy_health(current, maximum)
+
+
+
+# --- Utils ---
+
+func trigger_hit_pause(duration: float = 0.05) -> void:
+	Engine.time_scale = 0.0
+	await get_tree().create_timer(duration, true, false, true).timeout
+	Engine.time_scale = 1.0

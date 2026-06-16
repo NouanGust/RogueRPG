@@ -9,4 +9,4 @@ id = &"Stone Golem"
 display_name = "Golem de Pedra"
 sprite = ExtResource("2_ccw2s")
 base_hp = 20
-base_defense = 3
+base_defense = 2
