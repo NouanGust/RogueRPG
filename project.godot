@@ -11,12 +11,14 @@ config_version=5
 [application]
 
 config/name="RogueRPG"
+run/main_scene="uid://dp2ndfv4ha31q"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 GameState="*uid://cd1h37qc64tjy"
+SceneTransition="*uid://c350budg7i61"
 
 [display]
 

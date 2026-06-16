@@ -5,15 +5,15 @@ signal attack_pressed
 signal item_pressed
 signal escape_pressed
 
-@onready var title_label: Label = $MarginContainer/VBoxContainer/TitleLabel
-@onready var log_label: RichTextLabel = $MarginContainer/VBoxContainer/LogPanel/LogPanel
+@onready var title_label: Label = $MarginContainer/VBoxContainer/PanelContainer/TitleLabel
+@onready var log_label: RichTextLabel = $MarginContainer/VBoxContainer/Actions/HBoxContainer/LogPanel/LogPanel
 
-@onready var player_hp_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/PlayerPanel/HPLabel
-@onready var enemy_hp_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/EnemyPanel/HPLabel
+@onready var player_hp_label: Label = $MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer/PlayerHPLAbel
+@onready var enemy_hp_label: Label = $MarginContainer/VBoxContainer/EnemyPanel/HPLabel
 
-@onready var attack_button: Button = $MarginContainer/VBoxContainer/Actions/ActionsRow/AttackButton
-@onready var item_button: Button = $MarginContainer/VBoxContainer/Actions/ActionsRow/ItemButton
-@onready var escape_button: Button = $MarginContainer/VBoxContainer/Actions/ActionsRow/EscapeButton
+@onready var attack_button: Button = $MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow/AttackButton
+@onready var item_button: Button = $MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow/ItemButton
+@onready var escape_button: Button = $MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow/EscapeButton
 
 var controller: BattleController
 var item_menu: PopupMenu

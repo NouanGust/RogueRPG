@@ -4,8 +4,16 @@
 [ext_resource type="PackedScene" uid="uid://c6qysnfhwpqvr" path="res://scenes/run/class_selection_scene.tscn" id="2_5j2ff"]
 [ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="2_sjvrc"]
 [ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="3_1badp"]
+[ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="3_hjgfb"]
 [ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="4_ikn50"]
 [ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="5_5j2ff"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_87n53"]
+texture = ExtResource("3_hjgfb")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
 
 [node name="MainMenuScene" type="Control" unique_id=79255151]
 layout_mode = 3
@@ -17,14 +25,18 @@ grow_vertical = 2
 script = ExtResource("1_vk6xk")
 class_selection_scene = ExtResource("2_5j2ff")
 
-[node name="ColorRect" type="ColorRect" parent="." unique_id=1757178175]
+[node name="ColorRect" type="Panel" parent="." unique_id=1978640343]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 2.0
+offset_bottom = 2.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0, 0, 0, 1)
+theme_override_styles/panel = SubResource("StyleBoxTexture_87n53")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=532722788]
 layout_mode = 1
@@ -38,11 +50,32 @@ theme_override_constants/margin_top = 32
 theme_override_constants/margin_right = 32
 theme_override_constants/margin_bottom = 32
 
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1902680414]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=678245180]
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "ROGUE RPG"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=76457700]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Role dados e tente chegar ao fim!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="ButtonsVBox" type="VBoxContainer" parent="MarginContainer" unique_id=501225137]
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 10
+size_flags_vertical = 6
 theme_override_constants/separation = 40
 
 [node name="NewRunButton" type="Button" parent="MarginContainer/ButtonsVBox" unique_id=1791480533]
@@ -60,23 +93,14 @@ theme_override_styles/normal = ExtResource("4_ikn50")
 theme_override_styles/hover = ExtResource("5_5j2ff")
 text = "SAIR"
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1902680414]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme_override_constants/separation = 50
-alignment = 1
-
-[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=678245180]
-layout_mode = 2
-theme_override_font_sizes/font_size = 120
-text = "ROGUE RPG"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SubtitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=76457700]
-layout_mode = 2
-theme_override_font_sizes/font_size = 28
-text = "Role dados e tente chegar ao fim!"
-horizontal_alignment = 1
-vertical_alignment = 1
+[node name="Label" type="Label" parent="." unique_id=1609975694]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 26.0
+offset_top = -32.0
+offset_right = 111.0
+offset_bottom = -9.0
+grow_vertical = 0
+text = "0.0.1 Alpha"

@@ -12,7 +12,8 @@ func _ready() -> void:
 
 func _on_new_run_button_pressed() -> void:
 	GameState.start_new_run()
-	get_tree().change_scene_to_packed(class_selection_scene)
+	SceneTransition.change_scene("res://scenes/run/class_selection_scene.tscn")
+	#get_tree().change_scene_to_packed()
 
 func _on_quit_button_pressed() -> void:
 	get_tree().quit()

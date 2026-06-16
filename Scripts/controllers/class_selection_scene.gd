@@ -40,8 +40,8 @@ func _on_confirm_button_pressed() -> void:
 	if selected_class == null:
 		return
 
-	get_tree().change_scene_to_file(next_scene_path)
+	SceneTransition.change_scene("res://scenes/run/attribute_roll_scene.tscn")
 
 func _on_back_button_pressed() -> void:
 	GameState.reset_run()
-	get_tree().change_scene_to_file("res://scenes/run/main_menu_scene.tscn")
+	SceneTransition.change_scene("res://scenes/run/main_menu_scene.tscn")

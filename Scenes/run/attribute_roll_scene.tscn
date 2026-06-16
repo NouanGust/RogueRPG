@@ -14,6 +14,11 @@
 [ext_resource type="StyleBox" uid="uid://deqy0stw5v850" path="res://Assets/Themes/confirm_button_disable.tres" id="10_d6plq"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qltqm"]
+texture = ExtResource("2_qltqm")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2p5jr"]
 bg_color = Color(0, 0, 0, 0.5019608)
@@ -45,16 +50,7 @@ script = ExtResource("1_6rb0p")
 battle_scene = ExtResource("2_8af8v")
 class_selection_scene = ExtResource("3_axkud")
 
-[node name="BackgroundRect" type="ColorRect" parent="." unique_id=851625227]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0, 0, 0, 1)
-
-[node name="Panel" type="Panel" parent="BackgroundRect" unique_id=652906336]
+[node name="Panel" type="Panel" parent="." unique_id=652906336]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0

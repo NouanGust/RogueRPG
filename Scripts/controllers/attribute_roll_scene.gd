@@ -114,7 +114,7 @@ func _on_roll_all_button_pressed() -> void:
 
 func _on_confirm_button_pressed() -> void:
 	GameState.set_rolled_attributes(rolled_attributes)
-	get_tree().change_scene_to_packed(battle_scene)
+	SceneTransition.change_scene("res://scenes/battle/BattleScene.tscn")
 
 func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_packed(class_selection_scene)
+	SceneTransition.change_scene("res://scenes/run/class_selection_scene.tscn")

@@ -6,14 +6,19 @@
 [ext_resource type="Resource" uid="uid://464nrwl5bdmt" path="res://scripts/resources/Cleric.tres" id="4_uwdue"]
 [ext_resource type="Resource" uid="uid://bqq5xq0x0ap4b" path="res://scripts/resources/Warrior.tres" id="5_4k4ei"]
 [ext_resource type="PackedScene" uid="uid://dpp2bmi4k3s3o" path="res://scenes/run/class_card.tscn" id="6_x7nlm"]
+[ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="7_3f2pb"]
 [ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="7_ud13x"]
 [ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="8_3f2pb"]
 [ext_resource type="StyleBox" uid="uid://deqy0stw5v850" path="res://Assets/Themes/confirm_button_disable.tres" id="9_5eocb"]
 [ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="10_484d7"]
 [ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="11_dtxpx"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ud13x"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_5eocb"]
+texture = ExtResource("7_3f2pb")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
 
 [node name="ClassSelectionScene" type="Control" unique_id=1408903552]
 layout_mode = 3
@@ -33,7 +38,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_ud13x")
+theme_override_styles/panel = SubResource("StyleBoxTexture_5eocb")
 
 [node name="MarginContainer" type="MarginContainer" parent="BackgroundPanel" unique_id=133468362]
 layout_mode = 1
