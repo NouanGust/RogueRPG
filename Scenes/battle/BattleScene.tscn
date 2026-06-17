@@ -1,16 +1,16 @@
 [gd_scene format=3 uid="uid://bjl1db2okea7h"]
 
-[ext_resource type="Script" uid="uid://8kwf686gj1kl" path="res://scripts/components/dice_roller.gd" id="1_jb5ws"]
-[ext_resource type="Script" uid="uid://dencu6ype82ob" path="res://scenes/battle/battle_scene.gd" id="1_t3o3d"]
-[ext_resource type="PackedScene" uid="uid://blkvvo4kpqyln" path="res://scenes/entities/player.tscn" id="2_rpe18"]
-[ext_resource type="Script" uid="uid://cm5gejak3jpgh" path="res://scripts/controllers/battle_controller.gd" id="2_vd1me"]
-[ext_resource type="PackedScene" uid="uid://rysxpsnha4xb" path="res://scenes/entities/enemy.tscn" id="3_vvcci"]
-[ext_resource type="Script" uid="uid://jnenpcaop27n" path="res://scenes/battle/battle_ui.gd" id="4_rjp4h"]
-[ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://scripts/resources/enemy_data.gd" id="6_qcili"]
-[ext_resource type="Resource" uid="uid://bfwcvfw2jbpkl" path="res://scripts/resources/skeleton.tres" id="7_4ro08"]
-[ext_resource type="Resource" uid="uid://iaes6od38a84" path="res://scripts/resources/shadow.tres" id="8_5u8xp"]
-[ext_resource type="PackedScene" uid="uid://2vo5yre3vjgh" path="res://scenes/entities/damage_text.tscn" id="8_vpuc1"]
-[ext_resource type="Resource" uid="uid://c3vlvd4lj2v86" path="res://scripts/resources/stone_golem.tres" id="9_yvj2l"]
+[ext_resource type="Script" uid="uid://8kwf686gj1kl" path="res://Scripts/Components/dice_roller.gd" id="1_jb5ws"]
+[ext_resource type="Script" uid="uid://dencu6ype82ob" path="res://Scenes/battle/battle_scene.gd" id="1_t3o3d"]
+[ext_resource type="PackedScene" uid="uid://blkvvo4kpqyln" path="res://Scenes/Entities/player.tscn" id="2_rpe18"]
+[ext_resource type="Script" uid="uid://cm5gejak3jpgh" path="res://Scripts/controllers/battle_controller.gd" id="2_vd1me"]
+[ext_resource type="PackedScene" uid="uid://rysxpsnha4xb" path="res://Scenes/Entities/enemy.tscn" id="3_vvcci"]
+[ext_resource type="Script" uid="uid://jnenpcaop27n" path="res://Scenes/battle/battle_ui.gd" id="4_rjp4h"]
+[ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://Scripts/resources/enemy_data.gd" id="6_qcili"]
+[ext_resource type="Resource" uid="uid://bfwcvfw2jbpkl" path="res://Scripts/resources/skeleton.tres" id="7_4ro08"]
+[ext_resource type="Resource" uid="uid://iaes6od38a84" path="res://Scripts/resources/shadow.tres" id="8_5u8xp"]
+[ext_resource type="PackedScene" uid="uid://2vo5yre3vjgh" path="res://Scenes/Entities/damage_text.tscn" id="8_vpuc1"]
+[ext_resource type="Resource" uid="uid://c3vlvd4lj2v86" path="res://Scripts/resources/stone_golem.tres" id="9_yvj2l"]
 [ext_resource type="Texture2D" uid="uid://b1psxojoqg768" path="res://Assets/Background/sky.png" id="11_4rstf"]
 [ext_resource type="Texture2D" uid="uid://c8xu5mphlnx5k" path="res://Assets/UI/panel-border-022.png" id="12_qcili"]
 [ext_resource type="Texture2D" uid="uid://x4f4hqpx1pdt" path="res://Assets/Background/hills&trees.png" id="12_vpuc1"]
@@ -90,34 +90,38 @@ z_index = 10
 [node name="Parallax" type="Node2D" parent="BattleFieldLayer" unique_id=528505335]
 z_index = -5
 
-[node name="Parallax2D" type="Parallax2D" parent="BattleFieldLayer/Parallax" unique_id=710582908]
+[node name="Fundo" type="Parallax2D" parent="BattleFieldLayer/Parallax" unique_id=710582908]
+scroll_scale = Vector2(0.1, 0.1)
 repeat_size = Vector2(200, 200)
 autoscroll = Vector2(0.5, 0.5)
 
-[node name="Sprite2D" type="Sprite2D" parent="BattleFieldLayer/Parallax/Parallax2D" unique_id=1589397028]
+[node name="Sprite2D" type="Sprite2D" parent="BattleFieldLayer/Parallax/Fundo" unique_id=1589397028]
 scale = Vector2(0.66510415, 0.6675926)
 texture = ExtResource("11_4rstf")
 centered = false
 
-[node name="Parallax2D3" type="Parallax2D" parent="BattleFieldLayer/Parallax" unique_id=284810112]
+[node name="Médio" type="Parallax2D" parent="BattleFieldLayer/Parallax" unique_id=284810112]
 texture_filter = 1
+scroll_scale = Vector2(0.5, 0.5)
 repeat_size = Vector2(150, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="BattleFieldLayer/Parallax/Parallax2D3" unique_id=1183163149]
+[node name="Sprite2D" type="Sprite2D" parent="BattleFieldLayer/Parallax/Médio" unique_id=1183163149]
 scale = Vector2(0.66510415, 0.6675926)
 texture = ExtResource("12_vpuc1")
 centered = false
 
 [node name="Parallax2D4" type="Parallax2D" parent="BattleFieldLayer/Parallax" unique_id=493918369]
+scroll_scale = Vector2(0, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BattleFieldLayer/Parallax/Parallax2D4" unique_id=2092193850]
 scale = Vector2(0.66510415, 0.6675926)
 texture = ExtResource("13_5b2op")
 centered = false
 
-[node name="Parallax2D2" type="Parallax2D" parent="BattleFieldLayer/Parallax" unique_id=1722199824]
+[node name="Topo" type="Parallax2D" parent="BattleFieldLayer/Parallax" unique_id=1722199824]
+scroll_scale = Vector2(0, 0)
 
-[node name="Sprite2D" type="Sprite2D" parent="BattleFieldLayer/Parallax/Parallax2D2" unique_id=591444421]
+[node name="Sprite2D" type="Sprite2D" parent="BattleFieldLayer/Parallax/Topo" unique_id=591444421]
 scale = Vector2(0.66510415, 0.6675926)
 texture = ExtResource("14_xvy46")
 centered = false
