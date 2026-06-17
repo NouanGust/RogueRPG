@@ -7,6 +7,10 @@
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i4ldi"]
 texture = ExtResource("1_fnm7h")
+texture_margin_left = 10.0
+texture_margin_top = 10.0
+texture_margin_right = 10.0
+texture_margin_bottom = 10.0
 
 [node name="ClassCard" type="PanelContainer" unique_id=693902714]
 custom_minimum_size = Vector2(320, 260)

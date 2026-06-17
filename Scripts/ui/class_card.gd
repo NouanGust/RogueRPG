@@ -16,6 +16,7 @@ signal class_chosen(class_data: ClassData)
 
 func _ready() -> void:
 	confirm_button.pressed.connect(_on_selected_button_pressed)
+	confirm_button.mouse_entered.connect(_on_selected_button_hovered)
 	if class_data != null:
 		setup(class_data)
 
@@ -38,4 +39,8 @@ func setup(data: ClassData) -> void:
 	)
 
 func _on_selected_button_pressed() -> void:
+	AudioManager.play_ui_choose()
 	class_chosen.emit(class_data)
+	
+func _on_selected_button_hovered() -> void:
+	AudioManager.play_ui_hover()

@@ -13,6 +13,14 @@ signal battle_finished(player_won: bool)
 @export var enemy_pool: Array[EnemyData] = []
 @export var damage_text_scene: PackedScene
 
+# --- SFX ---
+@export_group("SFX")
+@export var attack_sfx: AudioStream
+@export var hurt_sfx: AudioStream
+@export var dice_sfx: AudioStream
+@export var item_sfx: AudioStream
+@export var heal_sfx: AudioStream
+
 var current_level: int = 1
 var current_turn: String = "player"
 var player_xp: int = 0
@@ -137,13 +145,15 @@ func player_attack() -> void:
 	action_in_progress = true
 	var damage := player_node.combat_component.attack(enemy_node.stats_component, enemy_node.health_component)
 	
+	AudioManager.play_sfx(attack_sfx)
+	trigger_hit_pause(0.08)
+	
 	if damage_text_scene:
 		var text_node = damage_text_scene.instantiate()
 		add_child(text_node)
 		var spawn_pos = enemy_node.global_position + Vector2(0, -30)
 		text_node.start(damage, spawn_pos, damage >=5)
 	
-	#trigger_hit_pause(0.08)
 	
 	ui.log_damage("Você atacou e causou %d de dano." % damage)
 

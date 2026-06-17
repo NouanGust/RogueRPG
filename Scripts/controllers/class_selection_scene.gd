@@ -13,7 +13,9 @@ var selected_class: ClassData
 
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_button_pressed)
+	back_button.mouse_entered.connect(_on_back_button_hovered)
 	confirm_button.pressed.connect(_on_confirm_button_pressed)
+	confirm_button.mouse_entered.connect(_on_confirm_button_hovered)
 	confirm_button.disabled = true
 
 	if not GameState.run_active:
@@ -39,9 +41,17 @@ func _on_class_chosen(class_data: ClassData) -> void:
 func _on_confirm_button_pressed() -> void:
 	if selected_class == null:
 		return
+	AudioManager.play_ui_click()
 
 	SceneTransition.change_scene("res://scenes/run/attribute_roll_scene.tscn")
 
+func _on_confirm_button_hovered() -> void:
+	AudioManager.play_ui_hover()
+
 func _on_back_button_pressed() -> void:
+	AudioManager.play_ui_cancel()
 	GameState.reset_run()
 	SceneTransition.change_scene("res://scenes/run/main_menu_scene.tscn")
+
+func _on_back_button_hovered() -> void:
+	AudioManager.play_ui_hover()

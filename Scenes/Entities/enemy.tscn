@@ -1,11 +1,11 @@
 [gd_scene format=3 uid="uid://rysxpsnha4xb"]
 
-[ext_resource type="Script" uid="uid://kdhw0c46qma0" path="res://Scenes/Entities/enemy.gd" id="1_jr1g6"]
-[ext_resource type="Shader" uid="uid://bv5mxen2on5ev" path="res://Scenes/Entities/hit_flash.gdshader" id="2_4fpkd"]
+[ext_resource type="Script" uid="uid://kdhw0c46qma0" path="res://scenes/entities/enemy.gd" id="1_jr1g6"]
+[ext_resource type="Shader" uid="uid://bv5mxen2on5ev" path="res://scenes/entities/hit_flash.gdshader" id="2_4fpkd"]
 [ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="2_hlb8m"]
-[ext_resource type="Script" uid="uid://cvctj0pw14gwt" path="res://Scripts/Components/stats_component.gd" id="3_4fpkd"]
-[ext_resource type="Script" uid="uid://d3tx70s82u3ma" path="res://Scripts/Components/health_component.gd" id="4_wqw0c"]
-[ext_resource type="Script" uid="uid://b5js5veqeeo81" path="res://Scripts/Components/combat_component.gd" id="5_onntj"]
+[ext_resource type="Script" uid="uid://cvctj0pw14gwt" path="res://scripts/components/stats_component.gd" id="3_4fpkd"]
+[ext_resource type="Script" uid="uid://d3tx70s82u3ma" path="res://scripts/components/health_component.gd" id="4_wqw0c"]
+[ext_resource type="Script" uid="uid://b5js5veqeeo81" path="res://scripts/components/combat_component.gd" id="5_onntj"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wqw0c"]
 shader = ExtResource("2_4fpkd")
@@ -18,8 +18,8 @@ script = ExtResource("1_jr1g6")
 
 [node name="Sprite2D2" type="Sprite2D" parent="." unique_id=408008699]
 modulate = Color(0, 0, 0, 0.56)
-position = Vector2(0, 26)
-scale = Vector2(0.1, 0.3)
+position = Vector2(0, 86)
+scale = Vector2(0.50000006, 0.056250002)
 texture = ExtResource("2_hlb8m")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=924286466]

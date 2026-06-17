@@ -58,12 +58,19 @@ func _setup_ui() -> void:
 func _connect_buttons() -> void:
 	back_button.pressed.connect(_on_back_button_pressed)
 	roll_all_button.pressed.connect(_on_roll_all_button_pressed)
+	back_button.mouse_entered.connect(_on_back_button_hovered)
+	roll_all_button.mouse_entered.connect(_on_roll_all_button_hovered)
 	confirm_button.pressed.connect(_on_confirm_button_pressed)
+	confirm_button.mouse_entered.connect(_on_confirm_button_hovered)
 
 	strength_roll_button.pressed.connect(_on_strength_roll_button_pressed)
 	intelligence_roll_button.pressed.connect(_on_intelligence_roll_button_pressed)
 	faith_roll_button.pressed.connect(_on_faith_roll_button_pressed)
 	agility_roll_button.pressed.connect(_on_agility_roll_button_pressed)
+	strength_roll_button.mouse_entered.connect(_on_strength_roll_button_hovered)
+	intelligence_roll_button.mouse_entered.connect(_on_intelligence_roll_button_hovered)
+	faith_roll_button.mouse_entered.connect(_on_faith_roll_button_hovered)
+	agility_roll_button.mouse_entered.connect(_on_agility_roll_button_hovered)
 
 func _reset_value_labels() -> void:
 	strength_value_label.text = "-"
@@ -83,38 +90,66 @@ func _update_confirm_state() -> void:
 	)
 
 func _on_strength_roll_button_pressed() -> void:
+	AudioManager.play_single_dice()
 	var result := _roll_die(selected_class.strength_dice)
 	rolled_attributes["strength"] = result
 	strength_value_label.text = str(result)
 	_update_confirm_state()
 
+func _on_strength_roll_button_hovered() -> void:
+	AudioManager.play_ui_hover()
+
 func _on_intelligence_roll_button_pressed() -> void:
+	AudioManager.play_single_dice()
 	var result := _roll_die(selected_class.intelligence_dice)
 	rolled_attributes["intelligence"] = result
 	intelligence_value_label.text = str(result)
 	_update_confirm_state()
 
+func _on_intelligence_roll_button_hovered() -> void:
+	AudioManager.play_ui_hover()
+
 func _on_faith_roll_button_pressed() -> void:
+	AudioManager.play_single_dice()
 	var result := _roll_die(selected_class.faith_dice)
 	rolled_attributes["faith"] = result
 	faith_value_label.text = str(result)
 	_update_confirm_state()
 
+func _on_faith_roll_button_hovered() -> void:
+	AudioManager.play_ui_hover()
+
 func _on_agility_roll_button_pressed() -> void:
+	AudioManager.play_single_dice()
 	var result := _roll_die(selected_class.agility_dice)
 	rolled_attributes["agility"] = result
 	agility_value_label.text = str(result)
 	_update_confirm_state()
+	
+func _on_agility_roll_button_hovered() -> void:
+	AudioManager.play_ui_hover()
 
 func _on_roll_all_button_pressed() -> void:
+	AudioManager.play_multi_dice()
 	_on_strength_roll_button_pressed()
 	_on_intelligence_roll_button_pressed()
 	_on_faith_roll_button_pressed()
 	_on_agility_roll_button_pressed()
 
+func _on_roll_all_button_hovered() -> void:
+	AudioManager.play_ui_hover()
+
 func _on_confirm_button_pressed() -> void:
+	AudioManager.play_ui_click()
 	GameState.set_rolled_attributes(rolled_attributes)
 	SceneTransition.change_scene("res://scenes/battle/BattleScene.tscn")
 
+func _on_confirm_button_hovered() -> void:
+	AudioManager.play_ui_hover()
+
 func _on_back_button_pressed() -> void:
+	AudioManager.play_ui_cancel()
 	SceneTransition.change_scene("res://scenes/run/class_selection_scene.tscn")
+
+func _on_back_button_hovered() -> void:
+	AudioManager.play_ui_hover()
