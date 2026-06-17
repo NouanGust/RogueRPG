@@ -91,6 +91,8 @@ z_index = 10
 z_index = -5
 
 [node name="Parallax2D" type="Parallax2D" parent="BattleFieldLayer/Parallax" unique_id=710582908]
+repeat_size = Vector2(200, 200)
+autoscroll = Vector2(0.5, 0.5)
 
 [node name="Sprite2D" type="Sprite2D" parent="BattleFieldLayer/Parallax/Parallax2D" unique_id=1589397028]
 scale = Vector2(0.66510415, 0.6675926)
@@ -99,6 +101,7 @@ centered = false
 
 [node name="Parallax2D3" type="Parallax2D" parent="BattleFieldLayer/Parallax" unique_id=284810112]
 texture_filter = 1
+repeat_size = Vector2(150, 0)
 
 [node name="Sprite2D" type="Sprite2D" parent="BattleFieldLayer/Parallax/Parallax2D3" unique_id=1183163149]
 scale = Vector2(0.66510415, 0.6675926)
