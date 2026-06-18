@@ -15,6 +15,10 @@ signal escape_pressed
 @onready var item_button: Button = $MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow/ItemButton
 @onready var escape_button: Button = $MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow/EscapeButton
 
+@onready var player_hp_bar: ProgressBar = $MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer/ProgressBar
+@onready var enemy_hp_bar: ProgressBar = $MarginContainer/VBoxContainer/EnemyPanel/EnemyHPBar
+
+
 var controller: BattleController
 var item_menu: PopupMenu
 
@@ -35,9 +39,15 @@ func set_controller(value: BattleController) -> void:
 
 func update_player_health(current: int, maximum: int) -> void:
 	player_hp_label.text = "HP: %d/%d" % [current, maximum]
+	player_hp_bar.max_value = maximum
+	var tween := create_tween()
+	tween.tween_property(player_hp_bar, "value", current, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 func update_enemy_health(current: int, maximum: int) -> void:
 	enemy_hp_label.text = "HP: %d/%d" % [current, maximum]
+	enemy_hp_bar.max_value = maximum
+	var tween := create_tween()
+	tween.tween_property(enemy_hp_bar, "value", current, 0.3).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 
 func log_str(message: String) -> void:
 	log_label.append_text(message + "\n")

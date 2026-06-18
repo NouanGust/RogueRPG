@@ -7,7 +7,7 @@ extends Node2D
 
 func _ready() -> void:
 	if not GameState.can_enter_battle():
-		get_tree().change_scene_to_file("res://scenes/run/main_menu_scene.tscn")
+		get_tree().change_scene_to_file("res://Scenes/Run/main_menu_scene.tscn")
 		return
 
 	controller.start_battle()

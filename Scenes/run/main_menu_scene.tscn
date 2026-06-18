@@ -1,12 +1,14 @@
 [gd_scene format=3 uid="uid://dp2ndfv4ha31q"]
 
-[ext_resource type="Script" uid="uid://pemfohp38d2q" path="res://scripts/controllers/main_menu_scene.gd" id="1_vk6xk"]
-[ext_resource type="PackedScene" uid="uid://c6qysnfhwpqvr" path="res://scenes/run/class_selection_scene.tscn" id="2_5j2ff"]
+[ext_resource type="Script" uid="uid://pemfohp38d2q" path="res://Scripts/controllers/main_menu_scene.gd" id="1_vk6xk"]
+[ext_resource type="PackedScene" uid="uid://c6qysnfhwpqvr" path="res://Scenes/Run/class_selection_scene.tscn" id="2_5j2ff"]
 [ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="2_sjvrc"]
 [ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="3_1badp"]
 [ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="3_hjgfb"]
 [ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="4_ikn50"]
 [ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="5_5j2ff"]
+[ext_resource type="StyleBox" uid="uid://jwjs7u0sndse" path="res://Assets/Themes/chose_button.tres" id="6_1jdas"]
+[ext_resource type="StyleBox" uid="uid://b4mai6yv25014" path="res://Assets/Themes/chose_button_hover.tres" id="7_27b2g"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_87n53"]
 texture = ExtResource("3_hjgfb")
@@ -54,7 +56,7 @@ theme_override_constants/margin_bottom = 32
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_constants/separation = 50
+theme_override_constants/separation = 10
 alignment = 1
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=678245180]
@@ -75,7 +77,7 @@ vertical_alignment = 1
 custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_horizontal = 4
-size_flags_vertical = 6
+size_flags_vertical = 10
 theme_override_constants/separation = 40
 
 [node name="NewRunButton" type="Button" parent="MarginContainer/ButtonsVBox" unique_id=1791480533]
@@ -85,6 +87,14 @@ theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("2_sjvrc")
 theme_override_styles/hover = ExtResource("3_1badp")
 text = "NOVA RUN"
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/ButtonsVBox" unique_id=863784233]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = ExtResource("6_1jdas")
+theme_override_styles/hover = ExtResource("7_27b2g")
+text = "CONFIGURAÇÕES"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/ButtonsVBox" unique_id=1441386715]
 layout_mode = 2

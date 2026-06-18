@@ -142,14 +142,14 @@ func _on_roll_all_button_hovered() -> void:
 func _on_confirm_button_pressed() -> void:
 	AudioManager.play_ui_click()
 	GameState.set_rolled_attributes(rolled_attributes)
-	SceneTransition.change_scene("res://scenes/battle/BattleScene.tscn")
+	SceneTransition.change_scene("res://Scenes/battle/BattleScene.tscn")
 
 func _on_confirm_button_hovered() -> void:
 	AudioManager.play_ui_hover()
 
 func _on_back_button_pressed() -> void:
 	AudioManager.play_ui_cancel()
-	SceneTransition.change_scene("res://scenes/run/class_selection_scene.tscn")
+	SceneTransition.change_scene("res://Scenes/Run/class_selection_scene.tscn")
 
 func _on_back_button_hovered() -> void:
 	AudioManager.play_ui_hover()

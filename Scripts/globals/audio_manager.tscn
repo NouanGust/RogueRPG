@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bxcb145mwjbmy"]
 
-[ext_resource type="Script" uid="uid://c65mx83sonvl2" path="res://scripts/globals/audio_manager.gd" id="1_x8dra"]
+[ext_resource type="Script" uid="uid://c65mx83sonvl2" path="res://Scripts/globals/audio_manager.gd" id="1_x8dra"]
 [ext_resource type="AudioStream" uid="uid://by0n4sp4g18xi" path="res://Assets/Music/SFX/UI_click.mp3" id="2_anbiu"]
 [ext_resource type="AudioStream" uid="uid://cw1ue6rpwduuw" path="res://Assets/Music/MenuTheme.mp3" id="2_jajao"]
 [ext_resource type="AudioStream" uid="uid://ccm6ip3ocj02a" path="res://Assets/Music/SFX/UI_hover.mp3" id="3_s0vh8"]
@@ -21,3 +21,4 @@ multi_dice_rool = ExtResource("5_hks6a")
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="." unique_id=1668632957]
 stream = ExtResource("2_jajao")
 volume_db = -6.0
+bus = &"Music"

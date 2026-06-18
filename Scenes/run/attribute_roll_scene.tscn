@@ -1,9 +1,9 @@
 [gd_scene format=3 uid="uid://dsj1epdnvjd1e"]
 
-[ext_resource type="Script" uid="uid://beii0cjd5fqyo" path="res://scripts/controllers/attribute_roll_scene.gd" id="1_6rb0p"]
-[ext_resource type="PackedScene" uid="uid://bjl1db2okea7h" path="res://scenes/battle/BattleScene.tscn" id="2_8af8v"]
+[ext_resource type="Script" uid="uid://beii0cjd5fqyo" path="res://Scripts/controllers/attribute_roll_scene.gd" id="1_6rb0p"]
+[ext_resource type="PackedScene" uid="uid://bjl1db2okea7h" path="res://Scenes/battle/BattleScene.tscn" id="2_8af8v"]
 [ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="2_qltqm"]
-[ext_resource type="PackedScene" uid="uid://c6qysnfhwpqvr" path="res://scenes/run/class_selection_scene.tscn" id="3_axkud"]
+[ext_resource type="PackedScene" uid="uid://c6qysnfhwpqvr" path="res://Scenes/Run/class_selection_scene.tscn" id="3_axkud"]
 [ext_resource type="Texture2D" uid="uid://bk2fd1a1tnv88" path="res://Assets/UI/dice-solid.png" id="3_q0xwv"]
 [ext_resource type="StyleBox" uid="uid://jwjs7u0sndse" path="res://Assets/Themes/chose_button.tres" id="3_vo54a"]
 [ext_resource type="StyleBox" uid="uid://b4mai6yv25014" path="res://Assets/Themes/chose_button_hover.tres" id="4_2sv62"]

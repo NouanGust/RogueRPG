@@ -45,6 +45,7 @@ func play_sfx(stream: AudioStream, randomize_pitch: bool = true) -> void:
 	
 	var player := AudioStreamPlayer.new()
 	player.stream = stream
+	player.bus = "SFX"
 	
 	if randomize_pitch:
 		player.pitch_scale = randf_range(0.9, 1.1)

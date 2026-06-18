@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://vb01rocv2w8o"]
+
+[ext_resource type="Script" uid="uid://cmnmh6fan7ydo" path="res://settings_scene.gd" id="1_4vkru"]
+[ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="2_hncxw"]
+[ext_resource type="PackedScene" uid="uid://dp2ndfv4ha31q" path="res://Scenes/Run/main_menu_scene.tscn" id="2_sj2cx"]
+[ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="3_sj2cx"]
+[ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="4_l67mf"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f2xt6"]
+texture = ExtResource("2_hncxw")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+
+[node name="Control" type="Control" unique_id=37602043]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_4vkru")
+main_menu_scene = ExtResource("2_sj2cx")
+
+[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2003434955]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_f2xt6")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1358432763]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=965490336]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/separation = 30
+alignment = 1
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=114343027]
+layout_mode = 2
+text = "GERAL"
+
+[node name="MasterSlider" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=1367663919]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer" unique_id=448340028]
+layout_mode = 2
+text = "MÚSICA"
+
+[node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=194446625]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer" unique_id=821640900]
+layout_mode = 2
+text = "SFX"
+
+[node name="SFXSlider" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=434478974]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1301778303]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("3_sj2cx")
+theme_override_styles/hover_pressed = ExtResource("4_l67mf")
+text = "VOLTAR"
