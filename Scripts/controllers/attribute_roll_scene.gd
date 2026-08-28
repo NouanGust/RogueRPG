@@ -43,7 +43,7 @@ func _ready() -> void:
 	visual_dice.visible = false
 	
 	if GameState.selected_class == null:
-		get_tree().change_scene_to_packed(class_selection_scene)
+		SceneTransition.change_scene("res://Scenes/run/class_selection_scene.tscn")
 		return
 
 	selected_class = GameState.selected_class
@@ -96,9 +96,17 @@ func _update_confirm_state() -> void:
 		or rolled_attributes["agility"] == null
 	)
 
+#================================
+# Botões de atributos
+#================================
+
 func _on_strength_roll_button_pressed() -> void:
 	AudioManager.play_single_dice()
-	var result = await _do_visual_roll(selected_class.strength_dice)
+	var result = await _roll_die(selected_class.strength_dice)
+	visual_dice.visible = true
+	visual_dice.play_animation(result)
+	await visual_dice.animation_finished
+	visual_dice.visible = false
 	rolled_attributes["strenght"] = result
 	strength_value_label.text = str(result)
 	_update_button_states()
@@ -108,7 +116,11 @@ func _on_strength_roll_button_hovered() -> void:
 
 func _on_intelligence_roll_button_pressed() -> void:
 	AudioManager.play_single_dice()
-	var result = await _do_visual_roll(selected_class.intelligence_dice)
+	var result = await _roll_die(selected_class.intelligence_dice)
+	visual_dice.visible = true
+	visual_dice.play_animation(result)
+	await visual_dice.animation_finished
+	visual_dice.visible = false
 	rolled_attributes["intelligence"] = result
 	intelligence_value_label.text = str(result)
 	_update_button_states()
@@ -121,6 +133,8 @@ func _on_faith_roll_button_pressed() -> void:
 	var result = await _roll_die(selected_class.faith_dice)
 	visual_dice.visible = true
 	visual_dice.play_animation(result)
+	await visual_dice.animation_finished
+	visual_dice.visible = false
 	rolled_attributes["faith"] = result
 	faith_value_label.text = str(result)
 	_update_button_states()
@@ -130,7 +144,11 @@ func _on_faith_roll_button_hovered() -> void:
 
 func _on_agility_roll_button_pressed() -> void:
 	AudioManager.play_single_dice()
-	var result = await _do_visual_roll(selected_class.agility_dice)
+	var result = await _roll_die(selected_class.agility_dice)
+	visual_dice.visible = true
+	visual_dice.play_animation(result)
+	await visual_dice.animation_finished
+	visual_dice.visible = false
 	rolled_attributes["agility"] = result
 	agility_value_label.text = str(result)
 	_update_button_states()
@@ -154,6 +172,12 @@ func _on_roll_all_button_pressed() -> void:
 			await _on_faith_roll_button_pressed()
 		if rolled_attributes["agility"] == null:
 			await _on_agility_roll_button_pressed()
+	else:
+		_reset_value_labels()
+		await _on_strength_roll_button_pressed()
+		await _on_intelligence_roll_button_pressed()
+		await _on_faith_roll_button_pressed()
+		await _on_agility_roll_button_pressed()
 
 	
 	_update_button_states()

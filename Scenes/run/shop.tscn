@@ -1,0 +1,127 @@
+[gd_scene format=3 uid="uid://cks72ysicbylr"]
+
+[ext_resource type="Script" uid="uid://chel0wh6i2a8j" path="res://Scenes/run/shop.gd" id="1_q6raw"]
+[ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="1_x8i8u"]
+[ext_resource type="Texture2D" uid="uid://d1k6oxsfto7m4" path="res://Assets/UI/polis_sanctuary.png" id="2_smx7w"]
+[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="4_oeq6j"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q6raw"]
+texture = ExtResource("1_x8i8u")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_oeq6j"]
+texture = ExtResource("2_smx7w")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+expand_margin_left = 1.0
+expand_margin_top = 1.0
+expand_margin_right = 1.0
+expand_margin_bottom = 1.0
+
+[node name="Shop" type="Control" unique_id=1696863286]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_q6raw")
+
+[node name="Panel" type="Panel" parent="." unique_id=704886201]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_q6raw")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=799387544]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=1792986198]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="EconPanel" type="Panel" parent="MarginContainer/HBoxContainer" unique_id=1695951565]
+custom_minimum_size = Vector2(200, 150)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+theme_override_styles/panel = SubResource("StyleBoxTexture_oeq6j")
+
+[node name="GoldLabel" type="RichTextLabel" parent="MarginContainer/HBoxContainer/EconPanel" unique_id=601170678]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "MOEDAS: 0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ShopContainer" type="GridContainer" parent="MarginContainer/HBoxContainer" unique_id=676468095]
+layout_mode = 2
+size_flags_horizontal = 6
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 200
+columns = 2
+
+[node name="Item" type="Panel" parent="MarginContainer/HBoxContainer/ShopContainer" unique_id=95883164]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/ShopContainer/Item" unique_id=678730871]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_oeq6j")
+
+[node name="Item2" type="Panel" parent="MarginContainer/HBoxContainer/ShopContainer" unique_id=521732418]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/ShopContainer/Item2" unique_id=997999273]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_oeq6j")
+
+[node name="Panel3" type="Panel" parent="MarginContainer/HBoxContainer/ShopContainer" unique_id=688619791]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/ShopContainer/Panel3" unique_id=1012611212]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_oeq6j")
+
+[node name="Panel4" type="Panel" parent="MarginContainer/HBoxContainer/ShopContainer" unique_id=1864212093]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer/ShopContainer/Panel4" unique_id=195725510]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_oeq6j")
+
+[node name="BackButton" type="Button" parent="MarginContainer" unique_id=1892343837]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+text = "VOLTAR"

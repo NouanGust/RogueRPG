@@ -242,7 +242,9 @@ func _on_enemy_died() -> void:
 	var reward := enemy_node.enemy_data.xp_reward * current_level
 	GameState.add_xp(reward)
 	player_xp += reward
-	ui.log_str("Inimigo derrotado! +%d XP." % reward)
+	var coins_dropped := randi_range(2, 5) * current_level
+	SaveManager.add_coins(coins_dropped)
+	ui.log_str("Inimigo derrotado! +%d XP | +%d Moedas." %[reward, coins_dropped])
 	
 	var drop_roll: float = randf()
 	if drop_roll <= 0.4:

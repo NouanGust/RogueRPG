@@ -17,6 +17,28 @@ texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 32.0
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_i6i1c"]
+bg_color = Color(0.827451, 0.83137256, 0, 0.7411765)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_a3oan"]
+bg_color = Color(0.827451, 0.83137256, 0, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
 [node name="MainMenuScene" type="Control" unique_id=79255151]
 layout_mode = 3
 anchors_preset = 15
@@ -87,6 +109,14 @@ theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("2_sjvrc")
 theme_override_styles/hover = ExtResource("3_1badp")
 text = "NOVA RUN"
+
+[node name="ShopButton" type="Button" parent="MarginContainer/ButtonsVBox" unique_id=1691070968]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = SubResource("StyleBoxFlat_i6i1c")
+theme_override_styles/hover = SubResource("StyleBoxFlat_a3oan")
+text = "LOJA"
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/ButtonsVBox" unique_id=863784233]
 layout_mode = 2
