@@ -21,7 +21,7 @@ func _ready() -> void:
 func _on_new_run_button_pressed() -> void:
 	AudioManager.play_ui_click()
 	GameState.start_new_run()
-	SceneTransition.change_scene("res://Scenes/Run/class_selection_scene.tscn")
+	SceneTransition.change_scene("res://Scenes/run/class_selection_scene.tscn")
 
 func _on_new_run_button_hovered() -> void:
 	AudioManager.play_ui_hover()

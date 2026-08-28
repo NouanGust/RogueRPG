@@ -3,7 +3,7 @@ extends Control
 
 @export var available_classes: Array[ClassData] = []
 @export var class_card_scene: PackedScene
-@export var next_scene_path: String = "res://Scenes/Run/attribute_roll_scene.tscn"
+@export var next_scene_path: String = "res://Scenes/run/attribute_roll_scene.tscn"
 
 @onready var classes_grid: GridContainer = $BackgroundPanel/MarginContainer/VBoxContainer/GridContainer
 @onready var back_button: Button = $BackgroundPanel/MarginContainer/VBoxContainer/BottomBar/BackButton
@@ -43,7 +43,7 @@ func _on_confirm_button_pressed() -> void:
 		return
 	AudioManager.play_ui_click()
 
-	SceneTransition.change_scene("res://Scenes/Run/attribute_roll_scene.tscn")
+	SceneTransition.change_scene("res://Scenes/run/attribute_roll_scene.tscn")
 
 func _on_confirm_button_hovered() -> void:
 	AudioManager.play_ui_hover()
@@ -51,7 +51,7 @@ func _on_confirm_button_hovered() -> void:
 func _on_back_button_pressed() -> void:
 	AudioManager.play_ui_cancel()
 	GameState.reset_run()
-	SceneTransition.change_scene("res://Scenes/Run/main_menu_scene.tscn")
+	SceneTransition.change_scene("res://Scenes/run/main_menu_scene.tscn")
 
 func _on_back_button_hovered() -> void:
 	AudioManager.play_ui_hover()

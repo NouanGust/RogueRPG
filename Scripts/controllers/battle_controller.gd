@@ -53,27 +53,27 @@ func _ready() -> void:
 	ui.item_pressed.connect(player_use_item)
 	ui.escape_pressed.connect(player_escape)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if not battle_active or main_camera == null: return
 	
-	if current_turn == "player" and not action_in_progress:
-		idle_time += delta
-		var sway_x := sin(idle_time * 0.5) * 15.0
-		var sway_y := cos(idle_time * 0.3) * 8.0
-		
-		var target_pos := base_camera_pos + Vector2(sway_x, sway_y)
-		main_camera.position = main_camera.position.lerp(target_pos, delta * 2.0)
-	else:
-		main_camera.position = main_camera.position.lerp(base_camera_pos, delta * 4.0)
+	#if current_turn == "player" and not action_in_progress:
+		#idle_time += delta
+		#var sway_x := sin(idle_time * 0.5) * 15.0
+		#var sway_y := cos(idle_time * 0.3) * 8.0
+		#
+		#var target_pos := base_camera_pos + Vector2(sway_x, sway_y)
+		#main_camera.position = main_camera.position.lerp(target_pos, delta * 2.0)
+	#else:
+		#main_camera.position = main_camera.position.lerp(base_camera_pos, delta * 4.0)
 func start_battle() -> void:
 	if GameState.selected_class == null or GameState.rolled_attributes.is_empty():
 		push_error("BattleController: GameState inválido.")
 		return
 		
 	
-	main_camera = get_viewport().get_camera_2d()
-	if main_camera:
-		base_camera_pos = main_camera.position
+	#main_camera = get_viewport().get_camera_2d()
+	#if main_camera:
+		#base_camera_pos = main_camera.position
 
 	battle_active = true
 	current_level = GameState.current_level
@@ -171,7 +171,7 @@ func player_use_item() -> void:
 
 func player_escape() -> void:
 	if not battle_active:
-		get_tree().change_scene_to_file("res://scenes/run/main_menu_scene.tscn")
+		get_tree().change_scene_to_file("res://Scenes/run/main_menu_scene.tscn")
 		return
 	
 	
@@ -230,7 +230,7 @@ func use_specific_item(id: int) -> void:
 	action_in_progress = false
 	
 
-func _on_item_used(item_id: StringName, message: String) -> void:
+func _on_item_used(_item_id: StringName, message: String) -> void:
 	ui.log_heal(message)
 
 

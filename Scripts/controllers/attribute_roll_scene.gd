@@ -3,6 +3,7 @@ extends Control
 
 @export var battle_scene: PackedScene
 @export var class_selection_scene: PackedScene
+@export var visual_dice: AnimatedSprite2D
 
 @onready var selected_class_label: Label = $MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/SelectedClassLabel
 @onready var instruction_label: Label = $MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/InstructionsLabel
@@ -27,15 +28,20 @@ extends Control
 @onready var roll_all_button: Button = $MarginContainer/VBoxContainer/BottomBar/RollAllButton
 @onready var confirm_button: Button = $MarginContainer/VBoxContainer/BottomBar/ConfirmButton
 
+var is_rolling: bool = false
+var has_general_reroll:bool = true
+
 var selected_class: ClassData
 var rolled_attributes := {
-	"strength": null,
+	"strenght": null,
 	"intelligence": null,
 	"faith": null,
 	"agility": null
 }
 
 func _ready() -> void:
+	visual_dice.visible = false
+	
 	if GameState.selected_class == null:
 		get_tree().change_scene_to_packed(class_selection_scene)
 		return
@@ -43,6 +49,7 @@ func _ready() -> void:
 	selected_class = GameState.selected_class
 	_setup_ui()
 	_connect_buttons()
+	_update_button_states()
 
 func _setup_ui() -> void:
 	selected_class_label.text = "Classe escolhida: %s" % selected_class.display_name
@@ -83,7 +90,7 @@ func _roll_die(sides: int) -> int:
 
 func _update_confirm_state() -> void:
 	confirm_button.disabled = (
-		rolled_attributes["strength"] == null
+		rolled_attributes["strenght"] == null
 		or rolled_attributes["intelligence"] == null
 		or rolled_attributes["faith"] == null
 		or rolled_attributes["agility"] == null
@@ -91,50 +98,65 @@ func _update_confirm_state() -> void:
 
 func _on_strength_roll_button_pressed() -> void:
 	AudioManager.play_single_dice()
-	var result := _roll_die(selected_class.strength_dice)
-	rolled_attributes["strength"] = result
+	var result = await _do_visual_roll(selected_class.strength_dice)
+	rolled_attributes["strenght"] = result
 	strength_value_label.text = str(result)
-	_update_confirm_state()
+	_update_button_states()
 
 func _on_strength_roll_button_hovered() -> void:
 	AudioManager.play_ui_hover()
 
 func _on_intelligence_roll_button_pressed() -> void:
 	AudioManager.play_single_dice()
-	var result := _roll_die(selected_class.intelligence_dice)
+	var result = await _do_visual_roll(selected_class.intelligence_dice)
 	rolled_attributes["intelligence"] = result
 	intelligence_value_label.text = str(result)
-	_update_confirm_state()
+	_update_button_states()
 
 func _on_intelligence_roll_button_hovered() -> void:
 	AudioManager.play_ui_hover()
 
 func _on_faith_roll_button_pressed() -> void:
 	AudioManager.play_single_dice()
-	var result := _roll_die(selected_class.faith_dice)
+	var result = await _roll_die(selected_class.faith_dice)
+	visual_dice.visible = true
+	visual_dice.play_animation(result)
 	rolled_attributes["faith"] = result
 	faith_value_label.text = str(result)
-	_update_confirm_state()
+	_update_button_states()
 
 func _on_faith_roll_button_hovered() -> void:
 	AudioManager.play_ui_hover()
 
 func _on_agility_roll_button_pressed() -> void:
 	AudioManager.play_single_dice()
-	var result := _roll_die(selected_class.agility_dice)
+	var result = await _do_visual_roll(selected_class.agility_dice)
 	rolled_attributes["agility"] = result
 	agility_value_label.text = str(result)
-	_update_confirm_state()
+	_update_button_states()
 	
 func _on_agility_roll_button_hovered() -> void:
 	AudioManager.play_ui_hover()
 
 func _on_roll_all_button_pressed() -> void:
-	AudioManager.play_multi_dice()
-	_on_strength_roll_button_pressed()
-	_on_intelligence_roll_button_pressed()
-	_on_faith_roll_button_pressed()
-	_on_agility_roll_button_pressed()
+	#AudioManager.play_multi_dice()
+	if roll_all_button.text == "Rerrolagem Geral (1)":
+		has_general_reroll = false
+		_reset_value_labels()
+		
+		rolled_attributes = {"strenght": null, "intelligence": null, "faith": null, "agility": null}
+		
+		if rolled_attributes["strenght"] == null:
+			await _on_strength_roll_button_pressed() 
+		if rolled_attributes["intelligence"] == null:
+			await _on_intelligence_roll_button_pressed()
+		if rolled_attributes["faith"] == null:
+			await _on_faith_roll_button_pressed()
+		if rolled_attributes["agility"] == null:
+			await _on_agility_roll_button_pressed()
+
+	
+	_update_button_states()
 
 func _on_roll_all_button_hovered() -> void:
 	AudioManager.play_ui_hover()
@@ -149,7 +171,51 @@ func _on_confirm_button_hovered() -> void:
 
 func _on_back_button_pressed() -> void:
 	AudioManager.play_ui_cancel()
-	SceneTransition.change_scene("res://Scenes/Run/class_selection_scene.tscn")
+	SceneTransition.change_scene("res://Scenes/run/class_selection_scene.tscn")
 
 func _on_back_button_hovered() -> void:
 	AudioManager.play_ui_hover()
+
+func _update_button_states() -> void:
+	if is_rolling:
+		strength_roll_button.disabled = true
+		intelligence_roll_button.disabled = true
+		faith_roll_button.disabled = true
+		agility_roll_button.disabled = true
+		roll_all_button.disabled = true
+		confirm_button.disabled = true
+		return
+		
+	strength_roll_button.disabled = rolled_attributes["strenght"] != null
+	intelligence_roll_button.disabled = rolled_attributes["intelligence"] != null
+	faith_roll_button.disabled = rolled_attributes["faith"] != null
+	agility_roll_button.disabled = rolled_attributes["agility"] != null
+	 
+	var all_rolled = (
+		rolled_attributes["strenght"] != null and rolled_attributes["intelligence"] != null and rolled_attributes["faith"] != null and rolled_attributes["agility"] != null
+	)
+	
+	confirm_button.disabled = not all_rolled
+	
+	if all_rolled:
+		roll_all_button.text = "Rerrolagem Geral (1)"
+		roll_all_button.disabled = not has_general_reroll
+	else:
+		roll_all_button.text = "Rolar Todos"
+		roll_all_button.disabled = false
+
+
+func _do_visual_roll(dice_sides: int) -> int:
+	is_rolling = true
+	_update_button_states()
+	
+	var result := _roll_die(dice_sides)
+	visual_dice.animate_roll(dice_sides, result)
+	await visual_dice.roll_finished
+	
+	is_rolling = false
+	return result
+	
+	
+	
+	

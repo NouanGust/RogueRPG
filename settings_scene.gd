@@ -33,4 +33,4 @@ func _on_sfx_changed(value: float) -> void:
 	
 func _on_back_button_pressed() -> void:
 	AudioManager.play_ui_click()
-	SceneTransition.change_scene("res://Scenes/Run/main_menu_scene.tscn")
+	SceneTransition.change_scene("res://Scenes/run/main_menu_scene.tscn")
