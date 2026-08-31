@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bo830gfweoavh"]
+
+[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="1_01vvc"]
+[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="1_ossu3"]
+
+[resource]
+script = ExtResource("1_01vvc")
+item_name = "Poção Média"
+description = "Restaura 10hp"
+icon = ExtResource("1_ossu3")
+cost = 7
+item_type = "potion"
+effect_value = "10"
+metadata/_custom_type_script = "uid://dclj8oiffd528"

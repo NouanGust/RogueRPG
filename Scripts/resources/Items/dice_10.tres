@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://b74gl4j2bp0rh"]
+
+[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="1_ufcpb"]
+
+[resource]
+script = ExtResource("1_ufcpb")
+item_name = "D6"
+description = "Dado de 6 lados (uso único)"
+cost = 10
+item_type = "dice"
+effect_value = "6"
+metadata/_custom_type_script = "uid://dclj8oiffd528"

@@ -2,8 +2,15 @@
 
 [ext_resource type="Script" uid="uid://chel0wh6i2a8j" path="res://Scenes/run/shop.gd" id="1_q6raw"]
 [ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="1_x8i8u"]
+[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="2_fbwwc"]
 [ext_resource type="Texture2D" uid="uid://d1k6oxsfto7m4" path="res://Assets/UI/polis_sanctuary.png" id="2_smx7w"]
+[ext_resource type="Resource" uid="uid://bmvf1pobnagu4" path="res://Scripts/resources/Items/dice_6.tres" id="3_fqbvf"]
+[ext_resource type="Resource" uid="uid://b74gl4j2bp0rh" path="res://Scripts/resources/Items/dice_10.tres" id="4_cvjhj"]
 [ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="4_oeq6j"]
+[ext_resource type="Resource" uid="uid://dy1q6pm7xlu3s" path="res://Scripts/resources/Items/dice_20.tres" id="5_cteau"]
+[ext_resource type="Resource" uid="uid://bo830gfweoavh" path="res://Scripts/resources/Items/potion_medium.tres" id="6_pk4r2"]
+[ext_resource type="Resource" uid="uid://yhexp7xptbop" path="res://Scripts/resources/Items/potion_small.tres" id="7_6ov3v"]
+[ext_resource type="PackedScene" uid="uid://bs1pa3rcorq6k" path="res://Scenes/item_card.tscn" id="8_ec5cm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_q6raw"]
 texture = ExtResource("1_x8i8u")
@@ -31,6 +38,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_q6raw")
+avaliable_items = Array[ExtResource("2_fbwwc")]([ExtResource("3_fqbvf"), ExtResource("4_cvjhj"), ExtResource("5_cteau"), ExtResource("6_pk4r2"), ExtResource("7_6ov3v")])
+item_card_scene = ExtResource("8_ec5cm")
 
 [node name="Panel" type="Panel" parent="." unique_id=704886201]
 layout_mode = 1
@@ -82,7 +91,7 @@ layout_mode = 2
 size_flags_horizontal = 6
 theme_override_constants/h_separation = 200
 theme_override_constants/v_separation = 200
-columns = 2
+columns = 3
 
 [node name="Item" type="Panel" parent="MarginContainer/HBoxContainer/ShopContainer" unique_id=95883164]
 layout_mode = 2

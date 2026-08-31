@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://bs1pa3rcorq6k"]
+
+[ext_resource type="Script" uid="uid://d3mkq5hj27lr3" path="res://Scripts/ui/item_card.gd" id="1_8m360"]
+[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="2_fyp8p"]
+
+[node name="ItemCard" type="PanelContainer" unique_id=756460846]
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_8m360")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1583511212]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1970199760]
+layout_mode = 2
+
+[node name="ItemIcon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=828345675]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+texture = ExtResource("2_fyp8p")
+stretch_mode = 5
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1575882376]
+layout_mode = 2
+theme_override_font_sizes/font_size = 12
+text = "Poção"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DescLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1783333148]
+layout_mode = 2
+theme_override_font_sizes/font_size = 8
+text = "Poção que cura 5 de hp"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="BuyButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=453350559]
+layout_mode = 2
+text = "Comprar"

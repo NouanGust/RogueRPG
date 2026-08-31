@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://bmvf1pobnagu4"]
+
+[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="1_jtjtp"]
+
+[resource]
+script = ExtResource("1_jtjtp")
+item_name = "D20"
+description = "Dado de 20 lados (uso único)"
+cost = 18
+item_type = "dice"
+effect_value = "20"
+metadata/_custom_type_script = "uid://dclj8oiffd528"

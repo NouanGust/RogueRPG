@@ -1,0 +1,14 @@
+[gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://yhexp7xptbop"]
+
+[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="1_buc51"]
+[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="1_tbe83"]
+
+[resource]
+script = ExtResource("1_buc51")
+item_name = "Poção Pequena"
+description = "Restaura 5 hp"
+icon = ExtResource("1_tbe83")
+cost = 3
+item_type = "potion"
+effect_value = "5"
+metadata/_custom_type_script = "uid://dclj8oiffd528"
