@@ -1,0 +1,77 @@
+[gd_scene format=3 uid="uid://nb6ex4qcllxb"]
+
+[ext_resource type="Script" uid="uid://b8rk2rthgw5sp" path="res://Scripts/controllers/save_menu_controller.gd" id="1_s45r0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_whlyn"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="SaveMenuController" type="Control" unique_id=1481104833]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s45r0")
+
+[node name="ColorRect" type="Panel" parent="." unique_id=743865436]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_whlyn")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1857911257]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="Label" type="Label" parent="MarginContainer" unique_id=1985369406]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 44
+text = "SELECIONAR SAVE"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ItemList" type="ItemList" parent="MarginContainer" unique_id=1297110261]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer" unique_id=21801373]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="NewProfileInput" type="LineEdit" parent="MarginContainer/HBoxContainer" unique_id=1443135111]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_vertical = 0
+placeholder_text = "Nome do jogador"
+alignment = 1
+
+[node name="CreateButton" type="Button" parent="MarginContainer/HBoxContainer" unique_id=124180032]
+layout_mode = 2
+text = "CRIAR"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer" unique_id=1480177691]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="LoadButton" type="Button" parent="MarginContainer/HBoxContainer2" unique_id=407132846]
+layout_mode = 2
+text = "Carregar"
+
+[node name="DeleteButton" type="Button" parent="MarginContainer/HBoxContainer2" unique_id=1810163585]
+layout_mode = 2
+text = "Deletar"

@@ -11,7 +11,7 @@ signal enemy_selected(enemy_data: EnemyData)
 signal run_finished(victory: bool)
 
 #const MAX_LEVEL: int = 3
-const MAX_INVENTORY_SLOTS: int = 5
+#const MAX_INVENTORY_SLOTS: int = 5
 var inventory: Array[ItemData] = []
 
 var selected_class: ClassData
@@ -76,11 +76,12 @@ func advance_level() -> void:
 func complete_run(victory: bool) -> void:
 	run_active = false
 	run_finished.emit(victory)
-	
+
 
 func has_selected_class() -> bool:
 	return selected_class != null
-	
+
+
 func has_rolled_attributes() -> bool:
 	return not rolled_attributes.is_empty()
 
@@ -90,15 +91,19 @@ func has_rolled_attributes() -> bool:
 func can_enter_battle() -> bool:
 	return run_active and selected_class != null and not rolled_attributes.is_empty()
 	
-	
+
+
 #===================
 # Inventário
 #===================
 
+func get_max_inventory_slots() -> int:
+	return SaveManager.get_backpack_limit()
+
 func has_inventory_space() -> bool:
-	return inventory.size() < MAX_INVENTORY_SLOTS
-	
-	
+	return inventory.size() < get_max_inventory_slots()
+
+
 func add_item(item: ItemData) -> bool:
 	if has_inventory_space():
 		inventory.append(item)

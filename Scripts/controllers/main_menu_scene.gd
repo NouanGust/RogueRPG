@@ -9,6 +9,11 @@ extends Control
 @onready var shop_button: Button = $MarginContainer/ButtonsVBox/ShopButton
 
 func _ready() -> void:
+	
+	# Teste save
+	if not SaveManager.load_profile("Nohan_Dev"):
+		SaveManager.create_new_profile("Nohan_Dev")
+	
 	AudioManager.play_menu_music()
 	new_run_button.pressed.connect(_on_new_run_button_pressed)
 	new_run_button.mouse_entered.connect(_on_new_run_button_hovered)

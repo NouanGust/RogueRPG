@@ -77,3 +77,11 @@ func spend_coins(amount: int) -> bool:
 		save_game()
 		return true
 	return false
+
+func get_backpack_limit() -> int:
+	return 2 + profile_data.get("backpack_level", 1)
+	
+func add_to_stash(item_id: String) -> void:
+	var stash: Array = profile_data.get("stash", [])
+	stash.append(item_id)
+	save_game()
