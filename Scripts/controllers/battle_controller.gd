@@ -9,6 +9,7 @@ signal battle_finished(player_won: bool)
 @onready var enemy_node: EnemyActor = $"../BattleFieldLayer/EnemyAnchor/Enemy"
 @onready var dice_roller: DiceRoller = $"../DiceRoller"
 @onready var ui: BattleUI = $"../UILayer/BattleUI"
+@export var combat_debug: CombatDebug
 
 @export var enemy_pool: Array[EnemyData] = []
 @export var damage_text_scene: PackedScene
@@ -80,6 +81,9 @@ func start_battle() -> void:
 
 	player_node.setup(GameState.selected_class, GameState.rolled_attributes)
 	_spawn_enemy_for_level(current_level)
+	
+	if combat_debug:
+		combat_debug.setup(player_node, enemy_node)
 
 	if not player_node.health_component.health_changed.is_connected(_on_player_health_changed):
 		player_node.health_component.health_changed.connect(_on_player_health_changed)

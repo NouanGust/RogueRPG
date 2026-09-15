@@ -33,7 +33,7 @@ var has_general_reroll:bool = true
 
 var selected_class: ClassData
 var rolled_attributes := {
-	"strenght": null,
+	"strength": null,
 	"intelligence": null,
 	"faith": null,
 	"agility": null
@@ -90,7 +90,7 @@ func _roll_die(sides: int) -> int:
 
 func _update_confirm_state() -> void:
 	confirm_button.disabled = (
-		rolled_attributes["strenght"] == null
+		rolled_attributes["strength"] == null
 		or rolled_attributes["intelligence"] == null
 		or rolled_attributes["faith"] == null
 		or rolled_attributes["agility"] == null
@@ -107,7 +107,7 @@ func _on_strength_roll_button_pressed() -> void:
 	visual_dice.play_animation(result)
 	await visual_dice.animation_finished
 	visual_dice.visible = false
-	rolled_attributes["strenght"] = result
+	rolled_attributes["strength"] = result
 	strength_value_label.text = str(result)
 	_update_button_states()
 
@@ -162,9 +162,9 @@ func _on_roll_all_button_pressed() -> void:
 		has_general_reroll = false
 		_reset_value_labels()
 		
-		rolled_attributes = {"strenght": null, "intelligence": null, "faith": null, "agility": null}
+		rolled_attributes = {"strength": null, "intelligence": null, "faith": null, "agility": null}
 		
-		if rolled_attributes["strenght"] == null:
+		if rolled_attributes["strength"] == null:
 			await _on_strength_roll_button_pressed() 
 		if rolled_attributes["intelligence"] == null:
 			await _on_intelligence_roll_button_pressed()
@@ -210,13 +210,13 @@ func _update_button_states() -> void:
 		confirm_button.disabled = true
 		return
 		
-	strength_roll_button.disabled = rolled_attributes["strenght"] != null
+	strength_roll_button.disabled = rolled_attributes["strength"] != null
 	intelligence_roll_button.disabled = rolled_attributes["intelligence"] != null
 	faith_roll_button.disabled = rolled_attributes["faith"] != null
 	agility_roll_button.disabled = rolled_attributes["agility"] != null
 	 
 	var all_rolled = (
-		rolled_attributes["strenght"] != null and rolled_attributes["intelligence"] != null and rolled_attributes["faith"] != null and rolled_attributes["agility"] != null
+		rolled_attributes["strength"] != null and rolled_attributes["intelligence"] != null and rolled_attributes["faith"] != null and rolled_attributes["agility"] != null
 	)
 	
 	confirm_button.disabled = not all_rolled

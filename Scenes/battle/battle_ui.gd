@@ -18,12 +18,14 @@ signal escape_pressed
 @onready var player_hp_bar: ProgressBar = $MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer/ProgressBar
 @onready var enemy_hp_bar: ProgressBar = $MarginContainer/VBoxContainer/EnemyPanel/EnemyHPBar
 
+@onready var inventory_panel: InventoryPanel = $InventoryPanel
 
 var controller: BattleController
 var item_menu: PopupMenu
 
 func _ready() -> void:
 	attack_button.pressed.connect(func(): attack_pressed.emit())
+	item_button.pressed.connect(_on_item_button_pressed)
 	item_button.pressed.connect(func(): item_pressed.emit())
 	escape_button.pressed.connect(func(): escape_pressed.emit())
 	log_label.text = ""
@@ -31,6 +33,7 @@ func _ready() -> void:
 	item_menu = PopupMenu.new()
 	add_child(item_menu)
 	item_menu.id_pressed.connect(_on_item_selected)
+	inventory_panel.item_selected.connect(_on_inventory_item_selected)
 
 func set_controller(value: BattleController) -> void:
 	controller = value
@@ -70,8 +73,23 @@ func open_item_menu() -> void:
 	item_menu.add_item("Elixir (%d) - Buff aleatório" % inventory.elixirs, 1)
 	item_menu.set_item_disabled(1, inventory.elixirs <= 0)
 	item_menu.popup_centered(Vector2i(250, 100))
+
+
+
+func _on_item_button_pressed() -> void:
+	if AudioManager.has_method("play_ui_click"):
+		AudioManager.play_ui_click()
+	inventory_panel.open_panel()
+
+func _on_inventory_item_selected(item: ItemData) -> void:
+	if item.item_type == "potion":
+		controller.player_node.health_component.heal(item.effect_value)
 	
+	GameState.remove_item(item)
 	
+	controller._set_turn("enemy")
+
+
 func _on_item_selected(id: int) -> void:
 	controller.use_specific_item(id)
 

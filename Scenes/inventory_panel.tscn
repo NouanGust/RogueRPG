@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://b20keqeqxjfwy"]
 
+[ext_resource type="Script" uid="uid://dqbwwxu8m4fct" path="res://Scripts/ui/inventory_panel.gd" id="1_4ij40"]
+
 [node name="InventoryPanel" type="Control" unique_id=341227670]
 custom_minimum_size = Vector2(300, 0)
 layout_mode = 3
@@ -9,6 +11,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 0
 grow_vertical = 2
+script = ExtResource("1_4ij40")
 
 [node name="Panel" type="Panel" parent="." unique_id=400555647]
 layout_mode = 1
@@ -29,3 +32,25 @@ theme_override_constants/margin_left = 10
 theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/MarginContainer" unique_id=518018139]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Panel/MarginContainer/VBoxContainer" unique_id=1273275533]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "MOCHILA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SlotsGrids" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=2110376607]
+layout_mode = 2
+columns = 2
+
+[node name="Control" type="Control" parent="Panel/MarginContainer/VBoxContainer" unique_id=31545484]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CloseBtn" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1734707761]
+layout_mode = 2
+text = "FECHAR"

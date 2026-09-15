@@ -6,6 +6,6 @@ extends Resource
 @export var icon: Texture2D
 @export var cost: int
 @export_enum("potion", "elixir", "dice", "relic") var item_type: String
-@export var effect_value: String
+@export var effect_value: int
 
  

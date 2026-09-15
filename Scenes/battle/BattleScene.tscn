@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="14_yvj2l"]
 [ext_resource type="Texture2D" uid="uid://d31vhh6u2yvmy" path="res://Assets/UI/spikecore.png" id="18_vpuc1"]
 [ext_resource type="AudioStream" uid="uid://xom27j2pc0c" path="res://Assets/Music/battleTheme.wav" id="20_5b2op"]
+[ext_resource type="PackedScene" uid="uid://b20keqeqxjfwy" path="res://Scenes/inventory_panel.tscn" id="22_jk8xb"]
+[ext_resource type="PackedScene" uid="uid://c5pplqrble7t4" path="res://combat_debug.tscn" id="23_qpm48"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vvcci"]
 texture = ExtResource("13_5u8xp")
@@ -67,8 +69,9 @@ script = ExtResource("1_t3o3d")
 script = ExtResource("1_jb5ws")
 metadata/_custom_type_script = "uid://8kwf686gj1kl"
 
-[node name="BattleController" type="Node" parent="." unique_id=747335412]
+[node name="BattleController" type="Node" parent="." unique_id=747335412 node_paths=PackedStringArray("combat_debug")]
 script = ExtResource("2_vd1me")
+combat_debug = NodePath("../UILayer/BattleUI/CombatDebug")
 enemy_pool = Array[ExtResource("6_qcili")]([ExtResource("7_4ro08"), ExtResource("8_5u8xp"), ExtResource("9_yvj2l")])
 damage_text_scene = ExtResource("8_vpuc1")
 attack_sfx = ExtResource("9_xvy46")
@@ -270,6 +273,13 @@ text = "Logs
 "
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="InventoryPanel" parent="UILayer/BattleUI" unique_id=341227670 instance=ExtResource("22_jk8xb")]
+layout_mode = 1
+offset_left = -300.0
+
+[node name="CombatDebug" parent="UILayer/BattleUI" unique_id=65692767 instance=ExtResource("23_qpm48")]
+layout_mode = 0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=966493238]
 position = Vector2(640, 360)

@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://bfwcvfw2jbpkl"]
 
-[ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://scripts/resources/enemy_data.gd" id="1_is4do"]
+[ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://Scripts/resources/enemy_data.gd" id="1_is4do"]
 [ext_resource type="Texture2D" uid="uid://eus2n2mjuv0h" path="res://Assets/Images/esqueleto.png" id="2_4xt3r"]
 
 [resource]
