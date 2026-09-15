@@ -23,3 +23,8 @@ func take_damage(amount: int) -> void:
 func heal(amount:int) -> void:
 	current_hp = min(max_hp, current_hp + amount)
 	health_changed.emit(current_hp, max_hp)
+	
+func increase_max_hp(amount: int) -> void:
+	max_hp += amount
+	current_hp += amount
+	health_changed.emit(current_hp, max_hp)

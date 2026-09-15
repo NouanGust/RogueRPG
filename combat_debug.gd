@@ -7,6 +7,9 @@ var player: PlayerActor
 var enemy: EnemyActor
 var last_math_log: String = "Nenhum ataque realizado."
 
+var is_visible:bool = true
+
+
 func setup(_player: PlayerActor, _enemy: EnemyActor) -> void:
 	player = _player
 	enemy = _enemy
@@ -15,6 +18,7 @@ func setup(_player: PlayerActor, _enemy: EnemyActor) -> void:
 	enemy.combat_component.attacked.connect(_on_enemy_attacked)
 	
 	update_display()
+	self.visible = is_visible
 
 
 func update_display() -> void:
@@ -52,3 +56,10 @@ func _on_enemy_attacked(raw_damage: int, final_damage: int) -> void:
 	last_math_log = "Inimigo ataca!\n"
 	last_math_log += "Dano Bruto (%d) - Defesa Jogador (%d) = Dano Final: [color=red]%d[/color]" % [raw_damage, player_def, final_damage]
 	update_display()
+
+
+func _input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("debug"):
+		is_visible = !is_visible
+		self.visible = is_visible
+	

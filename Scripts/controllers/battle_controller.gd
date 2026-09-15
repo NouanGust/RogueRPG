@@ -32,7 +32,7 @@ var idle_time: float = 0.0
 var base_camera_pos: Vector2
 var main_camera: Camera2D
 
-const MAX_LEVEL: int = 3
+#const MAX_LEVEL: int = 3
 const ENEMY_TURN_DELAY := 2
 
 func _ready() -> void:
@@ -100,7 +100,9 @@ func start_battle() -> void:
 		
 	_on_player_health_changed(player_node.health_component.current_hp, player_node.health_component.max_hp)
 	_on_enemy_health_changed(enemy_node.health_component.current_hp, enemy_node.health_component.max_hp)
-
+	
+	if not GameState.level_changed.is_connected(_on_player_level_up):
+		GameState.level_changed.connect(_on_player_level_up)
 	_set_turn("player")
 	battle_started.emit()
 
@@ -119,11 +121,7 @@ func _spawn_enemy_for_level(level: int) -> void:
 	enemy_node.setup(enemy_data, rolled_value)
 
 func _get_level_dice(level: int) -> int:
-	match level:
-		1: return 4
-		2: return 6
-		3: return 20
-		_: return 20
+	return 2 + (level * 2)
 
 func _set_turn(new_turn: String) -> void:
 	if not battle_active:
@@ -260,14 +258,6 @@ func _on_enemy_died() -> void:
 			player_node.inventory_component.elixirs += 1
 			ui.log_str("O inimigo dropou um Elixir!")
 	
-
-	if current_level >= MAX_LEVEL:
-		battle_active = false
-		GameState.complete_run(true)
-		battle_finished.emit(true)
-		return
-
-	GameState.advance_level()
 	current_level = GameState.current_level
 	_spawn_enemy_for_level(current_level)
 	_on_enemy_health_changed(enemy_node.health_component.current_hp, enemy_node.health_component.max_hp)
@@ -289,6 +279,18 @@ func _on_player_health_changed(current: int, maximum: int) -> void:
 func _on_enemy_health_changed(current: int, maximum: int) -> void:
 	ui.update_enemy_health(current, maximum)
 
+
+func _on_player_level_up(new_level: int) -> void:
+	var str_roll = dice_roller.roll(4)
+	var int_roll = dice_roller.roll(4)
+	var fai_roll = dice_roller.roll(4)
+	var agi_roll = dice_roller.roll(4)
+	
+	player_node.stats_component.apply_level_up(str_roll, int_roll, fai_roll, agi_roll)
+	player_node.health_component.increase_max_hp(str_roll)
+	
+	ui.log_str("[color=yellow]LEVEL UP! Você alcançou o Nível %d![/color]" % new_level)
+	ui.log_str("Atributos (d4) aumentaram: FOR+%d, INT+%d, FÉ+%d, AGI+%d" % [str_roll, int_roll, fai_roll, agi_roll])
 
 
 # --- Utils ---

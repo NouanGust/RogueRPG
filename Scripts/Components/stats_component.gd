@@ -73,3 +73,15 @@ func get_value(stat_name: String) -> int:
 			bonus += int(active_buff["amount"] / 2)
 			
 	return base_value + bonus
+
+func apply_level_up(str_bonus: int, int_bonus: int, fai_bonus: int, agi_bonus: int) -> void:
+	stats.strength += str_bonus
+	stats.intelligence += int_bonus
+	stats.faith += fai_bonus
+	stats.agility += agi_bonus
+	
+	stats.attack += str_bonus
+	stats.defense += int(agi_bonus/2)
+	stats.max_hp += str_bonus
+	
+	stats_changed.emit(stats)

@@ -10,7 +10,7 @@ signal xp_changed(current_xp: int)
 signal enemy_selected(enemy_data: EnemyData)
 signal run_finished(victory: bool)
 
-const MAX_LEVEL: int = 3
+#const MAX_LEVEL: int = 3
 const MAX_INVENTORY_SLOTS: int = 5
 var inventory: Array[ItemData] = []
 
@@ -59,7 +59,15 @@ func set_current_enemy(value: EnemyData) -> void:
 func add_xp(amount: int) -> void:
 	current_xp += amount
 	xp_changed.emit(current_xp)
+	_check_level_up()
+
+func _check_level_up() -> void:
+	var xp_required = current_level * 20
 	
+	if current_xp >= xp_required:
+		current_xp -= xp_required
+		advance_level()
+		_check_level_up()
 
 func advance_level() -> void:
 	current_level += 1
@@ -76,8 +84,8 @@ func has_selected_class() -> bool:
 func has_rolled_attributes() -> bool:
 	return not rolled_attributes.is_empty()
 
-func is_last_level() -> bool:
-	return current_level >= MAX_LEVEL
+#func is_last_level() -> bool:
+	#return current_level >= MAX_LEVEL
 
 func can_enter_battle() -> bool:
 	return run_active and selected_class != null and not rolled_attributes.is_empty()
