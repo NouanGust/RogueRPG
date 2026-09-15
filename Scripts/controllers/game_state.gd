@@ -11,6 +11,8 @@ signal enemy_selected(enemy_data: EnemyData)
 signal run_finished(victory: bool)
 
 const MAX_LEVEL: int = 3
+const MAX_INVENTORY_SLOTS: int = 5
+var inventory: Array[ItemData] = []
 
 var selected_class: ClassData
 var rolled_attributes: Dictionary = {}
@@ -79,3 +81,24 @@ func is_last_level() -> bool:
 
 func can_enter_battle() -> bool:
 	return run_active and selected_class != null and not rolled_attributes.is_empty()
+	
+	
+#===================
+# Inventário
+#===================
+
+func has_inventory_space() -> bool:
+	return inventory.size() < MAX_INVENTORY_SLOTS
+	
+	
+func add_item(item: ItemData) -> bool:
+	if has_inventory_space():
+		inventory.append(item)
+		return true
+	return false
+
+func remove_item(item: ItemData) -> void:
+	var index = inventory.find(item)
+	if index != -1:
+		inventory.remove_at(index)
+	
