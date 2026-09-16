@@ -10,19 +10,16 @@ var profile_data: Dictionary = {
 
 func _ready() -> void:
 	if not DirAccess.dir_exists_absolute(SAVE_DIR):
-		DirAccess.make_dir_absolute(SAVE_DIR)
+		DirAccess.make_dir_recursive_absolute(SAVE_DIR)
 
 
 func get_all_profiles() -> Array[String]:
 	var profiles: Array[String] = []
-	var dir = DirAccess.open(SAVE_DIR)
-	if dir:
-		dir.list_dir_begin()
-		var file_name = dir.get_next()
-		while file_name != "":
-			if not dir.current_is_dir() and file_name.ends_with(".save"):
-				profiles.append(file_name.replace(".save", ""))
-			file_name = dir.get_next()
+	if DirAccess.dir_exists_absolute(SAVE_DIR):
+		var files = DirAccess.get_files_at(SAVE_DIR)
+		for file in files:
+			if file.ends_with(".save"):
+				profiles.append(file.replace(".save", ""))
 			
 	return profiles
 
