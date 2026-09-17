@@ -7,7 +7,7 @@ var player: PlayerActor
 var enemy: EnemyActor
 var last_math_log: String = "Nenhum ataque realizado."
 
-var is_visible:bool = true
+var is_visible:bool = false
 
 
 func setup(_player: PlayerActor, _enemy: EnemyActor) -> void:

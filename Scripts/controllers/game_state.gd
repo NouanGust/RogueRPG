@@ -107,6 +107,7 @@ func has_inventory_space() -> bool:
 func add_item(item: ItemData) -> bool:
 	if has_inventory_space():
 		inventory.append(item)
+		sync_inventory_to_save()
 		return true
 	return false
 
@@ -114,4 +115,10 @@ func remove_item(item: ItemData) -> void:
 	var index = inventory.find(item)
 	if index != -1:
 		inventory.remove_at(index)
-	
+		sync_inventory_to_save()
+
+func sync_inventory_to_save() -> void:
+	SaveManager.save_backpack(inventory)
+
+func load_inventory_from_save() -> void:
+	inventory = SaveManager.get_saved_backpack()

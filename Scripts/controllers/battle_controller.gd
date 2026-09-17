@@ -13,6 +13,7 @@ signal battle_finished(player_won: bool)
 
 @export var enemy_pool: Array[EnemyData] = []
 @export var damage_text_scene: PackedScene
+@export var loot_pool: Array[ItemData] = []
 
 # --- SFX ---
 @export_group("SFX")
@@ -51,8 +52,8 @@ func _ready() -> void:
 
 	ui.set_controller(self)
 	ui.attack_pressed.connect(player_attack)
-	ui.item_pressed.connect(player_use_item)
 	ui.escape_pressed.connect(player_escape)
+	ui.loot_decision_made.connect(_on_loot_decision)
 
 func _process(_delta: float) -> void:
 	if not battle_active or main_camera == null: return
@@ -166,14 +167,10 @@ func player_attack() -> void:
 	await _set_turn("enemy")
 	action_in_progress = false
 
-func player_use_item() -> void:
-	if not battle_active or current_turn != "player":
-		return
-	ui.open_item_menu()
 
 func player_escape() -> void:
 	if not battle_active:
-		get_tree().change_scene_to_file("res://Scenes/run/main_menu_scene.tscn")
+		get_tree().change_scene_to_file("res://Scenes/main/camp.tscn")
 		return
 	
 	
@@ -212,26 +209,41 @@ func enemy_act() -> void:
 	await _set_turn("player")
 
 
-func use_specific_item(id: int) -> void:
-	if not battle_active or current_turn != "player" or action_in_progress:
-		return
+func use_item_from_inventory(item: ItemData) -> void:
+	if not battle_active or current_turn != "player" or action_in_progress: return
 	
 	action_in_progress = true
-	var item_used_sucessfully: bool = false
+	var used_suc: bool = true
 	
-	if id == 0:
-		item_used_sucessfully = player_node.inventory_component.use_potions(player_node.health_component)
-	elif id == 1:
-		item_used_sucessfully = player_node.inventory_component.use_elixir(player_node.stats_component)
-	
-	if item_used_sucessfully:
-		await _set_turn("enemy")
-	else:
-		ui.log_str("Não foi possivel usar o item.")
-		
-	action_in_progress = false
-	
+	match item.item_type:
+		"potion":
+			var heal_amount = item.effect_value
+			player_node.health_component.heal(heal_amount)
+			ui.log_heal("Você consumiu %s e curou %d de HP!" %[item.item_name, item.effect_value])
+		"elixir":
+			var buff_amount = item.effect_value
+			var stats = ["strength", "agility"]
+			var chosen_stat = stats.pick_random()
+			player_node.stats_component.apply_buff(chosen_stat, buff_amount, 3)
+			ui.log_heal("O elixir fez efeito! +%d %s por 3 turnos." % [buff_amount, chosen_stat.capitalize()])
+		"dice":
+			ui.log_str("Voce usou um Dado!")
+			#TODO Aplicar efeito do dado
+		"relic":
+			ui.log_str("Item especial!")
+			# TODO definir funcionabilidade do item
+		_:
+			ui.log_str("Item Desconhecido!")
+			used_suc = false
 
+	if used_suc:
+		AudioManager.play_sfx(item_sfx)
+		GameState.remove_item(item)
+		
+		if ui.inventory_panel.has_method("refresh_items"):
+			ui.inventory_panel.refresh_items()
+		await  _set_turn("enemy")
+	action_in_progress = false
 func _on_item_used(_item_id: StringName, message: String) -> void:
 	ui.log_heal(message)
 
@@ -249,15 +261,31 @@ func _on_enemy_died() -> void:
 	ui.log_str("Inimigo derrotado! +%d XP | +%d Moedas." %[reward, coins_dropped])
 	
 	var drop_roll: float = randf()
-	if drop_roll <= 0.4:
-		var is_potion: float = randf()
-		if is_potion:
-			player_node.inventory_component.potions += 1
-			ui.log_str("O inimigo dropou uma Poção!")
-		else:
-			player_node.inventory_component.elixirs += 1
-			ui.log_str("O inimigo dropou um Elixir!")
+	if drop_roll <= 0.4 and not loot_pool.is_empty():
+		var dropped_item = loot_pool.pick_random()
+		ui.show_loot_screen(dropped_item)
+	else:
+		_procede_to_next_enemy()
 	
+
+
+func _on_loot_decision(decision: String, item: ItemData) -> void:
+	match decision:
+		"backpack":
+			GameState.add_item(item)
+			ui.log_str("Você guardou %s na mochila." % item.item_name)
+		"stash":
+			SaveManager.add_to_stash(item)
+			ui.log_str("Você guardou %s no baú." % item.item_name)
+		"sell":
+			var sell_value = max(1, item.cost/2)
+			SaveManager.add_coins(sell_value)
+			ui.log_str("Você vendeu: %s por: %d." % [item.item_name, sell_value])
+	if ui.inventory_panel.has_method("refresh_items"):
+		ui.inventory_panel.refresh_items()
+	_procede_to_next_enemy()
+
+func _procede_to_next_enemy() -> void:
 	current_level = GameState.current_level
 	_spawn_enemy_for_level(current_level)
 	_on_enemy_health_changed(enemy_node.health_component.current_hp, enemy_node.health_component.max_hp)

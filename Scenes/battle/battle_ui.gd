@@ -2,8 +2,8 @@ class_name BattleUI
 extends Control
 
 signal attack_pressed
-signal item_pressed
 signal escape_pressed
+signal loot_decision_made(decision: String, item: ItemData)
 
 @onready var title_label: Label = $MarginContainer/VBoxContainer/PanelContainer/TitleLabel
 @onready var log_label: RichTextLabel = $MarginContainer/VBoxContainer/Actions/HBoxContainer/LogPanel/LogPanel
@@ -19,21 +19,26 @@ signal escape_pressed
 @onready var enemy_hp_bar: ProgressBar = $MarginContainer/VBoxContainer/EnemyPanel/EnemyHPBar
 
 @onready var inventory_panel: InventoryPanel = $InventoryPanel
+@onready var loot_panel: PanelContainer = $LootPanel
+@onready var loot_label: Label = $LootPanel/MarginContainer/VBoxContainer/Label
+@onready var backpack_button: Button = $LootPanel/MarginContainer/VBoxContainer/BagButton
+@onready var stash_button: Button = $LootPanel/MarginContainer/VBoxContainer/StashButton
+@onready var sell_button: Button = $LootPanel/MarginContainer/VBoxContainer/SellButton
 
 var controller: BattleController
-var item_menu: PopupMenu
+var current_loot: ItemData
 
 func _ready() -> void:
 	attack_button.pressed.connect(func(): attack_pressed.emit())
 	item_button.pressed.connect(_on_item_button_pressed)
-	item_button.pressed.connect(func(): item_pressed.emit())
 	escape_button.pressed.connect(func(): escape_pressed.emit())
 	log_label.text = ""
 	
-	item_menu = PopupMenu.new()
-	add_child(item_menu)
-	item_menu.id_pressed.connect(_on_item_selected)
 	inventory_panel.item_selected.connect(_on_inventory_item_selected)
+	loot_panel.hide()
+	backpack_button.pressed.connect(func(): _on_loot_chosen("backpack"))
+	stash_button.pressed.connect(func(): _on_loot_chosen("stash"))
+	sell_button.pressed.connect(func(): _on_loot_chosen("sell"))
 
 func set_controller(value: BattleController) -> void:
 	controller = value
@@ -64,16 +69,6 @@ func log_heal(message: String) -> void:
 	log_label.append_text("[color=green] [wave amp=20.0 freq=5.0 connected=1]" + message + "[/wave][/color]\n")
 	log_label.scroll_to_line(log_label.get_line_count() - 1)
 
-func open_item_menu() -> void:
-	item_menu.clear()
-	var inventory = controller.player_node.inventory_component
-	
-	item_menu.add_item("Poção (%d) - Cura 5 de HP" % inventory.potions, 0)
-	item_menu.set_item_disabled(0, inventory.potions <= 0)
-	item_menu.add_item("Elixir (%d) - Buff aleatório" % inventory.elixirs, 1)
-	item_menu.set_item_disabled(1, inventory.elixirs <= 0)
-	item_menu.popup_centered(Vector2i(250, 100))
-
 
 
 func _on_item_button_pressed() -> void:
@@ -82,18 +77,37 @@ func _on_item_button_pressed() -> void:
 	inventory_panel.open_panel()
 
 func _on_inventory_item_selected(item: ItemData) -> void:
-	if item.item_type == "potion":
-		controller.player_node.health_component.heal(item.effect_value)
+	if inventory_panel.has_method("close_panel"):
+		inventory_panel.close_panel()
+	else:
+		inventory_panel.hide()
 	
-	GameState.remove_item(item)
+	controller.use_item_from_inventory(item)
 	
-	controller._set_turn("enemy")
 
 
 func _on_item_selected(id: int) -> void:
 	controller.use_specific_item(id)
 
+func show_loot_screen(item: ItemData) -> void:
+	current_loot = item
+	loot_label.text = "O inimigo dropou:\n%s" % item.item_name
+	
+	backpack_button.disabled = not GameState.has_inventory_space()
+	if backpack_button.disabled:
+		backpack_button.text = "MOCHILA CHEIA!"
+	else:
+		backpack_button.text = "GUARDAR NA MOCHILA"
+	
+	sell_button.text = "VENDER (%d MOEDAS)" % max(1, item.cost/2)
+	
+	loot_panel.show()
 
+
+func _on_loot_chosen(decision: String) -> void:
+	loot_panel.hide()
+	AudioManager.play_ui_click()
+	loot_decision_made.emit(decision, current_loot)
 
 func _on_turn_changed(current_turn: String) -> void:
 	var is_player_turn := current_turn == "player"

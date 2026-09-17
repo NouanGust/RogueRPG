@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://clpyvtaf75kqa"]
+
+[node name="LootPanel" type="PanelContainer" unique_id=1826055585]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=23935871]
+layout_mode = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1541032982]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1346469769]
+layout_mode = 2
+text = "O Inimigo dropou: Poção"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="BagButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=607150180]
+layout_mode = 2
+text = "BAG"
+
+[node name="StashButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1810043626]
+layout_mode = 2
+text = "BAÚ"
+
+[node name="SellButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=649821617]
+layout_mode = 2
+text = "VENDER"

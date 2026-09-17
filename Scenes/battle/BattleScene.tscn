@@ -24,6 +24,7 @@
 [ext_resource type="AudioStream" uid="uid://xom27j2pc0c" path="res://Assets/Music/battleTheme.wav" id="20_5b2op"]
 [ext_resource type="PackedScene" uid="uid://b20keqeqxjfwy" path="res://Scenes/inventory_panel.tscn" id="22_jk8xb"]
 [ext_resource type="PackedScene" uid="uid://c5pplqrble7t4" path="res://combat_debug.tscn" id="23_qpm48"]
+[ext_resource type="PackedScene" uid="uid://clpyvtaf75kqa" path="res://Scenes/Entities/loot_panel.tscn" id="24_j4tin"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vvcci"]
 texture = ExtResource("13_5u8xp")
@@ -276,10 +277,13 @@ vertical_alignment = 1
 
 [node name="InventoryPanel" parent="UILayer/BattleUI" unique_id=341227670 instance=ExtResource("22_jk8xb")]
 layout_mode = 1
-offset_left = -300.0
 
 [node name="CombatDebug" parent="UILayer/BattleUI" unique_id=65692767 instance=ExtResource("23_qpm48")]
 layout_mode = 0
+
+[node name="LootPanel" parent="UILayer/BattleUI" unique_id=1826055585 instance=ExtResource("24_j4tin")]
+visible = false
+layout_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=966493238]
 position = Vector2(640, 360)
@@ -289,3 +293,5 @@ stream = ExtResource("20_5b2op")
 volume_db = -5.0
 autoplay = true
 bus = &"Music"
+
+[editable path="UILayer/BattleUI/LootPanel"]

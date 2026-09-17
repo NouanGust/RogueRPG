@@ -5,7 +5,8 @@ var current_profile_name: String = ""
 var profile_data: Dictionary = {
 	"coins": 0,
 	"backpack_level": 1,
-	"stach": []
+	"backpack_items": [],
+	"stash_items": []
 }
 
 func _ready() -> void:
@@ -46,6 +47,8 @@ func load_profile(profile_name: String) -> bool:
 			file.close()
 			return true
 	return false
+
+
 func save_game() -> void:
 	if current_profile_name == "":
 		push_error("SaveManager: Tentando salvar sem um perfil ativo.")
@@ -57,6 +60,19 @@ func save_game() -> void:
 		file.close()
 	else:
 		push_error("SaveManager: Falha ao abrir o arquivo.")
+
+func save_backpack(inventory: Array[ItemData]) -> void:
+	var paths = []
+	for item in inventory:
+		paths.append(item.resource_path)
+	profile_data["backpack_items"] = paths
+	save_game()
+
+func add_to_stash(item: ItemData) -> void:
+	var stash = profile_data.get("stash_items", [])
+	stash.append(item.resource_path)
+	profile_data["stash_items"] = stash
+	save_game()
 
 # Gets Globais
 
@@ -77,8 +93,11 @@ func spend_coins(amount: int) -> bool:
 
 func get_backpack_limit() -> int:
 	return 2 + profile_data.get("backpack_level", 1)
-	
-func add_to_stash(item_id: String) -> void:
-	var stash: Array = profile_data.get("stash", [])
-	stash.append(item_id)
-	save_game()
+
+func get_saved_backpack() -> Array[ItemData]:
+	var loaded_items: Array[ItemData] = []
+	var paths = profile_data.get("backpack_items", [])
+	for path in paths:
+		if ResourceLoader.exists(path):
+			loaded_items.append(ResourceLoader.load(path) as ItemData)
+	return loaded_items

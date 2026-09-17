@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://dbqktapaen5q"]
+
+[ext_resource type="Script" uid="uid://dkawiw15k03n3" path="res://Scripts/controllers/camp_controller.gd" id="1_da1cq"]
+[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="2_pgk6y"]
+[ext_resource type="Resource" uid="uid://bmvf1pobnagu4" path="res://Scripts/resources/Items/dice_6.tres" id="3_oe6bg"]
+[ext_resource type="Resource" uid="uid://b74gl4j2bp0rh" path="res://Scripts/resources/Items/dice_10.tres" id="4_rtroj"]
+[ext_resource type="Resource" uid="uid://dy1q6pm7xlu3s" path="res://Scripts/resources/Items/dice_20.tres" id="5_6vkrk"]
+[ext_resource type="Resource" uid="uid://bo830gfweoavh" path="res://Scripts/resources/Items/potion_medium.tres" id="6_fyq28"]
+[ext_resource type="Resource" uid="uid://yhexp7xptbop" path="res://Scripts/resources/Items/potion_small.tres" id="7_ou0is"]
+[ext_resource type="PackedScene" uid="uid://bs1pa3rcorq6k" path="res://Scenes/item_card.tscn" id="8_6atf5"]
+[ext_resource type="Resource" uid="uid://cgpcs6gynjckj" path="res://Scripts/resources/Items/strenght_elixir.tres" id="8_oe6bg"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mvf7"]
+bg_color = Color(0, 0, 0, 1)
+
+[node name="Camp" type="Control" unique_id=1886277990]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_da1cq")
+all_items = Array[ExtResource("2_pgk6y")]([ExtResource("3_oe6bg"), ExtResource("4_rtroj"), ExtResource("5_6vkrk"), ExtResource("6_fyq28"), ExtResource("7_ou0is"), ExtResource("8_oe6bg")])
+item_card_scene = ExtResource("8_6atf5")
+
+[node name="Panel" type="Panel" parent="." unique_id=1525156225]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_5mvf7")
+
+[node name="MarginContainer" type="MarginContainer" parent="." unique_id=401999161]
+custom_minimum_size = Vector2(400, 300)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=888460510]
+layout_mode = 2
+size_flags_vertical = 4
+alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=34223340]
+layout_mode = 2
+alignment = 1
+
+[node name="ProfileNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=9821723]
+layout_mode = 2
+text = "Perfil: Nohan"
+
+[node name="CoinsLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1448314825]
+layout_mode = 2
+text = "Moedas: 100"
+
+[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1297401850]
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1439542863]
+custom_minimum_size = Vector2(0, 200)
+layout_mode = 2
+alignment = 1
+
+[node name="Shop" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1738155814]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop" unique_id=1322769989]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer" unique_id=1240522752]
+layout_mode = 2
+size_flags_vertical = 0
+text = "LOJA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer" unique_id=336305228]
+layout_mode = 2
+columns = 2
+
+[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=110000170]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Bag" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1253661305]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag" unique_id=939962613]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer" unique_id=2098491903]
+layout_mode = 2
+size_flags_vertical = 0
+text = "MOCHILA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer" unique_id=1867560092]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1245226195]
+layout_mode = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=311269040]
+layout_mode = 2
+alignment = 1
+
+[node name="RerollShopButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=115810777]
+layout_mode = 2
+text = "Reroll: 10 moedas"
+
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=170486455]
+layout_mode = 2
+text = "COMEÇAR"

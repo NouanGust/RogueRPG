@@ -7,9 +7,9 @@ extends PanelContainer
 @onready var buy_button: Button = $MarginContainer/VBoxContainer/BuyButton
 
 var current_item: ItemData
-var shop_reference: ShopController
+var shop_reference: CampController
 
-func setup(item_data: ItemData, shop: ShopController) -> void:
+func setup(item_data: ItemData, shop: CampController) -> void:
 	current_item = item_data
 	shop_reference = shop
 	
@@ -22,7 +22,7 @@ func setup(item_data: ItemData, shop: ShopController) -> void:
 	buy_button.pressed.connect(_on_buy_pressed)
 
 func _on_buy_pressed() -> void:
-	var success = shop_reference.buy_item(current_item)
+	var success = shop_reference.buy_item(current_item, self)
 	
 	if success:
 		buy_button.disabled = true

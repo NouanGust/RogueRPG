@@ -1,0 +1,66 @@
+[gd_scene format=3 uid="uid://btf76lrdp8w1v"]
+
+[ext_resource type="Texture2D" uid="uid://c8xu5mphlnx5k" path="res://Assets/UI/panel-border-022.png" id="1_ugcfn"]
+[ext_resource type="PackedScene" uid="uid://dbqktapaen5q" path="res://Scenes/main/camp.tscn" id="2_audj6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_audj6"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_yxv6e"]
+texture = ExtResource("1_ugcfn")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[node name="Lobby" type="Control" unique_id=1829339731]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Color" type="Panel" parent="." unique_id=1620154886]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_audj6")
+
+[node name="texture" type="Panel" parent="." unique_id=1936495325]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_yxv6e")
+
+[node name="Camp" parent="texture" unique_id=1886277990 instance=ExtResource("2_audj6")]
+layout_mode = 0
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 297.0
+offset_top = 548.0
+offset_right = 297.0
+offset_bottom = 548.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 0
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="texture" unique_id=1174280464]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10

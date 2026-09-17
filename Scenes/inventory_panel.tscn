@@ -1,25 +1,35 @@
 [gd_scene format=3 uid="uid://b20keqeqxjfwy"]
 
 [ext_resource type="Script" uid="uid://dqbwwxu8m4fct" path="res://Scripts/ui/inventory_panel.gd" id="1_4ij40"]
+[ext_resource type="Texture2D" uid="uid://c8xu5mphlnx5k" path="res://Assets/UI/panel-border-022.png" id="2_wl8np"]
+[ext_resource type="StyleBox" uid="uid://jwjs7u0sndse" path="res://Assets/Themes/chose_button.tres" id="3_d2uih"]
+[ext_resource type="StyleBox" uid="uid://b4mai6yv25014" path="res://Assets/Themes/chose_button_hover.tres" id="4_df4ml"]
 
-[node name="InventoryPanel" type="Control" unique_id=341227670]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ixfct"]
+bg_color = Color(0.88235295, 0.5254902, 0.25490198, 0.1882353)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_sjxgx"]
+texture = ExtResource("2_wl8np")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+
+[node name="InventoryPanel" type="PanelContainer" unique_id=1969342278]
 custom_minimum_size = Vector2(300, 0)
-layout_mode = 3
 anchors_preset = 11
 anchor_left = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_left = -300.0
 grow_horizontal = 0
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ixfct")
 script = ExtResource("1_4ij40")
 
 [node name="Panel" type="Panel" parent="." unique_id=400555647]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_sjxgx")
 
 [node name="MarginContainer" type="MarginContainer" parent="Panel" unique_id=1352360951]
 layout_mode = 1
@@ -44,6 +54,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SlotsGrids" type="GridContainer" parent="Panel/MarginContainer/VBoxContainer" unique_id=2110376607]
+custom_minimum_size = Vector2(0, 200)
 layout_mode = 2
 columns = 2
 
@@ -53,4 +64,6 @@ size_flags_vertical = 3
 
 [node name="CloseBtn" type="Button" parent="Panel/MarginContainer/VBoxContainer" unique_id=1734707761]
 layout_mode = 2
+theme_override_styles/normal = ExtResource("3_d2uih")
+theme_override_styles/hover = ExtResource("4_df4ml")
 text = "FECHAR"

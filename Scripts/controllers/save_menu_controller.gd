@@ -41,7 +41,7 @@ func _on_load_pressed() -> void:
 		AudioManager.play_ui_choose()
 		var p_name = profile_list.get_item_text(selected[0])
 		SaveManager.load_profile(p_name)
-		SceneTransition.change_scene("res://Scenes/run/attribute_roll_scene.tscn")
+		SceneTransition.change_scene("res://Scenes/main/camp.tscn")
 
 func _on_delete_pressed() -> void:
 	var selected =  profile_list.get_selected_items()
