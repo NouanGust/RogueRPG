@@ -10,8 +10,16 @@ extends Control
 @onready var reroll_button: Button = $MarginContainer/VBoxContainer/HBoxContainer3/RerollShopButton
 @onready var shop_grid: GridContainer = $MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer/GridContainer
 @onready var backpack_grid: GridContainer = $MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer/GridContainer
+@onready var stash_grid: GridContainer = $MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer/GridContainer
+
+var stash_items: Array[ItemData] = []
 func _ready() -> void:
+	GameState.load_inventory_from_save()
+	stash_items = SaveManager.get_saved_stash()
 	_update_ui()
+	_update_backpack_ui()
+	_update_stash_ui()
+	
 	
 	start_button.pressed.connect(_on_start_button_pressed)
 	reroll_button.pressed.connect(_on_reroll_button_pressed)
@@ -25,23 +33,37 @@ func _update_ui() -> void:
 func _update_backpack_ui() -> void:
 	for child in backpack_grid.get_children():
 		child.queue_free()
-	
-	for item in GameState.inventory:
-		var icon_rect = TextureRect.new()
-		icon_rect.texture = item.icon
-		icon_rect.custom_minimum_size = Vector2(40, 40)
-		icon_rect.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
-		icon_rect.tooltip_text = item.item_name
-		backpack_grid.add_child(icon_rect)
 		
-	var current_size = GameState.inventory.size()
+	for item in GameState.inventory:
+		var btn = _create_item_button(item)
+		btn.pressed.connect(_on_backpack_item_clicked.bind(item))
+		backpack_grid.add_child(btn)
+		
 	var max_size = SaveManager.get_backpack_limit()
-	
-	for i in range(max_size - current_size):
+	for i in range(max_size - GameState.inventory.size()):
 		var empty_slot = Panel.new()
 		empty_slot.custom_minimum_size = Vector2(40, 40)
-		empty_slot.modulate.a = 0.3
+		empty_slot.modulate.a = 0.3 
 		backpack_grid.add_child(empty_slot)
+
+func _update_stash_ui() -> void:
+	for child in stash_grid.get_children():
+		child.queue_free()
+	
+	for item in stash_items:
+		var btn = _create_item_button(item)
+		btn.pressed.connect(_on_stash_item_clicked.bind(item))
+		stash_grid.add_child(btn)
+		
+
+
+func _create_item_button(item: ItemData) -> Button:
+	var btn = Button.new()
+	btn.icon = item.icon
+	btn.expand_icon = true
+	btn.custom_minimum_size = Vector2(40, 40)
+	btn.tooltip_text = item.item_name + "\n" + item.description
+	return btn
 
 func _generate_shop() -> void: 
 	for child in shop_grid.get_children():
@@ -108,6 +130,32 @@ func _on_start_button_pressed() -> void:
 	AudioManager.play_ui_choose()
 	GameState.reset_run()
 	SceneTransition.change_scene("res://Scenes/run/class_selection_scene.tscn")
+
+func _on_backpack_item_clicked(item: ItemData) -> void:
+	AudioManager.play_ui_click()
+	GameState.remove_item(item)
+	stash_items.append(item)
+	
+	SaveManager.save_stash(stash_items)
+	
+	_update_backpack_ui()
+	_update_stash_ui()
+
+
+func _on_stash_item_clicked(item: ItemData) -> void:
+	if not GameState.has_inventory_space():
+		AudioManager.play_ui_cancel()
+		trigger_ui_error(backpack_grid)
+		return
+	
+	AudioManager.play_ui_click()
+	stash_items.erase(item)
+	GameState.add_item(item)
+	
+	SaveManager.save_stash(stash_items)
+	
+	_update_backpack_ui()
+	_update_stash_ui()
 
 func trigger_ui_error(control: Control) -> void:
 	if not is_instance_valid(control): return

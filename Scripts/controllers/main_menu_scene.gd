@@ -6,7 +6,6 @@ extends Control
 @onready var new_run_button: Button = $MarginContainer/ButtonsVBox/NewRunButton
 @onready var settings_button: Button = $MarginContainer/ButtonsVBox/SettingsButton
 @onready var quit_button: Button = $MarginContainer/ButtonsVBox/QuitButton
-@onready var shop_button: Button = $MarginContainer/ButtonsVBox/ShopButton
 
 func _ready() -> void:
 	
@@ -24,8 +23,6 @@ func _ready() -> void:
 	quit_button.pressed.connect(_on_quit_button_pressed)
 	quit_button.mouse_entered.connect(_on_quit_button_hovered)
 	
-	shop_button.pressed.connect(_on_shop_button_pressed)
-	shop_button.mouse_entered.connect(_on_shop_button_hovered)
 
 func _on_new_run_button_pressed() -> void:
 	AudioManager.play_ui_click()

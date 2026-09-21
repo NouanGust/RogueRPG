@@ -74,6 +74,13 @@ func add_to_stash(item: ItemData) -> void:
 	profile_data["stash_items"] = stash
 	save_game()
 
+func save_stash(stash: Array[ItemData]) -> void:
+	var paths = []
+	for item in stash:
+		paths.append(item.resource_path)
+	profile_data["stash_items"] = paths
+	save_game()
+
 # Gets Globais
 
 func get_coins() -> int:
@@ -97,6 +104,14 @@ func get_backpack_limit() -> int:
 func get_saved_backpack() -> Array[ItemData]:
 	var loaded_items: Array[ItemData] = []
 	var paths = profile_data.get("backpack_items", [])
+	for path in paths:
+		if ResourceLoader.exists(path):
+			loaded_items.append(ResourceLoader.load(path) as ItemData)
+	return loaded_items
+
+func get_saved_stash() -> Array[ItemData]:
+	var loaded_items: Array[ItemData] = []
+	var paths = profile_data.get("stash_items", [])
 	for path in paths:
 		if ResourceLoader.exists(path):
 			loaded_items.append(ResourceLoader.load(path) as ItemData)
