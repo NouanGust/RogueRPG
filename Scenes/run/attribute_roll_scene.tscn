@@ -317,3 +317,11 @@ theme_override_styles/hover = ExtResource("9_d1fbd")
 theme_override_styles/disabled = ExtResource("10_d6plq")
 disabled = true
 text = "CONFIRMAR"
+
+[node name="Test3DButton" type="Button" parent="MarginContainer/VBoxContainer/BottomBar" unique_id=1759995909]
+layout_mode = 2
+theme_override_styles/normal = ExtResource("8_dvr6p")
+theme_override_styles/hover = ExtResource("9_d1fbd")
+theme_override_styles/disabled = ExtResource("10_d6plq")
+disabled = true
+text = "3D!!!!!"

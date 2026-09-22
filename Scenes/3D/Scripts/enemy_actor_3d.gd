@@ -45,16 +45,22 @@ func play_dead(): play_anim("Dead")
 
 func _on_health_changed(_current: int, _maximum: int) -> void:
 	play_hurt()
-	if anim_sprite.material != null:
-		anim_sprite.material.set_shader_parameter("active", true)
+	if anim_sprite.material_overlay != null:
+		anim_sprite.material_overlay.set_shader_parameter("active", true)
 		await get_tree().create_timer(0.18).timeout
-		if is_instance_valid(anim_sprite) and anim_sprite.material != null:
-			anim_sprite.material.set_shader_parameter("active", false)
+		if is_instance_valid(anim_sprite) and anim_sprite.material_overlay != null:
+			anim_sprite.material_overlay.set_shader_parameter("active", false)
 			
 	var tween := create_tween()
-	tween.tween_property(anim_sprite, "position:x", 15.0, 0.05).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(anim_sprite, "position:x", 0.3, 0.05).set_trans(Tween.TRANS_SINE)
 	tween.tween_property(anim_sprite, "position:x", 0.0, 0.1).set_trans(Tween.TRANS_SPRING)
 
 func _on_animation_finished() -> void:
 	if anim_sprite.animation in["attack", "hurt"]:
 		play_idle()
+
+
+func face_target(target_global_pos: Vector3) -> void:
+	var look_pos = Vector3(target_global_pos.x, global_position.y, target_global_pos.z)
+	look_at(look_pos, Vector3.UP)
+	#rotate_y(PI)

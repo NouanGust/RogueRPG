@@ -2,19 +2,29 @@
 
 [ext_resource type="Script" uid="uid://beufxl7eq0lyi" path="res://Scenes/3D/Scripts/enemy_actor_3d.gd" id="1_avwyy"]
 [ext_resource type="SpriteFrames" uid="uid://brgu4rojlcw45" path="res://Scripts/resources/Satyr_frames.tres" id="1_p3m7x"]
+[ext_resource type="Shader" uid="uid://bv5mxen2on5ev" path="res://Scenes/Entities/hit_flash.gdshader" id="2_m36qy"]
 [ext_resource type="Script" uid="uid://cvctj0pw14gwt" path="res://Scripts/Components/stats_component.gd" id="3_m36qy"]
 [ext_resource type="Script" uid="uid://d3tx70s82u3ma" path="res://Scripts/Components/health_component.gd" id="4_dsk1a"]
 [ext_resource type="Script" uid="uid://b5js5veqeeo81" path="res://Scripts/Components/combat_component.gd" id="5_rieus"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsk1a"]
+shader = ExtResource("2_m36qy")
+shader_parameter/active = false
+shader_parameter/shadow_offset = Vector2(10, 10)
+shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
 
 [node name="EnemyActor3D" type="Node3D" unique_id=1860734442]
 script = ExtResource("1_avwyy")
 
 [node name="AnimSprite" type="AnimatedSprite3D" parent="." unique_id=1920546388]
+material_overlay = SubResource("ShaderMaterial_dsk1a")
+flip_h = true
 billboard = 2
+shaded = true
 alpha_cut = 1
 texture_filter = 0
 sprite_frames = ExtResource("1_p3m7x")
-animation = &"Idle"
+animation = &"Attack"
 
 [node name="StatsComponent" type="Node" parent="." unique_id=117981316]
 script = ExtResource("3_m36qy")
@@ -24,6 +34,8 @@ metadata/_custom_type_script = "uid://cvctj0pw14gwt"
 script = ExtResource("4_dsk1a")
 metadata/_custom_type_script = "uid://d3tx70s82u3ma"
 
-[node name="CombatComponent" type="Node" parent="." unique_id=1792625975]
+[node name="CombatComponent" type="Node" parent="." unique_id=1792625975 node_paths=PackedStringArray("stats_component", "health_component")]
 script = ExtResource("5_rieus")
+stats_component = NodePath("../StatsComponent")
+health_component = NodePath("../HealthComponent")
 metadata/_custom_type_script = "uid://b5js5veqeeo81"

@@ -10,4 +10,5 @@ description = "Restaura 10hp"
 icon = ExtResource("1_ossu3")
 cost = 7
 item_type = "potion"
+effect_value = 10
 metadata/_custom_type_script = "uid://dclj8oiffd528"

@@ -12,7 +12,6 @@
 [ext_resource type="Resource" uid="uid://8i200rdnkeqe" path="res://Scripts/resources/Minotaur.tres" id="8_80okk"]
 [ext_resource type="PackedScene" uid="uid://2vo5yre3vjgh" path="res://Scenes/Entities/damage_text.tscn" id="8_vpuc1"]
 [ext_resource type="AudioStream" uid="uid://bhoh3ou3nlhv8" path="res://Assets/Music/SFX/attack.mp3" id="9_xvy46"]
-[ext_resource type="Resource" uid="uid://bmsc2166f3oqb" path="res://Scripts/resources/Minotaur2.tres" id="9_y5nb8"]
 [ext_resource type="Resource" uid="uid://ci7mmtcom0kne" path="res://Scripts/resources/Minotaur3.tres" id="10_y1d5e"]
 [ext_resource type="Texture2D" uid="uid://b1psxojoqg768" path="res://Assets/Background/sky.png" id="11_4rstf"]
 [ext_resource type="Resource" uid="uid://dfyian05yns2q" path="res://Scripts/resources/skeleton_archer.tres" id="11_m6p2g"]
@@ -43,10 +42,9 @@ script = ExtResource("1_t3o3d")
 script = ExtResource("1_jb5ws")
 metadata/_custom_type_script = "uid://8kwf686gj1kl"
 
-[node name="BattleController" type="Node" parent="." unique_id=747335412 node_paths=PackedStringArray("combat_debug")]
+[node name="BattleController" type="Node" parent="." unique_id=747335412]
 script = ExtResource("2_vd1me")
-combat_debug = NodePath("")
-enemy_pool = Array[ExtResource("6_qcili")]([ExtResource("8_1ivbh"), ExtResource("6_08vyw"), ExtResource("7_753mi"), ExtResource("8_80okk"), ExtResource("9_y5nb8"), ExtResource("10_y1d5e"), ExtResource("11_m6p2g")])
+enemy_pool = Array[ExtResource("6_qcili")]([ExtResource("8_1ivbh"), ExtResource("6_08vyw"), ExtResource("7_753mi"), ExtResource("8_80okk"), ExtResource("10_y1d5e"), ExtResource("11_m6p2g")])
 damage_text_scene = ExtResource("8_vpuc1")
 attack_sfx = ExtResource("9_xvy46")
 metadata/_custom_type_script = "uid://cm5gejak3jpgh"

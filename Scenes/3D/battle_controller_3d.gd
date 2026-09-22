@@ -53,6 +53,7 @@ func _ready() -> void:
 	ui.attack_pressed.connect(player_attack)
 	ui.escape_pressed.connect(player_escape)
 	ui.loot_decision_made.connect(_on_loot_decision)
+	start_battle()
 
 #func _process(_delta: float) -> void:
 	#if not battle_active or main_camera == null: return
@@ -120,7 +121,9 @@ func _spawn_enemy_for_level(level: int) -> void:
 	var rolled_value := dice_roller.roll(dice_size)
 	enemy_node.setup(enemy_data, rolled_value)
 	
-	var base_pos = Vector3(0, 0, -2) 
+	enemy_node.face_target(player_node.global_position)
+	
+	var base_pos = Vector3(0, 0.666, -2) 
 	
 	enemy_node.global_position = Vector3(base_pos.x, base_pos.y, base_pos.z - 8)
 	enemy_node.play_walk()
@@ -163,8 +166,10 @@ func player_attack() -> void:
 	
 	if damage_text_scene:
 		var text_node = damage_text_scene.instantiate()
-		add_child(text_node)
-		var spawn_pos = enemy_node.global_position + Vector3(0, -30, 0)
+		ui.add_child(text_node)
+		var screen_pos = main_camera.unproject_position(enemy_node.global_position)
+		
+		var spawn_pos = screen_pos + Vector2(0, -30)
 		text_node.start(damage, spawn_pos, damage >=5)
 	
 	
@@ -204,12 +209,11 @@ func player_escape() -> void:
 
 func enemy_act() -> void:
 	if not battle_active or current_turn != "enemy": return 
+	enemy_node.face_target(player_node.global_position)
 
 	var original_pos = enemy_node.global_position
 	var target_pos = player_node.global_position
 	
-	# No 3D, o Z positivo aproxima da câmera. O player está em +Z.
-	# Subtraímos um pouco de Z para o inimigo parar na frente do escudo.
 	target_pos.z -= 1.5 
 	
 	# 1. Dash 3D

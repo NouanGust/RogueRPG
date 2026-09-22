@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://5gelifaa73br"
-path.s3tc="res://.godot/imported/Walk.png-13e3d420d943d3ca4da2c17f2c595717.s3tc.ctex"
+uid="uid://c80j3elrcvi5m"
+path.s3tc="res://.godot/imported/Stylized_HandpaintedDirt_01_basecolor.jpg-b7924d088e95030f45d293440eccd6cf.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Assets/Images/Satyr/Walk.png"
-dest_files=["res://.godot/imported/Walk.png-13e3d420d943d3ca4da2c17f2c595717.s3tc.ctex"]
+source_file="res://Assets/Material/Stylized_HandpaintedDirt_01_basecolor.jpg"
+dest_files=["res://.godot/imported/Stylized_HandpaintedDirt_01_basecolor.jpg-b7924d088e95030f45d293440eccd6cf.s3tc.ctex"]
 
 [params]
 

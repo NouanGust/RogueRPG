@@ -4,7 +4,6 @@
 [ext_resource type="Script" uid="uid://ohcqlju12pkm" path="res://Scenes/3D/battle_controller_3d.gd" id="1_sakwf"]
 [ext_resource type="PackedScene" uid="uid://bkes4tbohs1k8" path="res://Scenes/3D/player_actor_3d.tscn" id="2_78cvt"]
 [ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://Scripts/resources/enemy_data.gd" id="2_newfi"]
-[ext_resource type="Resource" uid="uid://bmsc2166f3oqb" path="res://Scripts/resources/Minotaur2.tres" id="3_1oy0s"]
 [ext_resource type="PackedScene" uid="uid://cbuivkfuhoc36" path="res://Scenes/run/ui_layer.tscn" id="3_sakwf"]
 [ext_resource type="Resource" uid="uid://ci7mmtcom0kne" path="res://Scripts/resources/Minotaur3.tres" id="4_wjnf6"]
 [ext_resource type="Resource" uid="uid://8i200rdnkeqe" path="res://Scripts/resources/Minotaur.tres" id="5_m157x"]
@@ -20,14 +19,46 @@
 [ext_resource type="AudioStream" uid="uid://bhoh3ou3nlhv8" path="res://Assets/Music/SFX/attack.mp3" id="15_m157x"]
 [ext_resource type="AudioStream" uid="uid://dd773eqirtuyu" path="res://Assets/Music/SFX/single_dice.mp3" id="16_e6731"]
 [ext_resource type="AudioStream" uid="uid://2twdcj8bysqe" path="res://Assets/Music/SFX/UI_choose.wav" id="17_idpok"]
+[ext_resource type="Texture2D" uid="uid://dhpk4emx0qfa2" path="res://Assets/Painterly Sky BGs (158).png" id="18_sf1r6"]
+[ext_resource type="Texture2D" uid="uid://c80j3elrcvi5m" path="res://Assets/Material/Stylized_HandpaintedDirt_01_basecolor.jpg" id="18_trnot"]
+[ext_resource type="Texture2D" uid="uid://r6d8upgp5q86" path="res://Assets/Material/Stylized_HandpaintedDirt_01_height.jpg" id="19_sf1r6"]
+[ext_resource type="Texture2D" uid="uid://b2tvkd12gvriy" path="res://Assets/Material/Stylized_HandpaintedDirt_01_normalogl.jpg" id="20_bwk33"]
 [ext_resource type="Script" uid="uid://8kwf686gj1kl" path="res://Scripts/Components/dice_roller.gd" id="21_e6731"]
+[ext_resource type="Texture2D" uid="uid://doyrkxnc0gjp5" path="res://Assets/Material/Stylized_HandpaintedDirt_01_roughness.jpg" id="21_np1vh"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bwk33"]
+panorama = ExtResource("18_sf1r6")
+
+[sub_resource type="Sky" id="Sky_idpok"]
+sky_material = SubResource("PanoramaSkyMaterial_bwk33")
+
+[sub_resource type="Environment" id="Environment_ty8l0"]
+background_mode = 2
+sky = SubResource("Sky_idpok")
+tonemap_mode = 2
+fog_enabled = true
+fog_mode = 1
+fog_light_color = Color(0.35561672, 0.5253969, 0.49321038, 1)
+fog_density = 1.0
+fog_sky_affect = 0.395
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_plnp8"]
+albedo_texture = ExtResource("18_trnot")
+roughness_texture = ExtResource("21_np1vh")
+normal_enabled = true
+normal_texture = ExtResource("20_bwk33")
+heightmap_enabled = true
+heightmap_texture = ExtResource("19_sf1r6")
+uv1_scale = Vector3(20, 20, 20)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_no5v7"]
+material = SubResource("StandardMaterial3D_plnp8")
+size = Vector2(20, 20)
 
 [node name="BattleScene3D" type="Node3D" unique_id=1290004777 node_paths=PackedStringArray("combat_debug")]
 script = ExtResource("1_sakwf")
 combat_debug = NodePath("UILayer/BattleUI/CombatDebug")
-enemy_pool = Array[ExtResource("2_newfi")]([ExtResource("3_1oy0s"), ExtResource("4_wjnf6"), ExtResource("5_m157x"), ExtResource("6_e6731"), ExtResource("7_idpok"), ExtResource("8_ty8l0"), ExtResource("9_07vp7")])
+enemy_pool = Array[ExtResource("2_newfi")]([ExtResource("4_wjnf6"), ExtResource("5_m157x"), ExtResource("6_e6731"), ExtResource("7_idpok"), ExtResource("8_ty8l0"), ExtResource("9_07vp7")])
 damage_text_scene = ExtResource("10_trnot")
 loot_pool = Array[ExtResource("11_sf1r6")]([ExtResource("12_bwk33"), ExtResource("13_np1vh"), ExtResource("14_plnp8")])
 attack_sfx = ExtResource("15_m157x")
@@ -36,22 +67,27 @@ dice_sfx = ExtResource("16_e6731")
 item_sfx = ExtResource("17_idpok")
 heal_sfx = ExtResource("17_idpok")
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1079749919]
+environment = SubResource("Environment_ty8l0")
+
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2014827557]
-transform = Transform3D(0.8396199, -0.14058389, 0.5246662, 0, 0.9659258, 0.25881904, -0.54317445, -0.21730961, 0.81101054, 0.8623253, 1.0010622, 2.8615499)
+transform = Transform3D(0.5274898, 0, 0.8495614, 0, 1, 0, -0.8495614, 0, 0.5274898, 1.9507079, 0.79889417, 2.587897)
+fov = 86.9
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1382959672]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
 mesh = SubResource("PlaneMesh_no5v7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1893119812]
-transform = Transform3D(0.964539, 0.14021073, -0.22361907, 0, 0.84723324, 0.5312212, 0.2639404, -0.5123836, 0.8171895, 0, 4.417688, 5.3882446)
+transform = Transform3D(0.42999116, -0.47960404, 0.76491034, -1.3593224e-09, 0.8472333, 0.53122115, -0.90283316, -0.22842053, 0.36430275, 0, 4.417688, 5.3882446)
+light_energy = 0.63
 shadow_enabled = true
 
 [node name="EnemyActor3D" parent="." unique_id=336036032 instance=ExtResource("1_35m3w")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.666, 0)
 
 [node name="PlayerActor3D" parent="." unique_id=1380970242 instance=ExtResource("2_78cvt")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6559154, 2.298792)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.666, 2.299)
 
 [node name="UILayer" parent="." unique_id=760799296 instance=ExtResource("3_sakwf")]
 
