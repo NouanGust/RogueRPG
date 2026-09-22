@@ -18,6 +18,7 @@ func _ready() -> void:
 	load_button.pressed.connect(_on_load_pressed)
 	delete_button.pressed.connect(_on_delete_pressed)
 	profile_list.item_selected.connect(_on_profile_selected)
+	profile_list.item_activated.connect(func(_index: int): _on_load_pressed())
 	
 
 func _refresh_profile_list() -> void:

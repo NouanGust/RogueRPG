@@ -120,6 +120,15 @@ func _spawn_enemy_for_level(level: int) -> void:
 	var dice_size := _get_level_dice(level)
 	var rolled_value := dice_roller.roll(dice_size)
 	enemy_node.setup(enemy_data, rolled_value)
+	
+	var original_pos = enemy_node.global_position
+	enemy_node.global_position.x = original_pos.x - 300
+	enemy_node.play_walk()
+	
+	var tween = create_tween()
+	tween.tween_property(enemy_node, "global_position:x", original_pos.x, 1.5).set_trans(Tween.TRANS_LINEAR)
+	await tween.finished
+	enemy_node.play_idle()
 
 func _get_level_dice(level: int) -> int:
 	return 2 + (level * 2)
@@ -193,18 +202,41 @@ func player_escape() -> void:
 	action_in_progress = false
 
 func enemy_act() -> void:
-	if not battle_active or current_turn != "enemy":
-		return 
+	if not battle_active or current_turn != "enemy": return 
 
+	# Guarda o local de origem para saber pra onde voltar depois do golpe
+	var original_pos = enemy_node.global_position
+	
+	# Calcula onde ele deve ir (A posição do player + um recuo em X para não ficarem grudados)
+	var target_pos = player_node.global_position
+	target_pos.x += 80 # Aumente ou diminua isso para ajustar a distância do impacto
+	
+	# 1. O Avanço (Dash)
+	enemy_node.play_walk()
+	var dash_tween = create_tween()
+	dash_tween.tween_property(enemy_node, "global_position", target_pos, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+	await dash_tween.finished 
+
+	# 2. O Ataque (Impacto)
+	enemy_node.play_attack()
+	await enemy_node.anim_sprite.animation_finished 
+	
+	# O dano e o tremor de tela acontecem exatamente no final da animação de ataque
 	var damage := enemy_node.combat_component.attack(player_node.stats_component, player_node.health_component)
 	ui.log_damage("O inimigo atacou e causou %d de dano." % damage)
+	trigger_screenshake(clamp(damage * 2.0, 5.0, 25.0), 0.25)
 	
-	trigger_screenshake(10.0, 0.25)
-	
-	#trigger_hit_pause(0.08)
-	
-	if player_node.health_component.current_hp <= 0:
-		return 
+	# 3. O Recuo (Volta para a base)
+	# Em RPGs 2D clássicos, o inimigo não vira de costas, ele apenas desliza/recua na mesma pose de caminhada.
+	enemy_node.play_walk()
+	var return_tween = create_tween()
+	return_tween.tween_property(enemy_node, "global_position", original_pos, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	await return_tween.finished 
+
+	# 4. Fim do Turno
+	enemy_node.play_idle()
+
+	if player_node.health_component.current_hp <= 0: return 
 
 	await _set_turn("player")
 
@@ -252,7 +284,10 @@ func _on_item_used(_item_id: StringName, message: String) -> void:
 func _on_enemy_died() -> void:
 	if not battle_active:
 		return
-
+	
+	enemy_node.play_dead()
+	await enemy_node.anim_sprite.animation_finished
+	await  get_tree().create_timer(0.8).timeout
 	var reward := enemy_node.enemy_data.xp_reward * current_level
 	GameState.add_xp(reward)
 	player_xp += reward

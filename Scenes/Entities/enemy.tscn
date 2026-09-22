@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://kdhw0c46qma0" path="res://Scenes/Entities/enemy.gd" id="1_jr1g6"]
 [ext_resource type="Shader" uid="uid://bv5mxen2on5ev" path="res://Scenes/Entities/hit_flash.gdshader" id="2_4fpkd"]
-[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="2_hlb8m"]
+[ext_resource type="SpriteFrames" uid="uid://brgu4rojlcw45" path="res://Scripts/resources/Satyr_frames.tres" id="3_4ar56"]
 [ext_resource type="Script" uid="uid://cvctj0pw14gwt" path="res://Scripts/Components/stats_component.gd" id="3_4fpkd"]
 [ext_resource type="Script" uid="uid://d3tx70s82u3ma" path="res://Scripts/Components/health_component.gd" id="4_wqw0c"]
 [ext_resource type="Script" uid="uid://b5js5veqeeo81" path="res://Scripts/Components/combat_component.gd" id="5_onntj"]
@@ -16,10 +16,13 @@ shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
 [node name="Enemy" type="Node2D" unique_id=384965974]
 script = ExtResource("1_jr1g6")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=924286466]
+[node name="AnimSprite" type="AnimatedSprite2D" parent="." unique_id=790352821]
 material = SubResource("ShaderMaterial_wqw0c")
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_hlb8m")
+scale = Vector2(1.95, 1.95)
+skew = 0.0034906585
+sprite_frames = ExtResource("3_4ar56")
+animation = &"Hurt"
+flip_h = true
 
 [node name="StatsComponent" type="Node" parent="." unique_id=2031318885]
 script = ExtResource("3_4fpkd")

@@ -1,0 +1,184 @@
+[gd_scene format=3 uid="uid://cbuivkfuhoc36"]
+
+[ext_resource type="Script" uid="uid://jnenpcaop27n" path="res://Scenes/battle/battle_ui.gd" id="1_ehi7y"]
+[ext_resource type="Texture2D" uid="uid://c8xu5mphlnx5k" path="res://Assets/UI/panel-border-022.png" id="2_qxt0f"]
+[ext_resource type="Texture2D" uid="uid://d31vhh6u2yvmy" path="res://Assets/UI/spikecore.png" id="3_x3a1m"]
+[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="4_2w0vm"]
+[ext_resource type="PackedScene" uid="uid://b20keqeqxjfwy" path="res://Scenes/inventory_panel.tscn" id="5_70bmn"]
+[ext_resource type="PackedScene" uid="uid://c5pplqrble7t4" path="res://combat_debug.tscn" id="6_kaufe"]
+[ext_resource type="PackedScene" uid="uid://clpyvtaf75kqa" path="res://Scenes/Entities/loot_panel.tscn" id="7_3iwt2"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ro08"]
+texture = ExtResource("2_qxt0f")
+texture_margin_left = 12.0
+texture_margin_top = 12.0
+texture_margin_right = 12.0
+texture_margin_bottom = 12.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5u8xp"]
+bg_color = Color(0.9440817, 0.10012401, 0.18308142, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvj2l"]
+bg_color = Color(0.23298621, 0.48855, 0.2073664, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lk1r3"]
+texture = ExtResource("3_x3a1m")
+texture_margin_left = 16.0
+texture_margin_top = 16.0
+texture_margin_right = 16.0
+texture_margin_bottom = 16.0
+
+[sub_resource type="Theme" id="Theme_i1ovl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6755"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[node name="UILayer" type="CanvasLayer" unique_id=760799296]
+
+[node name="BattleUI" type="Control" parent="." unique_id=2146490657]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ehi7y")
+
+[node name="MarginContainer" type="MarginContainer" parent="BattleUI" unique_id=97673285]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="BattleUI/MarginContainer" unique_id=1055116119]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer" unique_id=1006204706]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_4ro08")
+
+[node name="TitleLabel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/PanelContainer" unique_id=499217304]
+layout_mode = 2
+theme_override_font_sizes/font_size = 32
+text = "Rogue RPG"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="EnemyPanel" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer" unique_id=1423311679]
+custom_minimum_size = Vector2(220, 20)
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+
+[node name="EnemyHPBar" type="ProgressBar" parent="BattleUI/MarginContainer/VBoxContainer/EnemyPanel" unique_id=196398989]
+custom_minimum_size = Vector2(0, 20)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_5u8xp")
+theme_override_styles/fill = SubResource("StyleBoxFlat_yvj2l")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="HPLabel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/EnemyPanel" unique_id=662621748]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "vida "
+
+[node name="Actions" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer" unique_id=511898135]
+custom_minimum_size = Vector2(0, 90)
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_styles/panel = SubResource("StyleBoxTexture_lk1r3")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions" unique_id=820727971]
+layout_mode = 2
+size_flags_vertical = 0
+theme = SubResource("Theme_i1ovl")
+theme_override_constants/separation = 50
+alignment = 1
+
+[node name="PanelContainer" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=1774549601]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_styles/panel = SubResource("StyleBoxFlat_s6755")
+
+[node name="TextureRect" type="TextureRect" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=989669624]
+visible = false
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+texture = ExtResource("4_2w0vm")
+stretch_mode = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=238705539]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+size_flags_vertical = 8
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="PlayerHPLAbel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=1616388180]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+text = "VIDA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ActionsRow" type="HBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=2091459208]
+layout_mode = 2
+size_flags_horizontal = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 30
+
+[node name="AttackButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=1187860118]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "ATACAR"
+
+[node name="ItemButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=112711313]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "ITEM"
+
+[node name="EscapeButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=937295147]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "FUGIR"
+
+[node name="LogPanel" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=1093327206]
+custom_minimum_size = Vector2(0, 160)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 6
+
+[node name="LogPanel" type="RichTextLabel" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/LogPanel" unique_id=1724685223]
+layout_mode = 2
+text = "Logs
+
+"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InventoryPanel" parent="BattleUI" unique_id=1969342278 instance=ExtResource("5_70bmn")]
+visible = false
+layout_mode = 1
+
+[node name="CombatDebug" parent="BattleUI" unique_id=65692767 instance=ExtResource("6_kaufe")]
+visible = false
+layout_mode = 0
+
+[node name="LootPanel" parent="BattleUI" unique_id=1826055585 instance=ExtResource("7_3iwt2")]
+visible = false
+layout_mode = 1
+
+[editable path="BattleUI/LootPanel"]

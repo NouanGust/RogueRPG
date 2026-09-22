@@ -1,11 +1,13 @@
 [gd_resource type="Resource" script_class="ItemData" format=3 uid="uid://cgpcs6gynjckj"]
 
+[ext_resource type="Texture2D" uid="uid://58xr8nhigfc4" path="res://Assets/Items/Bubbly Brew Bottle Rising - PINK - 0000.png" id="1_8002j"]
 [ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="1_vdkea"]
 
 [resource]
 script = ExtResource("1_vdkea")
 item_name = "Elixir pequeno"
 description = "Uma bebida que te dá vantagens em algum stat."
+icon = ExtResource("1_8002j")
 cost = 8
 item_type = "elixir"
 effect_value = 5

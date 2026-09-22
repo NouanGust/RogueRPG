@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://cj0q2ui7tp2d8"]
+
+[ext_resource type="PackedScene" uid="uid://ctmm051x36qqm" path="res://Scenes/3D/enemy_actor_3d.tscn" id="1_35m3w"]
+[ext_resource type="Script" uid="uid://ohcqlju12pkm" path="res://Scenes/3D/battle_controller_3d.gd" id="1_sakwf"]
+[ext_resource type="PackedScene" uid="uid://bkes4tbohs1k8" path="res://Scenes/3D/player_actor_3d.tscn" id="2_78cvt"]
+[ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://Scripts/resources/enemy_data.gd" id="2_newfi"]
+[ext_resource type="Resource" uid="uid://bmsc2166f3oqb" path="res://Scripts/resources/Minotaur2.tres" id="3_1oy0s"]
+[ext_resource type="PackedScene" uid="uid://cbuivkfuhoc36" path="res://Scenes/run/ui_layer.tscn" id="3_sakwf"]
+[ext_resource type="Resource" uid="uid://ci7mmtcom0kne" path="res://Scripts/resources/Minotaur3.tres" id="4_wjnf6"]
+[ext_resource type="Resource" uid="uid://8i200rdnkeqe" path="res://Scripts/resources/Minotaur.tres" id="5_m157x"]
+[ext_resource type="Resource" uid="uid://bx37cx5nq6a26" path="res://Scripts/resources/Satyr2.tres" id="6_e6731"]
+[ext_resource type="Resource" uid="uid://bdu5bkkenlo5i" path="res://Scripts/resources/Satyr3.tres" id="7_idpok"]
+[ext_resource type="Resource" uid="uid://dqctr8s4akvjm" path="res://Scripts/resources/Satyr.tres" id="8_ty8l0"]
+[ext_resource type="Resource" uid="uid://dfyian05yns2q" path="res://Scripts/resources/skeleton_archer.tres" id="9_07vp7"]
+[ext_resource type="PackedScene" uid="uid://2vo5yre3vjgh" path="res://Scenes/Entities/damage_text.tscn" id="10_trnot"]
+[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="11_sf1r6"]
+[ext_resource type="Resource" uid="uid://bo830gfweoavh" path="res://Scripts/resources/Items/potion_medium.tres" id="12_bwk33"]
+[ext_resource type="Resource" uid="uid://yhexp7xptbop" path="res://Scripts/resources/Items/potion_small.tres" id="13_np1vh"]
+[ext_resource type="Resource" uid="uid://cgpcs6gynjckj" path="res://Scripts/resources/Items/strenght_elixir.tres" id="14_plnp8"]
+[ext_resource type="AudioStream" uid="uid://bhoh3ou3nlhv8" path="res://Assets/Music/SFX/attack.mp3" id="15_m157x"]
+[ext_resource type="AudioStream" uid="uid://dd773eqirtuyu" path="res://Assets/Music/SFX/single_dice.mp3" id="16_e6731"]
+[ext_resource type="AudioStream" uid="uid://2twdcj8bysqe" path="res://Assets/Music/SFX/UI_choose.wav" id="17_idpok"]
+[ext_resource type="Script" uid="uid://8kwf686gj1kl" path="res://Scripts/Components/dice_roller.gd" id="21_e6731"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_no5v7"]
+
+[node name="BattleScene3D" type="Node3D" unique_id=1290004777 node_paths=PackedStringArray("combat_debug")]
+script = ExtResource("1_sakwf")
+combat_debug = NodePath("UILayer/BattleUI/CombatDebug")
+enemy_pool = Array[ExtResource("2_newfi")]([ExtResource("3_1oy0s"), ExtResource("4_wjnf6"), ExtResource("5_m157x"), ExtResource("6_e6731"), ExtResource("7_idpok"), ExtResource("8_ty8l0"), ExtResource("9_07vp7")])
+damage_text_scene = ExtResource("10_trnot")
+loot_pool = Array[ExtResource("11_sf1r6")]([ExtResource("12_bwk33"), ExtResource("13_np1vh"), ExtResource("14_plnp8")])
+attack_sfx = ExtResource("15_m157x")
+hurt_sfx = ExtResource("15_m157x")
+dice_sfx = ExtResource("16_e6731")
+item_sfx = ExtResource("17_idpok")
+heal_sfx = ExtResource("17_idpok")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=2014827557]
+transform = Transform3D(0.8396199, -0.14058389, 0.5246662, 0, 0.9659258, 0.25881904, -0.54317445, -0.21730961, 0.81101054, 0.8623253, 1.0010622, 2.8615499)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1382959672]
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+mesh = SubResource("PlaneMesh_no5v7")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1893119812]
+transform = Transform3D(0.964539, 0.14021073, -0.22361907, 0, 0.84723324, 0.5312212, 0.2639404, -0.5123836, 0.8171895, 0, 4.417688, 5.3882446)
+shadow_enabled = true
+
+[node name="EnemyActor3D" parent="." unique_id=336036032 instance=ExtResource("1_35m3w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
+
+[node name="PlayerActor3D" parent="." unique_id=1380970242 instance=ExtResource("2_78cvt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6559154, 2.298792)
+
+[node name="UILayer" parent="." unique_id=760799296 instance=ExtResource("3_sakwf")]
+
+[node name="DiceRoller" type="Node" parent="." unique_id=1341412926]
+script = ExtResource("21_e6731")
+metadata/_custom_type_script = "uid://8kwf686gj1kl"
+
+[editable path="UILayer"]
+[editable path="UILayer/BattleUI/LootPanel"]

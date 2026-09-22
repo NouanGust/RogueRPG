@@ -63,6 +63,13 @@ func _create_item_button(item: ItemData) -> Button:
 	btn.expand_icon = true
 	btn.custom_minimum_size = Vector2(40, 40)
 	btn.tooltip_text = item.item_name + "\n" + item.description
+	
+	btn.pivot_offset = Vector2(20,20)
+	btn.pivot_offset = Vector2(20, 20)
+	btn.scale = Vector2.ZERO
+	
+	var tween = create_tween()
+	tween.tween_property(btn, "scale", Vector2.ONE, 0.25).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 	return btn
 
 func _generate_shop() -> void: 
@@ -108,6 +115,17 @@ func buy_item(item: ItemData, card_node: Control) -> bool:
 	
 	SaveManager.spend_coins(item.cost)
 	GameState.add_item(item)
+	
+	var tween = create_tween()
+	var original_pos = card_node.position
+	
+	tween.tween_property(card_node, "position:y", original_pos.y - 15, 0.1).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(card_node, "scale", Vector2(1.05, 1.05), 0.1)
+	
+	tween.tween_property(card_node, "position:y", original_pos.y, 0.15).set_trans(Tween.TRANS_BOUNCE).set_ease(Tween.EASE_OUT)
+	tween.parallel().tween_property(card_node, "scale", Vector2.ONE, 0.15)
+	
+	
 	_update_ui()
 	_update_backpack_ui()
 	

@@ -5,26 +5,24 @@
 [ext_resource type="PackedScene" uid="uid://blkvvo4kpqyln" path="res://Scenes/Entities/player.tscn" id="2_rpe18"]
 [ext_resource type="Script" uid="uid://cm5gejak3jpgh" path="res://Scripts/controllers/battle_controller.gd" id="2_vd1me"]
 [ext_resource type="PackedScene" uid="uid://rysxpsnha4xb" path="res://Scenes/Entities/enemy.tscn" id="3_vvcci"]
-[ext_resource type="Script" uid="uid://jnenpcaop27n" path="res://Scenes/battle/battle_ui.gd" id="4_rjp4h"]
+[ext_resource type="Resource" uid="uid://bx37cx5nq6a26" path="res://Scripts/resources/Satyr2.tres" id="6_08vyw"]
 [ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://Scripts/resources/enemy_data.gd" id="6_qcili"]
-[ext_resource type="Resource" uid="uid://bfwcvfw2jbpkl" path="res://Scripts/resources/skeleton.tres" id="7_4ro08"]
-[ext_resource type="Resource" uid="uid://iaes6od38a84" path="res://Scripts/resources/shadow.tres" id="8_5u8xp"]
+[ext_resource type="Resource" uid="uid://bdu5bkkenlo5i" path="res://Scripts/resources/Satyr3.tres" id="7_753mi"]
+[ext_resource type="Resource" uid="uid://dqctr8s4akvjm" path="res://Scripts/resources/Satyr.tres" id="8_1ivbh"]
+[ext_resource type="Resource" uid="uid://8i200rdnkeqe" path="res://Scripts/resources/Minotaur.tres" id="8_80okk"]
 [ext_resource type="PackedScene" uid="uid://2vo5yre3vjgh" path="res://Scenes/Entities/damage_text.tscn" id="8_vpuc1"]
 [ext_resource type="AudioStream" uid="uid://bhoh3ou3nlhv8" path="res://Assets/Music/SFX/attack.mp3" id="9_xvy46"]
-[ext_resource type="Resource" uid="uid://c3vlvd4lj2v86" path="res://Scripts/resources/stone_golem.tres" id="9_yvj2l"]
+[ext_resource type="Resource" uid="uid://bmsc2166f3oqb" path="res://Scripts/resources/Minotaur2.tres" id="9_y5nb8"]
+[ext_resource type="Resource" uid="uid://ci7mmtcom0kne" path="res://Scripts/resources/Minotaur3.tres" id="10_y1d5e"]
 [ext_resource type="Texture2D" uid="uid://b1psxojoqg768" path="res://Assets/Background/sky.png" id="11_4rstf"]
+[ext_resource type="Resource" uid="uid://dfyian05yns2q" path="res://Scripts/resources/skeleton_archer.tres" id="11_m6p2g"]
 [ext_resource type="Shader" uid="uid://bna3rila3pi0g" path="res://Scenes/Entities/dissolve_shader.gdshader" id="12_kf1rh"]
-[ext_resource type="Texture2D" uid="uid://c8xu5mphlnx5k" path="res://Assets/UI/panel-border-022.png" id="12_qcili"]
 [ext_resource type="Texture2D" uid="uid://x4f4hqpx1pdt" path="res://Assets/Background/hills&trees.png" id="12_vpuc1"]
 [ext_resource type="Texture2D" uid="uid://bucqmlqh513ue" path="res://Assets/Background/ruins_bg.png" id="13_5b2op"]
 [ext_resource type="Texture2D" uid="uid://br4nmej8jgch1" path="res://Assets/UI/panel-border-003.png" id="13_5u8xp"]
 [ext_resource type="Texture2D" uid="uid://cfcoplx2bgcyu" path="res://Assets/Background/Battleground1.png" id="14_xvy46"]
-[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="14_yvj2l"]
-[ext_resource type="Texture2D" uid="uid://d31vhh6u2yvmy" path="res://Assets/UI/spikecore.png" id="18_vpuc1"]
 [ext_resource type="AudioStream" uid="uid://xom27j2pc0c" path="res://Assets/Music/battleTheme.wav" id="20_5b2op"]
-[ext_resource type="PackedScene" uid="uid://b20keqeqxjfwy" path="res://Scenes/inventory_panel.tscn" id="22_jk8xb"]
-[ext_resource type="PackedScene" uid="uid://c5pplqrble7t4" path="res://combat_debug.tscn" id="23_qpm48"]
-[ext_resource type="PackedScene" uid="uid://clpyvtaf75kqa" path="res://Scenes/Entities/loot_panel.tscn" id="24_j4tin"]
+[ext_resource type="PackedScene" uid="uid://cbuivkfuhoc36" path="res://Scenes/run/ui_layer.tscn" id="22_jk8xb"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vvcci"]
 texture = ExtResource("13_5u8xp")
@@ -38,31 +36,6 @@ shader = ExtResource("12_kf1rh")
 shader_parameter/dissolve_amount = 0.0
 shader_parameter/edge_color = Color(0.8, 0.1, 0.1, 1)
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ro08"]
-texture = ExtResource("12_qcili")
-texture_margin_left = 12.0
-texture_margin_top = 12.0
-texture_margin_right = 12.0
-texture_margin_bottom = 12.0
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5u8xp"]
-bg_color = Color(0.9440817, 0.10012401, 0.18308142, 1)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvj2l"]
-bg_color = Color(0.23298621, 0.48855, 0.2073664, 1)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lk1r3"]
-texture = ExtResource("18_vpuc1")
-texture_margin_left = 16.0
-texture_margin_top = 16.0
-texture_margin_right = 16.0
-texture_margin_bottom = 16.0
-
-[sub_resource type="Theme" id="Theme_i1ovl"]
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6755"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
-
 [node name="BattleScene" type="Node2D" unique_id=635572344]
 script = ExtResource("1_t3o3d")
 
@@ -72,8 +45,8 @@ metadata/_custom_type_script = "uid://8kwf686gj1kl"
 
 [node name="BattleController" type="Node" parent="." unique_id=747335412 node_paths=PackedStringArray("combat_debug")]
 script = ExtResource("2_vd1me")
-combat_debug = NodePath("../UILayer/BattleUI/CombatDebug")
-enemy_pool = Array[ExtResource("6_qcili")]([ExtResource("7_4ro08"), ExtResource("8_5u8xp"), ExtResource("9_yvj2l")])
+combat_debug = NodePath("")
+enemy_pool = Array[ExtResource("6_qcili")]([ExtResource("8_1ivbh"), ExtResource("6_08vyw"), ExtResource("7_753mi"), ExtResource("8_80okk"), ExtResource("9_y5nb8"), ExtResource("10_y1d5e"), ExtResource("11_m6p2g")])
 damage_text_scene = ExtResource("8_vpuc1")
 attack_sfx = ExtResource("9_xvy46")
 metadata/_custom_type_script = "uid://cm5gejak3jpgh"
@@ -139,151 +112,7 @@ scale = Vector2(0.66510415, 0.6675926)
 texture = ExtResource("14_xvy46")
 centered = false
 
-[node name="UILayer" type="CanvasLayer" parent="." unique_id=584070238]
-
-[node name="BattleUI" type="Control" parent="UILayer" unique_id=680032719]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("4_rjp4h")
-
-[node name="MarginContainer" type="MarginContainer" parent="UILayer/BattleUI" unique_id=369604433]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
-
-[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/BattleUI/MarginContainer" unique_id=587462297]
-layout_mode = 2
-
-[node name="PanelContainer" type="PanelContainer" parent="UILayer/BattleUI/MarginContainer/VBoxContainer" unique_id=828469033]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_4ro08")
-
-[node name="TitleLabel" type="Label" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/PanelContainer" unique_id=1588097471]
-layout_mode = 2
-theme_override_font_sizes/font_size = 32
-text = "Rogue RPG"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="EnemyPanel" type="PanelContainer" parent="UILayer/BattleUI/MarginContainer/VBoxContainer" unique_id=1506813770]
-custom_minimum_size = Vector2(220, 20)
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-
-[node name="EnemyHPBar" type="ProgressBar" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/EnemyPanel" unique_id=1617607548]
-custom_minimum_size = Vector2(0, 20)
-layout_mode = 2
-theme_override_styles/background = SubResource("StyleBoxFlat_5u8xp")
-theme_override_styles/fill = SubResource("StyleBoxFlat_yvj2l")
-step = 1.0
-value = 50.0
-show_percentage = false
-
-[node name="HPLabel" type="Label" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/EnemyPanel" unique_id=942529574]
-layout_mode = 2
-size_flags_horizontal = 4
-text = "vida "
-
-[node name="Actions" type="PanelContainer" parent="UILayer/BattleUI/MarginContainer/VBoxContainer" unique_id=1660335995]
-custom_minimum_size = Vector2(0, 90)
-layout_mode = 2
-size_flags_vertical = 10
-theme_override_styles/panel = SubResource("StyleBoxTexture_lk1r3")
-
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions" unique_id=699790158]
-layout_mode = 2
-size_flags_vertical = 0
-theme = SubResource("Theme_i1ovl")
-theme_override_constants/separation = 50
-alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=1120341538]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_s6755")
-
-[node name="TextureRect" type="TextureRect" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=428781409]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-texture = ExtResource("14_yvj2l")
-stretch_mode = 2
-
-[node name="ProgressBar" type="ProgressBar" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=1747792092]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 8
-step = 1.0
-value = 50.0
-show_percentage = false
-
-[node name="PlayerHPLAbel" type="Label" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=1089958981]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-text = "VIDA"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ActionsRow" type="HBoxContainer" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=937711154]
-layout_mode = 2
-size_flags_horizontal = 6
-size_flags_vertical = 4
-theme_override_constants/separation = 30
-
-[node name="AttackButton" type="Button" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=455310749]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "ATACAR"
-
-[node name="ItemButton" type="Button" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=2103939787]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "ITEM"
-
-[node name="EscapeButton" type="Button" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=813950500]
-layout_mode = 2
-theme_override_font_sizes/font_size = 24
-text = "FUGIR"
-
-[node name="LogPanel" type="PanelContainer" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=2101581572]
-custom_minimum_size = Vector2(0, 160)
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 6
-
-[node name="LogPanel" type="RichTextLabel" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/LogPanel" unique_id=1995288939]
-layout_mode = 2
-text = "Logs
-
-"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="InventoryPanel" parent="UILayer/BattleUI" unique_id=341227670 instance=ExtResource("22_jk8xb")]
-layout_mode = 1
-
-[node name="CombatDebug" parent="UILayer/BattleUI" unique_id=65692767 instance=ExtResource("23_qpm48")]
-layout_mode = 0
-
-[node name="LootPanel" parent="UILayer/BattleUI" unique_id=1826055585 instance=ExtResource("24_j4tin")]
-visible = false
-layout_mode = 1
+[node name="UILayer" parent="." unique_id=760799296 instance=ExtResource("22_jk8xb")]
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=966493238]
 position = Vector2(640, 360)
@@ -293,5 +122,3 @@ stream = ExtResource("20_5b2op")
 volume_db = -5.0
 autoplay = true
 bus = &"Music"
-
-[editable path="UILayer/BattleUI/LootPanel"]

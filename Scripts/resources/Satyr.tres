@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://dqctr8s4akvjm"]
+
+[ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://Scripts/resources/enemy_data.gd" id="1_cra7t"]
+[ext_resource type="SpriteFrames" uid="uid://brgu4rojlcw45" path="res://Scripts/resources/Satyr_frames.tres" id="2_3n8ks"]
+
+[resource]
+script = ExtResource("1_cra7t")
+sprite_frames = ExtResource("2_3n8ks")
+base_hp = 7
+base_attack = 2
+base_defense = 3
+xp_reward = 12
+metadata/_custom_type_script = "uid://hcscc6dcxeho"

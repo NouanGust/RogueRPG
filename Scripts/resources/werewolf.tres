@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="EnemyData" format=3 uid="uid://g82q0ohahwr"]
+
+[ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://Scripts/resources/enemy_data.gd" id="1_0c0oc"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_0c0oc"]
+
+[resource]
+script = ExtResource("1_0c0oc")
+display_name = "Lobisomem"
+sprite_frames = SubResource("SpriteFrames_0c0oc")
+base_hp = 12
+base_attack = 4
+base_defense = 2
+xp_reward = 15
+metadata/_custom_type_script = "uid://hcscc6dcxeho"

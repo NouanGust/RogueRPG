@@ -25,7 +25,7 @@ signal loot_decision_made(decision: String, item: ItemData)
 @onready var stash_button: Button = $LootPanel/MarginContainer/VBoxContainer/StashButton
 @onready var sell_button: Button = $LootPanel/MarginContainer/VBoxContainer/SellButton
 
-var controller: BattleController
+var controller
 var current_loot: ItemData
 
 func _ready() -> void:
@@ -40,7 +40,7 @@ func _ready() -> void:
 	stash_button.pressed.connect(func(): _on_loot_chosen("stash"))
 	sell_button.pressed.connect(func(): _on_loot_chosen("sell"))
 
-func set_controller(value: BattleController) -> void:
+func set_controller(value ) -> void:
 	controller = value
 	controller.turn_changed.connect(_on_turn_changed)
 	controller.battle_finished.connect(_on_battle_finished)
