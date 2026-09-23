@@ -1,0 +1,218 @@
+[gd_scene format=3 uid="uid://1e7x62tm46oa"]
+
+[ext_resource type="Script" uid="uid://drara81o8u3w8" path="res://Scenes/3D/Scripts/lobby_3d.gd" id="1_fdmty"]
+[ext_resource type="PackedScene" uid="uid://bkes4tbohs1k8" path="res://Scenes/3D/player_actor_3d.tscn" id="2_je1rc"]
+[ext_resource type="Texture2D" uid="uid://dhpk4emx0qfa2" path="res://Assets/Painterly Sky BGs (158).png" id="3_nnteq"]
+[ext_resource type="PackedScene" uid="uid://c6y3ay63a80hr" path="res://chest.tscn" id="3_vq873"]
+[ext_resource type="Texture2D" uid="uid://c80j3elrcvi5m" path="res://Assets/Material/Stylized_HandpaintedDirt_01_basecolor.jpg" id="4_wimh0"]
+[ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="4_yh5gd"]
+[ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="5_3heu7"]
+[ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="6_nnteq"]
+[ext_resource type="StyleBox" uid="uid://jwjs7u0sndse" path="res://Assets/Themes/chose_button.tres" id="7_wimh0"]
+[ext_resource type="StyleBox" uid="uid://b4mai6yv25014" path="res://Assets/Themes/chose_button_hover.tres" id="8_y0unm"]
+[ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="9_w1iuc"]
+[ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="10_mow7t"]
+[ext_resource type="PackedScene" uid="uid://dbqktapaen5q" path="res://Scenes/main/camp.tscn" id="13_wimh0"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_y0unm"]
+panorama = ExtResource("3_nnteq")
+
+[sub_resource type="Sky" id="Sky_w1iuc"]
+sky_material = SubResource("PanoramaSkyMaterial_y0unm")
+
+[sub_resource type="Environment" id="Environment_mow7t"]
+background_mode = 2
+sky = SubResource("Sky_w1iuc")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qmoyw"]
+albedo_texture = ExtResource("4_wimh0")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mjxr5"]
+material = SubResource("StandardMaterial3D_qmoyw")
+size = Vector2(20, 20)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_qmoyw"]
+texture = ExtResource("4_yh5gd")
+texture_margin_left = 32.0
+texture_margin_top = 32.0
+texture_margin_right = 32.0
+texture_margin_bottom = 32.0
+
+[node name="Lobby3D" type="Node3D" unique_id=1513798651]
+script = ExtResource("1_fdmty")
+
+[node name="PlayerActor3D" parent="." unique_id=1380970242 instance=ExtResource("2_je1rc")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6457192, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1279547269]
+environment = SubResource("Environment_mow7t")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1036842808]
+transform = Transform3D(1, 0, 0, 0, 0.8927353, 0.45058152, 0, -0.45058152, 0.8927353, 0, 1.1852698, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=354282780]
+mesh = SubResource("PlaneMesh_mjxr5")
+
+[node name="DynamicCamera" type="Camera3D" parent="." unique_id=1590885466]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23131108, 1.2252866, 2.3785098)
+
+[node name="Chest" parent="." unique_id=58081528 instance=ExtResource("3_vq873")]
+transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 3.2053401, 0.2684942, 0.1989317)
+
+[node name="CameraStations" type="Node3D" parent="." unique_id=548795565]
+
+[node name="PosMain" type="Marker3D" parent="CameraStations" unique_id=476836366]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23175025, 0.51570815, 1.3929242)
+
+[node name="PosStash" type="Marker3D" parent="CameraStations" unique_id=1048574268]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.173481, 0.3542788, 2.0199914)
+
+[node name="PosCreation" type="Marker3D" parent="CameraStations" unique_id=621344189]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4080524, 1.122613, 0.9416287)
+
+[node name="UILayer" type="CanvasLayer" parent="." unique_id=641258595]
+
+[node name="MainUI" type="Control" parent="UILayer" unique_id=1013485784]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="Panel" parent="UILayer/MainUI" unique_id=955670830]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 2.0
+offset_right = 2.0
+offset_bottom = 2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_qmoyw")
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/MainUI" unique_id=1686544958]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/MainUI/MarginContainer" unique_id=847177633]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="TitleLabel" type="Label" parent="UILayer/MainUI/MarginContainer/VBoxContainer" unique_id=2045825344]
+layout_mode = 2
+theme_override_font_sizes/font_size = 120
+text = "ROGUE RPG"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="UILayer/MainUI/MarginContainer/VBoxContainer" unique_id=2042957073]
+layout_mode = 2
+theme_override_font_sizes/font_size = 28
+text = "Role dados e tente chegar ao fim!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ButtonsVBox" type="VBoxContainer" parent="UILayer/MainUI/MarginContainer" unique_id=884134924]
+custom_minimum_size = Vector2(320, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 10
+theme_override_constants/separation = 40
+
+[node name="NewRunButton" type="Button" parent="UILayer/MainUI/MarginContainer/ButtonsVBox" unique_id=1849890504]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = ExtResource("5_3heu7")
+theme_override_styles/hover = ExtResource("6_nnteq")
+text = "NOVA RUN"
+
+[node name="SettingsButton" type="Button" parent="UILayer/MainUI/MarginContainer/ButtonsVBox" unique_id=197149011]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = ExtResource("7_wimh0")
+theme_override_styles/hover = ExtResource("8_y0unm")
+text = "CONFIGURAÇÕES"
+
+[node name="QuitButton" type="Button" parent="UILayer/MainUI/MarginContainer/ButtonsVBox" unique_id=1284327865]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
+theme_override_styles/normal = ExtResource("9_w1iuc")
+theme_override_styles/hover = ExtResource("10_mow7t")
+text = "SAIR"
+
+[node name="Label2" type="Label" parent="UILayer/MainUI" unique_id=2051855140]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -42.5
+offset_top = -23.0
+offset_right = 42.5
+grow_horizontal = 2
+grow_vertical = 0
+text = "0.0.1 Alpha"
+
+[node name="Button" type="Button" parent="UILayer/MainUI" unique_id=2093173692]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -186.0
+offset_top = -81.0
+offset_right = -79.0
+offset_bottom = -50.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Baú/Estoque"
+
+[node name="CreationUI" type="Control" parent="UILayer" unique_id=278501810]
+visible = false
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="UILayer/CreationUI" unique_id=2086694646]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -42.0
+offset_top = -11.5
+offset_right = 42.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "CreationUI"
+
+[node name="StashUI" parent="UILayer" unique_id=1886277990 instance=ExtResource("13_wimh0")]
+
+[node name="Panel" parent="UILayer/StashUI" index="0" unique_id=1525156225]
+visible = false
+
+[editable path="UILayer/StashUI"]
