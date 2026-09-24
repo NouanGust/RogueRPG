@@ -21,6 +21,8 @@ var current_level: int = 1
 var current_xp: int = 0
 var run_active: bool = false
 
+var returning_from_battle: bool = false
+
 func start_new_run() -> void:
 	selected_class = null
 	rolled_attributes = {}

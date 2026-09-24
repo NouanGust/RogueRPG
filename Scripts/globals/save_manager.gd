@@ -6,7 +6,9 @@ var profile_data: Dictionary = {
 	"coins": 0,
 	"backpack_level": 1,
 	"backpack_items": [],
-	"stash_items": []
+	"stash_items": [],
+	"active_class_path": "",
+	"active_attributes": {}
 }
 
 func _ready() -> void:
@@ -29,7 +31,7 @@ func create_new_profile(profile_name: String) -> void:
 	profile_data = {
 		"coins": 0,
 		"backpack_level": 1,
-		"stash": []
+		"stash": [],
 	}
 	save_game()
 	
@@ -41,13 +43,21 @@ func load_profile(profile_name: String) -> bool:
 		if file:
 			var data = file.get_var()
 			if typeof(data) == TYPE_DICTIONARY:
-				profile_data = {"coins": 0, "backpack": 1, "stash": []}
+				profile_data = {"coins": 0, "backpack": 1, "stash": [], "active_class_path": "", "active_attributes": {}}
 				profile_data.merge(data, true)
 				current_profile_name = profile_name
+				_sync_to_game_state()
 			file.close()
 			return true
 	return false
 
+func _sync_to_game_state() -> void:
+	if profile_data.get("active_class_path", "") != "":
+		GameState.selected_class = load(profile_data["active_class_path"])
+		GameState.rolled_attributes = profile_data.get("active_attributes", {})
+	else:
+		GameState.selected_class = null
+		GameState.rolled_attributes = {}
 
 func save_game() -> void:
 	if current_profile_name == "":
@@ -60,6 +70,17 @@ func save_game() -> void:
 		file.close()
 	else:
 		push_error("SaveManager: Falha ao abrir o arquivo.")
+
+func save_active_run(class_resource: ClassData, attributes: Dictionary) -> void:
+	if class_resource:
+		profile_data["active_class_path"] = class_resource.resource_path
+		profile_data["active_attributes"] = attributes
+		save_game()
+
+func clear_active_run() -> void:
+	profile_data["active_class_path"] = ""
+	profile_data["active_attributes"] = {}
+	save_game()
 
 func save_backpack(inventory: Array[ItemData]) -> void:
 	var paths = []

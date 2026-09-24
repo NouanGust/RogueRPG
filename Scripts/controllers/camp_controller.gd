@@ -145,9 +145,10 @@ func _on_reroll_button_pressed() -> void:
 		trigger_ui_error(reroll_button)
 
 func _on_start_button_pressed() -> void:
-	AudioManager.play_ui_choose()
-	GameState.reset_run()
-	SceneTransition.change_scene("res://Scenes/run/class_selection_scene.tscn")
+	#AudioManager.play_ui_choose()
+	#GameState.reset_run()
+	#SceneTransition.change_scene("res://Scenes/run/class_selection_scene.tscn")
+	pass
 
 func _on_backpack_item_clicked(item: ItemData) -> void:
 	AudioManager.play_ui_click()

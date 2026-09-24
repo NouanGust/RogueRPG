@@ -21,7 +21,7 @@ func _ready() -> void:
 func setup(actor_class: ClassData, rolled_atributtes: Dictionary) -> void:
 	class_data = actor_class
 	if class_data == null:
-		push_error("PlyerActor.setup: class_data é nulo")
+		push_error("PlayerActor.setup: class_data é nulo")
 		return
 	sprite.sprite_frames = class_data.sprite
 	sprite.play("Idle")
@@ -33,9 +33,9 @@ func _on_health_changed(_current: int, _maximum: int) -> void:
 	var tween := create_tween()
 	
 	# --- Squash e Stretch ---
-	tween.tween_property(sprite, "scale", Vector3(1.3, 0.7,0), 0.06).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(sprite, "scale", Vector3(0.8, 1.2, 0), 0.08).set_trans(Tween.TRANS_SINE)
-	tween.tween_property(sprite, "scale", Vector3(1.0, 1.0, 0), 0.15).set_trans(Tween.TRANS_SPRING)
+	tween.tween_property(sprite, "scale", Vector3(1.3, 0.7,1.2), 0.06).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(sprite, "scale", Vector3(0.8, 1.2, 1.2), 0.08).set_trans(Tween.TRANS_SINE)
+	tween.tween_property(sprite, "scale", Vector3(1.0, 1.0, 1.0), 0.15).set_trans(Tween.TRANS_SPRING)
 	
 	var knock_tween = create_tween()
 	knock_tween.tween_property(sprite, "position:x", -0.3, 0.05).set_trans(Tween.TRANS_SINE) 

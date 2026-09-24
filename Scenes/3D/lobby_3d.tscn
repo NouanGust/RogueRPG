@@ -24,6 +24,7 @@
 [ext_resource type="Script" uid="uid://cgpf5dbvnueia" path="res://Scenes/3D/Scripts/attributes_roll_3d.gd" id="21_d7b66"]
 [ext_resource type="PackedScene" uid="uid://bl1ltw2q8a00m" path="res://Scenes/run/dice_visual.tscn" id="22_l6ubl"]
 [ext_resource type="Texture2D" uid="uid://bk2fd1a1tnv88" path="res://Assets/UI/dice-solid.png" id="23_d7b66"]
+[ext_resource type="Texture2D" uid="uid://d1k6oxsfto7m4" path="res://Assets/UI/polis_sanctuary.png" id="25_5hc7j"]
 [ext_resource type="Script" uid="uid://0tofmxykk7xt" path="res://Scenes/3D/Scripts/save_ui.gd" id="25_8qwmk"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_y0unm"]
@@ -73,6 +74,13 @@ texture = ExtResource("4_yh5gd")
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6t4wf"]
 texture = ExtResource("4_yh5gd")
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h14am"]
+texture = ExtResource("25_5hc7j")
+texture_margin_left = 64.0
+texture_margin_top = 64.0
+texture_margin_right = 64.0
+texture_margin_bottom = 64.0
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4tnph"]
 bg_color = Color(0, 0, 0, 1)
 
@@ -93,7 +101,7 @@ transform = Transform3D(1, 0, 0, 0, 0.8927353, 0.45058152, 0, -0.45058152, 0.892
 mesh = SubResource("PlaneMesh_mjxr5")
 
 [node name="DynamicCamera" type="Camera3D" parent="." unique_id=1590885466]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23131108, 1.2252866, 2.3785098)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23131108, 1.2252866, 1.8695748)
 
 [node name="Chest" parent="." unique_id=58081528 instance=ExtResource("3_vq873")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 3.2053401, 0.2684942, 0.1989317)
@@ -112,6 +120,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4080524, 1.122613, 0.94162
 [node name="UILayer" type="CanvasLayer" parent="." unique_id=641258595]
 
 [node name="TitleMenuUI" type="Control" parent="UILayer" unique_id=1013485784]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -199,12 +208,15 @@ grow_vertical = 0
 text = "0.1.0 beta"
 
 [node name="StashUI" parent="UILayer" unique_id=1886277990 instance=ExtResource("13_wimh0")]
-visible = false
 
 [node name="Panel" parent="UILayer/StashUI" index="0" unique_id=1525156225]
 visible = false
 
+[node name="StartButton" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer3" parent_id_path=PackedInt32Array(1886277990, 311269040) index="1" unique_id=170486455]
+text = "VOLTAR"
+
 [node name="TransitionLayer" type="ColorRect" parent="UILayer" unique_id=1152259390]
+visible = false
 visibility_layer = 512
 anchors_preset = 15
 anchor_right = 1.0
@@ -214,6 +226,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="CreationUI" type="Control" parent="UILayer" unique_id=1406707399]
+visible = false
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -582,6 +595,73 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/MainUI" unique_id=1614625304]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MainUI/MarginContainer" unique_id=466292271]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_constants/separation = 50
+
+[node name="StashButton" type="Button" parent="UILayer/MainUI/MarginContainer/HBoxContainer" unique_id=1326952066]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("7_wimh0")
+theme_override_styles/pressed = ExtResource("7_wimh0")
+theme_override_styles/hover = ExtResource("8_y0unm")
+theme_override_styles/disabled = ExtResource("21_4tnph")
+text = "ESTOQUE
+"
+
+[node name="BattleButton" type="Button" parent="UILayer/MainUI/MarginContainer/HBoxContainer" unique_id=857288105]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_font_sizes/font_size = 32
+theme_override_styles/normal = ExtResource("5_3heu7")
+theme_override_styles/pressed = ExtResource("5_3heu7")
+theme_override_styles/hover = ExtResource("6_nnteq")
+theme_override_styles/disabled = ExtResource("21_4tnph")
+text = "BATALHA
+"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/MainUI/MarginContainer" unique_id=1785687860]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_constants/separation = 50
+
+[node name="Panel" type="Panel" parent="UILayer/MainUI/MarginContainer/HBoxContainer2" unique_id=554947883]
+custom_minimum_size = Vector2(200, 300)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_h14am")
+
+[node name="MarginContainer" type="MarginContainer" parent="UILayer/MainUI/MarginContainer/HBoxContainer2/Panel" unique_id=1378102110]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="PlayerActorInfos" type="RichTextLabel" parent="UILayer/MainUI/MarginContainer/HBoxContainer2/Panel/MarginContainer" unique_id=629490549]
+layout_mode = 2
 
 [node name="SaveUI" type="Control" parent="UILayer" unique_id=910259454]
 visible = false

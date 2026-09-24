@@ -1,7 +1,8 @@
 class_name ClassSelectionController3D
 extends Control
 
-signal class_confirmed 
+signal class_confirmed
+signal back_requested
 
 @export var available_classes: Array[ClassData] = []
 @export var class_card_scene: PackedScene
@@ -51,7 +52,7 @@ func _on_confirm_button_hovered() -> void:
 
 func _on_back_button_pressed() -> void:
 	AudioManager.play_ui_cancel()
-	GameState.reset_run()
+	back_requested.emit()
 
 func _on_back_button_hovered() -> void:
 	AudioManager.play_ui_hover()

@@ -21,6 +21,9 @@ extends Node3D
 @onready var roll_ui: Control = $UILayer/AtrributesScene
 @onready var save_ui: Control = $UILayer/SaveUI
 
+@onready var battle_button: Button = $UILayer/MainUI/MarginContainer/HBoxContainer/BattleButton
+@onready var stash_button: Button = $UILayer/MainUI/MarginContainer/HBoxContainer/StashButton
+@onready var stash_back_button: Button = $UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer3/StartButton
 @onready var fade_sceen: ColorRect = $UILayer/TransitionLayer
 
 @onready var player_node: PlayerActor3D = $PlayerActor3D
@@ -34,15 +37,25 @@ func _ready() -> void:
 	title_ui.new_game_requested.connect(_on_new_game_requested)
 	title_ui.load_game_requested.connect(_on_load_game_requested)
 	creation_ui.class_confirmed.connect(_on_class_confirmed_in_lobby)
+	creation_ui.back_requested.connect(_on_class_back_requested)
 	roll_ui.roll_confirmed.connect(_on_roll_confirmed_in_lobby)
 	save_ui.load_confirmed.connect(_on_save_selected_in_lobby)
 	save_ui.back_requested.connect(_on_load_back_requested)
+	battle_button.pressed.connect(_on_start_battle_pressed)
+	stash_button.pressed.connect(func(): move_to_station(pos_stash, stash_ui))
+	stash_back_button.pressed.connect(func(): move_to_station(pos_main, main_ui))
 	
-	camera.global_position = pos_main.global_position + Vector3(0, 2.0, 3.0)
-	camera.global_rotation = pos_main.global_rotation
-	camera.rotation_degrees.x -= 15
+	if GameState.get("returning_from_battle"):
+		GameState.returning_from_battle = false
+		_handle_return_from_battle
+	else:
+		_switch_ui(title_ui)
+		title_ui.modulate.a = 0.0
+		camera.global_position = pos_main.global_position + Vector3(0, 2.0, 3.0)
+		camera.global_rotation = pos_main.global_rotation
+		camera.rotation_degrees.x -= 15
 	
-	_play_intro()
+		_play_intro()
 
 
 func _play_intro() -> void:
@@ -77,18 +90,41 @@ func _on_load_back_requested() -> void:
 func _on_class_confirmed_in_lobby() -> void:
 	_show_attribute_roll_ui()
 
+func _on_class_back_requested() -> void:
+	move_to_station(pos_main, title_ui)
+	_switch_ui(title_ui)
+
 func _on_save_selected_in_lobby(save_filename: String) -> void:
-	# 1. Manda o SaveManager carregar esse arquivo específico para o GameState
 	SaveManager.load_profile(save_filename) 
+
+	if GameState.selected_class != null:
+		if player_node:
+			player_node.show()
+			if player_node.has_method("setup"):
+				player_node.setup(GameState.selected_class, GameState.rolled_attributes)
+		_switch_ui(main_ui)
 	
-	# 2. Instancia a aparência e atributos do herói
-	if player_node:
-		player_node.show()
-		if player_node.has_method("setup"):
-			player_node.setup(GameState.selected_class, GameState.rolled_attributes)
-			
-	# 3. Transição concluída: Esconde o menu de load e revela a interface do acampamento!
-	_switch_ui(main_ui)
+		
+	else:
+		save_ui.hide()
+		move_to_station(pos_creation, creation_ui)
+
+
+func _on_start_battle_pressed() -> void:
+	AudioManager.play_ui_click()
+	SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes)
+	SceneTransition.change_scene("res://Scenes/3D/battle_scene_3d.tscn")
+
+func _handle_return_from_battle() -> void:
+	_snap_camera_to(pos_main)
+	
+	if GameState.selected_class != null:
+		if player_node:
+			player_node.show()
+			if player_node.has_method("setup"):
+				player_node.setup(GameState.selected_class, GameState.rolled_attributes)
+	else:
+		_switch_ui(title_ui)
 
 func _show_attribute_roll_ui() -> void:
 	if roll_ui.has_method("prepare_roll"):
@@ -110,6 +146,7 @@ func _show_attribute_roll_ui() -> void:
 
 
 func _on_roll_confirmed_in_lobby() -> void:
+	SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes)
 	if player_node:
 		player_node.show()
 		
@@ -144,6 +181,9 @@ func _switch_ui(active_ui: Control) -> void:
 	title_ui.hide()
 	stash_ui.hide()
 	creation_ui.hide()
+	save_ui.hide()
+	main_ui.hide()
+	roll_ui.hide()
 	
 	if active_ui:
 		active_ui.show()
