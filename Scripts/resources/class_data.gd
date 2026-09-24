@@ -3,7 +3,7 @@ extends Resource
 
 @export var id: StringName
 @export var display_name: String
-@export var sprite: Texture2D
+@export var sprite: SpriteFrames
 
 @export_group("Base Stats")
 @export var base_hp: int = 10

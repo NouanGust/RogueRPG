@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://dpp2bmi4k3s3o"]
 
 [ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="1_fnm7h"]
-[ext_resource type="Script" uid="uid://cmd4jinemmsl1" path="res://scripts/ui/class_card.gd" id="1_sbpsr"]
+[ext_resource type="Script" uid="uid://cmd4jinemmsl1" path="res://Scripts/ui/class_card.gd" id="1_sbpsr"]
 [ext_resource type="StyleBox" uid="uid://jwjs7u0sndse" path="res://Assets/Themes/chose_button.tres" id="3_py8j7"]
 [ext_resource type="StyleBox" uid="uid://b4mai6yv25014" path="res://Assets/Themes/chose_button_hover.tres" id="4_8blrf"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_i4ldi"]
 texture = ExtResource("1_fnm7h")
-texture_margin_left = 10.0
-texture_margin_top = 10.0
-texture_margin_right = 10.0
-texture_margin_bottom = 10.0
+texture_margin_left = 5.0
+texture_margin_top = 5.0
+texture_margin_right = 5.0
+texture_margin_bottom = 5.0
+draw_center = false
 
 [node name="ClassCard" type="PanelContainer" unique_id=693902714]
 custom_minimum_size = Vector2(320, 260)

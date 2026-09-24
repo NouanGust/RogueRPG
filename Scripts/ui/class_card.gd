@@ -24,7 +24,8 @@ func _ready() -> void:
 func setup(data: ClassData) -> void:
 	class_data = data
 	name_label.text = class_data.display_name
-	portrait_rect.texture = class_data.sprite
+	var first_frame = class_data.sprite.get_frame_texture("Idle", 0)
+	portrait_rect.texture = first_frame
 	stats_label.text = (
 		"HP Base: %d\nAtaque Base: %d\nDefesa Base: %d\n\nForça d%d\nInteligência d%d\nFé d%d\nAgilidade d%d"
 		% [

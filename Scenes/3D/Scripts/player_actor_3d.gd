@@ -23,7 +23,8 @@ func setup(actor_class: ClassData, rolled_atributtes: Dictionary) -> void:
 	if class_data == null:
 		push_error("PlyerActor.setup: class_data é nulo")
 		return
-	sprite.sprite_frames = frames
+	sprite.sprite_frames = class_data.sprite
+	sprite.play("Idle")
 	stats_component.setup_from_class(class_data, rolled_atributtes)
 	health_component.setup(stats_component.get_value("max_hp"))
 	setup_finished.emit()
