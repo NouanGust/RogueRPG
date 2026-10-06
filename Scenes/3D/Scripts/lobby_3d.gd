@@ -30,9 +30,6 @@ extends Node3D
 var is_moving: bool = false
 
 func _ready() -> void:
-	#_snap_camera_to(pos_main)
-	_switch_ui(title_ui)
-	title_ui.modulate.a = 0.0
 	
 	title_ui.new_game_requested.connect(_on_new_game_requested)
 	title_ui.load_game_requested.connect(_on_load_game_requested)
@@ -47,7 +44,8 @@ func _ready() -> void:
 	
 	if GameState.get("returning_from_battle"):
 		GameState.returning_from_battle = false
-		_handle_return_from_battle
+		_handle_return_from_battle()
+		
 	else:
 		_switch_ui(title_ui)
 		title_ui.modulate.a = 0.0
@@ -123,6 +121,7 @@ func _handle_return_from_battle() -> void:
 			player_node.show()
 			if player_node.has_method("setup"):
 				player_node.setup(GameState.selected_class, GameState.rolled_attributes)
+		_switch_ui(main_ui)
 	else:
 		_switch_ui(title_ui)
 
@@ -178,15 +177,17 @@ func move_to_station(target_marker: Marker3D, target_ui: Control):
 
 
 func _switch_ui(active_ui: Control) -> void:
-	title_ui.hide()
-	stash_ui.hide()
-	creation_ui.hide()
-	save_ui.hide()
-	main_ui.hide()
-	roll_ui.hide()
+	if title_ui: title_ui.hide()
+	if stash_ui: stash_ui.hide()
+	if creation_ui: creation_ui.hide()
+	if main_ui: main_ui.hide()
+	if roll_ui: roll_ui.hide()
+	if save_ui: save_ui.hide()
 	
 	if active_ui:
 		active_ui.show()
+		active_ui.modulate.a = 1.0
+
 
 func _snap_camera_to(marker: Marker3D) -> void:
 	camera.global_position = marker.global_position

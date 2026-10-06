@@ -27,7 +27,6 @@ extends Control
 @onready var back_button: Button = $MarginContainer/VBoxContainer/BottomBar/BackButton
 @onready var roll_all_button: Button = $MarginContainer/VBoxContainer/BottomBar/RollAllButton
 @onready var confirm_button: Button = $MarginContainer/VBoxContainer/BottomBar/ConfirmButton
-@onready var test_3d_button: Button = $MarginContainer/VBoxContainer/BottomBar/Test3DButton
 
 var is_rolling: bool = false
 var has_general_reroll:bool = true
@@ -70,7 +69,7 @@ func _connect_buttons() -> void:
 	roll_all_button.mouse_entered.connect(_on_roll_all_button_hovered)
 	confirm_button.pressed.connect(_on_confirm_button_pressed)
 	confirm_button.mouse_entered.connect(_on_confirm_button_hovered)
-	test_3d_button.pressed.connect(_on_test_3d_pressed)
+
 
 	strength_roll_button.pressed.connect(_on_strength_roll_button_pressed)
 	intelligence_roll_button.pressed.connect(_on_intelligence_roll_button_pressed)
@@ -228,7 +227,6 @@ func _update_button_states() -> void:
 	)
 	
 	confirm_button.disabled = not all_rolled
-	test_3d_button.disabled = not all_rolled
 	
 	if all_rolled:
 		roll_all_button.text = "Rerrolagem Geral (1)"

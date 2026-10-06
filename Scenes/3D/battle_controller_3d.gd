@@ -198,32 +198,41 @@ func player_attack() -> void:
 
 
 func player_escape() -> void:
-	if not battle_active or current_turn != "player" or action_in_progress:
-		return 
+	if not battle_active:
+		AudioManager.play_ui_click()
+		GameState.returning_from_battle = true
 		
+		# Player morto
+		if player_node.health_component.current_hp <= 0:
+			if SaveManager.has_method("clear_active_run"):
+				SaveManager.clear_active_run()
+			GameState.selected_class = null
+			GameState.rolled_attributes = {}
+		# Player vivo
+		else:
+			if SaveManager.has_method("save_active_run"):
+				SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes)
+		SceneTransition.change_scene("res://Scenes/3D/lobby_3d.tscn")
+		return
+		
+	if current_turn != "player" or action_in_progress:
+		return
+	
 	action_in_progress = true
 	
 	var result := dice_roller.roll(20)
 	if result >= 10:
-		ui.log_str("Você fugiu da batalha.")
+		ui.log_str("Você fugiu!")
 		battle_active = false
-		GameState.complete_run(false)
-		battle_finished.emit(false)
-		
-		GameState.returning_from_battle = true
-		
-		if SaveManager.has_method("save_active_run"):
-			SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes)
-		
-		await get_tree().create_timer(1.0).timeout 
-		
-		SceneTransition.change_scene("res://Scenes/3D/lobby_3d.tscn") 
-		return 
-
-	ui.log_str("Falha ao fugir. Você perdeu o turno.")
-	await _set_turn("enemy")
+		battle_finished.emit(true)
+		action_in_progress = false
+		return
+	
+	ui.log_str("Falha ao fugir. \nPerdeu o turno!")
+	await  _set_turn("enemy")
 	action_in_progress = false
 	
+
 func enemy_act() -> void:
 	if not battle_active or current_turn != "enemy": return 
 	enemy_node.face_target(player_node.global_position)
@@ -355,25 +364,12 @@ func _on_player_died() -> void:
 	battle_active = false
 	ui.log_damage("Você foi derrotado. Permadeath.")
 	
-	# Opcional: Tocar animação de morte do jogador aqui e aguardar um segundo
 	player_node.play_dead()
 	await get_tree().create_timer(1.5).timeout
 	
 	GameState.complete_run(false)
 	battle_finished.emit(false)
 	
-	# --- RETORNO AO LOBBY (MORTO) ---
-	GameState.returning_from_battle = true
-	
-	# Limpa os dados do herói atual, mas mantém as moedas globais do Perfil
-	if SaveManager.has_method("clear_active_run"):
-		SaveManager.clear_active_run()
-		
-	GameState.selected_class = null
-	GameState.rolled_attributes = {}
-	
-	await get_tree().create_timer(1.5).timeout 
-	SceneTransition.change_scene("res://Scenes/3D/lobby_3d.tscn")
 
 func _on_player_health_changed(current: int, maximum: int) -> void:
 	ui.update_player_health(current, maximum)

@@ -10,8 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://bs1pa3rcorq6k" path="res://Scenes/item_card.tscn" id="8_6atf5"]
 [ext_resource type="Resource" uid="uid://cgpcs6gynjckj" path="res://Scripts/resources/Items/strenght_elixir.tres" id="8_oe6bg"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5mvf7"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oe6bg"]
 
 [node name="Camp" type="Control" unique_id=1886277990]
 layout_mode = 3
@@ -31,7 +30,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_5mvf7")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oe6bg")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=401999161]
 custom_minimum_size = Vector2(400, 300)

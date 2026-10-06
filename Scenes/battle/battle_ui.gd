@@ -8,8 +8,8 @@ signal loot_decision_made(decision: String, item: ItemData)
 @onready var title_label: Label = $MarginContainer/VBoxContainer/PanelContainer/TitleLabel
 @onready var log_label: RichTextLabel = $MarginContainer/VBoxContainer/Actions/HBoxContainer/LogPanel/LogPanel
 
-@onready var player_hp_label: Label = $MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer/PlayerHPLAbel
-@onready var enemy_hp_label: Label = $MarginContainer/VBoxContainer/EnemyPanel/HPLabel
+@onready var player_hp_label: Label = $MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer/ProgressBar/PlayerHPLAbel
+@onready var enemy_hp_label: Label = $MarginContainer/VBoxContainer/EnemyPanel/EnemyHPBar/HPLabel
 
 @onready var attack_button: Button = $MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow/AttackButton
 @onready var item_button: Button = $MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow/ItemButton

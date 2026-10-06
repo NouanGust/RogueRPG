@@ -1,11 +1,20 @@
 [gd_scene format=3 uid="uid://bs1pa3rcorq6k"]
 
 [ext_resource type="Script" uid="uid://d3mkq5hj27lr3" path="res://Scripts/ui/item_card.gd" id="1_8m360"]
+[ext_resource type="Texture2D" uid="uid://c4a2dqx2ybdcf" path="res://Assets/UI/Cell01.png" id="1_fyp8p"]
 [ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="2_fyp8p"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l8t4d"]
+texture = ExtResource("1_fyp8p")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 
 [node name="ItemCard" type="PanelContainer" unique_id=756460846]
 offset_right = 40.0
 offset_bottom = 40.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_l8t4d")
 script = ExtResource("1_8m360")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=1583511212]
@@ -19,6 +28,7 @@ theme_override_constants/margin_bottom = 5
 layout_mode = 2
 
 [node name="ItemIcon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=828345675]
+texture_filter = 1
 custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 texture = ExtResource("2_fyp8p")
@@ -32,6 +42,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="DescLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1783333148]
+custom_minimum_size = Vector2(60, 60)
 layout_mode = 2
 theme_override_font_sizes/font_size = 8
 text = "Poção que cura 5 de hp"

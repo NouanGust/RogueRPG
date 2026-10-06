@@ -15,11 +15,21 @@ texture_margin_top = 12.0
 texture_margin_right = 12.0
 texture_margin_bottom = 12.0
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ehi7y"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5u8xp"]
 bg_color = Color(0.9440817, 0.10012401, 0.18308142, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvj2l"]
 bg_color = Color(0.23298621, 0.48855, 0.2073664, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lk1r3"]
 texture = ExtResource("3_x3a1m")
@@ -30,8 +40,7 @@ texture_margin_bottom = 16.0
 
 [sub_resource type="Theme" id="Theme_i1ovl"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s6755"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qxt0f"]
 
 [node name="UILayer" type="CanvasLayer" unique_id=760799296]
 
@@ -77,18 +86,28 @@ custom_minimum_size = Vector2(220, 20)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
+theme_override_styles/panel = SubResource("StyleBoxEmpty_ehi7y")
 
 [node name="EnemyHPBar" type="ProgressBar" parent="BattleUI/MarginContainer/VBoxContainer/EnemyPanel" unique_id=196398989]
 custom_minimum_size = Vector2(0, 20)
 layout_mode = 2
+theme_override_constants/outline_size = 10
 theme_override_styles/background = SubResource("StyleBoxFlat_5u8xp")
 theme_override_styles/fill = SubResource("StyleBoxFlat_yvj2l")
 step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="HPLabel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/EnemyPanel" unique_id=662621748]
-layout_mode = 2
+[node name="HPLabel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/EnemyPanel/EnemyHPBar" unique_id=662621748]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = -1.5
+offset_bottom = 1.5
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 4
 text = "vida "
 
@@ -108,7 +127,7 @@ alignment = 1
 [node name="PanelContainer" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=1774549601]
 layout_mode = 2
 size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxFlat_s6755")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_qxt0f")
 
 [node name="TextureRect" type="TextureRect" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=989669624]
 visible = false
@@ -126,8 +145,11 @@ step = 1.0
 value = 50.0
 show_percentage = false
 
-[node name="PlayerHPLAbel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=1616388180]
-layout_mode = 2
+[node name="PlayerHPLAbel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer/ProgressBar" unique_id=1616388180]
+layout_mode = 0
+offset_top = -13.0
+offset_right = 38.0
+offset_bottom = 10.0
 size_flags_horizontal = 0
 size_flags_vertical = 8
 text = "VIDA"

@@ -8,6 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://jwjs7u0sndse" path="res://Assets/Themes/chose_button.tres" id="3_vo54a"]
 [ext_resource type="StyleBox" uid="uid://b4mai6yv25014" path="res://Assets/Themes/chose_button_hover.tres" id="4_2sv62"]
 [ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="6_8af8v"]
+[ext_resource type="Texture2D" uid="uid://br4nmej8jgch1" path="res://Assets/UI/panel-border-003.png" id="6_adv3l"]
 [ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="7_axkud"]
 [ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="8_dvr6p"]
 [ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="9_d1fbd"]
@@ -21,24 +22,35 @@ texture_margin_top = 32.0
 texture_margin_right = 32.0
 texture_margin_bottom = 32.0
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2p5jr"]
-bg_color = Color(0, 0, 0, 0.5019608)
-corner_radius_top_left = 10
-corner_radius_top_right = 10
-corner_radius_bottom_right = 10
-corner_radius_bottom_left = 10
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fhpgr"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_b4ehy"]
-texture = ExtResource("2_qltqm")
+texture = ExtResource("6_adv3l")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_7xcpr"]
-texture = ExtResource("2_qltqm")
+texture = ExtResource("6_adv3l")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_vo54a"]
-texture = ExtResource("2_qltqm")
+texture = ExtResource("6_adv3l")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_2sv62"]
-texture = ExtResource("2_qltqm")
+texture = ExtResource("6_adv3l")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
 
 [node name="AttributeRollScene" type="Control" unique_id=1832293318 node_paths=PackedStringArray("visual_dice")]
 layout_mode = 3
@@ -55,6 +67,7 @@ class_selection_scene = ExtResource("3_axkud")
 visual_dice = NodePath("MarginContainer/DiceVisual")
 
 [node name="Panel" type="Panel" parent="." unique_id=652906336]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -90,7 +103,7 @@ vertical_alignment = 1
 
 [node name="ClassInfoPanel" type="PanelContainer" parent="MarginContainer/VBoxContainer" unique_id=1959010428]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_2p5jr")
+theme_override_styles/panel = SubResource("StyleBoxEmpty_fhpgr")
 
 [node name="ClassInfoMargin" type="MarginContainer" parent="MarginContainer/VBoxContainer/ClassInfoPanel" unique_id=856557975]
 layout_mode = 2
@@ -317,11 +330,3 @@ theme_override_styles/hover = ExtResource("9_d1fbd")
 theme_override_styles/disabled = ExtResource("10_d6plq")
 disabled = true
 text = "CONFIRMAR"
-
-[node name="Test3DButton" type="Button" parent="MarginContainer/VBoxContainer/BottomBar" unique_id=1759995909]
-layout_mode = 2
-theme_override_styles/normal = ExtResource("8_dvr6p")
-theme_override_styles/hover = ExtResource("9_d1fbd")
-theme_override_styles/disabled = ExtResource("10_d6plq")
-disabled = true
-text = "3D!!!!!"
