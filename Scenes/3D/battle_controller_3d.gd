@@ -216,20 +216,35 @@ func player_escape() -> void:
 		return
 		
 	if current_turn != "player" or action_in_progress:
-		return
-	
+			return 
+		
 	action_in_progress = true
 	
 	var result := dice_roller.roll(20)
 	if result >= 10:
-		ui.log_str("Você fugiu!")
+		ui.log_str("Você conseguiu escapar da batalha!")
+		
+		# --- MECÂNICA DE PUNIÇÃO: MOEDAS ---
+		var moedas_atuais = SaveManager.get_coins()
+		var moedas_perdidas = int(moedas_atuais * 0.3) # Perde 30%
+		if moedas_perdidas > 0:
+			SaveManager.spend_coins(moedas_perdidas)
+			ui.log_damage("Punição: Você deixou cair %d moedas na fuga." % moedas_perdidas)
+			
+		# --- MECÂNICA DE PUNIÇÃO: ITENS ---
+		if GameState.inventory.size() > 0:
+			# Escolhe um item aleatório da mochila para perder
+			var item_perdido = GameState.inventory.pick_random()
+			GameState.remove_item(item_perdido)
+			ui.log_damage("Punição: Deixou cair [%s] pelo caminho!" % item_perdido.item_name)
+		
 		battle_active = false
-		battle_finished.emit(true)
+		battle_finished.emit(true) 
 		action_in_progress = false
-		return
-	
-	ui.log_str("Falha ao fugir. \nPerdeu o turno!")
-	await  _set_turn("enemy")
+		return 
+
+	ui.log_str("Falha ao fugir. Você perdeu o turno.")
+	await _set_turn("enemy")
 	action_in_progress = false
 	
 
@@ -386,6 +401,9 @@ func _on_player_level_up(new_level: int) -> void:
 	
 	player_node.stats_component.apply_level_up(str_roll, int_roll, fai_roll, agi_roll)
 	player_node.health_component.increase_max_hp(str_roll)
+	
+	if player_node.has_method("play_level_up_effect"):
+		player_node.play_level_up_effect()
 	
 	ui.log_str("[color=yellow]LEVEL UP! Você alcançou o Nível %d![/color]" % new_level)
 	ui.log_str("Atributos (d4) aumentaram: FOR+%d, INT+%d, FÉ+%d, AGI+%d" % [str_roll, int_roll, fai_roll, agi_roll])

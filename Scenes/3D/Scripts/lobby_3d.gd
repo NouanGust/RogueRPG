@@ -25,6 +25,9 @@ extends Node3D
 @onready var stash_button: Button = $UILayer/MainUI/MarginContainer/HBoxContainer/StashButton
 @onready var stash_back_button: Button = $UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer3/StartButton
 @onready var fade_sceen: ColorRect = $UILayer/TransitionLayer
+@onready var profile_label: Label = $UILayer/MainUI/MarginContainer/ProfileNameLabel
+@onready var stats_label: RichTextLabel = $UILayer/MainUI/MarginContainer/HBoxContainer2/Panel/MarginContainer/PlayerActorInfos
+
 
 @onready var player_node: PlayerActor3D = $PlayerActor3D
 var is_moving: bool = false
@@ -55,6 +58,70 @@ func _ready() -> void:
 	
 		_play_intro()
 
+func _update_main_ui_info() -> void:
+	if SaveManager.current_profile_name != "":
+		profile_label.text = "Perfil Ativo: " + SaveManager.current_profile_name
+	else:
+		profile_label.text = "Nenhum Perfil"
+
+	if GameState.selected_class != null:
+		var char_class = GameState.selected_class.display_name
+		var attrs = GameState.rolled_attributes
+		var current_level = GameState.current_level
+		
+		var info_text = "[b]Classe:[/b] %s (Nível %d)\n\n" % [char_class, current_level]
+		
+		# --- HP ---
+		var current_hp = player_node.health_component.current_hp
+		var max_hp = player_node.health_component.max_hp
+		var base_hp = GameState.selected_class.base_hp
+		var bonus_hp = max_hp - base_hp 
+		
+		var hp_tooltip = "Base: %d | Modificador: %d" % [base_hp, bonus_hp]
+		if bonus_hp >= 0: hp_tooltip = "Base: %d | Modificador: +%d" % [base_hp, bonus_hp]
+		info_text += "[hint=%s][b]HP:[/b] %d/%d[/hint]\n" % [hp_tooltip, current_hp, max_hp]
+		
+		# --- DANO (ATAQUE) E DEFESA ---
+		var base_atk = GameState.selected_class.base_attack
+		var mod_atk = 0
+		var base_def = GameState.selected_class.base_defense
+		var mod_def = 0
+		
+		if player_node.stats_component.has_method("get_modifier"):
+			mod_atk = player_node.stats_component.get_modifier("attack")
+			mod_def = player_node.stats_component.get_modifier("defense")
+			
+		var atk_tooltip = "Base: %d | Modificador: +%d" % [base_atk, mod_atk]
+		var def_tooltip = "Base: %d | Modificador: +%d" % [base_def, mod_def]
+		
+		info_text += "[hint=%s][b]Dano:[/b] %d[/hint]\n" % [atk_tooltip, base_atk + mod_atk]
+		info_text += "[hint=%s][b]Defesa:[/b] %d[/hint]\n\n" % [def_tooltip, base_def + mod_def]
+		
+		# --- ATRIBUTOS PRINCIPAIS ---
+		var stat_names = {
+			"strength": "Força",
+			"intelligence": "Inteligência",
+			"faith": "Fé",
+			"agility": "Agilidade"
+		}
+		
+		for stat_key in stat_names.keys():
+			var base_val = attrs.get(stat_key, 0)
+			var mod_val = 0
+			
+			if player_node.stats_component.has_method("get_modifier"):
+				mod_val = player_node.stats_component.get_modifier(stat_key)
+			
+			var total_val = base_val + mod_val
+			
+			var stat_tooltip = "Valor Base (Dado): %d | Modificador: %d" % [base_val, mod_val]
+			if mod_val >= 0: stat_tooltip = "Valor Base (Dado): %d | Modificador: +%d" % [base_val, mod_val]
+			
+			info_text += "[hint=%s]%s: %d[/hint]\n" % [stat_tooltip, stat_names[stat_key], total_val]
+		
+		stats_label.text = info_text
+	else:
+		stats_label.text = "Nenhum herói vivo."
 
 func _play_intro() -> void:
 	var tween = create_tween().set_parallel(true)
@@ -114,16 +181,21 @@ func _on_start_battle_pressed() -> void:
 	SceneTransition.change_scene("res://Scenes/3D/battle_scene_3d.tscn")
 
 func _handle_return_from_battle() -> void:
-	_snap_camera_to(pos_main)
 	
 	if GameState.selected_class != null:
+		_snap_camera_to(pos_main)
 		if player_node:
 			player_node.show()
 			if player_node.has_method("setup"):
 				player_node.setup(GameState.selected_class, GameState.rolled_attributes)
 		_switch_ui(main_ui)
 	else:
-		_switch_ui(title_ui)
+		if SaveManager.current_profile_name != "":
+			_snap_camera_to(pos_creation)
+			_switch_ui(creation_ui)
+		else:
+			_snap_camera_to(pos_main)
+			_switch_ui(title_ui)
 
 func _show_attribute_roll_ui() -> void:
 	if roll_ui.has_method("prepare_roll"):
@@ -187,6 +259,8 @@ func _switch_ui(active_ui: Control) -> void:
 	if active_ui:
 		active_ui.show()
 		active_ui.modulate.a = 1.0
+		if active_ui == main_ui:
+			_update_main_ui_info()
 
 
 func _snap_camera_to(marker: Marker3D) -> void:

@@ -10,6 +10,7 @@ signal setup_finished
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var combat_component: CombatComponent = $CombatComponent
 @onready var inventory_component: InventoryComponent = $InventoryComponent
+@onready var level_up_light: OmniLight3D = $LevelUpLight
 
 @export var frames: SpriteFrames
 var class_data: ClassData
@@ -62,3 +63,13 @@ func play_walk(): play_anim("Walk")
 func play_attack(): play_anim("Attack")
 func play_hurt(): play_anim("Hurt")
 func play_dead(): play_anim("Dead")
+
+func play_level_up_effect() -> void:
+	var tween = create_tween()
+	tween.tween_property(level_up_light, "light_energy", 8.0, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_property(level_up_light, "light_energy", 0.0, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	
+	var original_y = sprite.position.y
+	var jump_tween = create_tween()
+	jump_tween.tween_property(sprite, "position:y", original_y + 0.5, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	jump_tween.tween_property(sprite, "position:y", original_y, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)

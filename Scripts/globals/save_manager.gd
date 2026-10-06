@@ -55,9 +55,13 @@ func _sync_to_game_state() -> void:
 	if profile_data.get("active_class_path", "") != "":
 		GameState.selected_class = load(profile_data["active_class_path"])
 		GameState.rolled_attributes = profile_data.get("active_attributes", {})
+		GameState.current_level = profile_data.get("active_level", 1)
+		GameState.current_xp = profile_data.get("active_xp", 0)
 	else:
 		GameState.selected_class = null
 		GameState.rolled_attributes = {}
+		GameState.current_level = 1
+		GameState.current_xp = 0
 
 func save_game() -> void:
 	if current_profile_name == "":
@@ -75,6 +79,8 @@ func save_active_run(class_resource: ClassData, attributes: Dictionary) -> void:
 	if class_resource:
 		profile_data["active_class_path"] = class_resource.resource_path
 		profile_data["active_attributes"] = attributes
+		profile_data["active_level"] = GameState.current_level
+		profile_data["active_xp"] = GameState.current_xp
 		save_game()
 
 func clear_active_run() -> void:

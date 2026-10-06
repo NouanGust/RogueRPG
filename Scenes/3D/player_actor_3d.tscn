@@ -42,3 +42,7 @@ metadata/_custom_type_script = "uid://bo8sk2d1tobjf"
 
 [node name="HealthBarAnchor" type="Marker3D" parent="." unique_id=1024869278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3386022, 0)
+
+[node name="LevelUpLight" type="OmniLight3D" parent="." unique_id=1805458049]
+light_color = Color(0.75012, 0.7476155, 0, 1)
+light_energy = 0.0
