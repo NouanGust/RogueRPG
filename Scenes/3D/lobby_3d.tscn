@@ -26,6 +26,17 @@
 [ext_resource type="Texture2D" uid="uid://bk2fd1a1tnv88" path="res://Assets/UI/dice-solid.png" id="23_d7b66"]
 [ext_resource type="Texture2D" uid="uid://d1k6oxsfto7m4" path="res://Assets/UI/polis_sanctuary.png" id="25_5hc7j"]
 [ext_resource type="Script" uid="uid://0tofmxykk7xt" path="res://Scenes/3D/Scripts/save_ui.gd" id="25_8qwmk"]
+[ext_resource type="PackedScene" uid="uid://dsg1p8cjfp50g" path="res://Assets/Models/FBX/CommonTree_Autumn_4.fbx" id="27_v065u"]
+[ext_resource type="PackedScene" uid="uid://8wxbapi3hmad" path="res://Assets/Models/FBX/Rock_2.fbx" id="28_m3s23"]
+[ext_resource type="PackedScene" uid="uid://cry3crnh06xqg" path="res://Assets/Models/FBX/Rock_7.fbx" id="29_771s2"]
+[ext_resource type="PackedScene" uid="uid://dx801b7la0kbu" path="res://Assets/Models/FBX/TreeStump.fbx" id="30_kd24e"]
+[ext_resource type="PackedScene" uid="uid://2a2kc23f7o60" path="res://Assets/Models/FBX/Willow_Autumn_2.fbx" id="31_0iodb"]
+[ext_resource type="PackedScene" uid="uid://nxa8ixsh6oft" path="res://Assets/Models/FBX/Willow_Dead_3.fbx" id="32_1l5k2"]
+[ext_resource type="PackedScene" uid="uid://bjhrksnhvgy7o" path="res://Assets/Models/FBX/WoodLog.fbx" id="33_nnqiw"]
+[ext_resource type="PackedScene" uid="uid://7uqc08bjggrp" path="res://Assets/Models/FBX/Wheat.fbx" id="34_0iodb"]
+[ext_resource type="PackedScene" uid="uid://0fqwdqltsclr" path="res://Assets/Models/FBX/Plant_4.fbx" id="35_1l5k2"]
+[ext_resource type="PackedScene" uid="uid://cvjnoiasl1skv" path="res://Assets/Models/FBX/Cactus_3.fbx" id="36_nnqiw"]
+[ext_resource type="PackedScene" uid="uid://8ca8lrdhxclj" path="res://Assets/Models/FBX/CactusFlowers_3.fbx" id="37_dk6l1"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_y0unm"]
 panorama = ExtResource("3_nnteq")
@@ -88,7 +99,7 @@ bg_color = Color(0, 0, 0, 1)
 script = ExtResource("1_fdmty")
 
 [node name="PlayerActor3D" parent="." unique_id=1380970242 instance=ExtResource("2_je1rc")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6457192, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8605413, 0.6457192, -0.42686373)
 visible = false
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1279547269]
@@ -98,10 +109,11 @@ environment = SubResource("Environment_mow7t")
 transform = Transform3D(1, 0, 0, 0, 0.8927353, 0.45058152, 0, -0.45058152, 0.8927353, 0, 1.1852698, 0)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=354282780]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7697296e-05, -2.3841858e-07, 0.009364903)
 mesh = SubResource("PlaneMesh_mjxr5")
 
 [node name="DynamicCamera" type="Camera3D" parent="." unique_id=1590885466]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23131108, 1.2252866, 1.8695748)
+transform = Transform3D(1, 0, 0, 0, 0.99655396, -0.08294737, 0, 0.082947366, 0.99655396, -0.23780012, 0.61692953, 2.1742315)
 
 [node name="Chest" parent="." unique_id=58081528 instance=ExtResource("3_vq873")]
 transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 3.2053401, 0.2684942, 0.1989317)
@@ -109,7 +121,7 @@ transform = Transform3D(1.8, 0, 0, 0, 1.8, 0, 0, 0, 1.8, 3.2053401, 0.2684942, 0
 [node name="CameraStations" type="Node3D" parent="." unique_id=548795565]
 
 [node name="PosMain" type="Marker3D" parent="CameraStations" unique_id=476836366]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.23175025, 0.51570815, 1.3929242)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23780012, 0.61692953, 2.1742315)
 
 [node name="PosStash" type="Marker3D" parent="CameraStations" unique_id=1048574268]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.173481, 0.3542788, 2.0199914)
@@ -755,5 +767,350 @@ alignment = 1
 [node name="CreateButton" type="Button" parent="UILayer/SaveUI/MarginContainer/HBoxContainer" unique_id=460230030]
 layout_mode = 2
 text = "CRIAR"
+
+[node name="Models" type="Node3D" parent="." unique_id=51393943]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+
+[node name="CommonTree_Autumn_4" parent="Models" unique_id=997707243 instance=ExtResource("27_v065u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7087054, 0, -1.5771015)
+
+[node name="CommonTree_Autumn_5" parent="Models" unique_id=62359428 instance=ExtResource("27_v065u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7087054, 0, -5.4138803)
+
+[node name="CommonTree_Autumn_6" parent="Models" unique_id=1959818720 instance=ExtResource("27_v065u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1674533, 0, -4.060238)
+
+[node name="CommonTree_Autumn_7" parent="Models" unique_id=886455371 instance=ExtResource("27_v065u")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35831928, 0, -7.2108707)
+
+[node name="Rock_2" parent="Models" unique_id=1980059543 instance=ExtResource("28_m3s23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6038234, 0, 0.6914089)
+
+[node name="Rock_3" parent="Models" unique_id=230380953 instance=ExtResource("28_m3s23")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5731664, 0, -6.7648883)
+
+[node name="Rock_4" parent="Models" unique_id=1310220671 instance=ExtResource("28_m3s23")]
+transform = Transform3D(-0.78691345, 0, -0.61706334, 0, 1, 0, 0.61706334, 0, -0.78691345, 6.2734523, 0, -6.7648883)
+
+[node name="Rock_5" parent="Models" unique_id=1134505778 instance=ExtResource("28_m3s23")]
+transform = Transform3D(-0.78691345, 0, -0.61706334, 0, 1, 0, 0.61706334, 0, -0.78691345, -0.2538066, 0, -6.7648883)
+
+[node name="Rock_6" parent="Models" unique_id=195105365 instance=ExtResource("28_m3s23")]
+transform = Transform3D(-0.78691345, 0, -0.61706334, 0, 1, 0, 0.61706334, 0, -0.78691345, 1.4886847, 0, -8.076036)
+
+[node name="Rock_11" parent="Models" unique_id=2041637745 instance=ExtResource("28_m3s23")]
+transform = Transform3D(-0.78691345, 0, -0.61706334, 0, 1, 0, 0.61706334, 0, -0.78691345, 2.8037386, 0, -6.172926)
+
+[node name="Rock_7" parent="Models" unique_id=653127527 instance=ExtResource("29_771s2")]
+transform = Transform3D(3.0948772, 0, 2.9849253, 0, 5.4557934, 0, -2.3156009, 0, 3.9894516, 8.94654, 0, -8.552371)
+
+[node name="Rock_8" parent="Models" unique_id=2134176099 instance=ExtResource("29_771s2")]
+transform = Transform3D(-2.7228317, 0, 3.5364304, 0, 5.4557934, 0, -2.7434397, 0, -3.5098667, -9.881253, 0, -7.251816)
+
+[node name="Rock_9" parent="Models" unique_id=54898204 instance=ExtResource("29_771s2")]
+transform = Transform3D(-1.1375371, 0, 3.8659513, 0, 4.364635, 0, -3.9190044, 0, -1.1221385, -5.2671227, 0, -8.295943)
+
+[node name="Rock_10" parent="Models" unique_id=544747689 instance=ExtResource("29_771s2")]
+transform = Transform3D(-3.9330275, 0, -1.0733346, 0, 4.364635, 0, 1.0880634, 0, -3.8797846, -9.069967, 0, -2.3830838)
+
+[node name="TreeStump" parent="Models" unique_id=1335188237 instance=ExtResource("30_kd24e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5244114, 0, -3.580154)
+
+[node name="TreeStump2" parent="Models" unique_id=1001752984 instance=ExtResource("30_kd24e")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5633345, 0, -3.9480984)
+
+[node name="Willow_Autumn_2" parent="Models" unique_id=1180889289 instance=ExtResource("31_0iodb")]
+transform = Transform3D(-0.89460695, 0, -0.4468538, 0, 1, 0, 0.4468538, 0, -0.89460695, 5.607325, 0, -6.597618)
+
+[node name="Willow_Autumn_4" parent="Models" unique_id=666022266 instance=ExtResource("31_0iodb")]
+transform = Transform3D(-1.2947677, 0, -0.54669297, 0, 1.3, 0, 0.64673305, 0, -1.0944862, -4.6095214, 0, -5.227)
+
+[node name="Willow_Autumn_3" parent="Models" unique_id=1014589610 instance=ExtResource("31_0iodb")]
+transform = Transform3D(-0.4498184, 0, 0.66012865, 0, 0.79999995, 0, -1.0172287, 0, -0.2919088, 3.9521422, 0, -7.8789887)
+
+[node name="Willow_Dead_3" parent="Models" unique_id=1199816063 instance=ExtResource("32_1l5k2")]
+transform = Transform3D(-0.28249213, 0, 0.95926964, 0, 1, 0, -0.95926964, 0, -0.28249213, 4.881631, 0, -6.701056)
+
+[node name="Willow_Dead_4" parent="Models" unique_id=673952666 instance=ExtResource("32_1l5k2")]
+transform = Transform3D(-0.28249213, 0, 0.95926964, 0, 1, 0, -0.95926964, 0, -0.28249213, -5.821946, 0, -3.686866)
+
+[node name="Willow_Dead_5" parent="Models" unique_id=1278681901 instance=ExtResource("32_1l5k2")]
+transform = Transform3D(-0.28249213, 0, 0.95926964, 0, 1, 0, -0.95926964, 0, -0.28249213, -2.3742733, 0, -5.4069014)
+
+[node name="Willow_Dead_6" parent="Models" unique_id=57961399 instance=ExtResource("32_1l5k2")]
+transform = Transform3D(-0.28249213, 0, 0.95926964, 0, 1, 0, -0.95926964, 0, -0.28249213, -0.79836345, 0, -7.0563)
+
+[node name="WoodLog" parent="Models" unique_id=1777540147 instance=ExtResource("33_nnqiw")]
+transform = Transform3D(-0.7625329, 0, 0.6469494, 0, 1, 0, -0.6469494, 0, -0.7625329, -2.7487502, -0.20181105, -1.0597612)
+
+[node name="Wheat" parent="Models" unique_id=750343744 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.9408767, 0, -2.798234)
+
+[node name="Wheat2" parent="Models" unique_id=547425242 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.9408767, 0, -2.9670477)
+
+[node name="Wheat3" parent="Models" unique_id=826850361 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.9408767, 0, -3.1609108)
+
+[node name="Wheat4" parent="Models" unique_id=650731760 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.9408767, 0, -3.2951033)
+
+[node name="Wheat5" parent="Models" unique_id=1828360843 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.8374946, 0, -3.1743)
+
+[node name="Wheat6" parent="Models" unique_id=1188692359 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 2.1045084, 0, -3.0765665)
+
+[node name="Wheat7" parent="Models" unique_id=1195748169 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.7216045, 0, -2.6427512)
+
+[node name="Wheat8" parent="Models" unique_id=1033049831 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.6892081, 0, -2.8084273)
+
+[node name="Wheat9" parent="Models" unique_id=295855998 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.6520048, 0, -2.9986873)
+
+[node name="Wheat10" parent="Models" unique_id=257636749 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.6262525, 0, -3.1303856)
+
+[node name="Wheat11" parent="Models" unique_id=861456029 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.5479748, 0, -2.991988)
+
+[node name="Wheat12" parent="Models" unique_id=635251948 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.8287812, 0, -2.9473124)
+
+[node name="Wheat13" parent="Models" unique_id=1225315222 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.7216045, 0, -3.2543983)
+
+[node name="Wheat14" parent="Models" unique_id=1365931119 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.6892081, 0, -3.4200745)
+
+[node name="Wheat15" parent="Models" unique_id=651494171 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.6520048, 0, -3.6103344)
+
+[node name="Wheat16" parent="Models" unique_id=825319435 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.6262525, 0, -3.7420328)
+
+[node name="Wheat17" parent="Models" unique_id=368542419 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.5479748, 0, -3.603635)
+
+[node name="Wheat18" parent="Models" unique_id=1853997512 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.8287812, 0, -3.5589595)
+
+[node name="Wheat19" parent="Models" unique_id=100364401 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.2651615, 0, -3.2543983)
+
+[node name="Wheat20" parent="Models" unique_id=1820388422 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.2327652, 0, -3.4200745)
+
+[node name="Wheat21" parent="Models" unique_id=546172839 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.1955619, 0, -3.6103344)
+
+[node name="Wheat22" parent="Models" unique_id=2066434791 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.1698096, 0, -3.7420328)
+
+[node name="Wheat23" parent="Models" unique_id=1612477437 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.0915319, 0, -3.603635)
+
+[node name="Wheat24" parent="Models" unique_id=157031618 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 1.3723383, 0, -3.5589595)
+
+[node name="Wheat25" parent="Models" unique_id=979750625 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -3.5067542, 0, 1.9807549)
+
+[node name="Wheat26" parent="Models" unique_id=1298750068 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -3.5067542, 0, 1.8119411)
+
+[node name="Wheat27" parent="Models" unique_id=1758854631 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -3.5067542, 0, 1.618078)
+
+[node name="Wheat28" parent="Models" unique_id=2085624645 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -3.5067542, 0, 1.4838855)
+
+[node name="Wheat29" parent="Models" unique_id=168158174 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -3.6101363, 0, 1.6046889)
+
+[node name="Wheat30" parent="Models" unique_id=1673667639 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, -3.3431225, 0, 1.7024224)
+
+[node name="Wheat31" parent="Models" unique_id=1656444935 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.7260265, 0, 2.1362376)
+
+[node name="Wheat32" parent="Models" unique_id=1242533308 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.7584229, 0, 1.9705615)
+
+[node name="Wheat33" parent="Models" unique_id=1795091092 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.7956262, 0, 1.7803016)
+
+[node name="Wheat34" parent="Models" unique_id=130006301 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.8213782, 0, 1.6486032)
+
+[node name="Wheat35" parent="Models" unique_id=1368312874 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.899656, 0, 1.7870009)
+
+[node name="Wheat36" parent="Models" unique_id=106758182 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.6188498, 0, 1.8316765)
+
+[node name="Wheat37" parent="Models" unique_id=578627814 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.7260265, 0, 1.5245905)
+
+[node name="Wheat38" parent="Models" unique_id=171092884 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.7584229, 0, 1.3589144)
+
+[node name="Wheat39" parent="Models" unique_id=108658076 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.7956262, 0, 1.1686544)
+
+[node name="Wheat40" parent="Models" unique_id=293317375 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.8213782, 0, 1.0369561)
+
+[node name="Wheat41" parent="Models" unique_id=1836054703 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.899656, 0, 1.1753538)
+
+[node name="Wheat42" parent="Models" unique_id=1542566948 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -3.6188498, 0, 1.2200294)
+
+[node name="Wheat43" parent="Models" unique_id=441349920 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -4.1824694, 0, 1.5245905)
+
+[node name="Wheat44" parent="Models" unique_id=642375056 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -4.2148657, 0, 1.3589144)
+
+[node name="Wheat45" parent="Models" unique_id=1314139810 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -4.252069, 0, 1.1686544)
+
+[node name="Wheat46" parent="Models" unique_id=1112010735 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -4.2778215, 0, 1.0369561)
+
+[node name="Wheat47" parent="Models" unique_id=1861450565 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -4.356099, 0, 1.1753538)
+
+[node name="Wheat48" parent="Models" unique_id=1918546162 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, -4.0752926, 0, 1.2200294)
+
+[node name="Wheat49" parent="Models" unique_id=1071399688 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5.240366, 0, 1.9807549)
+
+[node name="Wheat50" parent="Models" unique_id=1699673188 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5.240366, 0, 1.8119411)
+
+[node name="Wheat51" parent="Models" unique_id=2054752612 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5.240366, 0, 1.618078)
+
+[node name="Wheat52" parent="Models" unique_id=49263823 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5.240366, 0, 1.4838855)
+
+[node name="Wheat53" parent="Models" unique_id=1442150635 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5.136984, 0, 1.6046889)
+
+[node name="Wheat54" parent="Models" unique_id=1311647500 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 5.4039974, 0, 1.7024224)
+
+[node name="Wheat55" parent="Models" unique_id=2032960505 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 5.0210934, 0, 2.1362376)
+
+[node name="Wheat56" parent="Models" unique_id=1837687201 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.988697, 0, 1.9705615)
+
+[node name="Wheat57" parent="Models" unique_id=1840246495 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.9514937, 0, 1.7803016)
+
+[node name="Wheat58" parent="Models" unique_id=1353801596 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.9257417, 0, 1.6486032)
+
+[node name="Wheat59" parent="Models" unique_id=1849212039 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.8474636, 0, 1.7870009)
+
+[node name="Wheat60" parent="Models" unique_id=852983449 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 5.12827, 0, 1.8316765)
+
+[node name="Wheat61" parent="Models" unique_id=27926996 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 5.0210934, 0, 1.5245905)
+
+[node name="Wheat62" parent="Models" unique_id=2090035694 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.988697, 0, 1.3589144)
+
+[node name="Wheat63" parent="Models" unique_id=1562689109 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.9514937, 0, 1.1686544)
+
+[node name="Wheat64" parent="Models" unique_id=1476662228 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.9257417, 0, 1.0369561)
+
+[node name="Wheat65" parent="Models" unique_id=1677778949 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.8474636, 0, 1.1753538)
+
+[node name="Wheat66" parent="Models" unique_id=1751955113 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 5.12827, 0, 1.2200294)
+
+[node name="Wheat67" parent="Models" unique_id=1788631063 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.5646505, 0, 1.5245905)
+
+[node name="Wheat68" parent="Models" unique_id=1786310645 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.532254, 0, 1.3589144)
+
+[node name="Wheat69" parent="Models" unique_id=2064813017 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.495051, 0, 1.1686544)
+
+[node name="Wheat70" parent="Models" unique_id=924690798 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.4692984, 0, 1.0369561)
+
+[node name="Wheat71" parent="Models" unique_id=368661138 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.391021, 0, 1.1753538)
+
+[node name="Wheat72" parent="Models" unique_id=1971653274 instance=ExtResource("34_0iodb")]
+transform = Transform3D(0.39256537, 0, 0.07676215, 0, 0.4, 0, -0.07676215, 0, 0.39256537, 4.6718273, 0, 1.2200294)
+
+[node name="Plant_4" parent="Models" unique_id=1282071156 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.35, 0, 0, 0, 0.25, 2.0757432, 0, 0.72833157)
+
+[node name="Plant_5" parent="Models" unique_id=262763083 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.15, 0, 0, 0, 0.21000001, 0, 0, 0, 0.15, 2.299636, 0, 0.72833157)
+
+[node name="Plant_6" parent="Models" unique_id=1597877245 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.35, 0, 0, 0, 0.25, 2.0757432, 0, -0.9322295)
+
+[node name="Plant_7" parent="Models" unique_id=602722940 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.15, 0, 0, 0, 0.21000001, 0, 0, 0, 0.15, 2.299636, 0, -0.9322295)
+
+[node name="Plant_8" parent="Models" unique_id=2044796397 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.35, 0, 0, 0, 0.25, 5.2096167, 0, -2.2063751)
+
+[node name="Plant_9" parent="Models" unique_id=2082708120 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.15, 0, 0, 0, 0.21000001, 0, 0, 0, 0.15, 5.4335093, 0, -2.2063751)
+
+[node name="Plant_10" parent="Models" unique_id=1287347054 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.35, 0, 0, 0, 0.25, -1.8576808, 0, -2.8034923)
+
+[node name="Plant_11" parent="Models" unique_id=932153005 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.15, 0, 0, 0, 0.21000001, 0, 0, 0, 0.15, -1.6337881, 0, -2.8034923)
+
+[node name="Plant_12" parent="Models" unique_id=1395509447 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.35, 0, 0, 0, 0.25, -3.355756, 0, -5.3914537)
+
+[node name="Plant_13" parent="Models" unique_id=769306517 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.15, 0, 0, 0, 0.21000001, 0, 0, 0, 0.15, -3.1318634, 0, -5.3914537)
+
+[node name="Plant_14" parent="Models" unique_id=675998976 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.35, 0, 0, 0, 0.25, -1.0974243, 0, -5.3914537)
+
+[node name="Plant_15" parent="Models" unique_id=1649317435 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.15, 0, 0, 0, 0.21000001, 0, 0, 0, 0.15, -0.8735316, 0, -5.3914537)
+
+[node name="Plant_16" parent="Models" unique_id=932636750 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.3, 0, 0, 0, 0.35, 0, 0, 0, 0.25, 1.7129691, 0, -5.3914537)
+
+[node name="Plant_17" parent="Models" unique_id=596237894 instance=ExtResource("35_1l5k2")]
+transform = Transform3D(0.15, 0, 0, 0, 0.21000001, 0, 0, 0, 0.15, 1.9368618, 0, -5.3914537)
+
+[node name="Cactus_3" parent="Models" unique_id=220010066 instance=ExtResource("36_nnqiw")]
+transform = Transform3D(0.15855442, 0, -0.9873502, 0, 1, 0, 0.9873502, 0, 0.15855442, 2.9261394, 0, -8.270513)
+
+[node name="Cactus_4" parent="Models" unique_id=1096512402 instance=ExtResource("36_nnqiw")]
+transform = Transform3D(-0.9826937, 0, 0.18523791, 0, 1, 0, -0.18523791, 0, -0.9826937, 5.161721, 0, -5.4620733)
+
+[node name="Cactus_5" parent="Models" unique_id=938128263 instance=ExtResource("36_nnqiw")]
+transform = Transform3D(-0.9826937, 0, 0.18523791, 0, 1, 0, -0.18523791, 0, -0.9826937, -4.348634, 0, -5.4620733)
+
+[node name="CactusFlowers_3" parent="Models" unique_id=957464737 instance=ExtResource("37_dk6l1")]
+transform = Transform3D(0.009860908, 0, -0.99995136, 0, 1, 0, 0.99995136, 0, 0.009860908, 0.90036774, 0, -5.168447)
 
 [editable path="UILayer/StashUI"]

@@ -6,7 +6,10 @@ signal turn_changed(current_turn: String)
 signal battle_finished(player_won: bool)
 
 @onready var player_node: PlayerActor3D = $PlayerActor3D
+@onready var player_anchor: Marker3D = $PlayerActor3D/HealthBarAnchor
 @onready var enemy_node: EnemyActor3D = $EnemyActor3D
+@onready var enemy_anchor: Marker3D = $EnemyActor3D/HealthBarAnchor
+
 @onready var dice_roller: DiceRoller = $DiceRoller
 @onready var ui: BattleUI = $UILayer/BattleUI
 #@export var combat_debug: CombatDebug
@@ -55,18 +58,29 @@ func _ready() -> void:
 	ui.loot_decision_made.connect(_on_loot_decision)
 	start_battle()
 
-#func _process(_delta: float) -> void:
-	#if not battle_active or main_camera == null: return
+func _process(_delta: float) -> void:
+	if not battle_active or main_camera == null:
+		return
 	
-	#if current_turn == "player" and not action_in_progress:
-		#idle_time += delta
-		#var sway_x := sin(idle_time * 0.5) * 15.0
-		#var sway_y := cos(idle_time * 0.3) * 8.0
-		#
-		#var target_pos := base_camera_pos + Vector2(sway_x, sway_y)
-		#main_camera.position = main_camera.position.lerp(target_pos, delta * 2.0)
-	#else:
-		#main_camera.position = main_camera.position.lerp(base_camera_pos, delta * 4.0)
+	_update_floating_health_bars()
+
+
+func _update_floating_health_bars() -> void:
+	if is_instance_valid(player_node) and player_node.visible:
+		var player_screen_pos: Vector2 = main_camera.unproject_position(player_anchor.global_position)
+		if not main_camera.is_position_behind(player_anchor.global_position):
+			ui.set_player_bar_position(player_screen_pos)
+			ui.set_player_bar_visible(true)
+		else:
+			ui.set_player_bar_visible(false)
+	
+	if is_instance_valid(enemy_node) and enemy_node.visible:
+		var enemy_screen_pos: Vector2 = main_camera.unproject_position(enemy_anchor.global_position)
+		if not main_camera.is_position_behind(enemy_anchor.global_position):
+			ui.set_enemy_bar_position(enemy_screen_pos)
+			ui.set_enemy_bar_visible(true)
+		else:
+			ui.set_enemy_bar_visible(false)
 func start_battle() -> void:
 	if GameState.selected_class == null or GameState.rolled_attributes.is_empty():
 		push_error("BattleController: GameState inválido.")

@@ -70,7 +70,7 @@ heal_sfx = ExtResource("17_idpok")
 environment = SubResource("Environment_ty8l0")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=2014827557]
-transform = Transform3D(0.5274898, 0, 0.8495614, 0, 1, 0, -0.8495614, 0, 0.5274898, 0.83235323, 0.79889417, 2.2539406)
+transform = Transform3D(0.5274898, 0, 0.8495614, 0, 1, 0, -0.8495614, 0, 0.5274898, 1.0636337, 0.6195564, 2.5123453)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1382959672]
 transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)

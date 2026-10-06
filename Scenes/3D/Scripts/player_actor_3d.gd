@@ -50,4 +50,15 @@ func _on_died() -> void:
 func _update_dissolve(value: float) -> void:
 	if sprite.material_overlay != null:
 		sprite.material_overlay.set_shader_parameter("dissolve_amount", value)
-	
+
+
+func play_anim(anim_name: String) -> void:
+	if sprite.sprite_frames and sprite.sprite_frames.has_animation(anim_name):
+		sprite.play(anim_name)
+
+
+func play_idle(): play_anim("Idle")
+func play_walk(): play_anim("Walk")
+func play_attack(): play_anim("Attack")
+func play_hurt(): play_anim("Hurt")
+func play_dead(): play_anim("Dead")

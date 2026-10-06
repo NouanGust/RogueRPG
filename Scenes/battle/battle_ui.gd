@@ -131,3 +131,16 @@ func _on_battle_finished(player_won: bool) -> void:
 
 func set_turn_text(text: String) -> void:
 	title_label.text = text
+
+func set_player_bar_position(screen_pos: Vector2) -> void:
+	# Centraliza horizontalmente e posiciona um pouco acima
+	player_hp_bar.global_position = screen_pos - Vector2(player_hp_bar.size.x * 0.5, player_hp_bar.size.y)
+
+func set_player_bar_visible(is_visible: bool) -> void:
+	player_hp_bar.visible = is_visible
+
+func set_enemy_bar_position(screen_pos: Vector2) -> void:
+	enemy_hp_bar.global_position = screen_pos - Vector2(enemy_hp_bar.size.x * 0.5, enemy_hp_bar.size.y)
+
+func set_enemy_bar_visible(is_visible: bool) -> void:
+	enemy_hp_bar.visible = is_visible
