@@ -9,6 +9,7 @@ extends Resource
 @export var base_hp: int = 10
 @export var base_attack: int = 1
 @export var base_defense: int = 0
+@export_enum("strenght", "intelligence", "faith", "agility") var main_attribute: String
 
 @export_group("Dado por atributo")
 @export var strength_dice: int = 6

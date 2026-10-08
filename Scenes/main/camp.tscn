@@ -9,14 +9,46 @@
 [ext_resource type="Resource" uid="uid://yhexp7xptbop" path="res://Scripts/resources/Items/potion_small.tres" id="7_ou0is"]
 [ext_resource type="PackedScene" uid="uid://bs1pa3rcorq6k" path="res://Scenes/item_card.tscn" id="8_6atf5"]
 [ext_resource type="Resource" uid="uid://cgpcs6gynjckj" path="res://Scripts/resources/Items/strenght_elixir.tres" id="8_oe6bg"]
+[ext_resource type="Texture2D" uid="uid://cnnibj3taycqu" path="res://Assets/UI/GUI_4x.png" id="10_6vkrk"]
+[ext_resource type="Texture2D" uid="uid://dvos0q3d1hw3o" path="res://Assets/Items/Small Bottle - RED - 0000.png" id="10_rtroj"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oe6bg"]
 
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fyq28"]
+texture = ExtResource("10_6vkrk")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(0, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ou0is"]
+texture = ExtResource("10_6vkrk")
+region_rect = Rect2(100, 4, 88, 88)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6atf5"]
+texture = ExtResource("10_6vkrk")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(384, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_75g80"]
+texture = ExtResource("10_6vkrk")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(416, 96, 32, 32)
+
 [node name="Camp" type="Control" unique_id=1886277990]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_da1cq")
@@ -69,6 +101,7 @@ alignment = 1
 [node name="Shop" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1738155814]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_fyq28")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop" unique_id=1322769989]
 layout_mode = 2
@@ -91,6 +124,7 @@ layout_mode = 2
 [node name="Bag" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1253661305]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ou0is")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag" unique_id=939962613]
 layout_mode = 2
@@ -114,6 +148,7 @@ layout_mode = 2
 [node name="Stash" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=143864144]
 custom_minimum_size = Vector2(200, 0)
 layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_6atf5")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash" unique_id=490230715]
 layout_mode = 2
@@ -127,7 +162,17 @@ vertical_alignment = 1
 
 [node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer" unique_id=1641259838]
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 columns = 3
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer/GridContainer" unique_id=2132028987]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_75g80")
+icon = ExtResource("10_rtroj")
+icon_alignment = 1
+expand_icon = true
 
 [node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1245226195]
 layout_mode = 2

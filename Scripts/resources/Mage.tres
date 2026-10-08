@@ -224,6 +224,7 @@ display_name = "Mago"
 sprite = SubResource("SpriteFrames_npgfc")
 base_hp = 6
 base_attack = 2
+main_attribute = "intelligence"
 strength_dice = 4
 intelligence_dice = 10
 metadata/_custom_type_script = "uid://dykg8obmcya8q"

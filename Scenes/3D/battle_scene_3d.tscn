@@ -87,7 +87,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.666, 0)
 [node name="PlayerActor3D" parent="." unique_id=1380970242 instance=ExtResource("2_78cvt")]
 transform = Transform3D(-0.31357816, 0, 0.9495624, 0, 1, 0, -0.9495624, 0, -0.31357816, 0, 0.666, 2.299)
 
+[node name="AnimSprite" parent="PlayerActor3D" index="0" unique_id=1166428044]
+shaded = true
+alpha_cut = 1
+
 [node name="UILayer" parent="." unique_id=760799296 instance=ExtResource("3_sakwf")]
+
+[node name="LootPanel" parent="UILayer/BattleUI" parent_id_path=PackedInt32Array(760799296, 2146490657) index="3" unique_id=1826055585]
+visible = true
 
 [node name="LevelUpPanel" type="Panel" parent="UILayer/BattleUI" parent_id_path=PackedInt32Array(760799296, 2146490657) index="4" unique_id=278983770]
 visible = false
@@ -130,5 +137,6 @@ vertical_alignment = 1
 script = ExtResource("21_e6731")
 metadata/_custom_type_script = "uid://8kwf686gj1kl"
 
+[editable path="PlayerActor3D"]
 [editable path="UILayer"]
 [editable path="UILayer/BattleUI/LootPanel"]

@@ -24,8 +24,9 @@
 [ext_resource type="PackedScene" uid="uid://bl1ltw2q8a00m" path="res://Scenes/run/dice_visual.tscn" id="22_l6ubl"]
 [ext_resource type="Texture2D" uid="uid://br4nmej8jgch1" path="res://Assets/UI/panel-border-003.png" id="23_0iodb"]
 [ext_resource type="Texture2D" uid="uid://bk2fd1a1tnv88" path="res://Assets/UI/dice-solid.png" id="23_d7b66"]
-[ext_resource type="Texture2D" uid="uid://d1k6oxsfto7m4" path="res://Assets/UI/polis_sanctuary.png" id="25_5hc7j"]
+[ext_resource type="Texture2D" uid="uid://c1mita4rr18lv" path="res://Assets/Images/UI/chest.png" id="25_1l5k2"]
 [ext_resource type="Script" uid="uid://0tofmxykk7xt" path="res://Scenes/3D/Scripts/save_ui.gd" id="25_8qwmk"]
+[ext_resource type="Texture2D" uid="uid://cnnibj3taycqu" path="res://Assets/UI/GUI_4x.png" id="26_1l5k2"]
 [ext_resource type="PackedScene" uid="uid://dsg1p8cjfp50g" path="res://Assets/Models/FBX/CommonTree_Autumn_4.fbx" id="27_v065u"]
 [ext_resource type="PackedScene" uid="uid://8wxbapi3hmad" path="res://Assets/Models/FBX/Rock_2.fbx" id="28_m3s23"]
 [ext_resource type="PackedScene" uid="uid://cry3crnh06xqg" path="res://Assets/Models/FBX/Rock_7.fbx" id="29_771s2"]
@@ -96,11 +97,12 @@ texture_margin_right = 20.0
 texture_margin_bottom = 20.0
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h14am"]
-texture = ExtResource("25_5hc7j")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
+texture = ExtResource("26_1l5k2")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(384, 0, 96, 96)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4tnph"]
 bg_color = Color(0, 0, 0, 1)
@@ -117,6 +119,7 @@ environment = SubResource("Environment_mow7t")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1036842808]
 transform = Transform3D(1, 0, 0, 0, 0.8927353, 0.45058152, 0, -0.45058152, 0.8927353, 0, 1.1852698, 0)
+shadow_enabled = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=354282780]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7697296e-05, -2.3841858e-07, 0.009364903)
@@ -238,6 +241,9 @@ visible = false
 
 [node name="Panel" parent="UILayer/StashUI" index="0" unique_id=1525156225]
 visible = false
+
+[node name="VBoxContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Stash" parent_id_path=PackedInt32Array(1886277990, 143864144) index="0" unique_id=490230715]
+theme_override_constants/separation = 10
 
 [node name="StartButton" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer3" parent_id_path=PackedInt32Array(1886277990, 311269040) index="1" unique_id=170486455]
 text = "VOLTAR"
@@ -650,6 +656,7 @@ size_flags_horizontal = 8
 theme_override_constants/separation = 50
 
 [node name="StashButton" type="Button" parent="UILayer/MainUI/MarginContainer/HBoxContainer" unique_id=1326952066]
+custom_minimum_size = Vector2(200, 20)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
@@ -660,6 +667,8 @@ theme_override_styles/hover = ExtResource("8_y0unm")
 theme_override_styles/disabled = ExtResource("21_4tnph")
 text = "ESTOQUE
 "
+icon = ExtResource("25_1l5k2")
+expand_icon = true
 
 [node name="BattleButton" type="Button" parent="UILayer/MainUI/MarginContainer/HBoxContainer" unique_id=857288105]
 layout_mode = 2
@@ -680,7 +689,7 @@ size_flags_vertical = 8
 theme_override_constants/separation = 50
 
 [node name="Panel" type="Panel" parent="UILayer/MainUI/MarginContainer/HBoxContainer2" unique_id=554947883]
-custom_minimum_size = Vector2(250, 350)
+custom_minimum_size = Vector2(250, 300)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_h14am")
 
@@ -691,13 +700,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
+theme_override_constants/margin_left = 20
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 20
 
 [node name="PlayerActorInfos" type="RichTextLabel" parent="UILayer/MainUI/MarginContainer/HBoxContainer2/Panel/MarginContainer" unique_id=629490549]
 layout_mode = 2
+theme_override_colors/default_color = Color(0.19889408, 0.20719731, 0.20719802, 1)
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "asndasndasndjsandjasndjsandjandjasndjanjdsndjansjdnajsdnasjdnajsdnajsdnjadnjandjasndjansjdnjasndjansjdnajsndjansdjnasjdnajsndjasndjanjdsnajdnajsndjandjsndajdnjsandjasndjasndjasndjasndjandjsandjasndajsndjasdnasjdnajsdnajdnajdnjandjsandjnajsdnajsndjansjdnajsndj"

@@ -211,6 +211,7 @@ sprite = SubResource("SpriteFrames_egsr7")
 base_hp = 8
 base_attack = 2
 base_defense = 1
+main_attribute = "strenght"
 strength_dice = 10
 intelligence_dice = 4
 faith_dice = 4

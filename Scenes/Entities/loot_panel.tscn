@@ -1,11 +1,30 @@
 [gd_scene format=3 uid="uid://clpyvtaf75kqa"]
 
+[ext_resource type="Texture2D" uid="uid://c8xu5mphlnx5k" path="res://Assets/UI/panel-border-022.png" id="1_prng2"]
+[ext_resource type="Texture2D" uid="uid://dvos0q3d1hw3o" path="res://Assets/Items/Small Bottle - RED - 0000.png" id="2_25bwk"]
+[ext_resource type="Shader" uid="uid://dhna1dlq7biry" path="res://Assets/Shadders/sweep_shine.gdshader" id="2_p2kyt"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p2kyt"]
+texture = ExtResource("1_prng2")
+texture_margin_left = 20.0
+texture_margin_top = 20.0
+texture_margin_right = 20.0
+texture_margin_bottom = 20.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_48sri"]
+shader = ExtResource("2_p2kyt")
+shader_parameter/shine_color = Color(0.25565878, 0.25565878, 0.25565878, 1)
+shader_parameter/shine_speed = 0.4750000225625
+shader_parameter/shine_width = 0.1210000057475
+shader_parameter/shine_angle = 37.622001787045
+
 [node name="LootPanel" type="PanelContainer" unique_id=1826055585]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_p2kyt")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=23935871]
 layout_mode = 2
@@ -19,6 +38,14 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 10
+
+[node name="ItemSprite" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=258862624]
+texture_filter = 1
+material = SubResource("ShaderMaterial_48sri")
+layout_mode = 2
+texture = ExtResource("2_25bwk")
+expand_mode = 4
+stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1346469769]
 layout_mode = 2

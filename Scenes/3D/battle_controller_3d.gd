@@ -35,27 +35,19 @@ var action_in_progress: bool = false
 var idle_time: float = 0.0
 var base_camera_pos: Vector2
 
+var is_peaceful_room: bool
+
 #const MAX_LEVEL: int = 3
 const ENEMY_TURN_DELAY := 2
 
 func _ready() -> void:
-	if player_node == null:
-		push_error("BattleController: player_node nulo.")
-		return
-	if enemy_node == null:
-		push_error("BattleController: enemy_node nulo.")
-		return
-	if dice_roller == null:
-		push_error("BattleController: dice_roller nulo.")
-		return
-	if ui == null:
-		push_error("BattleController: ui nula.")
-		return
+	
 
 	ui.set_controller(self)
 	ui.attack_pressed.connect(player_attack)
 	ui.escape_pressed.connect(player_escape)
 	ui.loot_decision_made.connect(_on_loot_decision)
+	
 	start_battle()
 
 func _process(_delta: float) -> void:
@@ -63,6 +55,18 @@ func _process(_delta: float) -> void:
 		return
 	
 	_update_floating_health_bars()
+
+func _setup_peaceful_room() -> void:
+	battle_active = true
+	enemy_node.hide() 
+	ui.set_enemy_bar_visible(false)
+	
+	ui.attack_button.disabled = false
+	ui.attack_button.text = "AVANÇAR"
+	ui.escape_button.text = "RETORNAR (Seguro)"
+	
+	ui.log_str("[color=green]ACAMPAMENTO SEGUR0[/color]")
+	ui.log_str("Use itens, RETORNE ao lobby sem punições, ou clique em AVANÇAR para continuar.")
 
 
 func _update_floating_health_bars() -> void:
@@ -132,7 +136,7 @@ func _spawn_enemy_for_level(level: int) -> void:
 
 	var enemy_data: EnemyData = valid_enemies.pick_random() if not valid_enemies.is_empty() else enemy_pool.pick_random()
 	var dice_size := _get_level_dice(level)
-	var rolled_value := dice_roller.roll(dice_size)
+	var rolled_value := (GameState.current_level - 1) * 2
 	enemy_node.setup(enemy_data, rolled_value)
 	
 	enemy_node.face_target(player_node.global_position)
@@ -169,6 +173,11 @@ func _set_turn(new_turn: String) -> void:
 		ui.set_turn_text("Sua vez")
 
 func player_attack() -> void:
+	if is_peaceful_room:
+		is_peaceful_room = false
+		ui.log_str("Você deixou o acampamento e continuou a jornada.")
+		_procede_to_next_enemy()
+		return
 	if not battle_active or current_turn != "player" or action_in_progress:
 		return
 	
@@ -215,6 +224,13 @@ func player_escape() -> void:
 		SceneTransition.change_scene("res://Scenes/3D/lobby_3d.tscn")
 		return
 		
+		
+	if is_peaceful_room:
+		ui.log_str("Você retornou ao acampamento em segurança.")
+		battle_active = false
+		battle_finished.emit(true)
+		return
+	
 	if current_turn != "player" or action_in_progress:
 			return 
 		
@@ -319,7 +335,9 @@ func use_item_from_inventory(item: ItemData) -> void:
 		
 		if ui.inventory_panel.has_method("refresh_items"):
 			ui.inventory_panel.refresh_items()
-		await  _set_turn("enemy")
+		
+		if not is_peaceful_room:
+			await  _set_turn("enemy")
 	action_in_progress = false
 func _on_item_used(_item_id: StringName, message: String) -> void:
 	ui.log_heal(message)
@@ -339,6 +357,7 @@ func _on_enemy_died() -> void:
 	var coins_dropped := randi_range(2, 5) * current_level
 	SaveManager.add_coins(coins_dropped)
 	ui.log_str("Inimigo derrotado! +%d XP | +%d Moedas." %[reward, coins_dropped])
+	GameState.encounters_won += 1
 	
 	var drop_roll: float = randf()
 	if drop_roll <= 0.4 and not loot_pool.is_empty():
@@ -366,11 +385,20 @@ func _on_loot_decision(decision: String, item: ItemData) -> void:
 	_procede_to_next_enemy()
 
 func _procede_to_next_enemy() -> void:
-	current_level = GameState.current_level
-	_spawn_enemy_for_level(current_level)
-	_on_enemy_health_changed(enemy_node.health_component.current_hp, enemy_node.health_component.max_hp)
+	is_peaceful_room = (GameState.encounters_won > 0) and (GameState.encounters_won % 5 == 0 )
+	if is_peaceful_room:
+		_setup_peaceful_room()
+		await  _set_turn("player")
+	else:
+		ui.attack_button.disabled = false
+		ui.attack_button.text = "ATACAR" 
+		ui.escape_button.text = "FUGIR"
+		
+		current_level = GameState.current_level
+		_spawn_enemy_for_level(current_level)
+		_on_enemy_health_changed(enemy_node.health_component.current_hp, enemy_node.health_component.max_hp)
 
-	await _set_turn("player")
+		await _set_turn("player")
 
 func _on_player_died() -> void:
 	if not battle_active:
@@ -401,6 +429,12 @@ func _on_player_level_up(new_level: int) -> void:
 	
 	player_node.stats_component.apply_level_up(str_roll, int_roll, fai_roll, agi_roll)
 	player_node.health_component.increase_max_hp(str_roll)
+	
+	if not GameState.rolled_attributes.is_empty():
+		GameState.rolled_attributes["strength"] += str_roll
+		GameState.rolled_attributes["intelligence"] += int_roll
+		GameState.rolled_attributes["faith"] += fai_roll
+		GameState.rolled_attributes["agility"] += agi_roll
 	
 	if player_node.has_method("play_level_up_effect"):
 		player_node.play_level_up_effect()

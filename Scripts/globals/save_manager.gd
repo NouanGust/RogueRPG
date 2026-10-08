@@ -62,6 +62,9 @@ func _sync_to_game_state() -> void:
 		GameState.rolled_attributes = {}
 		GameState.current_level = 1
 		GameState.current_xp = 0
+	
+	if GameState.has_method("load_inventory_from_save"):
+		GameState.load_inventory_from_save()
 
 func save_game() -> void:
 	if current_profile_name == "":

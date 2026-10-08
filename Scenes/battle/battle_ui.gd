@@ -24,6 +24,7 @@ signal loot_decision_made(decision: String, item: ItemData)
 @onready var backpack_button: Button = $LootPanel/MarginContainer/VBoxContainer/BagButton
 @onready var stash_button: Button = $LootPanel/MarginContainer/VBoxContainer/StashButton
 @onready var sell_button: Button = $LootPanel/MarginContainer/VBoxContainer/SellButton
+@onready var item_sprite: TextureRect = $LootPanel/MarginContainer/VBoxContainer/ItemSprite
 @onready var level_up_panel: Panel = $LevelUpPanel
 @onready var level_up_stats: Label = $LevelUpPanel/VBoxContainer/StatsLabel
 @onready var level_up_title: Label = $LevelUpPanel/VBoxContainer/TitleLabel
@@ -93,10 +94,12 @@ func _on_item_selected(id: int) -> void:
 	controller.use_specific_item(id)
 
 func show_loot_screen(item: ItemData) -> void:
+	var tween = create_tween()
 	current_loot = item
 	loot_label.text = "O inimigo dropou:\n%s" % item.item_name
 	
 	backpack_button.disabled = not GameState.has_inventory_space()
+	item_sprite.texture = item.icon
 	if backpack_button.disabled:
 		backpack_button.text = "MOCHILA CHEIA!"
 	else:
@@ -105,6 +108,11 @@ func show_loot_screen(item: ItemData) -> void:
 	sell_button.text = "VENDER (%d MOEDAS)" % max(1, item.cost/2)
 	
 	loot_panel.show()
+	
+	item_sprite.pivot_offset = item_sprite.size / 2.0
+	item_sprite.scale = Vector2.ZERO
+	
+	tween.tween_property(item_sprite, "scale", Vector2.ONE, 0.8).set_trans(Tween.TRANS_SPRING).set_ease(Tween.EASE_OUT)
 
 
 func _on_loot_chosen(decision: String) -> void:

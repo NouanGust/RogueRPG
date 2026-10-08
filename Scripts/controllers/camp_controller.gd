@@ -61,6 +61,8 @@ func _create_item_button(item: ItemData) -> Button:
 	var btn = Button.new()
 	btn.icon = item.icon
 	btn.expand_icon = true
+	btn.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
+	btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_CENTER
 	btn.custom_minimum_size = Vector2(40, 40)
 	btn.tooltip_text = item.item_name + "\n" + item.description
 	

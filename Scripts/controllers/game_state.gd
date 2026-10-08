@@ -22,8 +22,10 @@ var current_xp: int = 0
 var run_active: bool = false
 
 var returning_from_battle: bool = false
+var encounters_won: int = 0
 
 func start_new_run() -> void:
+	encounters_won = 0
 	selected_class = null
 	rolled_attributes = {}
 	current_enemy = null

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://d31vhh6u2yvmy" path="res://Assets/UI/spikecore.png" id="3_x3a1m"]
 [ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="4_2w0vm"]
 [ext_resource type="PackedScene" uid="uid://b20keqeqxjfwy" path="res://Scenes/inventory_panel.tscn" id="5_70bmn"]
+[ext_resource type="Texture2D" uid="uid://ow8hk2g4viui" path="res://Assets/Images/UI/backpack.png" id="5_qxt0f"]
 [ext_resource type="PackedScene" uid="uid://c5pplqrble7t4" path="res://combat_debug.tscn" id="6_kaufe"]
 [ext_resource type="PackedScene" uid="uid://clpyvtaf75kqa" path="res://Scenes/Entities/loot_panel.tscn" id="7_3iwt2"]
 
@@ -168,9 +169,12 @@ theme_override_font_sizes/font_size = 24
 text = "ATACAR"
 
 [node name="ItemButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=112711313]
+custom_minimum_size = Vector2(100, 20)
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "ITEM"
+icon = ExtResource("5_qxt0f")
+expand_icon = true
 
 [node name="EscapeButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=937295147]
 layout_mode = 2

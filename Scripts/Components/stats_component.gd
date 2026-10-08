@@ -21,13 +21,22 @@ var active_buff := {
 	"turns": 0
 }
 
+var primary_stat: String
+
 func setup_from_class(class_data: ClassData, rolled_atributes: Dictionary) -> void:
+	primary_stat = class_data.main_attribute
+	
 	stats.strength = rolled_atributes.get("strength", 0)
 	stats.intelligence = rolled_atributes.get("intelligence", 0)
 	stats.faith = rolled_atributes.get("faith", 0)
 	stats.agility = rolled_atributes.get("agility", 0)
 	
-	stats.attack = class_data.base_attack + stats.strength
+	var main_stat_value = stats.get(primary_stat, 0)
+	stats.attack = class_data.base_attack + main_stat_value
+	
+	# --- LINHA DE TESTE (Adicione esta linha): ---
+	print(">>> SETUP DA CLASSE: ", class_data.display_name, " | Atributo Principal lido: ", primary_stat, " | Valor desse atributo: ", main_stat_value, " | Ataque Final: ", stats.attack)
+	
 	stats.defense = class_data.base_defense + int(stats.agility / 2)
 	stats.max_hp = class_data.base_hp + stats.strength
 	stats_changed.emit(stats)
@@ -67,7 +76,7 @@ func get_value(stat_name: String) -> int:
 		if active_buff["stat"] == stat_name:
 			bonus += active_buff["amount"]
 			
-		if stat_name == "attack" and active_buff["stat"] == "strength":
+		if stat_name == "attack" and active_buff["stat"] == "primary_stat":
 			bonus += active_buff["amount"]
 		elif stat_name == "defense" and active_buff["stat"] == "agility":
 			bonus += int(active_buff["amount"] / 2)
@@ -80,7 +89,14 @@ func apply_level_up(str_bonus: int, int_bonus: int, fai_bonus: int, agi_bonus: i
 	stats.faith += fai_bonus
 	stats.agility += agi_bonus
 	
-	stats.attack += str_bonus
+	var main_bonus = 0
+	match primary_stat:
+		"strength": main_bonus = str_bonus
+		"intelligence": main_bonus = int_bonus
+		"faith": main_bonus = fai_bonus
+		"agility": main_bonus = agi_bonus
+		
+	stats.attack += main_bonus
 	stats.defense += int(agi_bonus/2)
 	stats.max_hp += str_bonus
 	

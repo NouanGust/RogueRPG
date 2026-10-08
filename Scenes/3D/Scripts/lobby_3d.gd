@@ -81,22 +81,36 @@ func _update_main_ui_info() -> void:
 		if bonus_hp >= 0: hp_tooltip = "Base: %d | Modificador: +%d" % [base_hp, bonus_hp]
 		info_text += "[hint=%s][b]HP:[/b] %d/%d[/hint]\n" % [hp_tooltip, current_hp, max_hp]
 		
-		# --- DANO (ATAQUE) E DEFESA ---
-		var base_atk = GameState.selected_class.base_attack
+		
+		## --- DANO (ATAQUE) E DEFESA ---
+		# 1. Identifica o atributo principal da classe para o cálculo de Dano
+		var primary_stat = GameState.selected_class.main_attribute
+		var main_stat_value = attrs.get(primary_stat, 0)
+		var class_base_atk = GameState.selected_class.base_attack
+		var total_base_atk = class_base_atk + main_stat_value
+		
+		# 2. Identifica a agilidade para o cálculo de Defesa
+		var agi_value = attrs.get("agility", 0)
+		var class_base_def = GameState.selected_class.base_defense
+		var total_base_def = class_base_def + int(agi_value / 2)
+		
 		var mod_atk = 0
-		var base_def = GameState.selected_class.base_defense
 		var mod_def = 0
 		
 		if player_node.stats_component.has_method("get_modifier"):
 			mod_atk = player_node.stats_component.get_modifier("attack")
 			mod_def = player_node.stats_component.get_modifier("defense")
 			
-		var atk_tooltip = "Base: %d | Modificador: +%d" % [base_atk, mod_atk]
-		var def_tooltip = "Base: %d | Modificador: +%d" % [base_def, mod_def]
+		# Monta os tooltips detalhando a origem do poder
+		var stat_name_pt = primary_stat.capitalize() # Deixa a primeira letra maiúscula
+		var atk_tooltip = "Ataque da Classe: %d | Bónus (%s): +%d | Modificadores: %d" % [class_base_atk, stat_name_pt, main_stat_value, mod_atk]
+		if mod_atk > 0: atk_tooltip = "Ataque da Classe: %d | Bónus (%s): +%d | Modificadores: +%d" % [class_base_atk, stat_name_pt, main_stat_value, mod_atk]
 		
-		info_text += "[hint=%s][b]Dano:[/b] %d[/hint]\n" % [atk_tooltip, base_atk + mod_atk]
-		info_text += "[hint=%s][b]Defesa:[/b] %d[/hint]\n\n" % [def_tooltip, base_def + mod_def]
+		var def_tooltip = "Defesa da Classe: %d | Bónus (Agilidade): +%d | Modificadores: %d" % [class_base_def, int(agi_value / 2), mod_def]
+		if mod_def > 0: def_tooltip = "Defesa da Classe: %d | Bónus (Agilidade): +%d | Modificadores: +%d" % [class_base_def, int(agi_value / 2), mod_def]
 		
+		info_text += "[hint=%s][b]Dano:[/b] %d[/hint]\n" % [atk_tooltip, total_base_atk + mod_atk]
+		info_text += "[hint=%s][b]Defesa:[/b] %d[/hint]\n\n" % [def_tooltip, total_base_def + mod_def]
 		# --- ATRIBUTOS PRINCIPAIS ---
 		var stat_names = {
 			"strength": "Força",
