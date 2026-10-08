@@ -405,8 +405,16 @@ func _on_player_level_up(new_level: int) -> void:
 	if player_node.has_method("play_level_up_effect"):
 		player_node.play_level_up_effect()
 	
+	
+	if ui.has_method("show_level_up"):
+		# Usamos o 'await' falso (apenas chamando a função) para não travar o fluxo do jogo,
+		# mas deixar a interface a piscar na tela por cima de tudo.
+		ui.show_level_up(new_level, str_roll, int_roll, fai_roll, agi_roll)
+	
+	# 4. Mantém o registo no log para histórico
 	ui.log_str("[color=yellow]LEVEL UP! Você alcançou o Nível %d![/color]" % new_level)
-	ui.log_str("Atributos (d4) aumentaram: FOR+%d, INT+%d, FÉ+%d, AGI+%d" % [str_roll, int_roll, fai_roll, agi_roll])
+	ui.log_str("Atributos aumentaram: FOR+%d, INT+%d, FÉ+%d, AGI+%d" % [str_roll, int_roll, fai_roll, agi_roll])
+
 
 
 # --- Utils ---

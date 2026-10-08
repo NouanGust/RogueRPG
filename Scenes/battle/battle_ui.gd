@@ -24,6 +24,9 @@ signal loot_decision_made(decision: String, item: ItemData)
 @onready var backpack_button: Button = $LootPanel/MarginContainer/VBoxContainer/BagButton
 @onready var stash_button: Button = $LootPanel/MarginContainer/VBoxContainer/StashButton
 @onready var sell_button: Button = $LootPanel/MarginContainer/VBoxContainer/SellButton
+@onready var level_up_panel: Panel = $LevelUpPanel
+@onready var level_up_stats: Label = $LevelUpPanel/VBoxContainer/StatsLabel
+@onready var level_up_title: Label = $LevelUpPanel/VBoxContainer/TitleLabel
 
 var controller
 var current_loot: ItemData
@@ -144,3 +147,19 @@ func set_enemy_bar_position(screen_pos: Vector2) -> void:
 
 func set_enemy_bar_visible(is_visible: bool) -> void:
 	enemy_hp_bar.visible = is_visible
+
+func show_level_up(new_level: int, str_val: int, int_val: int, fai_val: int, agi_val: int) -> void:
+	level_up_title.text = "LEVEL UP! Nível " + str(new_level)
+	level_up_stats.text = "FOR: +%d | INT: +%d\nFÉ: +%d | AGI: +%d" % [str_val, int_val, fai_val, agi_val]
+	
+	level_up_panel.scale = Vector2.ZERO
+	level_up_panel.show()
+	
+	# Animação de "Pop-up" (aumenta rápido, espera, diminui)
+	var tween = create_tween()
+	tween.tween_property(level_up_panel, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
+	tween.tween_interval(2.5) # Tempo para o jogador ler
+	tween.tween_property(level_up_panel, "scale", Vector2.ZERO, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
+	
+	await tween.finished
+	level_up_panel.hide()

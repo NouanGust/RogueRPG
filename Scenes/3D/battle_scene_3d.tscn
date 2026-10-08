@@ -89,6 +89,43 @@ transform = Transform3D(-0.31357816, 0, 0.9495624, 0, 1, 0, -0.9495624, 0, -0.31
 
 [node name="UILayer" parent="." unique_id=760799296 instance=ExtResource("3_sakwf")]
 
+[node name="LevelUpPanel" type="Panel" parent="UILayer/BattleUI" parent_id_path=PackedInt32Array(760799296, 2146490657) index="4" unique_id=278983770]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="UILayer/BattleUI/LevelUpPanel" unique_id=1641856913]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -71.0
+offset_top = -230.0
+offset_right = 71.0
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TitleLabel" type="Label" parent="UILayer/BattleUI/LevelUpPanel/VBoxContainer" unique_id=949851882]
+layout_mode = 2
+theme_override_font_sizes/font_size = 30
+text = "LEVEL UP!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="StatsLabel" type="Label" parent="UILayer/BattleUI/LevelUpPanel/VBoxContainer" unique_id=995336375]
+layout_mode = 2
+theme_override_font_sizes/font_size = 26
+text = "Stats"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [node name="DiceRoller" type="Node" parent="." unique_id=1341412926]
 script = ExtResource("21_e6731")
 metadata/_custom_type_script = "uid://8kwf686gj1kl"
