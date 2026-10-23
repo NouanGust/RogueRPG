@@ -1,3 +1,9 @@
 # Godot 4+ specific ignores
 .godot/
 /android/
+
+# Local regression output and future exports.
+.test-output/
+build/
+
+.agents

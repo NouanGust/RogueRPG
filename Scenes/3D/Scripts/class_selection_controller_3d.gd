@@ -20,9 +20,11 @@ func _ready() -> void:
 	confirm_button.mouse_entered.connect(_on_confirm_button_hovered)
 	confirm_button.disabled = true
 
-	if not GameState.run_active:
-		GameState.start_new_run()
+	_populate_classes()
 
+func prepare_selection() -> void:
+	selected_class = null
+	confirm_button.disabled = true
 	_populate_classes()
 
 func _populate_classes() -> void:
@@ -37,14 +39,13 @@ func _populate_classes() -> void:
 
 func _on_class_chosen(class_data: ClassData) -> void:
 	selected_class = class_data
-	GameState.set_selected_class(class_data)
 	confirm_button.disabled = false
 
 func _on_confirm_button_pressed() -> void:
 	if selected_class == null:
 		return
 	AudioManager.play_ui_click()
-
+	GameState.set_selected_class(selected_class)
 	class_confirmed.emit()
 
 func _on_confirm_button_hovered() -> void:

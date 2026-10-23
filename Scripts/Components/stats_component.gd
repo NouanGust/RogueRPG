@@ -22,27 +22,28 @@ var active_buff := {
 }
 
 var primary_stat: String
+var base_attack: int = 0
+var base_defense: int = 0
+var base_hp: int = 1
 
 func setup_from_class(class_data: ClassData, rolled_atributes: Dictionary) -> void:
 	primary_stat = class_data.main_attribute
+	base_attack = class_data.base_attack
+	base_defense = class_data.base_defense
+	base_hp = class_data.base_hp
+	active_buff = {"stat": "", "amount": 0, "turns": 0}
 	
 	stats.strength = rolled_atributes.get("strength", 0)
 	stats.intelligence = rolled_atributes.get("intelligence", 0)
 	stats.faith = rolled_atributes.get("faith", 0)
 	stats.agility = rolled_atributes.get("agility", 0)
 	
-	var main_stat_value = stats.get(primary_stat, 0)
-	stats.attack = class_data.base_attack + main_stat_value
-	
-	# --- LINHA DE TESTE (Adicione esta linha): ---
-	print(">>> SETUP DA CLASSE: ", class_data.display_name, " | Atributo Principal lido: ", primary_stat, " | Valor desse atributo: ", main_stat_value, " | Ataque Final: ", stats.attack)
-	
-	stats.defense = class_data.base_defense + int(stats.agility / 2)
-	stats.max_hp = class_data.base_hp + stats.strength
+	_recalculate_derived_stats()
 	stats_changed.emit(stats)
 
 
 func setup_from_enemy(enemy_data: EnemyData, rolled_value: int) -> void:
+	active_buff = {"stat": "", "amount": 0, "turns": 0}
 	stats.strength = rolled_value
 	stats.intelligence = rolled_value
 	stats.faith = rolled_value
@@ -70,18 +71,26 @@ func tick_buffs() -> void:
 
 func get_value(stat_name: String) -> int:
 	var base_value: int = stats.get(stat_name, 0)
+	return base_value + get_modifier(stat_name)
+
+func get_modifier(stat_name: String) -> int:
 	var bonus: int = 0
 	
 	if active_buff["turns"] > 0:
 		if active_buff["stat"] == stat_name:
 			bonus += active_buff["amount"]
 			
-		if stat_name == "attack" and active_buff["stat"] == "primary_stat":
+		if stat_name == "attack" and active_buff["stat"] in [primary_stat, "primary_stat"]:
 			bonus += active_buff["amount"]
 		elif stat_name == "defense" and active_buff["stat"] == "agility":
-			bonus += int(active_buff["amount"] / 2)
+			bonus += int((stats.agility + active_buff["amount"]) / 2) - int(stats.agility / 2)
 			
-	return base_value + bonus
+	return bonus
+
+func _recalculate_derived_stats() -> void:
+	stats.attack = base_attack + stats.get(primary_stat, 0)
+	stats.defense = base_defense + int(stats.agility / 2)
+	stats.max_hp = base_hp + stats.strength
 
 func apply_level_up(str_bonus: int, int_bonus: int, fai_bonus: int, agi_bonus: int) -> void:
 	stats.strength += str_bonus
@@ -89,15 +98,6 @@ func apply_level_up(str_bonus: int, int_bonus: int, fai_bonus: int, agi_bonus: i
 	stats.faith += fai_bonus
 	stats.agility += agi_bonus
 	
-	var main_bonus = 0
-	match primary_stat:
-		"strength": main_bonus = str_bonus
-		"intelligence": main_bonus = int_bonus
-		"faith": main_bonus = fai_bonus
-		"agility": main_bonus = agi_bonus
-		
-	stats.attack += main_bonus
-	stats.defense += int(agi_bonus/2)
-	stats.max_hp += str_bonus
+	_recalculate_derived_stats()
 	
 	stats_changed.emit(stats)

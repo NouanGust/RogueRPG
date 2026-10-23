@@ -31,19 +31,43 @@ extends Node3D
 
 @onready var player_node: PlayerActor3D = $PlayerActor3D
 var is_moving: bool = false
+var settings_ui: Control
+var settings_return_ui: Control
+var menu_back_button: Button
 
 func _ready() -> void:
 	
 	title_ui.new_game_requested.connect(_on_new_game_requested)
 	title_ui.load_game_requested.connect(_on_load_game_requested)
+	title_ui.config_requested.connect(_on_settings_requested)
 	creation_ui.class_confirmed.connect(_on_class_confirmed_in_lobby)
 	creation_ui.back_requested.connect(_on_class_back_requested)
 	roll_ui.roll_confirmed.connect(_on_roll_confirmed_in_lobby)
+	roll_ui.back_requested.connect(func(): _switch_ui(creation_ui))
 	save_ui.load_confirmed.connect(_on_save_selected_in_lobby)
 	save_ui.back_requested.connect(_on_load_back_requested)
 	battle_button.pressed.connect(_on_start_battle_pressed)
 	stash_button.pressed.connect(func(): move_to_station(pos_stash, stash_ui))
 	stash_back_button.pressed.connect(func(): move_to_station(pos_main, main_ui))
+	AudioManager.play_menu_music()
+	fade_sceen.hide()
+	settings_ui = preload("res://Scenes/main/SettingsScene.tscn").instantiate()
+	$UILayer.add_child(settings_ui)
+	settings_ui.hide()
+	settings_ui.back_requested.connect(func(): _switch_ui(settings_return_ui if settings_return_ui else title_ui))
+	var navigation := HBoxContainer.new()
+	navigation.position = Vector2(24, 24)
+	navigation.theme = preload("res://Scenes/ui/adventure_theme.tres")
+	navigation.add_theme_constant_override("separation", 12)
+	main_ui.add_child(navigation)
+	menu_back_button = Button.new()
+	menu_back_button.text = "← Voltar ao menu"
+	navigation.add_child(menu_back_button)
+	menu_back_button.pressed.connect(_return_to_title)
+	var config_button := Button.new()
+	config_button.text = "Configurações"
+	navigation.add_child(config_button)
+	config_button.pressed.connect(_on_settings_requested)
 	
 	if GameState.get("returning_from_battle"):
 		GameState.returning_from_battle = false
@@ -70,6 +94,7 @@ func _update_main_ui_info() -> void:
 		var current_level = GameState.current_level
 		
 		var info_text = "[b]Classe:[/b] %s (Nível %d)\n\n" % [char_class, current_level]
+		info_text += "[b]XP:[/b] %d / %d\n\n" % [GameState.current_xp, GameState.get_xp_required()]
 		
 		# --- HP ---
 		var current_hp = player_node.health_component.current_hp
@@ -150,7 +175,30 @@ func _play_intro() -> void:
 	fade_sceen.hide()
 
 func _on_new_game_requested() -> void:
-	move_to_station(pos_creation, creation_ui)
+	_on_load_game_requested()
+	save_ui.new_profile_input.grab_focus()
+
+func _on_settings_requested() -> void:
+	settings_return_ui = main_ui if main_ui.visible else title_ui
+	_switch_ui(settings_ui)
+
+func _return_to_title() -> void:
+	if is_moving:
+		return
+	if GameState.can_enter_battle() and not SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes):
+		_show_save_error()
+		return
+	move_to_station(pos_main, title_ui)
+
+func _unhandled_input(event: InputEvent) -> void:
+	if is_moving or settings_ui.visible or not event.is_action_pressed("ui_cancel"):
+		return
+	if stash_ui.visible:
+		get_viewport().set_input_as_handled()
+		move_to_station(pos_main, main_ui)
+	elif main_ui.visible:
+		get_viewport().set_input_as_handled()
+		_return_to_title()
 
 
 func _on_load_game_requested() -> void:
@@ -171,10 +219,11 @@ func _on_class_confirmed_in_lobby() -> void:
 
 func _on_class_back_requested() -> void:
 	move_to_station(pos_main, title_ui)
-	_switch_ui(title_ui)
 
 func _on_save_selected_in_lobby(save_filename: String) -> void:
-	SaveManager.load_profile(save_filename) 
+	if not SaveManager.load_profile(save_filename):
+		save_ui.show_error(SaveManager.last_error)
+		return
 
 	if GameState.selected_class != null:
 		if player_node:
@@ -185,13 +234,19 @@ func _on_save_selected_in_lobby(save_filename: String) -> void:
 	
 		
 	else:
-		save_ui.hide()
+		GameState.start_new_run()
+		creation_ui.prepare_selection()
 		move_to_station(pos_creation, creation_ui)
 
 
 func _on_start_battle_pressed() -> void:
+	if not GameState.can_enter_battle():
+		return
 	AudioManager.play_ui_click()
-	SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes)
+	if not SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes):
+		_show_save_error()
+		return
+	GameState.encounters_won = 0
 	SceneTransition.change_scene("res://Scenes/3D/battle_scene_3d.tscn")
 
 func _handle_return_from_battle() -> void:
@@ -205,6 +260,8 @@ func _handle_return_from_battle() -> void:
 		_switch_ui(main_ui)
 	else:
 		if SaveManager.current_profile_name != "":
+			GameState.start_new_run()
+			creation_ui.prepare_selection()
 			_snap_camera_to(pos_creation)
 			_switch_ui(creation_ui)
 		else:
@@ -231,7 +288,9 @@ func _show_attribute_roll_ui() -> void:
 
 
 func _on_roll_confirmed_in_lobby() -> void:
-	SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes)
+	if not SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes):
+		_show_save_error()
+		return
 	if player_node:
 		player_node.show()
 		
@@ -263,6 +322,7 @@ func move_to_station(target_marker: Marker3D, target_ui: Control):
 
 
 func _switch_ui(active_ui: Control) -> void:
+	if settings_ui: settings_ui.hide()
 	if title_ui: title_ui.hide()
 	if stash_ui: stash_ui.hide()
 	if creation_ui: creation_ui.hide()
@@ -275,6 +335,15 @@ func _switch_ui(active_ui: Control) -> void:
 		active_ui.modulate.a = 1.0
 		if active_ui == main_ui:
 			_update_main_ui_info()
+		elif active_ui == stash_ui:
+			stash_ui.refresh_from_profile()
+
+func _show_save_error() -> void:
+	var dialog := AcceptDialog.new()
+	dialog.dialog_text = SaveManager.last_error
+	add_child(dialog)
+	dialog.confirmed.connect(dialog.queue_free)
+	dialog.popup_centered()
 
 
 func _snap_camera_to(marker: Marker3D) -> void:

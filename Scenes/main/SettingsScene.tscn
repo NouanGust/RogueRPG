@@ -1,82 +1,158 @@
 [gd_scene format=3 uid="uid://vb01rocv2w8o"]
+[ext_resource type="Script" path="res://settings_scene.gd" id="1"]
+[ext_resource type="Theme" path="res://Scenes/ui/adventure_theme.tres" id="2"]
 
-[ext_resource type="Script" uid="uid://cmnmh6fan7ydo" path="res://settings_scene.gd" id="1_4vkru"]
-[ext_resource type="Texture2D" uid="uid://cvht7u6nyb3cw" path="res://Assets/UI/simple2.png" id="2_hncxw"]
-[ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="3_sj2cx"]
-[ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="4_l67mf"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_f2xt6"]
-texture = ExtResource("2_hncxw")
-texture_margin_left = 32.0
-texture_margin_top = 32.0
-texture_margin_right = 32.0
-texture_margin_bottom = 32.0
-
-[node name="Control" type="Control" unique_id=37602043]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_4vkru")
-
-[node name="PanelContainer" type="PanelContainer" parent="." unique_id=2003434955]
+[node name="Settings" type="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_f2xt6")
+theme = ExtResource("2")
+script = ExtResource("1")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1358432763]
+[node name="Shade" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+color = Color(0.01, 0.025, 0.025, 0.2)
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=965490336]
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_constants/separation = 30
-alignment = 1
+[node name="Panel" type="PanelContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.54
+anchor_top = 0.1
+anchor_right = 0.94
+anchor_bottom = 0.9
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=114343027]
+[node name="VBox" type="VBoxContainer" parent="Panel"]
 layout_mode = 2
-text = "GERAL"
+theme_override_constants/separation = 20
 
-[node name="MasterSlider" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=1367663919]
+[node name="Eyebrow" type="Label" parent="Panel/VBox"]
 layout_mode = 2
+text = "ROGUERPG  /  ACAMPAMENTO"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.82, 0.65, 0.38, 1)
+
+[node name="Title" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Configurações"
+theme_override_font_sizes/font_size = 32
+
+[node name="Subtitle" type="Label" parent="Panel/VBox"]
+layout_mode = 2
+text = "Encontre o som da sua aventura."
+theme_override_font_sizes/font_size = 16
+
+[node name="Separator" type="HSeparator" parent="Panel/VBox"]
+layout_mode = 2
+
+[node name="Master" type="VBoxContainer" parent="Panel/VBox"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Heading" type="HBoxContainer" parent="Panel/VBox/Master"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Panel/VBox/Master/Heading"]
+layout_mode = 2
+text = "Volume geral"
+theme_override_font_sizes/font_size = 18
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="Panel/VBox/Master/Heading"]
+layout_mode = 2
+text = "100%"
+theme_override_font_sizes/font_size = 18
+custom_minimum_size = Vector2(55, 0)
+horizontal_alignment = 2
+
+[node name="Slider" type="HSlider" parent="Panel/VBox/Master"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 28)
 max_value = 1.0
-step = 0.05
+step = 0.01
 
-[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer" unique_id=448340028]
+[node name="Hint" type="Label" parent="Panel/VBox/Master"]
 layout_mode = 2
-text = "MÚSICA"
+text = "Todo o áudio do jogo"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.67, 0.74, 0.68, 1)
 
-[node name="MusicSlider" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=194446625]
+[node name="Music" type="VBoxContainer" parent="Panel/VBox"]
 layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Heading" type="HBoxContainer" parent="Panel/VBox/Music"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Panel/VBox/Music/Heading"]
+layout_mode = 2
+text = "Música"
+theme_override_font_sizes/font_size = 18
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="Panel/VBox/Music/Heading"]
+layout_mode = 2
+text = "100%"
+theme_override_font_sizes/font_size = 18
+custom_minimum_size = Vector2(55, 0)
+horizontal_alignment = 2
+
+[node name="Slider" type="HSlider" parent="Panel/VBox/Music"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 28)
 max_value = 1.0
-step = 0.05
+step = 0.01
 
-[node name="Label3" type="Label" parent="MarginContainer/VBoxContainer" unique_id=821640900]
+[node name="Hint" type="Label" parent="Panel/VBox/Music"]
 layout_mode = 2
-text = "SFX"
+text = "Trilha do acampamento e da jornada"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.67, 0.74, 0.68, 1)
 
-[node name="SFXSlider" type="HSlider" parent="MarginContainer/VBoxContainer" unique_id=434478974]
+[node name="SFX" type="VBoxContainer" parent="Panel/VBox"]
 layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="Heading" type="HBoxContainer" parent="Panel/VBox/SFX"]
+layout_mode = 2
+
+[node name="Name" type="Label" parent="Panel/VBox/SFX/Heading"]
+layout_mode = 2
+text = "Efeitos"
+theme_override_font_sizes/font_size = 18
+size_flags_horizontal = 3
+
+[node name="Value" type="Label" parent="Panel/VBox/SFX/Heading"]
+layout_mode = 2
+text = "100%"
+theme_override_font_sizes/font_size = 18
+custom_minimum_size = Vector2(55, 0)
+horizontal_alignment = 2
+
+[node name="Slider" type="HSlider" parent="Panel/VBox/SFX"]
+layout_mode = 2
+custom_minimum_size = Vector2(0, 28)
 max_value = 1.0
-step = 0.05
+step = 0.01
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1301778303]
+[node name="Hint" type="Label" parent="Panel/VBox/SFX"]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("3_sj2cx")
-theme_override_styles/hover_pressed = ExtResource("4_l67mf")
-text = "VOLTAR"
+text = "Ataques, dados e interface"
+theme_override_font_sizes/font_size = 13
+theme_override_colors/font_color = Color(0.67, 0.74, 0.68, 1)
+
+[node name="Spacer" type="Control" parent="Panel/VBox"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Back" type="Button" parent="Panel/VBox"]
+layout_mode = 2
+text = "← Voltar"
+custom_minimum_size = Vector2(0, 48)

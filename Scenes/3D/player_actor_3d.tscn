@@ -11,6 +11,7 @@
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_evjeu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_evjeu"]
+resource_local_to_scene = true
 shader = ExtResource("3_ofp8x")
 shader_parameter/dissolve_noise = SubResource("NoiseTexture2D_evjeu")
 shader_parameter/dissolve_amount = 0.0

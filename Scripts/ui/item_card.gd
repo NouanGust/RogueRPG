@@ -1,10 +1,10 @@
 class_name ItemCard
 extends PanelContainer
 
-@onready var item_icon: TextureRect = $MarginContainer/VBoxContainer/ItemIcon
-@onready var name_label: Label = $MarginContainer/VBoxContainer/NameLabel
-@onready var desc_label: Label = $MarginContainer/VBoxContainer/DescLabel
-@onready var buy_button: Button = $MarginContainer/VBoxContainer/BuyButton
+@onready var item_icon: TextureRect = $Row/ItemIcon
+@onready var name_label: Label = $Row/Info/NameLabel
+@onready var desc_label: Label = $Row/Info/DescLabel
+@onready var buy_button: Button = $Row/BuyButton
 
 var current_item: ItemData
 var shop_reference: CampController

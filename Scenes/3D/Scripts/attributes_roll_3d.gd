@@ -2,6 +2,7 @@ class_name AttributeRoll3D
 extends Control
 
 signal roll_confirmed
+signal back_requested
 
 @export var visual_dice: AnimatedSprite2D
 
@@ -41,223 +42,94 @@ var rolled_attributes := {
 }
 
 func _ready() -> void:
-	visual_dice.visible = false
-	
-	#_setup_ui()
-	_connect_buttons()
+	visual_dice.hide()
+	test_3d_button.hide()
+	back_button.pressed.connect(func():
+		if not is_rolling:
+			back_requested.emit())
+	roll_all_button.pressed.connect(_on_roll_all_button_pressed)
+	confirm_button.pressed.connect(_on_confirm_button_pressed)
+	strength_roll_button.pressed.connect(_roll_single.bind("strength"))
+	intelligence_roll_button.pressed.connect(_roll_single.bind("intelligence"))
+	faith_roll_button.pressed.connect(_roll_single.bind("faith"))
+	agility_roll_button.pressed.connect(_roll_single.bind("agility"))
 	_update_button_states()
 
-func _setup_ui() -> void:
+func prepare_roll() -> void:
+	selected_class = GameState.selected_class
+	if selected_class == null:
+		return
+	rolled_attributes = {"strength": null, "intelligence": null, "faith": null, "agility": null}
+	is_rolling = false
+	has_general_reroll = true
 	selected_class_label.text = "Classe escolhida: %s" % selected_class.display_name
-
 	strength_dice_label.text = "Dado: d%d" % selected_class.strength_dice
 	intelligence_dice_label.text = "Dado: d%d" % selected_class.intelligence_dice
 	faith_dice_label.text = "Dado: d%d" % selected_class.faith_dice
 	agility_dice_label.text = "Dado: d%d" % selected_class.agility_dice
+	_refresh_values()
+	_update_button_states()
 
-	_reset_value_labels()
-	confirm_button.disabled = true
-
-func prepare_roll() -> void:
-	if GameState.selected_class == null:
-		push_error("Tentou iniciar rolagem sem classe definida!")
+func _roll_single(attribute: String) -> void:
+	if is_rolling or selected_class == null or rolled_attributes[attribute] != null:
 		return
-
-	selected_class = GameState.selected_class
-	
-	rolled_attributes = {"strength": null, "intelligence": null, "faith": null, "agility": null}
+	is_rolling = true
+	_update_button_states()
+	await _roll_attribute(attribute)
 	is_rolling = false
-	has_general_reroll = true
-	
-	_setup_ui()
 	_update_button_states()
 
-func _connect_buttons() -> void:
-	back_button.pressed.connect(_on_back_button_pressed)
-	roll_all_button.pressed.connect(_on_roll_all_button_pressed)
-	back_button.mouse_entered.connect(_on_back_button_hovered)
-	roll_all_button.mouse_entered.connect(_on_roll_all_button_hovered)
-	confirm_button.pressed.connect(_on_confirm_button_pressed)
-	confirm_button.mouse_entered.connect(_on_confirm_button_hovered)
-	test_3d_button.pressed.connect(_on_test_3d_pressed)
-
-	strength_roll_button.pressed.connect(_on_strength_roll_button_pressed)
-	intelligence_roll_button.pressed.connect(_on_intelligence_roll_button_pressed)
-	faith_roll_button.pressed.connect(_on_faith_roll_button_pressed)
-	agility_roll_button.pressed.connect(_on_agility_roll_button_pressed)
-	strength_roll_button.mouse_entered.connect(_on_strength_roll_button_hovered)
-	intelligence_roll_button.mouse_entered.connect(_on_intelligence_roll_button_hovered)
-	faith_roll_button.mouse_entered.connect(_on_faith_roll_button_hovered)
-	agility_roll_button.mouse_entered.connect(_on_agility_roll_button_hovered)
-
-func _reset_value_labels() -> void:
-	strength_value_label.text = "-"
-	intelligence_value_label.text = "-"
-	faith_value_label.text = "-"
-	agility_value_label.text = "-"
-
-func _roll_die(sides: int) -> int:
-	return randi_range(1, max(1, sides))
-
-func _update_confirm_state() -> void:
-	confirm_button.disabled = (
-		rolled_attributes["strength"] == null
-		or rolled_attributes["intelligence"] == null
-		or rolled_attributes["faith"] == null
-		or rolled_attributes["agility"] == null
-	)
-
-#================================
-# Botões de atributos
-#================================
-
-func _on_strength_roll_button_pressed() -> void:
+func _roll_attribute(attribute: String) -> void:
+	var sides: int = selected_class.get(attribute + "_dice")
+	var result := randi_range(1, maxi(1, sides))
 	AudioManager.play_single_dice()
-	var result = await _roll_die(selected_class.strength_dice)
-	visual_dice.visible = true
+	visual_dice.show()
 	visual_dice.play_animation(result)
 	await visual_dice.animation_finished
-	visual_dice.visible = false
-	rolled_attributes["strength"] = result
-	strength_value_label.text = str(result)
-	_update_button_states()
+	visual_dice.hide()
+	rolled_attributes[attribute] = result
+	_refresh_values()
 
-func _on_strength_roll_button_hovered() -> void:
-	AudioManager.play_ui_hover()
-
-func _on_intelligence_roll_button_pressed() -> void:
-	AudioManager.play_single_dice()
-	var result = await _roll_die(selected_class.intelligence_dice)
-	visual_dice.visible = true
-	visual_dice.play_animation(result)
-	await visual_dice.animation_finished
-	visual_dice.visible = false
-	rolled_attributes["intelligence"] = result
-	intelligence_value_label.text = str(result)
-	_update_button_states()
-
-func _on_intelligence_roll_button_hovered() -> void:
-	AudioManager.play_ui_hover()
-
-func _on_faith_roll_button_pressed() -> void:
-	AudioManager.play_single_dice()
-	var result = await _roll_die(selected_class.faith_dice)
-	visual_dice.visible = true
-	visual_dice.play_animation(result)
-	await visual_dice.animation_finished
-	visual_dice.visible = false
-	rolled_attributes["faith"] = result
-	faith_value_label.text = str(result)
-	_update_button_states()
-
-func _on_faith_roll_button_hovered() -> void:
-	AudioManager.play_ui_hover()
-
-func _on_agility_roll_button_pressed() -> void:
-	AudioManager.play_single_dice()
-	var result = await _roll_die(selected_class.agility_dice)
-	visual_dice.visible = true
-	visual_dice.play_animation(result)
-	await visual_dice.animation_finished
-	visual_dice.visible = false
-	rolled_attributes["agility"] = result
-	agility_value_label.text = str(result)
-	_update_button_states()
-	
-func _on_agility_roll_button_hovered() -> void:
-	AudioManager.play_ui_hover()
+func _all_rolled() -> bool:
+	return not rolled_attributes.values().has(null)
 
 func _on_roll_all_button_pressed() -> void:
-	#AudioManager.play_multi_dice()
-	if roll_all_button.text == "Rerrolagem Geral (1)":
+	if is_rolling or selected_class == null:
+		return
+	if _all_rolled():
+		if not has_general_reroll:
+			return
 		has_general_reroll = false
-		_reset_value_labels()
-		
-		rolled_attributes = {"strength": null, "intelligence": null, "faith": null, "agility": null}
-		
-		if rolled_attributes["strength"] == null:
-			await _on_strength_roll_button_pressed() 
-		if rolled_attributes["intelligence"] == null:
-			await _on_intelligence_roll_button_pressed()
-		if rolled_attributes["faith"] == null:
-			await _on_faith_roll_button_pressed()
-		if rolled_attributes["agility"] == null:
-			await _on_agility_roll_button_pressed()
-	else:
-		_reset_value_labels()
-		await _on_strength_roll_button_pressed()
-		await _on_intelligence_roll_button_pressed()
-		await _on_faith_roll_button_pressed()
-		await _on_agility_roll_button_pressed()
-
-	
+		for attribute in rolled_attributes:
+			rolled_attributes[attribute] = null
+	is_rolling = true
+	_refresh_values()
+	_update_button_states()
+	for attribute in rolled_attributes:
+		if rolled_attributes[attribute] == null:
+			await _roll_attribute(attribute)
+	is_rolling = false
 	_update_button_states()
 
-func _on_roll_all_button_hovered() -> void:
-	AudioManager.play_ui_hover()
+func _refresh_values() -> void:
+	strength_value_label.text = str(rolled_attributes.strength) if rolled_attributes.strength != null else "-"
+	intelligence_value_label.text = str(rolled_attributes.intelligence) if rolled_attributes.intelligence != null else "-"
+	faith_value_label.text = str(rolled_attributes.faith) if rolled_attributes.faith != null else "-"
+	agility_value_label.text = str(rolled_attributes.agility) if rolled_attributes.agility != null else "-"
+
+func _update_button_states() -> void:
+	strength_roll_button.disabled = is_rolling or rolled_attributes.strength != null
+	intelligence_roll_button.disabled = is_rolling or rolled_attributes.intelligence != null
+	faith_roll_button.disabled = is_rolling or rolled_attributes.faith != null
+	agility_roll_button.disabled = is_rolling or rolled_attributes.agility != null
+	back_button.disabled = is_rolling
+	confirm_button.disabled = is_rolling or not _all_rolled()
+	roll_all_button.text = "Rerrolagem Geral (1)" if _all_rolled() else "Rolar Todos"
+	roll_all_button.disabled = is_rolling or (_all_rolled() and not has_general_reroll)
 
 func _on_confirm_button_pressed() -> void:
+	if is_rolling or not _all_rolled():
+		return
 	AudioManager.play_ui_click()
 	GameState.set_rolled_attributes(rolled_attributes)
 	roll_confirmed.emit()
-	
-	
-func _on_test_3d_pressed() -> void:
-	AudioManager.play_ui_click()
-	GameState.set_rolled_attributes(rolled_attributes)
-	SceneTransition.change_scene("res://Scenes/3D/battle_scene_3d.tscn")
-
-func _on_confirm_button_hovered() -> void:
-	AudioManager.play_ui_hover()
-
-func _on_back_button_pressed() -> void:
-	AudioManager.play_ui_cancel()
-	
-
-func _on_back_button_hovered() -> void:
-	AudioManager.play_ui_hover()
-
-func _update_button_states() -> void:
-	if is_rolling:
-		strength_roll_button.disabled = true
-		intelligence_roll_button.disabled = true
-		faith_roll_button.disabled = true
-		agility_roll_button.disabled = true
-		roll_all_button.disabled = true
-		confirm_button.disabled = true
-		return
-		
-	strength_roll_button.disabled = rolled_attributes["strength"] != null
-	intelligence_roll_button.disabled = rolled_attributes["intelligence"] != null
-	faith_roll_button.disabled = rolled_attributes["faith"] != null
-	agility_roll_button.disabled = rolled_attributes["agility"] != null
-	 
-	var all_rolled = (
-		rolled_attributes["strength"] != null and rolled_attributes["intelligence"] != null and rolled_attributes["faith"] != null and rolled_attributes["agility"] != null
-	)
-	
-	confirm_button.disabled = not all_rolled
-	test_3d_button.disabled = not all_rolled
-	
-	if all_rolled:
-		roll_all_button.text = "Rerrolagem Geral (1)"
-		roll_all_button.disabled = not has_general_reroll
-	else:
-		roll_all_button.text = "Rolar Todos"
-		roll_all_button.disabled = false
-
-
-func _do_visual_roll(dice_sides: int) -> int:
-	is_rolling = true
-	_update_button_states()
-	
-	var result := _roll_die(dice_sides)
-	visual_dice.animate_roll(dice_sides, result)
-	await visual_dice.roll_finished
-	
-	is_rolling = false
-	return result
-	
-	
-	
-	

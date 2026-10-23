@@ -1,190 +1,200 @@
 [gd_scene format=3 uid="uid://dbqktapaen5q"]
+[ext_resource type="Script" path="res://Scripts/controllers/camp_controller.gd" id="1"]
+[ext_resource type="Theme" path="res://Scenes/ui/adventure_theme.tres" id="2"]
+[ext_resource type="Script" path="res://Scripts/resources/item_data.gd" id="3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Items/potion_small.tres" id="4"]
+[ext_resource type="Resource" path="res://Scripts/resources/Items/potion_medium.tres" id="5"]
+[ext_resource type="Resource" path="res://Scripts/resources/Items/strenght_elixir.tres" id="6"]
+[ext_resource type="PackedScene" path="res://Scenes/item_card.tscn" id="7"]
 
-[ext_resource type="Script" uid="uid://dkawiw15k03n3" path="res://Scripts/controllers/camp_controller.gd" id="1_da1cq"]
-[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="2_pgk6y"]
-[ext_resource type="Resource" uid="uid://bmvf1pobnagu4" path="res://Scripts/resources/Items/dice_6.tres" id="3_oe6bg"]
-[ext_resource type="Resource" uid="uid://b74gl4j2bp0rh" path="res://Scripts/resources/Items/dice_10.tres" id="4_rtroj"]
-[ext_resource type="Resource" uid="uid://dy1q6pm7xlu3s" path="res://Scripts/resources/Items/dice_20.tres" id="5_6vkrk"]
-[ext_resource type="Resource" uid="uid://bo830gfweoavh" path="res://Scripts/resources/Items/potion_medium.tres" id="6_fyq28"]
-[ext_resource type="Resource" uid="uid://yhexp7xptbop" path="res://Scripts/resources/Items/potion_small.tres" id="7_ou0is"]
-[ext_resource type="PackedScene" uid="uid://bs1pa3rcorq6k" path="res://Scenes/item_card.tscn" id="8_6atf5"]
-[ext_resource type="Resource" uid="uid://cgpcs6gynjckj" path="res://Scripts/resources/Items/strenght_elixir.tres" id="8_oe6bg"]
-[ext_resource type="Texture2D" uid="uid://cnnibj3taycqu" path="res://Assets/UI/GUI_4x.png" id="10_6vkrk"]
-[ext_resource type="Texture2D" uid="uid://dvos0q3d1hw3o" path="res://Assets/Items/Small Bottle - RED - 0000.png" id="10_rtroj"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oe6bg"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fyq28"]
-texture = ExtResource("10_6vkrk")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
-region_rect = Rect2(0, 0, 96, 96)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ou0is"]
-texture = ExtResource("10_6vkrk")
-region_rect = Rect2(100, 4, 88, 88)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6atf5"]
-texture = ExtResource("10_6vkrk")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
-region_rect = Rect2(384, 0, 96, 96)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_75g80"]
-texture = ExtResource("10_6vkrk")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
-region_rect = Rect2(416, 96, 32, 32)
-
-[node name="Camp" type="Control" unique_id=1886277990]
-layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_da1cq")
-all_items = Array[ExtResource("2_pgk6y")]([ExtResource("3_oe6bg"), ExtResource("4_rtroj"), ExtResource("5_6vkrk"), ExtResource("6_fyq28"), ExtResource("7_ou0is"), ExtResource("8_oe6bg")])
-item_card_scene = ExtResource("8_6atf5")
-
-[node name="Panel" type="Panel" parent="." unique_id=1525156225]
+[node name="Camp" type="Control"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_oe6bg")
+theme = ExtResource("2")
+script = ExtResource("1")
+all_items = Array[ExtResource("3")]([ExtResource("4"), ExtResource("5"), ExtResource("6")])
+item_card_scene = ExtResource("7")
 
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=401999161]
-custom_minimum_size = Vector2(400, 300)
+[node name="Shade" type="ColorRect" parent="."]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+color = Color(0.015, 0.025, 0.025, 0.32)
+mouse_filter = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=888460510]
-layout_mode = 2
-size_flags_vertical = 4
-alignment = 1
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchor_left = 0.04
+anchor_top = 0.05
+anchor_right = 0.96
+anchor_bottom = 0.95
 
-[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=34223340]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-alignment = 1
+theme_override_constants/separation = 14
 
-[node name="ProfileNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=9821723]
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Perfil: Nohan"
+theme_override_constants/separation = 24
 
-[node name="CoinsLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer" unique_id=1448314825]
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-text = "Moedas: 100"
+text = "PROVISÕES"
+theme_override_font_sizes/font_size = 30
+size_flags_horizontal = 3
 
-[node name="HSeparator" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1297401850]
+[node name="ProfileNameLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
+text = "Perfil"
+theme_override_font_sizes/font_size = 16
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=1439542863]
-custom_minimum_size = Vector2(0, 200)
+[node name="CoinsLabel" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-alignment = 1
+text = "0 moedas"
+theme_override_font_sizes/font_size = 22
+theme_override_colors/font_color = Color(0.93, 0.76, 0.43, 1)
 
-[node name="Shop" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1738155814]
-custom_minimum_size = Vector2(200, 0)
+[node name="Subtitle" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_fyq28")
+text = "Prepare a mochila antes de partir. O que ficar no baú estará esperando por você."
+theme_override_font_sizes/font_size = 16
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop" unique_id=1322769989]
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+theme_override_constants/separation = 18
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer" unique_id=1240522752]
+[node name="Shop" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
-size_flags_vertical = 0
-text = "LOJA"
-horizontal_alignment = 1
-vertical_alignment = 1
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1.5
+custom_minimum_size = Vector2(280, 0)
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer" unique_id=336305228]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop"]
 layout_mode = 2
-columns = 2
+theme_override_constants/separation = 14
 
-[node name="VSeparator" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=110000170]
-custom_minimum_size = Vector2(50, 0)
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer"]
 layout_mode = 2
+text = "MERCADOR"
+theme_override_font_sizes/font_size = 22
 
-[node name="Bag" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=1253661305]
-custom_minimum_size = Vector2(200, 0)
+[node name="Hint" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_ou0is")
+text = "Consumíveis para a próxima expedição."
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 2
+custom_minimum_size = Vector2(0, 36)
+theme_override_colors/font_color = Color(0.66, 0.73, 0.66, 1)
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag" unique_id=939962613]
+[node name="Scroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer"]
 layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
 
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer" unique_id=2098491903]
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer/Scroll"]
 layout_mode = 2
-size_flags_vertical = 0
+size_flags_horizontal = 3
+columns = 1
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
+
+[node name="Bag" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1
+custom_minimum_size = Vector2(280, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag"]
+layout_mode = 2
+theme_override_constants/separation = 14
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer"]
+layout_mode = 2
 text = "MOCHILA"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 22
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer" unique_id=1867560092]
+[node name="Hint" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+text = "Clique em um item para guardar no baú."
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 2
+custom_minimum_size = Vector2(0, 36)
+theme_override_colors/font_color = Color(0.66, 0.73, 0.66, 1)
+
+[node name="Scroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
 columns = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
 
-[node name="VSeparator2" type="VSeparator" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=724496127]
-custom_minimum_size = Vector2(50, 0)
+[node name="Stash" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
 layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 1
+custom_minimum_size = Vector2(280, 0)
 
-[node name="Stash" type="PanelContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2" unique_id=143864144]
-custom_minimum_size = Vector2(200, 0)
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash"]
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_6atf5")
+theme_override_constants/separation = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash" unique_id=490230715]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer"]
 layout_mode = 2
-
-[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer" unique_id=436811918]
-layout_mode = 2
-size_flags_vertical = 0
 text = "BAÚ"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 22
 
-[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer" unique_id=1641259838]
+[node name="Hint" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
+text = "Clique em um item para levar na mochila."
+theme_override_font_sizes/font_size = 14
+autowrap_mode = 2
+custom_minimum_size = Vector2(0, 36)
+theme_override_colors/font_color = Color(0.66, 0.73, 0.66, 1)
+
+[node name="Scroll" type="ScrollContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer/Scroll"]
+layout_mode = 2
+size_flags_horizontal = 3
 columns = 3
+theme_override_constants/h_separation = 12
+theme_override_constants/v_separation = 12
 
-[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer/GridContainer" unique_id=2132028987]
-custom_minimum_size = Vector2(40, 40)
+[node name="Status" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_75g80")
-icon = ExtResource("10_rtroj")
-icon_alignment = 1
-expand_icon = true
+text = "As compras vão para a mochila. Transfira itens para liberar espaço."
+theme_override_font_sizes/font_size = 14
+custom_minimum_size = Vector2(0, 24)
 
-[node name="HSeparator2" type="HSeparator" parent="MarginContainer/VBoxContainer" unique_id=1245226195]
+[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
+theme_override_constants/separation = 16
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="MarginContainer/VBoxContainer" unique_id=311269040]
+[node name="RerollShopButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
-alignment = 1
+text = "Renovar ofertas · 10 moedas"
 
-[node name="RerollShopButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=115810777]
+[node name="Spacer" type="Control" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
-text = "Reroll: 10 moedas"
+size_flags_horizontal = 3
 
-[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3" unique_id=170486455]
+[node name="StartButton" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer3"]
 layout_mode = 2
-text = "COMEÇAR"
+text = "← Voltar ao acampamento"
+custom_minimum_size = Vector2(260, 48)

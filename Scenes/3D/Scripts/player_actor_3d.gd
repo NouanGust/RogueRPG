@@ -25,6 +25,7 @@ func setup(actor_class: ClassData, rolled_atributtes: Dictionary) -> void:
 		push_error("PlayerActor.setup: class_data é nulo")
 		return
 	sprite.sprite_frames = class_data.sprite
+	_update_dissolve(0.0)
 	sprite.play("Idle")
 	stats_component.setup_from_class(class_data, rolled_atributtes)
 	health_component.setup(stats_component.get_value("max_hp"))

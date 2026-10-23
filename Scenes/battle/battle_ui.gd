@@ -25,14 +25,30 @@ signal loot_decision_made(decision: String, item: ItemData)
 @onready var stash_button: Button = $LootPanel/MarginContainer/VBoxContainer/StashButton
 @onready var sell_button: Button = $LootPanel/MarginContainer/VBoxContainer/SellButton
 @onready var item_sprite: TextureRect = $LootPanel/MarginContainer/VBoxContainer/ItemSprite
-@onready var level_up_panel: Panel = $LevelUpPanel
-@onready var level_up_stats: Label = $LevelUpPanel/VBoxContainer/StatsLabel
-@onready var level_up_title: Label = $LevelUpPanel/VBoxContainer/TitleLabel
+@onready var level_up_panel: Control = $LevelUpPanel
 
 var controller
 var current_loot: ItemData
+var camp_back_button: Button
+var progress_label: Label
 
 func _ready() -> void:
+	camp_back_button = Button.new()
+	camp_back_button.text = "← Voltar ao acampamento"
+	camp_back_button.position = Vector2(24, 76)
+	camp_back_button.theme = preload("res://Scenes/ui/adventure_theme.tres")
+	add_child(camp_back_button)
+	camp_back_button.hide()
+	camp_back_button.pressed.connect(func():
+		if controller.phase == controller.Phase.CAMP:
+			controller._finish_expedition()
+			controller.player_escape())
+	progress_label = Label.new()
+	progress_label.position = Vector2(24, 22)
+	progress_label.theme = preload("res://Scenes/ui/adventure_theme.tres")
+	add_child(progress_label)
+	GameState.xp_changed.connect(func(_xp: int): _update_progress())
+	_update_progress()
 	attack_button.pressed.connect(func(): attack_pressed.emit())
 	item_button.pressed.connect(_on_item_button_pressed)
 	escape_button.pressed.connect(func(): escape_pressed.emit())
@@ -133,8 +149,8 @@ func _on_battle_finished(player_won: bool) -> void:
 	escape_button.disabled = false
 	escape_button.text = "MENU"
 	if player_won:
-		title_label.text = "Vitória!"
-		log_str("A run foi concluída com sucesso. Clique em MENU para sair.")
+		title_label.text = "Expedição encerrada"
+		log_str("Você sobreviveu. Clique em MENU para retornar ao lobby.")
 	else:
 		title_label.text = "Derrota!"
 		log_str("Permadeath. A run terminou. Clique em MENU para sair.")
@@ -156,18 +172,10 @@ func set_enemy_bar_position(screen_pos: Vector2) -> void:
 func set_enemy_bar_visible(is_visible: bool) -> void:
 	enemy_hp_bar.visible = is_visible
 
-func show_level_up(new_level: int, str_val: int, int_val: int, fai_val: int, agi_val: int) -> void:
-	level_up_title.text = "LEVEL UP! Nível " + str(new_level)
-	level_up_stats.text = "FOR: +%d | INT: +%d\nFÉ: +%d | AGI: +%d" % [str_val, int_val, fai_val, agi_val]
-	
-	level_up_panel.scale = Vector2.ZERO
-	level_up_panel.show()
-	
-	# Animação de "Pop-up" (aumenta rápido, espera, diminui)
-	var tween = create_tween()
-	tween.tween_property(level_up_panel, "scale", Vector2.ONE, 0.4).set_trans(Tween.TRANS_ELASTIC).set_ease(Tween.EASE_OUT)
-	tween.tween_interval(2.5) # Tempo para o jogador ler
-	tween.tween_property(level_up_panel, "scale", Vector2.ZERO, 0.3).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_IN)
-	
-	await tween.finished
-	level_up_panel.hide()
+func show_level_up(growth: Dictionary) -> void:
+	loot_panel.hide()
+	inventory_panel.close_panel()
+	await level_up_panel.present(growth)
+
+func _update_progress() -> void:
+	progress_label.text = "Nível %d  ·  XP %d / %d" % [GameState.current_level, GameState.current_xp, GameState.get_xp_required()]

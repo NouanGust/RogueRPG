@@ -8,5 +8,5 @@ item_name = "D20"
 description = "Dado de 20 lados (uso único)"
 cost = 18
 item_type = "dice"
-effect_value = "20"
+effect_value = 20
 metadata/_custom_type_script = "uid://dclj8oiffd528"

@@ -1,5 +1,5 @@
 class_name VisualDice
-extends Node2D
+extends AnimatedSprite2D
 
 signal roll_finished
 
@@ -12,5 +12,6 @@ func _ready() -> void:
 	pass
 
 func play_animation(result: int) -> void:
+	animated_sprite.stop()
 	animated_sprite.play("result_%d" %result)
 	

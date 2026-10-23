@@ -1,55 +1,42 @@
 [gd_scene format=3 uid="uid://bs1pa3rcorq6k"]
+[ext_resource type="Script" path="res://Scripts/ui/item_card.gd" id="1"]
 
-[ext_resource type="Script" uid="uid://d3mkq5hj27lr3" path="res://Scripts/ui/item_card.gd" id="1_8m360"]
-[ext_resource type="Texture2D" uid="uid://c4a2dqx2ybdcf" path="res://Assets/UI/Cell01.png" id="1_fyp8p"]
-[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="2_fyp8p"]
+[node name="ItemCard" type="PanelContainer"]
+custom_minimum_size = Vector2(0, 108)
+size_flags_horizontal = 3
+script = ExtResource("1")
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_l8t4d"]
-texture = ExtResource("1_fyp8p")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
-
-[node name="ItemCard" type="PanelContainer" unique_id=756460846]
-offset_right = 40.0
-offset_bottom = 40.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_l8t4d")
-script = ExtResource("1_8m360")
-
-[node name="MarginContainer" type="MarginContainer" parent="." unique_id=1583511212]
+[node name="Row" type="HBoxContainer" parent="."]
 layout_mode = 2
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 5
-theme_override_constants/margin_right = 5
-theme_override_constants/margin_bottom = 5
+theme_override_constants/separation = 14
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer" unique_id=1970199760]
+[node name="ItemIcon" type="TextureRect" parent="Row"]
 layout_mode = 2
-
-[node name="ItemIcon" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=828345675]
-texture_filter = 1
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-texture = ExtResource("2_fyp8p")
+custom_minimum_size = Vector2(48, 64)
+expand_mode = 1
 stretch_mode = 5
+texture_filter = 1
 
-[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1575882376]
+[node name="Info" type="VBoxContainer" parent="Row"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 12
+size_flags_horizontal = 3
+theme_override_constants/separation = 6
+
+[node name="NameLabel" type="Label" parent="Row/Info"]
+layout_mode = 2
 text = "Poção"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DescLabel" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1783333148]
-custom_minimum_size = Vector2(60, 60)
-layout_mode = 2
-theme_override_font_sizes/font_size = 8
-text = "Poção que cura 5 de hp"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_font_sizes/font_size = 17
 autowrap_mode = 2
 
-[node name="BuyButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=453350559]
+[node name="DescLabel" type="Label" parent="Row/Info"]
 layout_mode = 2
-text = "Comprar"
+text = "Restaura vida."
+theme_override_font_sizes/font_size = 13
+autowrap_mode = 2
+theme_override_colors/font_color = Color(0.67, 0.74, 0.68, 1)
+
+[node name="BuyButton" type="Button" parent="Row"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "3 moedas"
+theme_override_font_sizes/font_size = 14

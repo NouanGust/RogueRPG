@@ -13,15 +13,23 @@
 [ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="9_w1iuc"]
 [ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="10_mow7t"]
 [ext_resource type="PackedScene" uid="uid://dbqktapaen5q" path="res://Scenes/main/camp.tscn" id="13_wimh0"]
+[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="14_65no0"]
 [ext_resource type="Script" uid="uid://cwb10gg46gxc8" path="res://Scenes/3D/Scripts/class_selection_controller_3d.gd" id="14_rlyvh"]
+[ext_resource type="Resource" uid="uid://bmvf1pobnagu4" path="res://Scripts/resources/Items/dice_6.tres" id="15_3lntg"]
 [ext_resource type="Script" uid="uid://dykg8obmcya8q" path="res://Scripts/resources/class_data.gd" id="15_ff6bx"]
+[ext_resource type="Resource" uid="uid://b74gl4j2bp0rh" path="res://Scripts/resources/Items/dice_10.tres" id="16_kjiec"]
 [ext_resource type="Resource" uid="uid://464nrwl5bdmt" path="res://Scripts/resources/Cleric.tres" id="16_l6ubl"]
 [ext_resource type="Resource" uid="uid://djde6f2om1shn" path="res://Scripts/resources/Mage.tres" id="17_d7b66"]
+[ext_resource type="Resource" uid="uid://dy1q6pm7xlu3s" path="res://Scripts/resources/Items/dice_20.tres" id="17_x6xk3"]
 [ext_resource type="Resource" uid="uid://bqq5xq0x0ap4b" path="res://Scripts/resources/Warrior.tres" id="18_8qwmk"]
+[ext_resource type="Resource" uid="uid://bo830gfweoavh" path="res://Scripts/resources/Items/potion_medium.tres" id="18_dvk2v"]
 [ext_resource type="PackedScene" uid="uid://dpp2bmi4k3s3o" path="res://Scenes/run/class_card.tscn" id="19_5hc7j"]
+[ext_resource type="Resource" uid="uid://yhexp7xptbop" path="res://Scripts/resources/Items/potion_small.tres" id="19_67uv8"]
+[ext_resource type="Resource" uid="uid://cgpcs6gynjckj" path="res://Scripts/resources/Items/strenght_elixir.tres" id="20_ldrhn"]
 [ext_resource type="StyleBox" uid="uid://deqy0stw5v850" path="res://Assets/Themes/confirm_button_disable.tres" id="21_4tnph"]
 [ext_resource type="Script" uid="uid://cgpf5dbvnueia" path="res://Scenes/3D/Scripts/attributes_roll_3d.gd" id="21_d7b66"]
 [ext_resource type="PackedScene" uid="uid://bl1ltw2q8a00m" path="res://Scenes/run/dice_visual.tscn" id="22_l6ubl"]
+[ext_resource type="Texture2D" uid="uid://dvos0q3d1hw3o" path="res://Assets/Items/Small Bottle - RED - 0000.png" id="22_xtjg4"]
 [ext_resource type="Texture2D" uid="uid://br4nmej8jgch1" path="res://Assets/UI/panel-border-003.png" id="23_0iodb"]
 [ext_resource type="Texture2D" uid="uid://bk2fd1a1tnv88" path="res://Assets/UI/dice-solid.png" id="23_d7b66"]
 [ext_resource type="Texture2D" uid="uid://c1mita4rr18lv" path="res://Assets/Images/UI/chest.png" id="25_1l5k2"]
@@ -55,6 +63,36 @@ albedo_texture = ExtResource("4_wimh0")
 [sub_resource type="PlaneMesh" id="PlaneMesh_mjxr5"]
 material = SubResource("StandardMaterial3D_qmoyw")
 size = Vector2(20, 20)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oe6bg"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fyq28"]
+texture = ExtResource("26_1l5k2")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(0, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ou0is"]
+texture = ExtResource("26_1l5k2")
+region_rect = Rect2(100, 4, 88, 88)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6atf5"]
+texture = ExtResource("26_1l5k2")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(384, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_75g80"]
+texture = ExtResource("26_1l5k2")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(416, 96, 32, 32)
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bcmnq"]
 bg_color = Color(1, 1, 1, 0)
@@ -103,9 +141,6 @@ texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 region_rect = Rect2(384, 0, 96, 96)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4tnph"]
-bg_color = Color(0, 0, 0, 1)
 
 [node name="Lobby3D" type="Node3D" unique_id=1513798651]
 script = ExtResource("1_fdmty")
@@ -238,15 +273,132 @@ text = "0.1.0 beta"
 
 [node name="StashUI" parent="UILayer" unique_id=1886277990 instance=ExtResource("13_wimh0")]
 visible = false
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+theme = null
+all_items = Array[ExtResource("14_65no0")]([ExtResource("15_3lntg"), ExtResource("16_kjiec"), ExtResource("17_x6xk3"), ExtResource("18_dvk2v"), ExtResource("19_67uv8"), ExtResource("20_ldrhn")])
 
 [node name="Panel" parent="UILayer/StashUI" index="0" unique_id=1525156225]
-visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxEmpty_oe6bg")
 
-[node name="VBoxContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Stash" parent_id_path=PackedInt32Array(1886277990, 143864144) index="0" unique_id=490230715]
-theme_override_constants/separation = 10
+[node name="MarginContainer" parent="UILayer/StashUI" index="1" unique_id=401999161]
+custom_minimum_size = Vector2(400, 300)
+anchors_preset = 15
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="StartButton" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer3" parent_id_path=PackedInt32Array(1886277990, 311269040) index="1" unique_id=170486455]
-text = "VOLTAR"
+[node name="VBoxContainer" parent="UILayer/StashUI/MarginContainer" index="0" unique_id=888460510]
+size_flags_vertical = 4
+alignment = 1
+
+[node name="HBoxContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="0" unique_id=34223340]
+alignment = 1
+
+[node name="ProfileNameLabel" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer" index="0" unique_id=9821723]
+text = "Perfil: Nohan"
+
+[node name="CoinsLabel" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1448314825]
+text = "Moedas: 100"
+
+[node name="HSeparator" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="1" unique_id=1297401850]
+layout_mode = 2
+
+[node name="HBoxContainer2" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="2" unique_id=1439542863]
+custom_minimum_size = Vector2(0, 200)
+size_flags_vertical = 1
+alignment = 1
+
+[node name="Shop" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="0" unique_id=1738155814]
+custom_minimum_size = Vector2(200, 0)
+size_flags_horizontal = 1
+size_flags_stretch_ratio = 1.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_fyq28")
+
+[node name="Label" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 1322769989) index="0" unique_id=1240522752]
+size_flags_vertical = 0
+text = "LOJA"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 1322769989) index="1" unique_id=336305228]
+layout_mode = 2
+columns = 2
+
+[node name="VSeparator" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="1" unique_id=110000170]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Bag" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="2" unique_id=1253661305]
+custom_minimum_size = Vector2(200, 0)
+size_flags_horizontal = 1
+size_flags_stretch_ratio = 1.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_ou0is")
+
+[node name="Label" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 939962613) index="0" unique_id=2098491903]
+size_flags_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 939962613) index="1" unique_id=1867560092]
+layout_mode = 2
+size_flags_horizontal = 4
+columns = 3
+
+[node name="VSeparator2" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="3" unique_id=724496127]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+
+[node name="Stash" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="4" unique_id=143864144]
+custom_minimum_size = Vector2(200, 0)
+size_flags_horizontal = 1
+size_flags_stretch_ratio = 1.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_6atf5")
+
+[node name="Label" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 490230715) index="0" unique_id=436811918]
+size_flags_vertical = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GridContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 490230715) index="1" unique_id=1641259838]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+columns = 3
+
+[node name="Button" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer/GridContainer" index="0" unique_id=2132028987]
+custom_minimum_size = Vector2(40, 40)
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxTexture_75g80")
+icon = ExtResource("22_xtjg4")
+icon_alignment = 1
+expand_icon = true
+
+[node name="HSeparator2" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="3" unique_id=1245226195]
+layout_mode = 2
+
+[node name="HBoxContainer3" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="4" unique_id=311269040]
+alignment = 1
+
+[node name="RerollShopButton" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer3" index="0" unique_id=115810777]
+text = "Reroll: 10 moedas"
+
+[node name="StartButton" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer3" index="1" unique_id=170486455]
+custom_minimum_size = Vector2(0, 0)
+text = "COMEÇAR"
 
 [node name="TransitionLayer" type="ColorRect" parent="UILayer" unique_id=1152259390]
 visible = false
@@ -712,7 +864,7 @@ theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
 text = "asndasndasndjsandjasndjsandjandjasndjanjdsndjansjdnajsdnasjdnajsdnajsdnjadnjandjasndjansjdnjasndjansjdnajsndjansdjnasjdnajsndjasndjanjdsnajdnajsndjandjsndajdnjsandjasndjasndjasndjasndjandjsandjasndajsndjasdnasjdnajsdnajdnajdnjandjsandjnajsdnajsndjansjdnajsndj"
 
-[node name="SaveUI" type="Control" parent="UILayer" unique_id=910259454]
+[node name="SaveUI" type="Control" parent="UILayer" unique_id=1429053585]
 visible = false
 layout_mode = 3
 anchors_preset = 15
@@ -722,88 +874,78 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("25_8qwmk")
 
-[node name="ColorRect" type="Panel" parent="UILayer/SaveUI" unique_id=2077534790]
-visible = false
+[node name="Panel" type="PanelContainer" parent="UILayer/SaveUI" unique_id=47470348]
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_4tnph")
-
-[node name="MarginContainer" type="MarginContainer" parent="UILayer/SaveUI" unique_id=1843580407]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/margin_left = 10
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 10
-theme_override_constants/margin_bottom = 10
-
-[node name="Label" type="Label" parent="UILayer/SaveUI/MarginContainer" unique_id=1243328302]
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_font_sizes/font_size = 44
-text = "SELECIONAR SAVE"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="ItemList" type="ItemList" parent="UILayer/SaveUI/MarginContainer" unique_id=1641793838]
-custom_minimum_size = Vector2(400, 300)
-layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/SaveUI/MarginContainer/ItemList" unique_id=293803277]
-layout_mode = 1
-anchors_preset = 7
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -73.0
-offset_top = -36.0
-offset_right = 73.0
-offset_bottom = -5.0
+anchor_bottom = 0.5
+offset_left = -330.0
+offset_top = -260.0
+offset_right = 330.0
+offset_bottom = 260.0
 grow_horizontal = 2
-grow_vertical = 0
-size_flags_horizontal = 0
-size_flags_vertical = 8
+grow_vertical = 2
 
-[node name="LoadButton" type="Button" parent="UILayer/SaveUI/MarginContainer/ItemList/HBoxContainer2" unique_id=1233557128]
+[node name="Margin" type="MarginContainer" parent="UILayer/SaveUI/Panel" unique_id=1135766679]
 layout_mode = 2
-text = "Carregar"
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
-[node name="DeleteButton" type="Button" parent="UILayer/SaveUI/MarginContainer/ItemList/HBoxContainer2" unique_id=1584775611]
+[node name="VBox" type="VBoxContainer" parent="UILayer/SaveUI/Panel/Margin" unique_id=1535419798]
 layout_mode = 2
-text = "Deletar"
+theme_override_constants/separation = 16
 
-[node name="Control" type="Control" parent="UILayer/SaveUI/MarginContainer" unique_id=1186978694]
-custom_minimum_size = Vector2(0, 50)
+[node name="Title" type="Label" parent="UILayer/SaveUI/Panel/Margin/VBox" unique_id=1263704562]
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 8
+theme_override_font_sizes/font_size = 30
+text = "PERFIS DE AVENTURA"
+horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="UILayer/SaveUI/MarginContainer" unique_id=288136390]
+[node name="Profiles" type="ItemList" parent="UILayer/SaveUI/Panel/Margin/VBox" unique_id=409693218]
+custom_minimum_size = Vector2(0, 220)
 layout_mode = 2
-size_flags_horizontal = 0
-size_flags_vertical = 4
+size_flags_vertical = 3
 
-[node name="NewProfileInput" type="LineEdit" parent="UILayer/SaveUI/MarginContainer/HBoxContainer" unique_id=1911618629]
-custom_minimum_size = Vector2(300, 0)
+[node name="CreateRow" type="HBoxContainer" parent="UILayer/SaveUI/Panel/Margin/VBox" unique_id=723866820]
 layout_mode = 2
-size_flags_vertical = 0
-placeholder_text = "Nome do jogador"
+
+[node name="Name" type="LineEdit" parent="UILayer/SaveUI/Panel/Margin/VBox/CreateRow" unique_id=1757064921]
+layout_mode = 2
+size_flags_horizontal = 3
+placeholder_text = "Nome do novo perfil"
+max_length = 40
+
+[node name="Create" type="Button" parent="UILayer/SaveUI/Panel/Margin/VBox/CreateRow" unique_id=463793189]
+layout_mode = 2
+text = "Criar e jogar"
+
+[node name="Status" type="Label" parent="UILayer/SaveUI/Panel/Margin/VBox" unique_id=91139128]
+custom_minimum_size = Vector2(0, 44)
+layout_mode = 2
+autowrap_mode = 2
+
+[node name="Actions" type="HBoxContainer" parent="UILayer/SaveUI/Panel/Margin/VBox" unique_id=202015750]
+layout_mode = 2
 alignment = 1
 
-[node name="CreateButton" type="Button" parent="UILayer/SaveUI/MarginContainer/HBoxContainer" unique_id=460230030]
+[node name="Load" type="Button" parent="UILayer/SaveUI/Panel/Margin/VBox/Actions" unique_id=2079479007]
 layout_mode = 2
-text = "CRIAR"
+text = "Continuar"
+
+[node name="Delete" type="Button" parent="UILayer/SaveUI/Panel/Margin/VBox/Actions" unique_id=133384388]
+layout_mode = 2
+text = "Excluir perfil"
+
+[node name="Back" type="Button" parent="UILayer/SaveUI/Panel/Margin/VBox/Actions" unique_id=666600264]
+layout_mode = 2
+text = "Voltar"
+
+[node name="DeleteConfirmation" type="ConfirmationDialog" parent="UILayer/SaveUI" unique_id=1667377081]
+title = "Excluir perfil"
 
 [node name="Models" type="Node3D" parent="." unique_id=51393943]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)

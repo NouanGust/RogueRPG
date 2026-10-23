@@ -1,6 +1,8 @@
 class_name GameStateClass
 extends Node
 
+const Progression = preload("res://Scripts/resources/progression_rules.gd")
+
 signal run_started
 signal run_reset
 signal class_selected(class_data: ClassData)
@@ -25,17 +27,16 @@ var returning_from_battle: bool = false
 var encounters_won: int = 0
 
 func start_new_run() -> void:
-	encounters_won = 0
-	selected_class = null
-	rolled_attributes = {}
-	current_enemy = null
-	current_level = 1
-	current_xp = 0
+	reset_run()
+	load_inventory_from_save()
 	run_active = true
 	run_started.emit()
 	
 
 func reset_run() -> void:
+	inventory.clear()
+	encounters_won = 0
+	returning_from_battle = false
 	selected_class = null
 	rolled_attributes = {}
 	current_enemy = null
@@ -48,7 +49,7 @@ func reset_run() -> void:
 
 func set_selected_class(value: ClassData) -> void:
 	selected_class = value
-	class_selected.emit(rolled_attributes)
+	class_selected.emit(selected_class)
 	
 
 func set_rolled_attributes(value: Dictionary) -> void:
@@ -61,17 +62,17 @@ func set_current_enemy(value: EnemyData) -> void:
 	enemy_selected.emit(current_enemy)
 	
 func add_xp(amount: int) -> void:
-	current_xp += amount
-	xp_changed.emit(current_xp)
+	current_xp += maxi(0, amount)
 	_check_level_up()
+	xp_changed.emit(current_xp)
 
 func _check_level_up() -> void:
-	var xp_required = current_level * 20
-	
-	if current_xp >= xp_required:
-		current_xp -= xp_required
+	while current_xp >= get_xp_required():
+		current_xp -= get_xp_required()
 		advance_level()
-		_check_level_up()
+
+func get_xp_required() -> int:
+	return Progression.xp_required(current_level)
 
 func advance_level() -> void:
 	current_level += 1
@@ -87,13 +88,16 @@ func has_selected_class() -> bool:
 
 
 func has_rolled_attributes() -> bool:
-	return not rolled_attributes.is_empty()
+	for key in ["strength", "intelligence", "faith", "agility"]:
+		if not rolled_attributes.get(key) is int or rolled_attributes[key] < 1:
+			return false
+	return true
 
 #func is_last_level() -> bool:
 	#return current_level >= MAX_LEVEL
 
 func can_enter_battle() -> bool:
-	return run_active and selected_class != null and not rolled_attributes.is_empty()
+	return run_active and selected_class != null and has_rolled_attributes() and SaveManager.current_profile_name != ""
 	
 
 
@@ -109,7 +113,7 @@ func has_inventory_space() -> bool:
 
 
 func add_item(item: ItemData) -> bool:
-	if has_inventory_space():
+	if item != null and has_inventory_space():
 		inventory.append(item)
 		sync_inventory_to_save()
 		return true

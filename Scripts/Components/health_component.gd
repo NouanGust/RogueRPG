@@ -13,6 +13,8 @@ func setup(value: int) -> void:
 	health_changed.emit(current_hp, max_hp)
 
 func take_damage(amount: int) -> void:
+	if current_hp <= 0 or amount <= 0:
+		return
 	current_hp = max(0, current_hp - amount)
 	health_changed.emit(current_hp, max_hp)
 	
@@ -21,6 +23,8 @@ func take_damage(amount: int) -> void:
 		
 
 func heal(amount:int) -> void:
+	if current_hp <= 0 or amount <= 0:
+		return
 	current_hp = min(max_hp, current_hp + amount)
 	health_changed.emit(current_hp, max_hp)
 	

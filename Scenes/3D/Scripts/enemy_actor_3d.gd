@@ -44,6 +44,8 @@ func play_dead(): play_anim("Dead")
 
 
 func _on_health_changed(_current: int, _maximum: int) -> void:
+	if _current <= 0:
+		return
 	play_hurt()
 	if anim_sprite.material_overlay != null:
 		anim_sprite.material_overlay.set_shader_parameter("active", true)
@@ -56,7 +58,7 @@ func _on_health_changed(_current: int, _maximum: int) -> void:
 	tween.tween_property(anim_sprite, "position:x", 0.0, 0.1).set_trans(Tween.TRANS_SPRING)
 
 func _on_animation_finished() -> void:
-	if anim_sprite.animation in["attack", "hurt"]:
+	if anim_sprite.animation in ["Attack", "Hurt"] and health_component.current_hp > 0:
 		play_idle()
 
 
