@@ -287,4 +287,6 @@ sprite_frames = SubResource("SpriteFrames_uqjh2")
 base_hp = 18
 base_attack = 2
 base_defense = 1
+attack_style = "melee"
+slash_palette = 0
 metadata/_custom_type_script = "uid://hcscc6dcxeho"

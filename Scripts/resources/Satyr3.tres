@@ -287,4 +287,6 @@ base_hp = 7
 base_attack = 2
 base_defense = 3
 xp_reward = 12
+attack_style = "melee"
+slash_palette = 3
 metadata/_custom_type_script = "uid://hcscc6dcxeho"

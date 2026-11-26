@@ -1,0 +1,34 @@
+[gd_scene format=3]
+
+[ext_resource type="Texture2D" path="res://Assets/2D/logs/trunk2.png" id="1_trunk"]
+[ext_resource type="Texture2D" path="res://Assets/2D/bushes/bush22.png" id="2_canopy1"]
+[ext_resource type="Texture2D" path="res://Assets/2D/bushes/bush23.png" id="3_canopy2"]
+
+[node name="Tree2DProp" type="Node3D"]
+
+[node name="Trunk" type="Sprite3D" parent="."]
+offset = Vector2(0, 40)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("1_trunk")
+
+[node name="CanopyMain" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55, 0.06)
+pixel_size = 0.055
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("2_canopy1")
+
+[node name="CanopySide" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 2.2, -0.05)
+pixel_size = 0.045
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("3_canopy2")

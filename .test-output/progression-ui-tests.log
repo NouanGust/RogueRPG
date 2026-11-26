@@ -1,0 +1,71 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+
+PASS: XP thresholds grow independently of rewards
+PASS: Enemy XP is not multiplied by player level
+PASS: Even high-level enemies award at most seven coins
+PASS: Two ordinary encounters no longer guarantee a level
+PASS: Multi-level XP preserves the correct remainder
+PASS: Warrior includes strength in attack
+PASS: Strength buff changes Warrior damage
+PASS: Agility buff crosses rounding boundary
+PASS: Buff expires
+PASS: Level-up and reloaded derived stats agree
+PASS: Death only emits once and healing cannot resurrect
+PASS: Create profile
+PASS: Duplicate names cannot overwrite a profile
+PASS: Duplicate creation preserves coins
+PASS: Reject profile path traversal
+PASS: Save a living character
+PASS: Save snapshot does not alias live attributes
+PASS: Reload profile
+PASS: Reload level, XP and backpack
+PASS: Invalid save leaves active profile intact
+PASS: Migrate earlier save keys
+PASS: Create isolated integration profile
+PASS: Game opens on 3D title menu
+PASS: Settings opens from title
+PASS: New game requires a profile
+PASS: Create profile opens class selection
+PASS: Roll animation locks conflicting controls
+PASS: Roll all attributes completes
+PASS: Every attribute has a value
+PASS: Character reaches lobby ready for combat
+PASS: Transfer backpack to stash
+PASS: Transfer stash to backpack
+PASS: Shop purchase succeeds
+PASS: Purchase persists coins and item together
+PASS: Enter battle through lobby button
+PASS: Enemy entrance finishes before actions unlock
+PASS: Full-health potion is not consumed
+PASS: Potion consumes one item and enemy turn returns control
+PASS: Enemy attack deals damage after item use
+PASS: Unimplemented item cannot consume itself or a turn
+PASS: First reward resolves and next enemy arrives
+PASS: Rapid attacks produce one victory and reward
+PASS: Encounter 2 completes
+PASS: Encounter 3 completes
+PASS: Encounter 4 completes
+PASS: Encounter 5 completes
+PASS: Combat grants XP and levels
+PASS: Level-up waits for confirmation without overlapping loot
+PASS: Camp exposes a dedicated return button
+PASS: Fifth victory opens safe camp
+PASS: Advance leaves camp for sixth encounter
+PASS: Enemy becomes visible again after camp
+PASS: Loot choice advances once
+PASS: Duplicate loot choice cannot pay twice
+PASS: Safe return ends expedition
+PASS: Return to 3D lobby
+PASS: Safe return preserves level and XP
+PASS: Reload rewarded character
+PASS: Saved rewards survive reload
+PASS: Re-enter expedition
+PASS: Re-entered battle is ready
+PASS: Death clears save before animation completes
+PASS: Death resets character level and XP
+PASS: Reload after death cannot resurrect character
+PASS: Death preserves coins and permanent backpack upgrade
+PASS: Death returns to character creation
+PASS: Next character starts at level one
+PASS: New player instance does not inherit death dissolve
+RESULT: 68 checks, 0 failures

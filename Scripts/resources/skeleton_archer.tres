@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://cp5iajn1ufxcd" path="res://Assets/Images/Skeleton_Archer/Hurt.png" id="4_mft8e"]
 [ext_resource type="Texture2D" uid="uid://c2t62q5gfs6cl" path="res://Assets/Images/Skeleton_Archer/Idle.png" id="5_6cqs6"]
 [ext_resource type="Texture2D" uid="uid://du03xvjn1nvj4" path="res://Assets/Images/Skeleton_Archer/Walk.png" id="6_r3bon"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Skeleton_Archer/Arrow.png" id="7_proj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dyn76"]
 atlas = ExtResource("2_ohvpj")
@@ -303,4 +304,12 @@ base_hp = 8
 base_attack = 4
 base_defense = 2
 xp_reward = 12
+attack_style = "ranged"
+projectile_texture = ExtResource("7_proj")
+projectile_frame_size = Vector2i(48, 48)
+projectile_flight_frames = 1
+projectile_impact_frames = 0
+projectile_speed = 11.0
+projectile_arc_height = 0.3
+projectile_color = Color(1, 1, 1, 1)
 metadata/_custom_type_script = "uid://hcscc6dcxeho"

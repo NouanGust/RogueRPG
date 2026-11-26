@@ -1,0 +1,448 @@
+Godot Engine v4.6.3.stable.official.7d41c59c4 - https://godotengine.org
+TextServer: Added interface "Dummy"
+TextServer: Added interface "ICU / HarfBuzz / Graphite (Built-in)"
+Unrecognized output string "misc2" in mapping:
+030000008a2e0000dd10000000000000,Hand Held Legend GC Ultimate,a:b0,b:b2,back:b17,dpdown:b5,dpleft:b6,dpright:b7,dpup:b4,guide:b18,leftshoulder:b10,leftstick:b8,lefttrigger:a3,leftx:a0,lefty:a1,misc1:b19,misc2:b24,paddle1:b13,paddle2:b12,rightshoulder:b11,rightstick:b9,righttrigger:a4,rightx:a2,righty:a5,start:b16,x:b1,y:b3,platform:Windows,
+Unrecognized output string "misc2" in mapping:
+030000000d0f00000202000000000000,Horipad O Nintendo Switch 2 Controller,a:b1,b:b0,back:b8,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b12,leftshoulder:b4,leftstick:b10,lefttrigger:b6,leftx:a0,lefty:a1,misc1:b13,misc2:b14,rightshoulder:b5,rightstick:b11,righttrigger:b7,rightx:a2,righty:a3,start:b9,x:b3,y:b2,platform:Windows,
+Unrecognized output string "misc2" in mapping:
+030000000d0f00009601000000000000,Horipad Steam,a:b0,b:b1,back:b10,dpdown:h0.4,dpleft:h0.8,dpright:h0.2,dpup:h0.1,guide:b12,leftshoulder:b6,leftstick:b13,lefttrigger:b8,leftx:a0,lefty:a1,misc2:b2,paddle1:b5,paddle2:b15,paddle3:b18,paddle4:b19,rightshoulder:b7,rightstick:b14,righttrigger:b9,rightx:a3,righty:a4,start:b11,x:b3,y:b4,platform:Windows,
+Unrecognized output string "misc2" in mapping:
+030000007e0500006920000000000000,Nintendo Switch 2 Pro Controller,a:b0,b:b1,back:b14,dpdown:b8,dpleft:b10,dpright:b9,dpup:b11,guide:b16,leftshoulder:b12,leftstick:b15,lefttrigger:b13,leftx:a0,lefty:a1~,misc1:b17,misc2:b20,paddle1:b18,paddle2:b19,rightshoulder:b4,rightstick:b7,righttrigger:b5,rightx:a2,righty:a3~,start:b6,x:b2,y:b3,platform:Windows,
+Using "default" pen tablet driver...
+
+TextServer: Primary interface set to: "ICU / HarfBuzz / Graphite (Built-in)".
+Loading resource: res://default_bus_layout.tres
+CORE API HASH: 2475187701
+EDITOR API HASH: 3867286884
+SceneTreeFTI: traversal method DEFAULT
+Loading resource: res://Scripts/controllers/game_state.gd
+Loading resource: res://SceneTransition.tscn
+Loading resource: res://scene_transition.gd
+Loading resource: res://Scripts/globals/audio_manager.tscn
+Loading resource: res://Scripts/globals/audio_manager.gd
+Loading resource: res://Assets/Music/SFX/UI_click.mp3
+Loading resource: res://.godot/imported/UI_click.mp3-1c379d861ca968a68c31e03d567bd994.mp3str
+Loading resource: res://Assets/Music/MenuTheme.mp3
+Loading resource: res://.godot/imported/MenuTheme.mp3-766dec41c276e1c0a6cd1d431e235975.mp3str
+Loading resource: res://Assets/Music/SFX/UI_hover.mp3
+Loading resource: res://.godot/imported/UI_hover.mp3-51a3a8a8a0e3c84e1098bceafee07f84.mp3str
+Loading resource: res://Assets/Music/SFX/single_dice.mp3
+Loading resource: res://.godot/imported/single_dice.mp3-ce600be16c31d592d65de33f3d293b04.mp3str
+Loading resource: res://Assets/Music/SFX/UI_cancel.wav
+Loading resource: res://.godot/imported/UI_cancel.wav-87958c8e4f7240258a87cb716f173644.sample
+Loading resource: res://Assets/Music/SFX/UI_choose.wav
+Loading resource: res://.godot/imported/UI_choose.wav-525f176184d6af250560895f81187397.sample
+Loading resource: res://Assets/Music/SFX/multi_dice.mp3
+Loading resource: res://.godot/imported/multi_dice.mp3-6135d1b608ef30dd02b98e44dbea51d3.mp3str
+Loaded system CA certificates
+Loading resource: res://Tests/run_tests.tscn
+Loading resource: res://Tests/run_tests.gd
+Loading resource: res://Scripts/resources/Warrior.tres
+Loading resource: res://Assets/Images/Knight_1/Attack 2.png
+Loading resource: res://.godot/imported/Attack 2.png-f79c3e571d6be97142c8b6fdb7e71951.ctex
+Loading resource: res://Assets/Images/Knight_1/Dead.png
+Loading resource: res://.godot/imported/Dead.png-69ce3b84ae953f8030da5afcc8d1ae54.ctex
+Loading resource: res://Assets/Images/Knight_1/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-59c571a5e9af7898c484da4efda53f53.ctex
+Loading resource: res://Assets/Images/Knight_1/Idle.png
+Loading resource: res://.godot/imported/Idle.png-41f7216d69c3d317bf9802c6a8d54a42.ctex
+Loading resource: res://Assets/Images/Knight_1/Walk.png
+Loading resource: res://.godot/imported/Walk.png-cb0bd11fc5698e677e940b0cba97ff8e.ctex
+Loading resource: res://Scripts/resources/Items/potion_small.tres
+Loading resource: res://Assets/Items/Small Bottle - RED - 0000.png
+Loading resource: res://.godot/imported/Small Bottle - RED - 0000.png-9beac44118eba33c7be8dc207543472c.s3tc.ctex
+Loading resource: res://Scenes/3D/lobby_3d.tscn
+Loading resource: res://Scenes/3D/Scripts/lobby_3d.gd
+Loading resource: res://Scenes/main/SettingsScene.tscn
+Loading resource: res://settings_scene.gd
+Loading resource: res://Assets/UI/simple2.png
+Loading resource: res://.godot/imported/simple2.png-bb64f63142cc333c4aae38d592f1c7d4.ctex
+Loading resource: res://Assets/Themes/quit_button.tres
+Loading resource: res://Assets/Themes/quit_button_hover.tres
+Loading resource: res://Scenes/3D/player_actor_3d.tscn
+Loading resource: res://Gargon.tres
+Loading resource: res://Assets/Images/Gorgon_1/Attack_3.png
+Loading resource: res://.godot/imported/Attack_3.png-e9e876d820bd497136c767a73a53aa72.s3tc.ctex
+Loading resource: res://Assets/Images/Gorgon_1/Dead.png
+Loading resource: res://.godot/imported/Dead.png-c0ccfb41c5189258f72c3ee862ed74a9.s3tc.ctex
+Loading resource: res://Assets/Images/Gorgon_1/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-56a3dd8424df4566ad970fa8f87025ab.s3tc.ctex
+Loading resource: res://Assets/Images/Gorgon_1/Idle.png
+Loading resource: res://.godot/imported/Idle.png-5c5dcf687e7e3d8d9e4e816c6a59d8a7.s3tc.ctex
+Loading resource: res://Assets/Images/Gorgon_1/Walk.png
+Loading resource: res://.godot/imported/Walk.png-bc276da4718e6f8ab148c2e37dcc925f.s3tc.ctex
+Loading resource: res://Scenes/Entities/dissolve_shader.gdshader
+Loading resource: res://Assets/Painterly Sky BGs (158).png
+Loading resource: res://.godot/imported/Painterly Sky BGs (158).png-4f102caa3147b9ee569b043a6b3a6987.s3tc.ctex
+Loading resource: res://chest.tscn
+Loading resource: res://Assets/Chests.png
+Loading resource: res://.godot/imported/Chests.png-eaf96c7aaaf8cda6ed31bf4922f6b067.s3tc.ctex
+Loading resource: res://Assets/Material/Stylized_HandpaintedDirt_01_basecolor.jpg
+Loading resource: res://.godot/imported/Stylized_HandpaintedDirt_01_basecolor.jpg-b7924d088e95030f45d293440eccd6cf.s3tc.ctex
+Loading resource: res://Assets/Themes/confirm_button.tres
+Loading resource: res://Assets/Themes/confirm_button_hover.tres
+Loading resource: res://Scenes/3D/Scripts/title_menu_ui.gd
+Loading resource: res://Assets/Themes/chose_button.tres
+Loading resource: res://Assets/Themes/chose_button_hover.tres
+Loading resource: res://Scenes/main/camp.tscn
+Loading resource: res://Scripts/controllers/camp_controller.gd
+Loading resource: res://Scripts/resources/Items/dice_6.tres
+Loading resource: res://Scripts/resources/Items/dice_10.tres
+Loading resource: res://Scripts/resources/Items/dice_20.tres
+Loading resource: res://Scripts/resources/Items/potion_medium.tres
+Loading resource: res://Assets/Items/Large Bottle - RED - 0000.png
+Loading resource: res://.godot/imported/Large Bottle - RED - 0000.png-a8d9a677e3a46b7f7322559a345b41d0.ctex
+Loading resource: res://Scenes/item_card.tscn
+Loading resource: res://Assets/UI/Cell01.png
+Loading resource: res://.godot/imported/Cell01.png-8815c53647e82767e31928b88c4bc1ba.ctex
+Loading resource: res://icon.svg
+Loading resource: res://.godot/imported/icon.svg-218a8f2b3041327d8a5756f3a245f83b.ctex
+Loading resource: res://Scripts/resources/Items/strenght_elixir.tres
+Loading resource: res://Assets/Items/Bubbly Brew Bottle Rising - PINK - 0000.png
+Loading resource: res://.godot/imported/Bubbly Brew Bottle Rising - PINK - 0000.png-8c95d5d45cc0afdb14debfdd4c971cea.s3tc.ctex
+Loading resource: res://Assets/UI/GUI_4x.png
+Loading resource: res://.godot/imported/GUI_4x.png-dff0d0d9d615701f6952f55a03eefc6c.ctex
+Loading resource: res://Scenes/3D/Scripts/class_selection_controller_3d.gd
+Loading resource: res://Scripts/resources/Cleric.tres
+Loading resource: res://Assets/Images/Kitsune/Attack_1.png
+Loading resource: res://.godot/imported/Attack_1.png-64d7c9e568665ac3dd51b97086b85b77.ctex
+Loading resource: res://Assets/Images/Kitsune/Dead.png
+Loading resource: res://.godot/imported/Dead.png-c22461d3ea83595f692bc239302abdf9.ctex
+Loading resource: res://Assets/Images/Kitsune/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-8655b3a209a8453ade76c08d6bd2bf47.ctex
+Loading resource: res://Assets/Images/Kitsune/Idle.png
+Loading resource: res://.godot/imported/Idle.png-3297c1ade6de255fb86bdb5cfc53d9a9.ctex
+Loading resource: res://Assets/Images/Kitsune/Walk.png
+Loading resource: res://.godot/imported/Walk.png-90bb1c59bef57608e96e2f5d158eabd8.ctex
+Loading resource: res://Scripts/resources/Mage.tres
+Loading resource: res://Assets/Images/Fire Wizard/Attack_1.png
+Loading resource: res://.godot/imported/Attack_1.png-0b4dae734cd67fc76c6f82e8f2190144.ctex
+Loading resource: res://Assets/Images/Fire Wizard/Dead.png
+Loading resource: res://.godot/imported/Dead.png-311ed4babdb617e98ba4083e15924aaf.ctex
+Loading resource: res://Assets/Images/Fire Wizard/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-4e2297877db5c5868f3b11c156506947.ctex
+Loading resource: res://Assets/Images/Fire Wizard/Idle.png
+Loading resource: res://.godot/imported/Idle.png-a9282bb16ae839c843165a860683a843.ctex
+Loading resource: res://Assets/Images/Fire Wizard/Walk.png
+Loading resource: res://.godot/imported/Walk.png-8ec17a52f4d207e3963497be97c8f5ea.ctex
+Loading resource: res://Scenes/run/class_card.tscn
+Loading resource: res://Assets/UI/panel-border-003.png
+Loading resource: res://.godot/imported/panel-border-003.png-fdf0d59f01efa83014f6e7104cced912.ctex
+Loading resource: res://Assets/Themes/confirm_button_disable.tres
+Loading resource: res://Scenes/3D/Scripts/attributes_roll_3d.gd
+Loading resource: res://Scenes/run/dice_visual.tscn
+Loading resource: res://Scenes/run/dice_visual.gd
+Loading resource: res://Assets/Images/r02.png
+Loading resource: res://.godot/imported/r02.png-2a371783c9aefdf948373e0bbd093556.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r01.png
+Loading resource: res://.godot/imported/r01.png-769e66e6ede1cc6cd103bed4898cb242.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r10.png
+Loading resource: res://.godot/imported/r10.png-8952875f8b1dd194537c216c94aff7ce.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r11.png
+Loading resource: res://.godot/imported/r11.png-e4c58adbe5a5ee77c32023424e7c0ad1.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r12.png
+Loading resource: res://.godot/imported/r12.png-a8dde605e7c89afb264b011a27af27c6.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r13.png
+Loading resource: res://.godot/imported/r13.png-5f8727d607974543636169ea56126459.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r14.png
+Loading resource: res://.godot/imported/r14.png-1bff531f74f7a108fe57e1aae50d67df.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r15.png
+Loading resource: res://.godot/imported/r15.png-d96fb1554b0d078adf90cb9cdcedfe78.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r16.png
+Loading resource: res://.godot/imported/r16.png-a416f2cf5243b35076ff454e8085053d.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r17.png
+Loading resource: res://.godot/imported/r17.png-9f2e1369e000422f9aa022bae442599d.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r18.png
+Loading resource: res://.godot/imported/r18.png-4e53f2a0ec1a73bd84231b3cb79f4271.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r19.png
+Loading resource: res://.godot/imported/r19.png-1121d81f72dfcf05639f2ee1e90bceb3.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r02.png
+Loading resource: res://.godot/imported/r02.png-7e974b25a51fe9b7af2ff143524aa8ae.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r20.png
+Loading resource: res://.godot/imported/r20.png-862c0747a018b4d08ed33577ddf19094.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r03.png
+Loading resource: res://.godot/imported/r03.png-6d158b2421baaf24a8a9457a42e898e3.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r04.png
+Loading resource: res://.godot/imported/r04.png-0ed0f1a6ac39e4bac01cba98f4cb6a89.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r05.png
+Loading resource: res://.godot/imported/r05.png-4d23a9696c4f551af01dd5783dece3aa.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r06.png
+Loading resource: res://.godot/imported/r06.png-b17f6d2951a07d3328503bde6a7e9e53.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r07.png
+Loading resource: res://.godot/imported/r07.png-1996da5d3d2dc1c51aab6fd57968b885.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r08.png
+Loading resource: res://.godot/imported/r08.png-96ae14966582ae9fefacbe37b5453a8e.ctex
+Loading resource: res://Assets/Images/DiceAnimations/r09.png
+Loading resource: res://.godot/imported/r09.png-fecce5ec1b57b728fa56988ed030358c.ctex
+Loading resource: res://Assets/UI/dice-solid.png
+Loading resource: res://.godot/imported/dice-solid.png-5240ef19fb26ba06780e9bd30328be70.ctex
+Loading resource: res://Assets/Images/UI/chest.png
+Loading resource: res://.godot/imported/chest.png-f5bd59a605f191cbfbb30bb6122a80bd.ctex
+Loading resource: res://Scenes/3D/Scripts/save_ui.gd
+Loading resource: res://Assets/Models/FBX/CommonTree_Autumn_4.fbx
+Loading resource: res://.godot/imported/CommonTree_Autumn_4.fbx-83f74ec2543fb160b04c2c909dc4f1a8.scn
+Loading resource: res://Assets/Models/FBX/Rock_2.fbx
+Loading resource: res://.godot/imported/Rock_2.fbx-05ef6a6523c2d50b2ddcc9b98d80db45.scn
+Loading resource: res://Assets/Models/FBX/Rock_7.fbx
+Loading resource: res://.godot/imported/Rock_7.fbx-4b926dcf763ce07532cd2537a86a55c1.scn
+Loading resource: res://Assets/Models/FBX/TreeStump.fbx
+Loading resource: res://.godot/imported/TreeStump.fbx-de6bac18612b3e0421dc42a96b4e33a3.scn
+Loading resource: res://Assets/Models/FBX/Willow_Autumn_2.fbx
+Loading resource: res://.godot/imported/Willow_Autumn_2.fbx-390f353dc93d5d189808c93cfb3a8329.scn
+Loading resource: res://Assets/Models/FBX/Willow_Dead_3.fbx
+Loading resource: res://.godot/imported/Willow_Dead_3.fbx-9b9f5c451c61b5c2fb64e510d042933e.scn
+Loading resource: res://Assets/Models/FBX/WoodLog.fbx
+Loading resource: res://.godot/imported/WoodLog.fbx-415393d14f4c454faa0e13954871ceb2.scn
+Loading resource: res://Assets/Models/FBX/Wheat.fbx
+Loading resource: res://.godot/imported/Wheat.fbx-ae2fb0c8c7a89f9cd5215c30aede3ff9.scn
+Loading resource: res://Assets/Models/FBX/Plant_4.fbx
+Loading resource: res://.godot/imported/Plant_4.fbx-5465f6687a81c18b9c838c4fecbc8e1e.scn
+Loading resource: res://Assets/Models/FBX/Cactus_3.fbx
+Loading resource: res://.godot/imported/Cactus_3.fbx-aaa451fde13a7a9de83d70b993d668b5.scn
+Loading resource: res://Assets/Models/FBX/CactusFlowers_3.fbx
+Loading resource: res://.godot/imported/CactusFlowers_3.fbx-639665a0e7152b8637577d202290145e.scn
+PASS: Warrior includes strength in attack
+PASS: Strength buff changes Warrior damage
+PASS: Agility buff crosses rounding boundary
+PASS: Buff expires
+PASS: Level-up and reloaded derived stats agree
+PASS: Death only emits once and healing cannot resurrect
+PASS: Create profile
+PASS: Duplicate names cannot overwrite a profile
+PASS: Duplicate creation preserves coins
+PASS: Reject profile path traversal
+PASS: Save a living character
+PASS: Save snapshot does not alias live attributes
+PASS: Reload profile
+PASS: Reload level, XP and backpack
+PASS: Invalid save leaves active profile intact
+PASS: Migrate earlier save keys
+PASS: Create isolated integration profile
+PASS: Game opens on 3D title menu
+PASS: Settings opens from title
+PASS: New game requires a profile
+PASS: Create profile opens class selection
+PASS: Roll animation locks conflicting controls
+PASS: Roll all attributes completes
+PASS: Every attribute has a value
+PASS: Character reaches lobby ready for combat
+PASS: Transfer backpack to stash
+PASS: Transfer stash to backpack
+PASS: Shop purchase succeeds
+PASS: Purchase persists coins and item together
+Loading resource: res://Scenes/3D/battle_scene_3d.tscn
+Loading resource: res://Scenes/3D/enemy_actor_3d.tscn
+Loading resource: res://Scripts/resources/Satyr_frames.tres
+Loading resource: res://Assets/Images/Satyr/Attack.png
+Loading resource: res://.godot/imported/Attack.png-0e85b4aec6caa9f4ce336e69309f8ac4.s3tc.ctex
+Loading resource: res://Assets/Images/Satyr/Dead.png
+Loading resource: res://.godot/imported/Dead.png-97b1852aa1de53e26882ef369405079c.s3tc.ctex
+Loading resource: res://Assets/Images/Satyr/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-abaeb23805319a5f18d1518b7936bf75.s3tc.ctex
+Loading resource: res://Assets/Images/Satyr/Idle.png
+Loading resource: res://.godot/imported/Idle.png-a4c6967965170c0160c7c936be44d0f4.s3tc.ctex
+Loading resource: res://Assets/Images/Satyr/Walk.png
+Loading resource: res://.godot/imported/Walk.png-13e3d420d943d3ca4da2c17f2c595717.s3tc.ctex
+Loading resource: res://Scenes/Entities/hit_flash.gdshader
+Loading resource: res://Scenes/run/ui_layer.tscn
+Loading resource: res://Assets/UI/panel-border-022.png
+Loading resource: res://.godot/imported/panel-border-022.png-5dc6506cc3c95a80e5603cc92e0c845b.ctex
+Loading resource: res://Assets/UI/spikecore.png
+Loading resource: res://.godot/imported/spikecore.png-efeb5ad368c578d50e3c0b1efa8146be.ctex
+Loading resource: res://Scenes/inventory_panel.tscn
+Loading resource: res://Assets/Images/UI/backpack.png
+Loading resource: res://.godot/imported/backpack.png-5673e3cb3c32350154b027766ad2a549.ctex
+Loading resource: res://combat_debug.tscn
+Loading resource: res://combat_debug.gd
+Loading resource: res://Scenes/Entities/loot_panel.tscn
+Loading resource: res://Assets/Shadders/sweep_shine.gdshader
+Loading resource: res://Scripts/resources/Minotaur3.tres
+Loading resource: res://Assets/Images/Minotaur_2/Attack.png
+Loading resource: res://.godot/imported/Attack.png-fb2b18c754628ab00d8d22b5a432f543.ctex
+Loading resource: res://Assets/Images/Minotaur_2/Dead.png
+Loading resource: res://.godot/imported/Dead.png-b5405d18d2686c687c528f90b5ef2d57.ctex
+Loading resource: res://Assets/Images/Minotaur_2/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-1f091bb96fe4266293e346ada6d0d978.ctex
+Loading resource: res://Assets/Images/Minotaur_2/Idle.png
+Loading resource: res://.godot/imported/Idle.png-79591728bfbe3c78507a9d0e38b007a9.ctex
+Loading resource: res://Assets/Images/Minotaur_2/Walk.png
+Loading resource: res://.godot/imported/Walk.png-5f3867c6b215618c216463a5fea4babc.ctex
+Loading resource: res://Scripts/resources/Minotaur.tres
+Loading resource: res://Assets/Images/Minotaur/Attack.png
+Loading resource: res://.godot/imported/Attack.png-686431a3766d51710606c83d09bf3760.ctex
+Loading resource: res://Assets/Images/Minotaur/Dead.png
+Loading resource: res://.godot/imported/Dead.png-0aded4b6b6cd5ea2cebc40c6efc788d1.ctex
+Loading resource: res://Assets/Images/Minotaur/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-d8166f675a4c4a75659f606795091d76.ctex
+Loading resource: res://Assets/Images/Minotaur/Idle.png
+Loading resource: res://.godot/imported/Idle.png-b880a2bff86ced506c91c17d6eca0c11.ctex
+Loading resource: res://Assets/Images/Minotaur/Walk.png
+Loading resource: res://.godot/imported/Walk.png-c85fba17b71b84a9ab07979363de7f9b.ctex
+Loading resource: res://Scripts/resources/Satyr2.tres
+Loading resource: res://Assets/Images/Satyr2/Attack.png
+Loading resource: res://.godot/imported/Attack.png-d3e834e5ba07ba67f77d0cdecb9e83b8.ctex
+Loading resource: res://Assets/Images/Satyr2/Dead.png
+Loading resource: res://.godot/imported/Dead.png-29ae3b95f27e17368d38d205c50985b3.ctex
+Loading resource: res://Assets/Images/Satyr2/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-851bd90a97f375e950a1ad06998331f5.ctex
+Loading resource: res://Assets/Images/Satyr2/Idle.png
+Loading resource: res://.godot/imported/Idle.png-ac1716de139def9545ef8f798874657a.ctex
+Loading resource: res://Assets/Images/Satyr2/Walk.png
+Loading resource: res://.godot/imported/Walk.png-5a90b8febf317e32fb18f404b75faf39.ctex
+Loading resource: res://Scripts/resources/Satyr3.tres
+Loading resource: res://Assets/Images/Satyr3/Attack.png
+Loading resource: res://.godot/imported/Attack.png-018790330f6b150b8a25be83a3e36fff.ctex
+Loading resource: res://Assets/Images/Satyr3/Dead.png
+Loading resource: res://.godot/imported/Dead.png-417930c37044509dc45196097c03493a.ctex
+Loading resource: res://Assets/Images/Satyr3/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-edb102a8c74e196f98b660f5d62d51a3.ctex
+Loading resource: res://Assets/Images/Satyr3/Idle.png
+Loading resource: res://.godot/imported/Idle.png-28a50b4051d8115154695c05ad2e8b7c.ctex
+Loading resource: res://Assets/Images/Satyr3/Walk.png
+Loading resource: res://.godot/imported/Walk.png-61cee8415f51ef8fc4ab369235070950.ctex
+Loading resource: res://Scripts/resources/Satyr.tres
+Loading resource: res://Scripts/resources/skeleton_archer.tres
+Loading resource: res://Assets/Images/Skeleton_Archer/Shot_2.png
+Loading resource: res://.godot/imported/Shot_2.png-d6cb05e9a63a2378f2383e903490de54.ctex
+Loading resource: res://Assets/Images/Skeleton_Archer/Dead.png
+Loading resource: res://.godot/imported/Dead.png-c5f2dfa3ffcc0fe423277ca5d99383c3.ctex
+Loading resource: res://Assets/Images/Skeleton_Archer/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-adf0e50b7af54d9ef5eba4f178146048.ctex
+Loading resource: res://Assets/Images/Skeleton_Archer/Idle.png
+Loading resource: res://.godot/imported/Idle.png-2be37742d9eb3ce52977e3dd8f444e44.ctex
+Loading resource: res://Assets/Images/Skeleton_Archer/Walk.png
+Loading resource: res://.godot/imported/Walk.png-c9c3befa0bcf63d379f9fd1fd722bfd6.ctex
+Loading resource: res://Scenes/Entities/damage_text.tscn
+Loading resource: res://damage_text.gd
+Loading resource: res://Assets/Music/SFX/attack.mp3
+Loading resource: res://.godot/imported/attack.mp3-566b612283092398b8451ffb326dd83d.mp3str
+Loading resource: res://Assets/Material/Stylized_HandpaintedDirt_01_height.jpg
+Loading resource: res://.godot/imported/Stylized_HandpaintedDirt_01_height.jpg-5cce488091ee20085dec88e1a2b38ed8.s3tc.ctex
+Loading resource: res://Assets/Material/Stylized_HandpaintedDirt_01_normalogl.jpg
+Loading resource: res://.godot/imported/Stylized_HandpaintedDirt_01_normalogl.jpg-b2ce53184ae0f79525c08a056c82d82a.s3tc.ctex
+Loading resource: res://Assets/Material/Stylized_HandpaintedDirt_01_roughness.jpg
+Loading resource: res://.godot/imported/Stylized_HandpaintedDirt_01_roughness.jpg-c8f63a6aa0b2dcd577a0d52c114cbc34.s3tc.ctex
+PASS: Enter battle through lobby button
+PASS: Enemy entrance finishes before actions unlock
+PASS: Full-health potion is not consumed
+PASS: Potion consumes one item and enemy turn returns control
+PASS: Enemy attack deals damage after item use
+PASS: Unimplemented item cannot consume itself or a turn
+PASS: First reward resolves and next enemy arrives
+PASS: Rapid attacks produce one victory and reward
+PASS: Encounter 2 completes
+PASS: Encounter 3 completes
+PASS: Encounter 4 completes
+PASS: Encounter 5 completes
+PASS: Combat grants XP and levels
+PASS: Fifth victory opens safe camp
+PASS: Advance leaves camp for sixth encounter
+PASS: Enemy becomes visible again after camp
+PASS: Loot choice advances once
+PASS: Duplicate loot choice cannot pay twice
+PASS: Safe return ends expedition
+PASS: Return to 3D lobby
+PASS: Safe return preserves level and XP
+PASS: Reload rewarded character
+PASS: Saved rewards survive reload
+Loading resource: res://Scenes/3D/battle_scene_3d.tscn
+Loading resource: res://Scenes/3D/enemy_actor_3d.tscn
+Loading resource: res://Scripts/resources/Satyr_frames.tres
+Loading resource: res://Assets/Images/Satyr/Attack.png
+Loading resource: res://.godot/imported/Attack.png-0e85b4aec6caa9f4ce336e69309f8ac4.s3tc.ctex
+Loading resource: res://Assets/Images/Satyr/Dead.png
+Loading resource: res://.godot/imported/Dead.png-97b1852aa1de53e26882ef369405079c.s3tc.ctex
+Loading resource: res://Assets/Images/Satyr/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-abaeb23805319a5f18d1518b7936bf75.s3tc.ctex
+Loading resource: res://Assets/Images/Satyr/Idle.png
+Loading resource: res://.godot/imported/Idle.png-a4c6967965170c0160c7c936be44d0f4.s3tc.ctex
+Loading resource: res://Assets/Images/Satyr/Walk.png
+Loading resource: res://.godot/imported/Walk.png-13e3d420d943d3ca4da2c17f2c595717.s3tc.ctex
+Loading resource: res://Scenes/Entities/hit_flash.gdshader
+Loading resource: res://Scenes/run/ui_layer.tscn
+Loading resource: res://Assets/UI/panel-border-022.png
+Loading resource: res://.godot/imported/panel-border-022.png-5dc6506cc3c95a80e5603cc92e0c845b.ctex
+Loading resource: res://Assets/UI/spikecore.png
+Loading resource: res://.godot/imported/spikecore.png-efeb5ad368c578d50e3c0b1efa8146be.ctex
+Loading resource: res://Scenes/inventory_panel.tscn
+Loading resource: res://Assets/Images/UI/backpack.png
+Loading resource: res://.godot/imported/backpack.png-5673e3cb3c32350154b027766ad2a549.ctex
+Loading resource: res://combat_debug.tscn
+Loading resource: res://Scenes/Entities/loot_panel.tscn
+Loading resource: res://Assets/Shadders/sweep_shine.gdshader
+Loading resource: res://Scripts/resources/Minotaur3.tres
+Loading resource: res://Assets/Images/Minotaur_2/Attack.png
+Loading resource: res://.godot/imported/Attack.png-fb2b18c754628ab00d8d22b5a432f543.ctex
+Loading resource: res://Assets/Images/Minotaur_2/Dead.png
+Loading resource: res://.godot/imported/Dead.png-b5405d18d2686c687c528f90b5ef2d57.ctex
+Loading resource: res://Assets/Images/Minotaur_2/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-1f091bb96fe4266293e346ada6d0d978.ctex
+Loading resource: res://Assets/Images/Minotaur_2/Idle.png
+Loading resource: res://.godot/imported/Idle.png-79591728bfbe3c78507a9d0e38b007a9.ctex
+Loading resource: res://Assets/Images/Minotaur_2/Walk.png
+Loading resource: res://.godot/imported/Walk.png-5f3867c6b215618c216463a5fea4babc.ctex
+Loading resource: res://Scripts/resources/Minotaur.tres
+Loading resource: res://Assets/Images/Minotaur/Attack.png
+Loading resource: res://.godot/imported/Attack.png-686431a3766d51710606c83d09bf3760.ctex
+Loading resource: res://Assets/Images/Minotaur/Dead.png
+Loading resource: res://.godot/imported/Dead.png-0aded4b6b6cd5ea2cebc40c6efc788d1.ctex
+Loading resource: res://Assets/Images/Minotaur/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-d8166f675a4c4a75659f606795091d76.ctex
+Loading resource: res://Assets/Images/Minotaur/Idle.png
+Loading resource: res://.godot/imported/Idle.png-b880a2bff86ced506c91c17d6eca0c11.ctex
+Loading resource: res://Assets/Images/Minotaur/Walk.png
+Loading resource: res://.godot/imported/Walk.png-c85fba17b71b84a9ab07979363de7f9b.ctex
+Loading resource: res://Scripts/resources/Satyr2.tres
+Loading resource: res://Assets/Images/Satyr2/Attack.png
+Loading resource: res://.godot/imported/Attack.png-d3e834e5ba07ba67f77d0cdecb9e83b8.ctex
+Loading resource: res://Assets/Images/Satyr2/Dead.png
+Loading resource: res://.godot/imported/Dead.png-29ae3b95f27e17368d38d205c50985b3.ctex
+Loading resource: res://Assets/Images/Satyr2/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-851bd90a97f375e950a1ad06998331f5.ctex
+Loading resource: res://Assets/Images/Satyr2/Idle.png
+Loading resource: res://.godot/imported/Idle.png-ac1716de139def9545ef8f798874657a.ctex
+Loading resource: res://Assets/Images/Satyr2/Walk.png
+Loading resource: res://.godot/imported/Walk.png-5a90b8febf317e32fb18f404b75faf39.ctex
+Loading resource: res://Scripts/resources/Satyr3.tres
+Loading resource: res://Assets/Images/Satyr3/Attack.png
+Loading resource: res://.godot/imported/Attack.png-018790330f6b150b8a25be83a3e36fff.ctex
+Loading resource: res://Assets/Images/Satyr3/Dead.png
+Loading resource: res://.godot/imported/Dead.png-417930c37044509dc45196097c03493a.ctex
+Loading resource: res://Assets/Images/Satyr3/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-edb102a8c74e196f98b660f5d62d51a3.ctex
+Loading resource: res://Assets/Images/Satyr3/Idle.png
+Loading resource: res://.godot/imported/Idle.png-28a50b4051d8115154695c05ad2e8b7c.ctex
+Loading resource: res://Assets/Images/Satyr3/Walk.png
+Loading resource: res://.godot/imported/Walk.png-61cee8415f51ef8fc4ab369235070950.ctex
+Loading resource: res://Scripts/resources/Satyr.tres
+Loading resource: res://Scripts/resources/skeleton_archer.tres
+Loading resource: res://Assets/Images/Skeleton_Archer/Shot_2.png
+Loading resource: res://.godot/imported/Shot_2.png-d6cb05e9a63a2378f2383e903490de54.ctex
+Loading resource: res://Assets/Images/Skeleton_Archer/Dead.png
+Loading resource: res://.godot/imported/Dead.png-c5f2dfa3ffcc0fe423277ca5d99383c3.ctex
+Loading resource: res://Assets/Images/Skeleton_Archer/Hurt.png
+Loading resource: res://.godot/imported/Hurt.png-adf0e50b7af54d9ef5eba4f178146048.ctex
+Loading resource: res://Assets/Images/Skeleton_Archer/Idle.png
+Loading resource: res://.godot/imported/Idle.png-2be37742d9eb3ce52977e3dd8f444e44.ctex
+Loading resource: res://Assets/Images/Skeleton_Archer/Walk.png
+Loading resource: res://.godot/imported/Walk.png-c9c3befa0bcf63d379f9fd1fd722bfd6.ctex
+Loading resource: res://Scenes/Entities/damage_text.tscn
+Loading resource: res://Assets/Music/SFX/attack.mp3
+Loading resource: res://.godot/imported/attack.mp3-566b612283092398b8451ffb326dd83d.mp3str
+Loading resource: res://Assets/Material/Stylized_HandpaintedDirt_01_height.jpg
+Loading resource: res://.godot/imported/Stylized_HandpaintedDirt_01_height.jpg-5cce488091ee20085dec88e1a2b38ed8.s3tc.ctex
+Loading resource: res://Assets/Material/Stylized_HandpaintedDirt_01_normalogl.jpg
+Loading resource: res://.godot/imported/Stylized_HandpaintedDirt_01_normalogl.jpg-b2ce53184ae0f79525c08a056c82d82a.s3tc.ctex
+Loading resource: res://Assets/Material/Stylized_HandpaintedDirt_01_roughness.jpg
+Loading resource: res://.godot/imported/Stylized_HandpaintedDirt_01_roughness.jpg-c8f63a6aa0b2dcd577a0d52c114cbc34.s3tc.ctex
+PASS: Re-enter expedition
+PASS: Re-entered battle is ready
+PASS: Death clears save before animation completes
+PASS: Death resets character level and XP
+PASS: Reload after death cannot resurrect character
+PASS: Death preserves coins and permanent backpack upgrade
+PASS: Death returns to character creation
+PASS: Next character starts at level one
+PASS: New player instance does not inherit death dissolve
+RESULT: 61 checks, 0 failures

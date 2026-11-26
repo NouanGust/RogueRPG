@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bjivu3ndbh0dx" path="res://Assets/Images/Kitsune/Hurt.png" id="4_ff27y"]
 [ext_resource type="Texture2D" uid="uid://dgolkupt1ie6v" path="res://Assets/Images/Kitsune/Idle.png" id="5_jttuw"]
 [ext_resource type="Texture2D" uid="uid://cgyfk7u71pwjy" path="res://Assets/Images/Kitsune/Walk.png" id="6_r1cor"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Kitsune/Fire_2.png" id="7_proj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4otbh"]
 atlas = ExtResource("2_lov3c")
@@ -312,4 +313,12 @@ base_defense = 2
 main_attribute = "faith"
 strength_dice = 4
 faith_dice = 10
+attack_style = "ranged"
+projectile_texture = ExtResource("7_proj")
+projectile_frame_size = Vector2i(64, 64)
+projectile_flight_frames = 5
+projectile_impact_frames = 6
+projectile_speed = 7.5
+projectile_arc_height = 0.0
+projectile_color = Color(0.25, 0.9, 1, 1)
 metadata/_custom_type_script = "uid://dykg8obmcya8q"

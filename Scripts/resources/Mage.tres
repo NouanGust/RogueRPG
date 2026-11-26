@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bujdnoyjmkpy2" path="res://Assets/Images/Fire Wizard/Hurt.png" id="4_1psdm"]
 [ext_resource type="Texture2D" uid="uid://de117hsvqejoi" path="res://Assets/Images/Fire Wizard/Idle.png" id="5_k8d1h"]
 [ext_resource type="Texture2D" uid="uid://bxpdd8bmyv3d1" path="res://Assets/Images/Fire Wizard/Walk.png" id="6_n0s18"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Fire Wizard/Charge.png" id="7_proj"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wc0n"]
 atlas = ExtResource("2_kpkd4")
@@ -227,4 +228,12 @@ base_attack = 2
 main_attribute = "intelligence"
 strength_dice = 4
 intelligence_dice = 10
+attack_style = "ranged"
+projectile_texture = ExtResource("7_proj")
+projectile_frame_size = Vector2i(64, 64)
+projectile_flight_frames = 6
+projectile_impact_frames = 6
+projectile_speed = 7.5
+projectile_arc_height = 0.0
+projectile_color = Color(1, 0.55, 0.15, 1)
 metadata/_custom_type_script = "uid://dykg8obmcya8q"

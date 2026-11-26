@@ -27,6 +27,11 @@ signal battle_finished(player_won: bool)
 @export var item_sfx: AudioStream
 @export var heal_sfx: AudioStream
 
+# --- VFX ---
+@export_group("VFX")
+@export var slash_effect_scene: PackedScene = preload("res://Scenes/3D/VFX/slash_effect_3d.tscn")
+@export var projectile_scene: PackedScene = preload("res://Scenes/3D/VFX/projectile_3d.tscn")
+
 var current_level: int = 1
 var current_turn: String = "player"
 var battle_active: bool = false
@@ -165,6 +170,29 @@ func player_attack() -> void:
 	if not battle_active or phase != Phase.PLAYER:
 		return
 	_enter_phase(Phase.RESOLVING)
+
+	var class_data: ClassData = player_node.class_data
+	var is_ranged := class_data != null and class_data.attack_style == "ranged"
+	var original_pos := player_node.global_position
+
+	player_node.play_attack()
+	if is_ranged:
+		await get_tree().create_timer(0.18).timeout
+		await _launch_projectile(
+			player_node.global_position + Vector3(0, 0.1, -0.3),
+			enemy_node.global_position + Vector3(0, 0.1, 0.2),
+			class_data,
+			false
+		)
+	else:
+		var lunge_pos := enemy_node.global_position + Vector3(0, 0, 1.35)
+		var lunge_tween := create_tween()
+		lunge_tween.tween_property(player_node, "global_position", lunge_pos, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		await lunge_tween.finished
+		var slash_tex: Texture2D = class_data.slash_texture if class_data != null else null
+		var slash_pal: int = class_data.slash_palette if class_data != null else 7
+		_spawn_slash(enemy_node.global_position + Vector3(0, 0.1, 0.25), slash_tex, slash_pal, false)
+
 	var damage := player_node.combat_component.attack(enemy_node.stats_component, enemy_node.health_component)
 	AudioManager.play_sfx(attack_sfx)
 	trigger_hit_pause(0.08)
@@ -174,6 +202,13 @@ func player_attack() -> void:
 		var spawn_pos := main_camera.unproject_position(enemy_node.global_position) + Vector2(0, -30)
 		text_node.start(damage, spawn_pos, damage >= 5)
 	ui.log_damage("Você atacou e causou %d de dano." % damage)
+
+	if not is_ranged:
+		var return_tween := create_tween()
+		return_tween.tween_property(player_node, "global_position", original_pos, 0.18).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+		await return_tween.finished
+	player_node.play_idle()
+
 	if enemy_node.health_component.current_hp <= 0:
 		return
 	await _set_turn("enemy")
@@ -224,35 +259,58 @@ func enemy_act() -> void:
 	if not battle_active or phase != Phase.ENEMY: return
 	enemy_node.face_target(player_node.global_position)
 
+	var enemy_data: EnemyData = enemy_node.enemy_data
+	var is_ranged := enemy_data != null and enemy_data.attack_style == "ranged"
 	var original_pos = enemy_node.global_position
-	var target_pos = player_node.global_position
 
-	target_pos.z -= 1.5
+	if is_ranged:
+		# Ataque à distância: permanece na posição e dispara o projétil
+		enemy_node.play_attack()
+		await get_tree().create_timer(0.35).timeout
+		await _launch_projectile(
+			enemy_node.global_position + Vector3(0, 0.1, 0.3),
+			player_node.global_position + Vector3(0, 0.1, -0.2),
+			enemy_data,
+			true
+		)
+		enemy_node.play_idle()
 
-	# 1. Dash 3D
-	enemy_node.play_walk()
-	var dash_tween = create_tween()
-	dash_tween.tween_property(enemy_node, "global_position", target_pos, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
-	await dash_tween.finished
+		var damage := enemy_node.combat_component.attack(player_node.stats_component, player_node.health_component)
+		AudioManager.play_sfx(hurt_sfx)
+		ui.log_damage("O inimigo atacou à distância e causou %d de dano." % damage)
+		trigger_camera_shake(clamp(damage * 0.05, 0.1, 0.5), 0.25)
+	else:
+		var target_pos = player_node.global_position
+		target_pos.z -= 1.5
 
-	# 2. Ataque
-	enemy_node.play_attack()
-	await _wait_enemy_animation("Attack")
-	enemy_node.play_idle()
+		# 1. Dash 3D
+		enemy_node.play_walk()
+		var dash_tween = create_tween()
+		dash_tween.tween_property(enemy_node, "global_position", target_pos, 0.35).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN_OUT)
+		await dash_tween.finished
 
-	var damage := enemy_node.combat_component.attack(player_node.stats_component, player_node.health_component)
-	ui.log_damage("O inimigo atacou e causou %d de dano." % damage)
+		# 2. Ataque + Efeito de Slash
+		enemy_node.play_attack()
+		await _wait_enemy_animation("Attack")
+		var slash_tex: Texture2D = enemy_data.slash_texture if enemy_data != null else null
+		var slash_pal: int = enemy_data.slash_palette if enemy_data != null else 4
+		_spawn_slash(player_node.global_position + Vector3(0, 0.1, -0.2), slash_tex, slash_pal, true)
+		enemy_node.play_idle()
 
-	# Tremor na câmera 3D
-	trigger_camera_shake(clamp(damage * 0.05, 0.1, 0.5), 0.25)
+		var damage := enemy_node.combat_component.attack(player_node.stats_component, player_node.health_component)
+		AudioManager.play_sfx(hurt_sfx)
+		ui.log_damage("O inimigo atacou e causou %d de dano." % damage)
 
-	# 3. Recuo 3D
-	enemy_node.play_walk()
-	var return_tween = create_tween()
-	return_tween.tween_property(enemy_node, "global_position", original_pos, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-	await return_tween.finished
+		# Tremor na câmera 3D
+		trigger_camera_shake(clamp(damage * 0.05, 0.1, 0.5), 0.25)
 
-	enemy_node.play_idle()
+		# 3. Recuo 3D
+		enemy_node.play_walk()
+		var return_tween = create_tween()
+		return_tween.tween_property(enemy_node, "global_position", original_pos, 0.3).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		await return_tween.finished
+
+		enemy_node.play_idle()
 
 	if player_node.health_component.current_hp <= 0: return
 	if buff_just_applied:
@@ -260,6 +318,36 @@ func enemy_act() -> void:
 	else:
 		player_node.stats_component.tick_buffs()
 	_enter_phase(Phase.PLAYER)
+
+func _spawn_slash(world_pos: Vector3, texture: Texture2D, palette: int, flip_h: bool = false) -> void:
+	if slash_effect_scene == null:
+		return
+	var slash := slash_effect_scene.instantiate()
+	if slash == null:
+		return
+	add_child(slash)
+	slash.global_position = world_pos
+	slash.play_effect(texture, palette, 24.0, 1.6, flip_h)
+
+func _launch_projectile(start_pos: Vector3, target_pos: Vector3, data: Resource, flip_h: bool = false) -> void:
+	if projectile_scene == null:
+		return
+	var proj := projectile_scene.instantiate()
+	if proj == null:
+		return
+	add_child(proj)
+	var config := {
+		"texture": data.get("projectile_texture"),
+		"frame_size": data.get("projectile_frame_size"),
+		"flight_frames": data.get("projectile_flight_frames"),
+		"impact_frames": data.get("projectile_impact_frames"),
+		"speed": data.get("projectile_speed"),
+		"arc_height": data.get("projectile_arc_height"),
+		"color": data.get("projectile_color"),
+		"flip_h": flip_h,
+	}
+	proj.launch(start_pos, target_pos, config)
+	await proj.impacted
 
 
 func use_item_from_inventory(item: ItemData) -> void:

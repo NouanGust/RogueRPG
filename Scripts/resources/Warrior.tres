@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://btwcrp784ikbb" path="res://Assets/Images/Knight_1/Hurt.png" id="4_ju3ue"]
 [ext_resource type="Texture2D" uid="uid://dxpj0sbiua4dv" path="res://Assets/Images/Knight_1/Idle.png" id="5_bqe86"]
 [ext_resource type="Texture2D" uid="uid://4m3ck6ohmocq" path="res://Assets/Images/Knight_1/Walk.png" id="6_qv70t"]
+[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/01.png" id="7_slash"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d8xea"]
 atlas = ExtResource("2_n0ugk")
@@ -215,4 +216,7 @@ main_attribute = "strength"
 strength_dice = 10
 intelligence_dice = 4
 faith_dice = 4
+attack_style = "melee"
+slash_texture = ExtResource("7_slash")
+slash_palette = 7
 metadata/_custom_type_script = "uid://dykg8obmcya8q"

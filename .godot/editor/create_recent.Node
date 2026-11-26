@@ -1,0 +1,14 @@
+MarginContainer
+Button
+TextureRect
+OmniLight3D
+Label
+RichTextLabel
+Panel
+HBoxContainer
+Control
+ColorRect
+Sprite2D
+InventoryComponent
+InventoryPanel
+DiceRoller
