@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="AttackData" format=3]
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://d3txgh1bkjj5d"]
 
-[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://Assets/Images/Kitsune/Fire_2.png" id="2_tex"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://r2nvpu2q7nyu" path="res://Assets/Images/Kitsune/Fire_2.png" id="2_tex"]
 
 [resource]
 script = ExtResource("1_script")
@@ -9,14 +9,11 @@ id = &"cleric_will_o_wisp"
 display_name = "Fogo Fátuo"
 description = "Causa dano espiritual e recupera 35% do dano como vida."
 effect_type = "drain"
-power_multiplier = 1.0
 accuracy = 95
 max_uses = 3
 drain_ratio = 0.35
 attack_style = "ranged"
 projectile_texture = ExtResource("2_tex")
-projectile_frame_size = Vector2i(64, 64)
 projectile_flight_frames = 5
 projectile_impact_frames = 6
-projectile_speed = 8.0
-projectile_color = Color(0.35, 1, 0.75, 1)
+projectile_color = Color(0.28, 1, 0.62, 1)

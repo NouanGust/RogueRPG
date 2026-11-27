@@ -1,0 +1,7 @@
+# Builds e exports
+build/
+
+# Arquivos temporários do Godot
+.godot/
+.test-output/
+*.tmp

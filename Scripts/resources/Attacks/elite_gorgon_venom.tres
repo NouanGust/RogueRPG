@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/03.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"elite_gorgon_venom"
+display_name = "Picada Venenosa"
+description = "Causa dano e enfraquece o atributo principal em -3 por 2 turnos."
+effect_type = "damage_debuff"
+power_multiplier = 0.95
+accuracy = 90
+debuff_stat = "primary_stat"
+debuff_amount = 3
+debuff_turns = 2
+attack_style = "melee"
+slash_texture = ExtResource("2_tex")
+slash_palette = 2

@@ -11,12 +11,12 @@
 [ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_fire_bolt.tres" id="9_atk1"]
 [ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_fireball.tres" id="10_atk2"]
 [ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_arcane_focus.tres" id="11_atk3"]
-[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_ember_burst.tres" id="12_atk4"]
-[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_blinding_spark.tres" id="13_u1"]
-[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_flame_lance.tres" id="14_u2"]
+[ext_resource type="Resource" uid="uid://c8jxgxqo2tncf" path="res://Scripts/resources/Attacks/mage_ember_burst.tres" id="12_atk4"]
+[ext_resource type="Resource" uid="uid://p554s61c32xq" path="res://Scripts/resources/Attacks/mage_blinding_spark.tres" id="13_u1"]
+[ext_resource type="Resource" uid="uid://pb2e2ogwknqc" path="res://Scripts/resources/Attacks/mage_flame_lance.tres" id="14_u2"]
 [ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_inferno_surge.tres" id="15_u3"]
-[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_ember_barrage.tres" id="16_u4"]
-[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_arcane_meteor.tres" id="17_u5"]
+[ext_resource type="Resource" uid="uid://dqd33hnfu57cx" path="res://Scripts/resources/Attacks/mage_ember_barrage.tres" id="16_u4"]
+[ext_resource type="Resource" uid="uid://bq3mrg46cbffu" path="res://Scripts/resources/Attacks/mage_arcane_meteor.tres" id="17_u5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wc0n"]
 atlas = ExtResource("2_kpkd4")

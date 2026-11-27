@@ -1,7 +1,7 @@
-[gd_resource type="Resource" script_class="AttackData" format=3]
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://p554s61c32xq"]
 
-[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://Assets/Images/Fire Wizard/Charge.png" id="2_tex"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://ck3ixndyf674p" path="res://Assets/Images/Fire Wizard/Charge.png" id="2_tex"]
 
 [resource]
 script = ExtResource("1_script")
@@ -14,11 +14,9 @@ accuracy = 95
 max_uses = 4
 debuff_stat = "attack"
 debuff_amount = 2
-debuff_turns = 2
 attack_style = "ranged"
 projectile_texture = ExtResource("2_tex")
-projectile_frame_size = Vector2i(64, 64)
 projectile_flight_frames = 6
 projectile_impact_frames = 6
 projectile_speed = 9.0
-projectile_color = Color(0.95, 0.4, 1, 1)
+projectile_color = Color(0.78, 0.42, 1, 1)

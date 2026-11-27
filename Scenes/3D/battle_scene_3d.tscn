@@ -27,11 +27,11 @@
 [ext_resource type="Texture2D" uid="uid://doyrkxnc0gjp5" path="res://Assets/Material/Stylized_HandpaintedDirt_01_roughness.jpg" id="21_np1vh"]
 [ext_resource type="PackedScene" path="res://Scenes/battle/level_up_panel.tscn" id="22_levelup"]
 [ext_resource type="PackedScene" uid="uid://dq3mvl7neiur2" path="res://Scenes/3D/Props/tree_2d_prop.tscn" id="23_tree2d"]
-[ext_resource type="Shader" uid="uid://bna3rila3pi0g" path="res://Scenes/Entities/dissolve_shader.gdshader" id="24_71kgn"]
 [ext_resource type="Texture2D" uid="uid://di073ijmd6rbw" path="res://Assets/2D/stone/stone6.png" id="24_stone_sm"]
 [ext_resource type="Texture2D" uid="uid://dvhaxmtmi3fgh" path="res://Assets/2D/stone/stone9.png" id="25_stone_lg"]
 [ext_resource type="Texture2D" uid="uid://bsnv7cu6ws2po" path="res://Assets/2D/logs/stump1.png" id="26_stump"]
 [ext_resource type="Texture2D" uid="uid://cgjsdgqptxmmx" path="res://Assets/2D/logs/trunk3.png" id="27_dead_tree"]
+[ext_resource type="Shader" uid="uid://bip5cyoe23vlg" path="res://Assets/Shadders/status_aura_outline.gdshader" id="28_g4tfs"]
 [ext_resource type="Texture2D" uid="uid://ccs0g1h6dqmsy" path="res://Assets/2D/logs/log1.png" id="28_log"]
 [ext_resource type="Texture2D" uid="uid://cuucbhmss6vdu" path="res://Assets/2D/grass/grass1.png" id="29_grass1"]
 [ext_resource type="Texture2D" uid="uid://h7058fwdpyfe" path="res://Assets/2D/grass/grass3.png" id="30_grass2"]
@@ -42,6 +42,10 @@
 [ext_resource type="Texture2D" uid="uid://b4uliymwded6y" path="res://Assets/2D/bushes/berry_bush7.png" id="35_bush1"]
 [ext_resource type="Texture2D" uid="uid://dh2scpx25ju8w" path="res://Assets/2D/bushes/bush24.png" id="36_bush2"]
 [ext_resource type="Shader" uid="uid://dyfwn58tfv0dk" path="res://Assets/Shadders/foliage_sway.gdshader" id="37_sway"]
+[ext_resource type="Resource" uid="uid://g82q0ohahwr" path="res://Scripts/resources/werewolf.tres" id="38_elite_werewolf"]
+[ext_resource type="Resource" uid="uid://b55vtbu52ji7d" path="res://Scripts/resources/gorgon.tres" id="39_elite_gorgon"]
+[ext_resource type="Resource" uid="uid://bfeumn7eplfeh" path="res://Scripts/resources/yamabushi_tengu.tres" id="40_elite_yamabushi"]
+[ext_resource type="Resource" uid="uid://dw286hfar8057" path="res://Scripts/resources/karasu_tengu.tres" id="41_elite_karasu"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bwk33"]
 panorama = ExtResource("18_sf1r6")
@@ -77,14 +81,21 @@ uv1_scale = Vector3(20, 20, 20)
 material = SubResource("StandardMaterial3D_plnp8")
 size = Vector2(20, 20)
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_evjeu"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_eix6b"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n2ykv"]
 resource_local_to_scene = true
-shader = ExtResource("24_71kgn")
-shader_parameter/dissolve_noise = SubResource("NoiseTexture2D_evjeu")
-shader_parameter/dissolve_amount = 0.0
-shader_parameter/edge_color = Color(0.8, 0.1, 0.1, 1)
+render_priority = 1
+shader = ExtResource("28_g4tfs")
+shader_parameter/region_rect = Vector4(0, 0, 1, 1)
+shader_parameter/aura_active = false
+shader_parameter/is_debuff = false
+shader_parameter/aura_color = Color(1, 0.85, 0.25, 1)
+shader_parameter/outline_pixels = 2.0
+shader_parameter/halo_pixels = 4.0
+shader_parameter/pulse_speed = 3.5
+shader_parameter/aura_intensity = 1.45
+shader_parameter/halo_opacity = 0.38
+shader_parameter/rim_opacity = 0.2
+shader_parameter/hit_flash = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dead_tree"]
 render_priority = 0
@@ -122,6 +133,7 @@ shader_parameter/alpha_scissor = 0.5
 [node name="BattleScene3D" type="Node3D" unique_id=1290004777]
 script = ExtResource("1_sakwf")
 enemy_pool = Array[ExtResource("2_newfi")]([ExtResource("4_wjnf6"), ExtResource("5_m157x"), ExtResource("6_e6731"), ExtResource("7_idpok"), ExtResource("8_ty8l0"), ExtResource("9_07vp7")])
+elite_enemy_pool = Array[ExtResource("2_newfi")]([ExtResource("38_elite_werewolf"), ExtResource("39_elite_gorgon"), ExtResource("40_elite_yamabushi"), ExtResource("41_elite_karasu")])
 damage_text_scene = ExtResource("10_trnot")
 loot_pool = Array[ExtResource("11_sf1r6")]([ExtResource("12_bwk33"), ExtResource("13_np1vh"), ExtResource("14_plnp8")])
 attack_sfx = ExtResource("15_m157x")
@@ -152,11 +164,16 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.666, 0)
 transform = Transform3D(-0.31357816, 0, 0.9495624, 0, 1, 0, -0.9495624, 0, -0.31357816, 0, 0.666, 2.299)
 
 [node name="AnimSprite" parent="PlayerActor3D" index="0" unique_id=1166428044]
-material_overlay = SubResource("ShaderMaterial_eix6b")
+material_overlay = SubResource("ShaderMaterial_n2ykv")
 shaded = true
 alpha_cut = 1
 
 [node name="UILayer" parent="." unique_id=760799296 instance=ExtResource("3_sakwf")]
+
+[node name="StatusBadges" parent="UILayer/BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/StatusSection" index="0"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 8
 
 [node name="LootPanel" parent="UILayer/BattleUI" parent_id_path=PackedInt32Array(760799296, 2146490657) index="3" unique_id=1826055585]
 visible = true

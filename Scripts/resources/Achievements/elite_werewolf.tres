@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/achievement_data.gd" id="1_ach"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Red_Werewolf/Idle.png" id="2_tex"]
+
+[sub_resource type="AtlasTexture" id="Atlas_icon"]
+atlas = ExtResource("2_tex")
+region = Rect2(20, 64, 86, 64)
+
+[resource]
+script = ExtResource("1_ach")
+id = &"ach_elite_werewolf"
+title = "Caçador da Lua Sangrenta"
+description = "Derrote o inimigo Elite Lobisomem Alfa."
+category = "elite_defeat"
+target_id = &"elite_werewolf"
+required_count = 1
+icon = SubResource("Atlas_icon")

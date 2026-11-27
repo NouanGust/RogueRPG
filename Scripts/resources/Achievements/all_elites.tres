@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/achievement_data.gd" id="1_ach"]
+[ext_resource type="Texture2D" path="res://Assets/UI/dice-solid.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_ach")
+id = &"ach_all_elites"
+title = "Lenda dos Elites"
+description = "Derrote todos os 4 inimigos Elite ao menos uma vez."
+category = "all_elites"
+required_count = 4
+icon = ExtResource("2_tex")

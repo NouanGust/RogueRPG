@@ -3,6 +3,8 @@ extends Node3D
 
 signal impacted
 
+const PROJECTILE_TINT_SHADER: Shader = preload("res://Assets/Shadders/projectile_tint.gdshader")
+
 @onready var anim_sprite: AnimatedSprite3D = $AnimSprite
 @onready var glow_light: OmniLight3D = $GlowLight
 
@@ -17,9 +19,12 @@ var _elapsed: float = 0.0
 var _arc_height: float = 0.0
 var _in_flight: bool = false
 var _has_impact_anim: bool = false
+var _tint_mat: ShaderMaterial = null
 
 func _ready() -> void:
 	anim_sprite.animation_finished.connect(_on_animation_finished)
+	anim_sprite.frame_changed.connect(_sync_tint_texture)
+	anim_sprite.animation_changed.connect(_sync_tint_texture)
 
 func launch(start_pos: Vector3, target_pos: Vector3, config: Dictionary = {}) -> void:
 	global_position = start_pos
@@ -42,7 +47,7 @@ func launch(start_pos: Vector3, target_pos: Vector3, config: Dictionary = {}) ->
 	var flip_h: bool = bool(config.get("flip_h", false))
 
 	anim_sprite.scale = Vector3.ONE * scale_mult
-	anim_sprite.modulate = tint
+	anim_sprite.modulate = Color.WHITE
 	anim_sprite.flip_h = flip_h
 
 	if config.has("sprite_frames") and config["sprite_frames"] is SpriteFrames:
@@ -54,6 +59,15 @@ func launch(start_pos: Vector3, target_pos: Vector3, config: Dictionary = {}) ->
 	else:
 		_has_impact_anim = false
 
+	if tint != Color.WHITE:
+		_tint_mat = ShaderMaterial.new()
+		_tint_mat.shader = PROJECTILE_TINT_SHADER
+		_tint_mat.set_shader_parameter("tint_color", tint)
+		anim_sprite.material_override = _tint_mat
+	else:
+		_tint_mat = null
+		anim_sprite.material_override = null
+
 	# Luz sutil para projéteis mágicos (desligada se cor for branca padrão ou light_energy == 0)
 	var light_energy: float = float(config.get("light_energy", 1.2 if tint != Color.WHITE else 0.0))
 	glow_light.light_color = tint
@@ -61,8 +75,23 @@ func launch(start_pos: Vector3, target_pos: Vector3, config: Dictionary = {}) ->
 
 	if anim_sprite.sprite_frames and anim_sprite.sprite_frames.has_animation("fly"):
 		anim_sprite.play("fly")
+	_sync_tint_texture()
 
 	_in_flight = true
+
+func _sync_tint_texture() -> void:
+	if _tint_mat == null or anim_sprite.sprite_frames == null:
+		return
+	if not anim_sprite.sprite_frames.has_animation(anim_sprite.animation):
+		return
+	var count := anim_sprite.sprite_frames.get_frame_count(anim_sprite.animation)
+	if count <= 0:
+		return
+	var tex := anim_sprite.sprite_frames.get_frame_texture(anim_sprite.animation, clampi(anim_sprite.frame, 0, count - 1))
+	if tex is AtlasTexture and tex.atlas != null:
+		_tint_mat.set_shader_parameter("sprite_texture", tex.atlas)
+	elif tex != null:
+		_tint_mat.set_shader_parameter("sprite_texture", tex)
 
 func _process(delta: float) -> void:
 	if not _in_flight:

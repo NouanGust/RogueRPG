@@ -40,7 +40,13 @@ func play_multi_dice() -> void:
 	
 
 
-func play_sfx(stream: AudioStream, randomize_pitch: bool = true) -> void:
+func play_buff_sfx(stream: AudioStream) -> void:
+	play_sfx(stream, false, 1.18)
+
+func play_debuff_sfx(stream: AudioStream) -> void:
+	play_sfx(stream, false, 0.82)
+
+func play_sfx(stream: AudioStream, randomize_pitch: bool = true, pitch_scale: float = 1.0) -> void:
 	if stream == null: return
 	
 	var player := AudioStreamPlayer.new()
@@ -48,7 +54,9 @@ func play_sfx(stream: AudioStream, randomize_pitch: bool = true) -> void:
 	player.bus = "SFX"
 	
 	if randomize_pitch:
-		player.pitch_scale = randf_range(0.9, 1.1)
+		player.pitch_scale = pitch_scale * randf_range(0.9, 1.1)
+	else:
+		player.pitch_scale = pitch_scale
 		
 	add_child(player)
 	player.play()

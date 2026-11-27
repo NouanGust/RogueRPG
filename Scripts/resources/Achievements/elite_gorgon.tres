@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AchievementData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/achievement_data.gd" id="1_ach"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Gorgon_1/Idle.png" id="2_tex"]
+
+[sub_resource type="AtlasTexture" id="Atlas_icon"]
+atlas = ExtResource("2_tex")
+region = Rect2(14, 46, 76, 82)
+
+[resource]
+script = ExtResource("1_ach")
+id = &"ach_elite_gorgon"
+title = "Olhar Inquebrável"
+description = "Derrote o inimigo Elite Górgona."
+category = "elite_defeat"
+target_id = &"elite_gorgon"
+required_count = 1
+icon = SubResource("Atlas_icon")

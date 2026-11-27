@@ -4,6 +4,7 @@ render_mode unshaded, cull_disabled, depth_draw_never;
 uniform sampler2D sprite_texture : source_color, filter_nearest;
 uniform vec4 region_rect = vec4(0.0, 0.0, 1.0, 1.0);
 uniform bool aura_active = false;
+uniform bool is_debuff = false;
 uniform vec4 aura_color : source_color = vec4(1.0, 0.85, 0.25, 1.0);
 uniform float outline_pixels : hint_range(1.0, 6.0) = 1.8;
 uniform float halo_pixels : hint_range(1.0, 10.0) = 4.0;
@@ -55,7 +56,6 @@ void fragment() {
 		vec2 step_in = px * outline_pixels;
 		vec2 step_out = px * halo_pixels;
 
-		// Anel interno (outline nítido) e verificação de borda interna
 		float max_in = 0.0;
 		float min_in = 1.0;
 		vec2 dirs[8] = vec2[8](
@@ -71,25 +71,51 @@ void fragment() {
 		}
 		float halo_avg = halo_sum / 8.0;
 
-		// Pulso suave + leve onda ascendente de brilho
-		float pulse = 0.78 + 0.22 * sin(TIME * pulse_speed);
-		float shimmer = 0.86 + 0.14 * sin(TIME * (pulse_speed * 1.35) - UV.y * 20.0);
-		vec3 glow_rgb = aura_color.rgb * aura_intensity * pulse * shimmer;
+		if (is_debuff) {
+			// Debuff: mesma cor do atributo, mas com onda descendente, contorno fissurado/tracejado e drenagem escura
+			float down_wave = 0.65 + 0.35 * sin(TIME * (pulse_speed * 1.45) + UV.y * 32.0);
+			float dash_pattern = sin((UV.x * 110.0 - UV.y * 110.0) + TIME * 6.5);
+			float flicker = 0.72 + 0.28 * sin(TIME * 14.0 + UV.y * 18.0);
+			vec3 debuff_rgb = aura_color.rgb * (aura_intensity * 0.78) * down_wave * flicker;
 
-		if (center_a < 0.15 && max_in > 0.5) {
-			// Contorno luminoso principal
-			ALBEDO = glow_rgb;
-			ALPHA = aura_color.a * (0.85 + 0.15 * pulse);
-		} else if (center_a < 0.15 && halo_avg > 0.08) {
-			// Halo externo suave com brilho difuso
-			ALBEDO = glow_rgb * 0.9;
-			ALPHA = clamp(halo_avg * 1.4, 0.0, 1.0) * halo_opacity * pulse;
-		} else if (center_a >= 0.5 && min_in < 0.5) {
-			// Brilho sutil na borda interna do personagem
-			ALBEDO = glow_rgb;
-			ALPHA = rim_opacity * pulse * shimmer;
+			if (center_a < 0.15 && max_in > 0.5) {
+				if (dash_pattern < -0.25) {
+					// Fissura escura no contorno
+					ALBEDO = aura_color.rgb * 0.18;
+					ALPHA = 0.65;
+				} else {
+					ALBEDO = debuff_rgb;
+					ALPHA = aura_color.a * 0.92;
+				}
+			} else if (center_a < 0.15 && halo_avg > 0.16) {
+				// Névoa externa mais fechada e pesada
+				ALBEDO = aura_color.rgb * 0.42 * down_wave;
+				ALPHA = clamp(halo_avg * 1.1, 0.0, 1.0) * (halo_opacity * 0.75) * flicker;
+			} else if (center_a >= 0.5 && min_in < 0.5) {
+				// Sombra interna drenante na borda do personagem
+				ALBEDO = aura_color.rgb * 0.22;
+				ALPHA = (rim_opacity + 0.16) * down_wave;
+			} else {
+				discard;
+			}
 		} else {
-			discard;
+			// Buff: contorno contínuo luminoso, halo radiante e onda ascendente de brilho
+			float pulse = 0.8 + 0.2 * sin(TIME * pulse_speed);
+			float shimmer = 0.86 + 0.14 * sin(TIME * (pulse_speed * 1.35) - UV.y * 22.0);
+			vec3 glow_rgb = aura_color.rgb * aura_intensity * pulse * shimmer;
+
+			if (center_a < 0.15 && max_in > 0.5) {
+				ALBEDO = glow_rgb;
+				ALPHA = aura_color.a * (0.85 + 0.15 * pulse);
+			} else if (center_a < 0.15 && halo_avg > 0.08) {
+				ALBEDO = glow_rgb * 0.9;
+				ALPHA = clamp(halo_avg * 1.4, 0.0, 1.0) * halo_opacity * pulse;
+			} else if (center_a >= 0.5 && min_in < 0.5) {
+				ALBEDO = glow_rgb;
+				ALPHA = rim_opacity * pulse * shimmer;
+			} else {
+				discard;
+			}
 		}
 	} else {
 		discard;

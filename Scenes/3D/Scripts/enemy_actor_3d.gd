@@ -10,6 +10,7 @@ signal setup_finished
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var combat_component: CombatComponent = $CombatComponent
 @onready var vfx_center: Marker3D = get_node_or_null("VFXCenter")
+@onready var intro_light: OmniLight3D = get_node_or_null("IntroLight")
 
 var enemy_data: EnemyData
 var _aura_active: bool = false
@@ -38,6 +39,9 @@ func setup(data: EnemyData, rolled_value:int) -> void:
 		return
 		
 	anim_sprite.sprite_frames = enemy_data.sprite_frames
+	anim_sprite.modulate = Color.WHITE
+	if intro_light != null:
+		intro_light.light_energy = 0.0
 	play_idle()
 	_sync_aura_texture()
 	
@@ -52,24 +56,26 @@ func _on_aura_changed(aura_type: String, stat_name: String) -> void:
 	if aura_type == "none":
 		_aura_active = false
 		mat.set_shader_parameter("aura_active", false)
+		mat.set_shader_parameter("is_debuff", false)
 		return
 	_aura_active = true
 	_sync_aura_texture()
+	var is_debuff := aura_type == "debuff"
 	mat.set_shader_parameter("aura_active", true)
-	mat.set_shader_parameter("aura_color", _color_for_aura(aura_type, stat_name))
+	mat.set_shader_parameter("is_debuff", is_debuff)
+	mat.set_shader_parameter("aura_color", _color_for_stat(stat_name))
 	mat.set_shader_parameter("aura_intensity", 2.2)
 	mat.set_shader_parameter("outline_pixels", 2.2)
-	mat.set_shader_parameter("pulse_speed", 4.6 if aura_type == "debuff" else 3.2)
+	mat.set_shader_parameter("pulse_speed", 4.6 if is_debuff else 3.2)
 
-func _color_for_aura(aura_type: String, stat_name: String) -> Color:
-	if aura_type == "debuff":
-		return Color(1.0, 0.22, 0.58, 1.0)
+func _color_for_stat(stat_name: String) -> Color:
 	match stat_name.to_lower().strip_edges():
 		"defense": return Color(0.25, 0.92, 1.0, 1.0)
-		"strength", "attack": return Color(1.0, 0.75, 0.15, 1.0)
-		"intelligence": return Color(0.84, 0.48, 1.0, 1.0)
-		"faith": return Color(1.0, 0.95, 0.48, 1.0)
-		"agility": return Color(0.32, 1.0, 0.58, 1.0)
+		"strength": return Color(1.0, 0.68, 0.14, 1.0)
+		"attack": return Color(1.0, 0.48, 0.10, 1.0)
+		"intelligence": return Color(0.78, 0.49, 1.0, 1.0)
+		"faith": return Color(1.0, 0.95, 0.46, 1.0)
+		"agility": return Color(0.22, 0.95, 0.78, 1.0)
 		_: return Color(1.0, 0.85, 0.25, 1.0)
 
 func _sync_aura_texture() -> void:
@@ -131,3 +137,12 @@ func face_target(target_global_pos: Vector3) -> void:
 	var look_pos = Vector3(target_global_pos.x, global_position.y, target_global_pos.z)
 	look_at(look_pos, Vector3.UP)
 	#rotate_y(PI)
+
+func pulse_intro_light(color: Color, peak_energy: float = 5.5, hold_time: float = 0.9) -> void:
+	if intro_light == null:
+		return
+	intro_light.light_color = color
+	var tween := create_tween()
+	tween.tween_property(intro_light, "light_energy", peak_energy, 0.2).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+	tween.tween_interval(hold_time)
+	tween.tween_property(intro_light, "light_energy", 0.0, 0.55).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)

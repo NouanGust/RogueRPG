@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/01.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"elite_werewolf_claw"
+display_name = "Garras Ferozes"
+description = "Ataque veloz com garras afiadas."
+effect_type = "damage"
+power_multiplier = 1.15
+accuracy = 95
+attack_style = "melee"
+slash_texture = ExtResource("2_tex")
+slash_palette = 0

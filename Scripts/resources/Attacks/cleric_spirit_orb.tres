@@ -1,23 +1,15 @@
-[gd_resource type="Resource" script_class="AttackData" format=3]
+[gd_resource type="Resource" script_class="AttackData" format=3 uid="uid://c4jgws8kt7qoh"]
 
-[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
-[ext_resource type="Texture2D" path="res://Assets/Images/Kitsune/Fire_2.png" id="2_proj"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://r2nvpu2q7nyu" path="res://Assets/Images/Kitsune/Fire_2.png" id="2_proj"]
 
 [resource]
 script = ExtResource("1_script")
 id = &"cleric_spirit_orb"
 display_name = "Orbe Espiritual"
 description = "Disparo espiritual preciso que sempre acerta."
-effect_type = "damage"
-power_multiplier = 1.0
-flat_bonus = 0
-accuracy = 100
-max_uses = 0
 attack_style = "ranged"
 projectile_texture = ExtResource("2_proj")
-projectile_frame_size = Vector2i(64, 64)
 projectile_flight_frames = 5
 projectile_impact_frames = 6
-projectile_speed = 8.0
-projectile_arc_height = 0.0
-projectile_color = Color(0.25, 0.9, 1, 1)
+projectile_color = Color(0.28, 0.82, 1, 1)

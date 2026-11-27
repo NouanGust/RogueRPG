@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"elite_gorgon_scales"
+display_name = "Escamas Antigas"
+description = "Endurece a pele aumentando a defesa em +3 por 3 turnos."
+effect_type = "buff"
+accuracy = 100
+buff_stat = "defense"
+buff_amount = 3
+buff_turns = 3
+attack_style = "self"

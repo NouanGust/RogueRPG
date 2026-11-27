@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/04.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"elite_gorgon_lash"
+display_name = "Chicote de Serpentes"
+description = "Golpe rápido com serpentes venenosas."
+effect_type = "damage"
+power_multiplier = 1.1
+accuracy = 100
+attack_style = "melee"
+slash_texture = ExtResource("2_tex")
+slash_palette = 2

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"elite_werewolf_frenzy"
+display_name = "Frenesi Lupino"
+description = "Uivo feroz que aumenta o ataque em +3 por 3 turnos."
+effect_type = "buff"
+accuracy = 100
+buff_stat = "attack"
+buff_amount = 3
+buff_turns = 3
+attack_style = "self"

@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/02.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"elite_karasu_dive"
+display_name = "Investida Sombria"
+description = "Ataque brutal que ignora 25% da defesa do herói."
+effect_type = "damage"
+power_multiplier = 1.4
+accuracy = 85
+ignore_defense_ratio = 0.25
+attack_style = "melee"
+slash_texture = ExtResource("2_tex")
+slash_palette = 5

@@ -34,6 +34,7 @@ var is_moving: bool = false
 var settings_ui: Control
 var settings_return_ui: Control
 var menu_back_button: Button
+var achievements_ui: AchievementsPanel
 
 func _ready() -> void:
 	
@@ -55,6 +56,9 @@ func _ready() -> void:
 	$UILayer.add_child(settings_ui)
 	settings_ui.hide()
 	settings_ui.back_requested.connect(func(): _switch_ui(settings_return_ui if settings_return_ui else title_ui))
+	achievements_ui = preload("res://Scenes/ui/achievements_panel.tscn").instantiate() as AchievementsPanel
+	$UILayer.add_child(achievements_ui)
+	achievements_ui.hide()
 	var navigation := HBoxContainer.new()
 	navigation.position = Vector2(24, 24)
 	navigation.theme = preload("res://Scenes/ui/adventure_theme.tres")
@@ -68,11 +72,26 @@ func _ready() -> void:
 	menu_back_button.add_theme_stylebox_override("pressed", preload("res://Assets/Themes/quit_button_hover.tres"))
 	navigation.add_child(menu_back_button)
 	menu_back_button.pressed.connect(_return_to_title)
+	KeyboardNav.attach_key_hint(menu_back_button, "ESC")
+	KeyboardNav.attach_key_hint(battle_button, "R")
+	KeyboardNav.attach_key_hint(stash_button, "E")
+	KeyboardNav.attach_key_hint(stash_back_button, "ESC")
 	var config_button := Button.new()
 	config_button.text = "Configurações"
 	config_button.custom_minimum_size = Vector2(150, 40)
 	navigation.add_child(config_button)
 	config_button.pressed.connect(_on_settings_requested)
+	KeyboardNav.attach_key_hint(config_button, "G")
+	var achievements_button := Button.new()
+	achievements_button.text = "Conquistas"
+	achievements_button.custom_minimum_size = Vector2(150, 40)
+	navigation.add_child(achievements_button)
+	KeyboardNav.attach_key_hint(achievements_button, "C")
+	achievements_button.pressed.connect(func():
+		if AudioManager.has_method("play_ui_click"):
+			AudioManager.play_ui_click()
+		if achievements_ui:
+			achievements_ui.open_panel())
 	
 	if GameState.get("returning_from_battle"):
 		GameState.returning_from_battle = false
@@ -86,6 +105,45 @@ func _ready() -> void:
 		camera.rotation_degrees.x -= 15
 	
 		_play_intro()
+
+func _unhandled_input(event: InputEvent) -> void:
+	if is_moving or not (event is InputEventKey and event.pressed and not event.echo):
+		return
+	var focused := get_viewport().gui_get_focus_owner()
+	if focused is LineEdit or focused is TextEdit:
+		return
+	if achievements_ui != null and achievements_ui.visible:
+		return
+	if settings_ui != null and settings_ui.visible:
+		if event.is_action_pressed("ui_cancel"):
+			_switch_ui(settings_return_ui if settings_return_ui else title_ui)
+			get_viewport().set_input_as_handled()
+		return
+	if stash_ui != null and stash_ui.visible:
+		if event.is_action_pressed("ui_cancel") or event.keycode == KEY_E:
+			move_to_station(pos_main, main_ui)
+			get_viewport().set_input_as_handled()
+		return
+	if main_ui != null and main_ui.visible:
+		match event.keycode:
+			KEY_R:
+				_on_start_battle_pressed()
+				get_viewport().set_input_as_handled()
+			KEY_E:
+				move_to_station(pos_stash, stash_ui)
+				get_viewport().set_input_as_handled()
+			KEY_C:
+				if AudioManager.has_method("play_ui_click"):
+					AudioManager.play_ui_click()
+				if achievements_ui:
+					achievements_ui.open_panel()
+				get_viewport().set_input_as_handled()
+			KEY_G:
+				_on_settings_requested()
+				get_viewport().set_input_as_handled()
+			KEY_ESCAPE:
+				_return_to_title()
+				get_viewport().set_input_as_handled()
 
 func _update_main_ui_info() -> void:
 	if SaveManager.current_profile_name != "":
@@ -194,16 +252,6 @@ func _return_to_title() -> void:
 		_show_save_error()
 		return
 	move_to_station(pos_main, title_ui)
-
-func _unhandled_input(event: InputEvent) -> void:
-	if is_moving or settings_ui.visible or not event.is_action_pressed("ui_cancel"):
-		return
-	if stash_ui.visible:
-		get_viewport().set_input_as_handled()
-		move_to_station(pos_main, main_ui)
-	elif main_ui.visible:
-		get_viewport().set_input_as_handled()
-		_return_to_title()
 
 
 func _on_load_game_requested() -> void:

@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"elite_gorgon_gaze"
+display_name = "Olhar Petrificante"
+description = "Reduz a agilidade do herói em -3 por 3 turnos."
+effect_type = "debuff"
+accuracy = 90
+debuff_stat = "agility"
+debuff_amount = 3
+debuff_turns = 3
+attack_style = "self"

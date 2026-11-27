@@ -13,6 +13,7 @@ func _default_profile() -> Dictionary:
 		"backpack_items": [], "stash_items": [], "active_class_path": "",
 		"active_attributes": {}, "active_level": 1, "active_xp": 0,
 		"active_attacks": [],
+		"unlocked_achievements": [], "defeated_elites": [],
 	}
 
 func _ready() -> void:
@@ -118,6 +119,13 @@ func _valid_profile_data(data: Dictionary) -> bool:
 		for path in data.active_attacks:
 			if not path is String or not path.begins_with("res://Scripts/resources/Attacks/"):
 				return false
+	for key in ["unlocked_achievements", "defeated_elites"]:
+		if data.has(key):
+			if not data[key] is Array:
+				return false
+			for entry in data[key]:
+				if not entry is String:
+					return false
 	return true
 
 func _sync_to_game_state() -> void:
@@ -267,3 +275,22 @@ func get_saved_backpack() -> Array[ItemData]:
 
 func get_saved_stash() -> Array[ItemData]:
 	return _load_items(profile_data.stash_items)
+
+func get_unlocked_achievements() -> Array[String]:
+	var result: Array[String] = []
+	for entry in profile_data.get("unlocked_achievements", []):
+		if entry is String:
+			result.append(entry)
+	return result
+
+func get_defeated_elites() -> Array[String]:
+	var result: Array[String] = []
+	for entry in profile_data.get("defeated_elites", []):
+		if entry is String:
+			result.append(entry)
+	return result
+
+func save_achievements(unlocked: Array[String], defeated_elites: Array[String]) -> bool:
+	profile_data["unlocked_achievements"] = unlocked.duplicate()
+	profile_data["defeated_elites"] = defeated_elites.duplicate()
+	return save_game()

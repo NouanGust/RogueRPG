@@ -4,12 +4,14 @@ extends Resource
 @export var id: StringName
 @export var display_name: String
 @export var sprite_frames: SpriteFrames
+@export var is_elite: bool = false
 
 @export_group("Base Stats")
 @export var base_hp: int = 15
 @export var base_attack: int = 1
 @export var base_defense: int = 0
 @export var xp_reward: int = 10
+@export var elite_coin_bonus: int = 0
 
 @export_group("Dado por atributo")
 @export var stats_dice: int = 4
@@ -28,3 +30,8 @@ extends Resource
 
 @export_group("Ataques do Inimigo")
 @export var attacks: Array[AttackData] = []
+
+@export_group("Apresentação Elite")
+@export var elite_epithet: String = ""
+@export var elite_theme_color: Color = Color(1.0, 0.72, 0.25, 1.0)
+@export_enum("rush", "mystic", "drop", "shadow") var elite_intro_style: String = "rush"

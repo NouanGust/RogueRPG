@@ -16,6 +16,7 @@ signal battle_finished(player_won: bool)
 @onready var ui: BattleUI = $UILayer/BattleUI
 
 @export var enemy_pool: Array[EnemyData] = []
+@export var elite_enemy_pool: Array[EnemyData] = []
 @export var damage_text_scene: PackedScene
 @export var loot_pool: Array[ItemData] = []
 @export_range(0.0, 1.0) var backpack_drop_chance: float = 0.05
@@ -46,10 +47,17 @@ var is_peaceful_room: bool = false
 var pending_loot: ItemData
 var enemy_defeat_pending: bool = false
 var last_camp_encounter: int = 0
+var next_battle_is_elite: bool = false
+var rounds_since_last_elite: int = 3
 var buff_just_applied: bool = false
 var attack_uses_remaining: Array[int] = []
+var _elite_intro_active: bool = false
+var _elite_intro_waiting_confirm: bool = false
+var _elite_intro_confirmed: bool = false
 
 const ENEMY_TURN_DELAY := 2
+const ELITE_MIN_BREATHER_ROUNDS := 3
+const ELITE_SPAWN_CHANCE := 0.38
 
 func _ready() -> void:
 
@@ -64,16 +72,29 @@ func _ready() -> void:
 	start_battle()
 
 func _process(_delta: float) -> void:
-	if not battle_active or main_camera == null:
+	if not battle_active or main_camera == null or _elite_intro_active:
 		return
 
 	_update_floating_health_bars()
 
+func _input(event: InputEvent) -> void:
+	if not _elite_intro_active or not _elite_intro_waiting_confirm:
+		return
+	var clicked: bool = event is InputEventMouseButton and (event as InputEventMouseButton).pressed and (event as InputEventMouseButton).button_index == MOUSE_BUTTON_LEFT
+	var accepted: bool = event.is_action_pressed("ui_accept")
+	if clicked or accepted:
+		_elite_intro_confirmed = true
+		get_viewport().set_input_as_handled()
+
 func _setup_peaceful_room() -> void:
 	battle_active = true
 	enemy_node.hide()
+	enemy_node.stats_component.active_buff = {"stat": "", "amount": 0, "turns": 0}
+	enemy_node.stats_component.aura_changed.emit("none", "")
 	ui.set_enemy_bar_visible(false)
 	_reset_attack_uses()
+	_refresh_status_badges()
+	ui.update_expedition_progress(GameState.encounters_won, true, next_battle_is_elite)
 
 	ui.attack_button.disabled = false
 	ui.attack_button.text = "AVANÇAR"
@@ -81,6 +102,8 @@ func _setup_peaceful_room() -> void:
 	ui.camp_back_button.show()
 
 	ui.log_str("[color=green]ACAMPAMENTO SEGURO[/color]")
+	if next_battle_is_elite:
+		ui.log_str("[color=orange]Prepare-se! Um Inimigo Elite aguarda na próxima batalha.[/color]")
 	ui.log_str("Usos de ataque restaurados. Use itens, RETORNE ao lobby sem punições, ou clique em AVANÇAR para continuar.")
 
 
@@ -121,29 +144,155 @@ func start_battle() -> void:
 	battle_started.emit()
 
 func _spawn_enemy_for_level(level: int) -> void:
-	if enemy_pool.is_empty():
+	var is_elite_round := next_battle_is_elite and not elite_enemy_pool.is_empty()
+	next_battle_is_elite = false
+	var active_pool: Array[EnemyData] = elite_enemy_pool if is_elite_round else enemy_pool
+	if active_pool.is_empty():
 		battle_active = false
 		_enter_phase(Phase.FINISHED)
 		ui.log_str("Nenhum inimigo disponível. Retorne ao lobby.")
 		battle_finished.emit(true)
 		return
 	_enter_phase(Phase.SPAWNING)
+	ui.update_expedition_progress(GameState.encounters_won, false, is_elite_round)
 	enemy_node.show()
 	ui.set_enemy_bar_visible(true)
-	var enemy_data: EnemyData = enemy_pool.pick_random()
-	var rolled_value := (level - 1) * 2
+	var enemy_data: EnemyData = active_pool.pick_random()
+	var rolled_value := (level - 1) * 2 + (2 if enemy_data.is_elite else 0)
 	enemy_node.setup(enemy_data, rolled_value)
-	var base_pos := Vector3(0, 0.666, -2)
-	enemy_node.global_position = base_pos - Vector3(0, 0, 8)
-	enemy_node.face_target(player_node.global_position)
-	enemy_node.play_walk()
-	var tween := create_tween()
-	tween.tween_property(enemy_node, "global_position", base_pos, 1.5)
-	await tween.finished
+	var enemy_scale := 1.14 if enemy_data.is_elite else 1.0
+	enemy_node.scale = Vector3.ONE * enemy_scale
+	if enemy_data.is_elite:
+		ui.set_turn_text("ELITE: %s se aproxima!" % enemy_data.display_name)
+		ui.log_str("[color=orange]INIMIGO ELITE: %s entrou na batalha![/color]" % enemy_data.display_name)
+	var ground_offset := (enemy_scale - 1.0) * 0.64
+	var base_pos := Vector3(0, 0.666 + ground_offset, -2)
+	if enemy_data.is_elite:
+		await _play_elite_intro(enemy_data, base_pos)
+	else:
+		enemy_node.global_position = base_pos - Vector3(0, 0, 8)
+		enemy_node.face_target(player_node.global_position)
+		enemy_node.play_walk()
+		var tween := create_tween()
+		tween.tween_property(enemy_node, "global_position", base_pos, 1.5)
+		await tween.finished
 	if phase != Phase.SPAWNING:
 		return
 	enemy_node.play_idle()
 	_enter_phase(Phase.PLAYER)
+
+func _play_elite_intro(enemy_data: EnemyData, base_pos: Vector3) -> void:
+	_elite_intro_active = true
+	_elite_intro_waiting_confirm = false
+	_elite_intro_confirmed = false
+	if ui.has_method("begin_elite_intro"):
+		ui.begin_elite_intro(enemy_data)
+
+	var orig_transform: Transform3D = main_camera.global_transform
+	var orig_fov: float = main_camera.fov
+	var accent: Color = enemy_data.elite_theme_color
+
+	# Enquadramento dramático em contra-plongée suave focado no Elite
+	var focus_target := base_pos + Vector3(0.0, 0.16, 0.0)
+	var intro_cam_pos := base_pos + Vector3(1.38, 0.42, 2.45)
+	var intro_cam_transform := Transform3D(Basis.IDENTITY, intro_cam_pos).looking_at(focus_target, Vector3.UP)
+
+	var cam_in := create_tween().set_parallel(true)
+	cam_in.tween_property(main_camera, "global_transform", intro_cam_transform, 0.85).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+	cam_in.tween_property(main_camera, "fov", 52.0, 0.85).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
+
+	enemy_node.face_target(player_node.global_position)
+	await get_tree().create_timer(0.32).timeout
+
+	match enemy_data.elite_intro_style:
+		"rush":
+			# Lobisomem Alfa: corrida veloz + freada brusca + ataque com clarão carmesim
+			enemy_node.global_position = base_pos + Vector3(0.0, 0.0, -9.0)
+			enemy_node.play_anim("Run")
+			var run_tw := create_tween()
+			run_tw.tween_property(enemy_node, "global_position", base_pos, 0.85).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+			await run_tw.finished
+			enemy_node.global_position = base_pos
+			enemy_node.pulse_intro_light(accent, 6.5, 2.2)
+			AudioManager.play_sfx(attack_sfx, false, 0.62)
+			trigger_camera_shake(0.26, 0.35)
+			enemy_node.play_attack()
+			await _wait_enemy_animation("Attack")
+		"mystic":
+			# Górgona: avanço imponente + animação Special + pulso esmeralda
+			enemy_node.global_position = base_pos + Vector3(0.0, 0.0, -4.5)
+			enemy_node.play_walk()
+			var walk_tw := create_tween()
+			walk_tw.tween_property(enemy_node, "global_position", base_pos, 1.05).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+			await walk_tw.finished
+			enemy_node.global_position = base_pos
+			enemy_node.pulse_intro_light(accent, 6.0, 2.2)
+			AudioManager.play_sfx(item_sfx, false, 0.68)
+			enemy_node.play_anim("Special")
+			await _wait_enemy_animation("Special")
+		"drop":
+			# Yamabushi Tengu: pausa de tensão + queda do céu + impacto forte + pose de bastão
+			enemy_node.global_position = base_pos + Vector3(0.0, 5.8, -0.5)
+			await get_tree().create_timer(0.25).timeout
+			enemy_node.play_anim("Jump")
+			var drop_tw := create_tween()
+			drop_tw.tween_property(enemy_node, "global_position", base_pos, 0.68).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+			await drop_tw.finished
+			enemy_node.global_position = base_pos
+			enemy_node.pulse_intro_light(accent, 6.8, 2.2)
+			AudioManager.play_sfx(attack_sfx, false, 0.55)
+			trigger_camera_shake(0.34, 0.38)
+			enemy_node.play_attack()
+			await _wait_enemy_animation("Attack")
+		"shadow":
+			# Karasu Tengu: surgimento das sombras + dash rápido + corte sombrio no ar
+			enemy_node.global_position = base_pos + Vector3(0.0, 0.0, -5.0)
+			enemy_node.anim_sprite.modulate.a = 0.0
+			enemy_node.play_anim("Run")
+			var sh_tw := create_tween().set_parallel(true)
+			sh_tw.tween_property(enemy_node.anim_sprite, "modulate:a", 1.0, 0.55).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+			sh_tw.tween_property(enemy_node, "global_position", base_pos, 0.72).set_trans(Tween.TRANS_EXPO).set_ease(Tween.EASE_OUT)
+			await sh_tw.finished
+			enemy_node.global_position = base_pos
+			enemy_node.anim_sprite.modulate.a = 1.0
+			enemy_node.pulse_intro_light(accent, 6.4, 2.2)
+			_spawn_slash(_vfx_position_for(enemy_node, 0.16), null, enemy_data.slash_palette, true)
+			AudioManager.play_sfx(attack_sfx, false, 0.72)
+			trigger_camera_shake(0.22, 0.3)
+			enemy_node.play_attack()
+			await _wait_enemy_animation("Attack")
+		_:
+			enemy_node.global_position = base_pos
+			enemy_node.pulse_intro_light(accent, 5.5, 2.0)
+			await get_tree().create_timer(0.8).timeout
+
+	enemy_node.global_position = base_pos
+	enemy_node.anim_sprite.modulate = Color.WHITE
+	enemy_node.play_idle()
+
+	# Aguarda interação do jogador para encerrar a cena e iniciar a batalha
+	_elite_intro_waiting_confirm = true
+	if ui.has_method("show_elite_intro_confirm_prompt"):
+		ui.show_elite_intro_confirm_prompt()
+	while not _elite_intro_confirmed and is_inside_tree():
+		await get_tree().process_frame
+	_elite_intro_waiting_confirm = false
+
+	if AudioManager.has_method("play_ui_click"):
+		AudioManager.play_ui_click()
+
+	var cam_out := create_tween().set_parallel(true)
+	cam_out.tween_property(main_camera, "global_transform", orig_transform, 0.55).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	cam_out.tween_property(main_camera, "fov", orig_fov, 0.55).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_IN_OUT)
+	await cam_out.finished
+	main_camera.global_transform = orig_transform
+	main_camera.fov = orig_fov
+
+	if ui.has_method("end_elite_intro"):
+		ui.end_elite_intro()
+	_elite_intro_active = false
+	_elite_intro_confirmed = false
+	_refresh_status_badges()
 
 
 func _set_turn(new_turn: String) -> void:
@@ -211,21 +360,39 @@ func player_use_attack(attack_index: int) -> void:
 	var attack_name := attack_data.display_name if attack_data != null else "Ataque"
 
 	if style == "self":
+		if not player_node.combat_component.roll_hit(attack_data):
+			AudioManager.play_sfx(dice_sfx, false, 0.72)
+			_spawn_miss_text(player_node)
+			ui.log_str("Você tentou usar %s, mas falhou." % attack_name)
+			await get_tree().create_timer(0.45).timeout
+			await _set_turn("enemy")
+			return
 		player_node.play_level_up_effect()
 		await get_tree().create_timer(0.28).timeout
-		var self_res := player_node.combat_component.execute_attack(attack_data, enemy_node.stats_component, enemy_node.health_component)
+		var self_res := player_node.combat_component.execute_attack(attack_data, enemy_node.stats_component, enemy_node.health_component, true)
 		if self_res.get("type") == "heal":
 			AudioManager.play_sfx(heal_sfx)
-			var msg := "Você usou %s e recuperou %d HP." % [attack_name, int(self_res.get("amount", 0))]
+			var heal_amount: int = int(self_res.get("amount", 0))
+			_spawn_heal_number(heal_amount, player_node)
+			var msg := "Você usou %s e recuperou %d HP." % [attack_name, heal_amount]
 			if self_res.has("buff_stat"):
 				buff_just_applied = true
+				AudioManager.play_buff_sfx(item_sfx)
 				msg += " (+%d %s por %d turnos)" % [int(self_res.get("buff_amount", 0)), str(self_res.get("buff_stat", "")), int(self_res.get("buff_turns", 1))]
 			ui.log_heal(msg)
 		elif self_res.get("type") == "buff":
-			AudioManager.play_sfx(item_sfx)
+			AudioManager.play_buff_sfx(item_sfx)
 			buff_just_applied = true
 			ui.log_heal("Você usou %s: +%d %s por %d turnos." % [attack_name, int(self_res.get("amount", 0)), str(self_res.get("buff_stat", "")), int(self_res.get("buff_turns", 1))])
 		player_node.play_idle()
+		await _set_turn("enemy")
+		return
+
+	if not player_node.combat_component.roll_hit(attack_data):
+		AudioManager.play_sfx(dice_sfx, false, 0.72)
+		_spawn_miss_text(enemy_node)
+		ui.log_str("Você usou %s, mas errou o alvo." % attack_name)
+		await get_tree().create_timer(0.45).timeout
 		await _set_turn("enemy")
 		return
 
@@ -249,25 +416,25 @@ func player_use_attack(attack_index: int) -> void:
 		var slash_pal: int = attack_data.slash_palette if attack_data != null else (class_data.slash_palette if class_data != null else 7)
 		_spawn_slash(_vfx_position_for(enemy_node, 0.12), slash_tex, slash_pal, false)
 
-	var result := player_node.combat_component.execute_attack(attack_data, enemy_node.stats_component, enemy_node.health_component)
+	var attack_buff_color := _get_player_attack_buff_color()
+	var result := player_node.combat_component.execute_attack(attack_data, enemy_node.stats_component, enemy_node.health_component, true)
 	if result.get("hit", true):
 		var res_type: String = str(result.get("type", "damage"))
 		if res_type == "debuff":
-			AudioManager.play_sfx(item_sfx)
+			AudioManager.play_debuff_sfx(item_sfx)
 			ui.log_str("Você usou %s: inimigo recebeu -%d %s por %d turnos." % [attack_name, int(result.get("amount", 0)), str(result.get("debuff_stat", "")), int(result.get("debuff_turns", 1))])
 		else:
 			var damage: int = int(result.get("amount", 0))
 			AudioManager.play_sfx(attack_sfx)
 			trigger_hit_pause(0.08)
-			if damage_text_scene:
-				var text_node = damage_text_scene.instantiate()
-				ui.add_child(text_node)
-				var spawn_pos := main_camera.unproject_position(enemy_node.global_position) + Vector2(0, -30)
-				text_node.start(damage, spawn_pos, damage >= 5)
+			_spawn_combat_number(damage, enemy_node, damage >= 5, attack_buff_color)
 			if res_type == "damage_debuff":
+				AudioManager.play_debuff_sfx(item_sfx)
 				ui.log_damage("Você usou %s: %d de dano e -%d %s no inimigo." % [attack_name, damage, int(result.get("debuff_amount", 0)), str(result.get("debuff_stat", ""))])
 			elif res_type == "drain":
-				ui.log_damage("Você usou %s: %d de dano e recuperou %d HP." % [attack_name, damage, int(result.get("heal_amount", 0))])
+				var drain_heal: int = int(result.get("heal_amount", 0))
+				_spawn_heal_number(drain_heal, player_node)
+				ui.log_damage("Você usou %s: %d de dano e recuperou %d HP." % [attack_name, damage, drain_heal])
 			else:
 				ui.log_damage("Você usou %s e causou %d de dano." % [attack_name, damage])
 	else:
@@ -339,6 +506,14 @@ func _pick_enemy_attack(enemy_data: EnemyData) -> AttackData:
 		if atk.effect_type == "debuff" and player_has_debuff:
 			continue
 		candidates.append(atk)
+		# Elites priorizam buffs próprios e debuffs com peso maior para um combate mais tático e difícil
+		if enemy_data.is_elite:
+			if atk.effect_type == "buff" and not enemy_has_buff:
+				candidates.append(atk)
+				candidates.append(atk)
+			elif atk.effect_type in ["debuff", "damage_debuff"] and not player_has_debuff:
+				candidates.append(atk)
+				candidates.append(atk)
 	if candidates.is_empty():
 		return enemy_data.attacks[0]
 	return candidates.pick_random()
@@ -351,23 +526,31 @@ func enemy_act() -> void:
 	var chosen_attack: AttackData = _pick_enemy_attack(enemy_data)
 	var style := chosen_attack.attack_style if chosen_attack != null else (enemy_data.attack_style if enemy_data != null else "melee")
 	var attack_name := chosen_attack.display_name if chosen_attack != null else "Ataque"
+	var enemy_label := enemy_data.display_name if (enemy_data != null and not enemy_data.display_name.is_empty()) else "Inimigo"
+	if ui.has_method("show_enemy_action_banner"):
+		ui.show_enemy_action_banner(enemy_label, attack_name)
 	var original_pos = enemy_node.global_position
 	var enemy_buffed_now := false
 
-	if style == "self":
+	if not enemy_node.combat_component.roll_hit(chosen_attack):
+		AudioManager.play_sfx(dice_sfx, false, 0.72)
+		_spawn_miss_text(player_node)
+		ui.log_str("%s usou %s, mas errou!" % [enemy_label, attack_name])
+		await get_tree().create_timer(0.55).timeout
+	elif style == "self":
 		enemy_node.play_attack()
 		await get_tree().create_timer(0.35).timeout
-		var self_res := enemy_node.combat_component.execute_attack(chosen_attack, player_node.stats_component, player_node.health_component)
+		var self_res := enemy_node.combat_component.execute_attack(chosen_attack, player_node.stats_component, player_node.health_component, true)
 		enemy_node.play_idle()
 		if not self_res.get("hit", true):
 			ui.log_str("O inimigo usou %s, mas falhou." % attack_name)
 		elif self_res.get("type") == "buff":
 			enemy_buffed_now = true
-			AudioManager.play_sfx(item_sfx)
+			AudioManager.play_buff_sfx(item_sfx)
 			ui.log_str("O inimigo usou %s (+%d %s por %d turnos)." % [attack_name, int(self_res.get("amount", 0)), str(self_res.get("buff_stat", "")), int(self_res.get("buff_turns", 1))])
 		elif self_res.get("type") == "debuff":
 			buff_just_applied = true
-			AudioManager.play_sfx(hurt_sfx)
+			AudioManager.play_debuff_sfx(item_sfx)
 			ui.log_damage("O inimigo usou %s: você sofreu -%d %s por %d turnos." % [attack_name, int(self_res.get("amount", 0)), str(self_res.get("debuff_stat", "")), int(self_res.get("debuff_turns", 1))])
 	elif style == "ranged":
 		enemy_node.play_attack()
@@ -381,13 +564,18 @@ func enemy_act() -> void:
 		)
 		enemy_node.play_idle()
 
-		var res := enemy_node.combat_component.execute_attack(chosen_attack, player_node.stats_component, player_node.health_component)
+		var res := enemy_node.combat_component.execute_attack(chosen_attack, player_node.stats_component, player_node.health_component, true)
 		if res.get("hit", true):
 			var damage: int = int(res.get("amount", 0))
 			AudioManager.play_sfx(hurt_sfx)
 			if res.get("type") == "damage_debuff":
 				buff_just_applied = true
+				AudioManager.play_debuff_sfx(item_sfx)
 				ui.log_damage("O inimigo usou %s: %d de dano e -%d %s." % [attack_name, damage, int(res.get("debuff_amount", 0)), str(res.get("debuff_stat", ""))])
+			elif res.get("type") == "drain":
+				var enemy_heal: int = int(res.get("heal_amount", 0))
+				_spawn_heal_number(enemy_heal, enemy_node)
+				ui.log_damage("O inimigo usou %s: %d de dano e recuperou %d HP." % [attack_name, damage, enemy_heal])
 			else:
 				ui.log_damage("O inimigo usou %s e causou %d de dano." % [attack_name, damage])
 			trigger_camera_shake(clamp(damage * 0.05, 0.1, 0.5), 0.25)
@@ -395,6 +583,7 @@ func enemy_act() -> void:
 			ui.log_str("O inimigo usou %s, mas errou." % attack_name)
 	else:
 		var target_pos = player_node.global_position
+		target_pos.y = original_pos.y
 		target_pos.z -= 1.5
 
 		# 1. Dash 3D
@@ -411,13 +600,18 @@ func enemy_act() -> void:
 		_spawn_slash(_vfx_position_for(player_node, 0.12), slash_tex, slash_pal, true)
 		enemy_node.play_idle()
 
-		var res := enemy_node.combat_component.execute_attack(chosen_attack, player_node.stats_component, player_node.health_component)
+		var res := enemy_node.combat_component.execute_attack(chosen_attack, player_node.stats_component, player_node.health_component, true)
 		if res.get("hit", true):
 			var damage: int = int(res.get("amount", 0))
 			AudioManager.play_sfx(hurt_sfx)
 			if res.get("type") == "damage_debuff":
 				buff_just_applied = true
+				AudioManager.play_debuff_sfx(item_sfx)
 				ui.log_damage("O inimigo usou %s: %d de dano e -%d %s." % [attack_name, damage, int(res.get("debuff_amount", 0)), str(res.get("debuff_stat", ""))])
+			elif res.get("type") == "drain":
+				var enemy_heal: int = int(res.get("heal_amount", 0))
+				_spawn_heal_number(enemy_heal, enemy_node)
+				ui.log_damage("O inimigo usou %s: %d de dano e recuperou %d HP." % [attack_name, damage, enemy_heal])
 			else:
 				ui.log_damage("O inimigo usou %s e causou %d de dano." % [attack_name, damage])
 			trigger_camera_shake(clamp(damage * 0.05, 0.1, 0.5), 0.25)
@@ -500,15 +694,21 @@ func use_item_from_inventory(item: ItemData) -> void:
 	_enter_phase(Phase.RESOLVING)
 	match item.item_type:
 		"potion":
+			var before_hp := player_node.health_component.current_hp
 			player_node.health_component.heal(item.effect_value)
-			ui.log_heal("Você consumiu %s e recuperou até %d HP." % [item.item_name, item.effect_value])
+			var healed_amount := maxi(1, player_node.health_component.current_hp - before_hp)
+			_spawn_heal_number(healed_amount, player_node)
+			ui.log_heal("Você consumiu %s e recuperou %d HP." % [item.item_name, healed_amount])
 		"elixir":
 			var chosen_stat: String = [player_node.stats_component.primary_stat, "agility"].pick_random()
 			player_node.stats_component.apply_buff(chosen_stat, item.effect_value, 3)
 			buff_just_applied = not in_camp
 			ui.log_heal("Elixir: +%d %s por 3 turnos." % [item.effect_value, chosen_stat])
 	GameState.remove_item(item)
-	AudioManager.play_sfx(item_sfx)
+	if item.item_type == "elixir":
+		AudioManager.play_buff_sfx(item_sfx)
+	else:
+		AudioManager.play_sfx(heal_sfx if item.item_type == "potion" else item_sfx)
 	ui.inventory_panel.refresh_items()
 	if in_camp:
 		_enter_phase(Phase.CAMP)
@@ -520,24 +720,46 @@ func _on_enemy_died() -> void:
 	if not battle_active or phase == Phase.LOOT or enemy_defeat_pending:
 		return
 	enemy_defeat_pending = true
+	enemy_node.stats_component.active_buff = {"stat": "", "amount": 0, "turns": 0}
+	enemy_node.stats_component.aura_changed.emit("none", "")
+	if buff_just_applied:
+		buff_just_applied = false
+	else:
+		player_node.stats_component.tick_buffs()
+	_refresh_status_badges()
 	_enter_phase(Phase.RESOLVING)
 	enemy_node.play_dead()
 	await _wait_enemy_animation("Dead")
 	await get_tree().create_timer(0.8).timeout
+	var defeated_elite := enemy_node.enemy_data != null and enemy_node.enemy_data.is_elite
 	var reward := Progression.encounter_xp(enemy_node.enemy_data.xp_reward)
 	GameState.add_xp(reward)
-	var coins_dropped := Progression.coin_reward(current_level)
+	var coins_dropped := Progression.coin_reward(current_level) + (enemy_node.enemy_data.elite_coin_bonus if defeated_elite else 0)
 	SaveManager.profile_data.coins += coins_dropped
 	GameState.encounters_won += 1
+	if defeated_elite:
+		rounds_since_last_elite = 0
+	else:
+		rounds_since_last_elite += 1
+	ui.update_expedition_progress(GameState.encounters_won, false, false)
 	if not SaveManager.save_active_run(GameState.selected_class, GameState.rolled_attributes):
 		ui.log_str(SaveManager.last_error)
-	ui.log_str("Inimigo derrotado! +%d XP | +%d moedas." % [reward, coins_dropped])
+	if defeated_elite:
+		ui.log_str("[color=yellow]ELITE DERROTADO! +%d XP | +%d moedas.[/color]" % [reward, coins_dropped])
+		var unlocked_list := AchievementManager.record_enemy_defeat(enemy_node.enemy_data)
+		for ach in unlocked_list:
+			ui.log_str("[color=yellow]CONQUISTA DESBLOQUEADA: %s - %s[/color]" % [ach.title, ach.description])
+			if ui.has_method("show_achievement_toast"):
+				ui.show_achievement_toast(ach)
+	else:
+		ui.log_str("Inimigo derrotado! +%d XP | +%d moedas." % [reward, coins_dropped])
 	while not level_up_queue.is_empty():
 		_enter_phase(Phase.LEVEL_UP)
 		var growth: Dictionary = level_up_queue.pop_front()
 		player_node.play_level_up_effect()
 		await ui.show_level_up(growth)
-		var candidate := GameState.get_random_unlearned_attack()
+		var reached_level: int = int(growth.get("level", 0))
+		var candidate: AttackData = GameState.get_random_unlearned_attack() if Progression.should_offer_attack_unlock(reached_level) else null
 		if candidate != null and ui.has_method("show_learn_attack"):
 			var equipped := GameState.get_equipped_attacks()
 			if equipped.size() < 4:
@@ -558,8 +780,14 @@ func _on_enemy_died() -> void:
 	if SaveManager.can_upgrade_backpack() and randf() <= backpack_drop_chance:
 		if SaveManager.upgrade_backpack(1):
 			ui.inventory_panel.refresh_items()
-			ui.log_heal("Drop raro! Você encontrou +1 espaço de mochila (capacidade: %d)." % SaveManager.get_backpack_limit())
-	if randf() <= 0.4 and not loot_pool.is_empty():
+			AudioManager.play_buff_sfx(item_sfx)
+			AudioManager.play_ui_choose()
+			var new_limit := SaveManager.get_backpack_limit()
+			if ui.has_method("show_backpack_drop_toast"):
+				ui.show_backpack_drop_toast(new_limit)
+			ui.log_heal("Drop raro! Você encontrou +1 espaço de mochila (capacidade: %d)." % new_limit)
+	var loot_chance := 0.85 if defeated_elite else 0.4
+	if randf() <= loot_chance and not loot_pool.is_empty():
 		pending_loot = loot_pool.pick_random()
 		_enter_phase(Phase.LOOT)
 		ui.show_loot_screen(pending_loot)
@@ -593,7 +821,22 @@ func _on_loot_decision(decision: String, item: ItemData) -> void:
 
 func _procede_to_next_enemy() -> void:
 	enemy_defeat_pending = false
-	if GameState.encounters_won > last_camp_encounter and GameState.encounters_won % 5 == 0:
+	var entering_regular_camp := GameState.encounters_won > last_camp_encounter and GameState.encounters_won % 5 == 0
+	var can_trigger_elite := (
+		not elite_enemy_pool.is_empty()
+		and GameState.encounters_won >= 5
+		and rounds_since_last_elite >= ELITE_MIN_BREATHER_ROUNDS
+		and not next_battle_is_elite
+		and phase != Phase.CAMP
+	)
+	if can_trigger_elite and randf() <= ELITE_SPAWN_CHANCE:
+		next_battle_is_elite = true
+		if entering_regular_camp:
+			last_camp_encounter = GameState.encounters_won
+		_setup_peaceful_room()
+		_enter_phase(Phase.CAMP)
+		return
+	if entering_regular_camp:
 		last_camp_encounter = GameState.encounters_won
 		_setup_peaceful_room()
 		_enter_phase(Phase.CAMP)
@@ -653,6 +896,52 @@ func _on_player_level_up(new_level: int) -> void:
 
 
 # --- Utils ---
+
+func _get_player_attack_buff_color() -> Color:
+	if player_node == null or player_node.stats_component == null:
+		return Color(0, 0, 0, 0)
+	if player_node.stats_component.get_modifier("attack") <= 0:
+		return Color(0, 0, 0, 0)
+	var stat_key := str(player_node.stats_component.active_buff.get("stat", "")).to_lower().strip_edges()
+	if stat_key == "primary_stat":
+		stat_key = player_node.stats_component.primary_stat.to_lower().strip_edges()
+	match stat_key:
+		"strength": return Color(1.0, 0.68, 0.14, 1.0)
+		"intelligence": return Color(0.78, 0.49, 1.0, 1.0)
+		"faith": return Color(1.0, 0.95, 0.46, 1.0)
+		"agility": return Color(0.22, 0.95, 0.78, 1.0)
+		"attack": return Color(1.0, 0.48, 0.10, 1.0)
+		_: return Color(0, 0, 0, 0)
+
+func _spawn_combat_number(
+	amount: int,
+	actor: Node3D,
+	is_critical: bool = false,
+	custom_color: Color = Color(0, 0, 0, 0),
+	prefix: String = ""
+) -> void:
+	if damage_text_scene == null or actor == null or main_camera == null:
+		return
+	var text_node = damage_text_scene.instantiate()
+	ui.add_child(text_node)
+	var spawn_pos := main_camera.unproject_position(actor.global_position) + Vector2(0, -30)
+	text_node.start(amount, spawn_pos, is_critical, custom_color, prefix)
+
+func _spawn_heal_number(amount: int, actor: Node3D) -> void:
+	if amount <= 0 or damage_text_scene == null or actor == null or main_camera == null:
+		return
+	var text_node = damage_text_scene.instantiate()
+	ui.add_child(text_node)
+	var spawn_pos := main_camera.unproject_position(actor.global_position) + Vector2(0, -30)
+	text_node.start_heal(amount, spawn_pos)
+
+func _spawn_miss_text(actor: Node3D) -> void:
+	if damage_text_scene == null or actor == null or main_camera == null:
+		return
+	var text_node = damage_text_scene.instantiate()
+	ui.add_child(text_node)
+	var spawn_pos := main_camera.unproject_position(actor.global_position) + Vector2(0, -34)
+	text_node.start_miss(spawn_pos)
 
 func trigger_hit_pause(duration: float = 0.05) -> void:
 	Engine.time_scale = 0.0

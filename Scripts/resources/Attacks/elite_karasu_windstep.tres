@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"elite_karasu_windstep"
+display_name = "Passo das Sombras"
+description = "Aumenta a agilidade em +4 por 3 turnos."
+effect_type = "buff"
+accuracy = 100
+buff_stat = "agility"
+buff_amount = 4
+buff_turns = 3
+attack_style = "self"

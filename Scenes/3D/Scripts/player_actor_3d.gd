@@ -54,24 +54,29 @@ func _on_aura_changed(aura_type: String, stat_name: String) -> void:
 	if aura_type == "none":
 		_aura_active = false
 		mat.set_shader_parameter("aura_active", false)
+		mat.set_shader_parameter("is_debuff", false)
 		return
 	_aura_active = true
 	_sync_aura_texture()
+	var is_debuff := aura_type == "debuff"
 	mat.set_shader_parameter("aura_active", true)
-	mat.set_shader_parameter("aura_color", _color_for_aura(aura_type, stat_name))
+	mat.set_shader_parameter("is_debuff", is_debuff)
+	mat.set_shader_parameter("aura_color", _color_for_stat(stat_name))
 	mat.set_shader_parameter("aura_intensity", 2.2)
 	mat.set_shader_parameter("outline_pixels", 2.2)
-	mat.set_shader_parameter("pulse_speed", 4.6 if aura_type == "debuff" else 3.2)
+	mat.set_shader_parameter("pulse_speed", 4.6 if is_debuff else 3.2)
 
-func _color_for_aura(aura_type: String, stat_name: String) -> Color:
-	if aura_type == "debuff":
-		return Color(1.0, 0.22, 0.58, 1.0)
-	match stat_name.to_lower().strip_edges():
+func _color_for_stat(stat_name: String) -> Color:
+	var key := stat_name.to_lower().strip_edges()
+	if key == "primary_stat" and stats_component != null:
+		key = stats_component.primary_stat.to_lower().strip_edges()
+	match key:
 		"defense": return Color(0.25, 0.92, 1.0, 1.0)
-		"strength", "attack": return Color(1.0, 0.75, 0.15, 1.0)
-		"intelligence": return Color(0.84, 0.48, 1.0, 1.0)
-		"faith": return Color(1.0, 0.95, 0.48, 1.0)
-		"agility": return Color(0.32, 1.0, 0.58, 1.0)
+		"strength": return Color(1.0, 0.68, 0.14, 1.0)
+		"attack": return Color(1.0, 0.48, 0.10, 1.0)
+		"intelligence": return Color(0.78, 0.49, 1.0, 1.0)
+		"faith": return Color(1.0, 0.95, 0.46, 1.0)
+		"agility": return Color(0.22, 0.95, 0.78, 1.0)
 		_: return Color(1.0, 0.85, 0.25, 1.0)
 
 func _sync_aura_texture() -> void:

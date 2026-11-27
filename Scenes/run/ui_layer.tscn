@@ -99,10 +99,33 @@ size_flags_horizontal = 4
 size_flags_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_4ro08")
 
-[node name="TitleLabel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/PanelContainer" unique_id=499217304]
+[node name="TopHeader" type="VBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/PanelContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_constants/separation = 6
+
+[node name="TitleLabel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/PanelContainer/TopHeader" unique_id=499217304]
+layout_mode = 2
+theme_override_font_sizes/font_size = 22
 text = "Rogue RPG"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ExpeditionRow" type="HBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/PanelContainer/TopHeader"]
+layout_mode = 2
+theme_override_constants/separation = 10
+alignment = 1
+
+[node name="ExpeditionDots" type="HBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/PanelContainer/TopHeader/ExpeditionRow"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/separation = 6
+alignment = 1
+
+[node name="ExpeditionLabel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/PanelContainer/TopHeader/ExpeditionRow"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.95, 0.9, 0.74, 1)
+theme_override_font_sizes/font_size = 13
+text = "Batalha 1/5 - Área segura em 5"
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -202,11 +225,6 @@ size_flags_vertical = 4
 theme_override_constants/separation = 12
 alignment = 2
 
-[node name="StatusBadges" type="HBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/StatusSection"]
-layout_mode = 2
-size_flags_vertical = 4
-theme_override_constants/separation = 8
-
 [node name="HistoryButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/StatusSection"]
 custom_minimum_size = Vector2(126, 40)
 layout_mode = 2
@@ -243,6 +261,39 @@ theme_override_font_sizes/font_size = 14
 text = "HP: 10/10"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="PlayerStatusPanel" type="VBoxContainer" parent="BattleUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -310.0
+offset_right = 290.0
+offset_bottom = -138.0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 2
+
+[node name="EnemyStatusPanel" type="VBoxContainer" parent="BattleUI"]
+visible = false
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -290.0
+offset_top = -310.0
+offset_right = -24.0
+offset_bottom = -138.0
+grow_horizontal = 0
+grow_vertical = 0
+mouse_filter = 2
+theme_override_constants/separation = 6
+alignment = 2
 
 [node name="InventoryPanel" parent="BattleUI" unique_id=1969342278 instance=ExtResource("5_70bmn")]
 visible = false

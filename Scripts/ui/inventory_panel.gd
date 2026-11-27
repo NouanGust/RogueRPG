@@ -15,6 +15,17 @@ func _ready() -> void:
 func open_panel() -> void:
 	refresh_items()
 	show()
+	call_deferred("_focus_first_control")
+
+func _focus_first_control() -> void:
+	if not visible:
+		return
+	for child in item_grid.get_children():
+		if child is Button and not child.disabled:
+			child.grab_focus()
+			return
+	if close_button != null and close_button.is_visible_in_tree():
+		close_button.grab_focus()
 
 func close_panel() -> void:
 	AudioManager.play_ui_cancel()

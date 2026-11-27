@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/02.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"elite_werewolf_bite"
+display_name = "Mordida Sanguinária"
+description = "Morde o alvo e recupera 35% do dano causado como HP."
+effect_type = "drain"
+power_multiplier = 1.1
+accuracy = 90
+drain_ratio = 0.35
+attack_style = "melee"
+slash_texture = ExtResource("2_tex")
+slash_palette = 0

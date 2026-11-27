@@ -14,12 +14,17 @@ func attack(target_stats: StatsComponent, target_health: HealthComponent) -> int
 	target_health.take_damage(final_damage)
 	return final_damage
 
-func execute_attack(attack_data: AttackData, target_stats: StatsComponent, target_health: HealthComponent) -> Dictionary:
+func roll_hit(attack_data: AttackData) -> bool:
+	if attack_data == null or attack_data.accuracy >= 100:
+		return true
+	return randi_range(1, 100) <= attack_data.accuracy
+
+func execute_attack(attack_data: AttackData, target_stats: StatsComponent, target_health: HealthComponent, skip_accuracy_check: bool = false) -> Dictionary:
 	if attack_data == null:
 		var dmg := attack(target_stats, target_health)
 		return {"hit": true, "type": "damage", "amount": dmg}
 
-	if attack_data.accuracy < 100 and randi_range(1, 100) > attack_data.accuracy:
+	if not skip_accuracy_check and not roll_hit(attack_data):
 		return {"hit": false, "type": attack_data.effect_type, "amount": 0}
 
 	match attack_data.effect_type:
