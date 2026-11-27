@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/03.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"enemy_minotaur_crush"
+display_name = "Esmagar Armadura"
+description = "Causa dano e reduz a defesa do jogador em -2 por 2 turnos."
+effect_type = "damage_debuff"
+power_multiplier = 0.85
+accuracy = 90
+debuff_stat = "defense"
+debuff_amount = 2
+debuff_turns = 2
+attack_style = "melee"
+slash_texture = ExtResource("2_tex")
+slash_palette = 1

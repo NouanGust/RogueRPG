@@ -6,7 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://bujdnoyjmkpy2" path="res://Assets/Images/Fire Wizard/Hurt.png" id="4_1psdm"]
 [ext_resource type="Texture2D" uid="uid://de117hsvqejoi" path="res://Assets/Images/Fire Wizard/Idle.png" id="5_k8d1h"]
 [ext_resource type="Texture2D" uid="uid://bxpdd8bmyv3d1" path="res://Assets/Images/Fire Wizard/Walk.png" id="6_n0s18"]
-[ext_resource type="Texture2D" path="res://Assets/Images/Fire Wizard/Charge.png" id="7_proj"]
+[ext_resource type="Texture2D" uid="uid://ck3ixndyf674p" path="res://Assets/Images/Fire Wizard/Charge.png" id="7_proj"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="8_atk_script"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_fire_bolt.tres" id="9_atk1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_fireball.tres" id="10_atk2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_arcane_focus.tres" id="11_atk3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_ember_burst.tres" id="12_atk4"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_blinding_spark.tres" id="13_u1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_flame_lance.tres" id="14_u2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_inferno_surge.tres" id="15_u3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_ember_barrage.tres" id="16_u4"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/mage_arcane_meteor.tres" id="17_u5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_0wc0n"]
 atlas = ExtResource("2_kpkd4")
@@ -230,10 +240,10 @@ strength_dice = 4
 intelligence_dice = 10
 attack_style = "ranged"
 projectile_texture = ExtResource("7_proj")
-projectile_frame_size = Vector2i(64, 64)
 projectile_flight_frames = 6
 projectile_impact_frames = 6
 projectile_speed = 7.5
-projectile_arc_height = 0.0
 projectile_color = Color(1, 0.55, 0.15, 1)
+attacks = Array[ExtResource("8_atk_script")]([ExtResource("9_atk1"), ExtResource("10_atk2"), ExtResource("11_atk3"), ExtResource("12_atk4")])
+unlockable_attacks = Array[ExtResource("8_atk_script")]([ExtResource("13_u1"), ExtResource("14_u2"), ExtResource("15_u3"), ExtResource("16_u4"), ExtResource("17_u5")])
 metadata/_custom_type_script = "uid://dykg8obmcya8q"

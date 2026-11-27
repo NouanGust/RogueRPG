@@ -2,22 +2,28 @@
 
 [ext_resource type="Script" uid="uid://beufxl7eq0lyi" path="res://Scenes/3D/Scripts/enemy_actor_3d.gd" id="1_avwyy"]
 [ext_resource type="SpriteFrames" uid="uid://brgu4rojlcw45" path="res://Scripts/resources/Satyr_frames.tres" id="1_p3m7x"]
-[ext_resource type="Shader" uid="uid://bv5mxen2on5ev" path="res://Scenes/Entities/hit_flash.gdshader" id="2_m36qy"]
+[ext_resource type="Shader" path="res://Assets/Shadders/status_aura_outline.gdshader" id="2_aura"]
 [ext_resource type="Script" uid="uid://cvctj0pw14gwt" path="res://Scripts/Components/stats_component.gd" id="3_m36qy"]
 [ext_resource type="Script" uid="uid://d3tx70s82u3ma" path="res://Scripts/Components/health_component.gd" id="4_dsk1a"]
 [ext_resource type="Script" uid="uid://b5js5veqeeo81" path="res://Scripts/Components/combat_component.gd" id="5_rieus"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_dsk1a"]
-shader = ExtResource("2_m36qy")
-shader_parameter/active = false
-shader_parameter/shadow_offset = Vector2(10, 10)
-shader_parameter/shadow_color = Color(0, 0, 0, 0.5)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aura"]
+resource_local_to_scene = true
+render_priority = 1
+shader = ExtResource("2_aura")
+shader_parameter/region_rect = Vector4(0, 0, 1, 1)
+shader_parameter/aura_active = false
+shader_parameter/aura_color = Color(0.85, 0.18, 0.65, 1)
+shader_parameter/outline_pixels = 2.0
+shader_parameter/pulse_speed = 4.2
+shader_parameter/aura_intensity = 1.45
+shader_parameter/hit_flash = false
 
 [node name="EnemyActor3D" type="Node3D" unique_id=1860734442]
 script = ExtResource("1_avwyy")
 
 [node name="AnimSprite" type="AnimatedSprite3D" parent="." unique_id=1920546388]
-material_overlay = SubResource("ShaderMaterial_dsk1a")
+material_overlay = SubResource("ShaderMaterial_aura")
 flip_h = true
 billboard = 2
 shaded = true
@@ -42,3 +48,6 @@ metadata/_custom_type_script = "uid://b5js5veqeeo81"
 
 [node name="HealthBarAnchor" type="Marker3D" parent="." unique_id=958448306]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3386022, 0)
+
+[node name="VFXCenter" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)

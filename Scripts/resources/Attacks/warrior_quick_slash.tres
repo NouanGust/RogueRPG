@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/01.png" id="2_slash"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"warrior_quick_slash"
+display_name = "Corte Rápido"
+description = "Golpe preciso de espada. Sempre acerta."
+effect_type = "damage"
+power_multiplier = 1.0
+flat_bonus = 0
+accuracy = 100
+max_uses = 0
+attack_style = "melee"
+slash_texture = ExtResource("2_slash")
+slash_palette = 7

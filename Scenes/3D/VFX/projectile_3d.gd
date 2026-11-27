@@ -8,7 +8,7 @@ signal impacted
 
 @export var default_speed: float = 8.0
 @export var default_fps: float = 16.0
-@export var default_scale: float = 1.4
+@export var default_scale: float = 0.85
 
 var _start_pos: Vector3
 var _target_pos: Vector3

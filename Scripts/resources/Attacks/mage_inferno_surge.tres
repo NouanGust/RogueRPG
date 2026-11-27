@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"mage_inferno_surge"
+display_name = "Sobrecarga Ígnea"
+description = "Aumenta a inteligência em +5 por 2 turnos."
+effect_type = "buff"
+accuracy = 100
+max_uses = 2
+buff_stat = "intelligence"
+buff_amount = 5
+buff_turns = 2
+attack_style = "self"

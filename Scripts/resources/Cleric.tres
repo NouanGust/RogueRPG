@@ -6,7 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://bjivu3ndbh0dx" path="res://Assets/Images/Kitsune/Hurt.png" id="4_ff27y"]
 [ext_resource type="Texture2D" uid="uid://dgolkupt1ie6v" path="res://Assets/Images/Kitsune/Idle.png" id="5_jttuw"]
 [ext_resource type="Texture2D" uid="uid://cgyfk7u71pwjy" path="res://Assets/Images/Kitsune/Walk.png" id="6_r1cor"]
-[ext_resource type="Texture2D" path="res://Assets/Images/Kitsune/Fire_2.png" id="7_proj"]
+[ext_resource type="Texture2D" uid="uid://r2nvpu2q7nyu" path="res://Assets/Images/Kitsune/Fire_2.png" id="7_proj"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="8_atk_script"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/cleric_spirit_orb.tres" id="9_atk1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/cleric_sacred_flame.tres" id="10_atk2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/cleric_healing_light.tres" id="11_atk3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/cleric_blessing.tres" id="12_atk4"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/cleric_fox_curse.tres" id="13_u1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/cleric_will_o_wisp.tres" id="14_u2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/cleric_protective_veil.tres" id="15_u3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/cleric_celestial_judgment.tres" id="16_u4"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/cleric_spirit_awakening.tres" id="17_u5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4otbh"]
 atlas = ExtResource("2_lov3c")
@@ -315,10 +325,10 @@ strength_dice = 4
 faith_dice = 10
 attack_style = "ranged"
 projectile_texture = ExtResource("7_proj")
-projectile_frame_size = Vector2i(64, 64)
 projectile_flight_frames = 5
 projectile_impact_frames = 6
 projectile_speed = 7.5
-projectile_arc_height = 0.0
 projectile_color = Color(0.25, 0.9, 1, 1)
+attacks = Array[ExtResource("8_atk_script")]([ExtResource("9_atk1"), ExtResource("10_atk2"), ExtResource("11_atk3"), ExtResource("12_atk4")])
+unlockable_attacks = Array[ExtResource("8_atk_script")]([ExtResource("13_u1"), ExtResource("14_u2"), ExtResource("15_u3"), ExtResource("16_u4"), ExtResource("17_u5")])
 metadata/_custom_type_script = "uid://dykg8obmcya8q"

@@ -11,7 +11,7 @@ const PALETTES_PER_ROW := 4
 @export var slash_texture: Texture2D = DEFAULT_SLASH_TEXTURE
 @export_range(0, 7) var palette_index: int = 7
 @export var fps: float = 24.0
-@export var effect_scale: float = 1.6
+@export var effect_scale: float = 1.0
 @export var flip_horizontal: bool = false
 
 var _configured: bool = false
@@ -25,7 +25,7 @@ func play_effect(
 	texture: Texture2D = null,
 	palette: int = 7,
 	speed_fps: float = 24.0,
-	scale_mult: float = 1.6,
+	scale_mult: float = 1.0,
 	flip_h: bool = false
 ) -> void:
 	_configured = true

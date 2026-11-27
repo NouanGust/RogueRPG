@@ -6,7 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://cp5iajn1ufxcd" path="res://Assets/Images/Skeleton_Archer/Hurt.png" id="4_mft8e"]
 [ext_resource type="Texture2D" uid="uid://c2t62q5gfs6cl" path="res://Assets/Images/Skeleton_Archer/Idle.png" id="5_6cqs6"]
 [ext_resource type="Texture2D" uid="uid://du03xvjn1nvj4" path="res://Assets/Images/Skeleton_Archer/Walk.png" id="6_r3bon"]
-[ext_resource type="Texture2D" path="res://Assets/Images/Skeleton_Archer/Arrow.png" id="7_proj"]
+[ext_resource type="Texture2D" uid="uid://kjxxxrqiseru" path="res://Assets/Images/Skeleton_Archer/Arrow.png" id="7_proj"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="8_atk_script"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_archer_arrow.tres" id="9_ea1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_archer_charged.tres" id="10_ea2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_archer_focus.tres" id="11_ea3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_archer_weaken.tres" id="12_ea4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_dyn76"]
 atlas = ExtResource("2_ohvpj")
@@ -307,9 +312,7 @@ xp_reward = 12
 attack_style = "ranged"
 projectile_texture = ExtResource("7_proj")
 projectile_frame_size = Vector2i(48, 48)
-projectile_flight_frames = 1
-projectile_impact_frames = 0
 projectile_speed = 11.0
 projectile_arc_height = 0.3
-projectile_color = Color(1, 1, 1, 1)
+attacks = Array[ExtResource("8_atk_script")]([ExtResource("9_ea1"), ExtResource("10_ea2"), ExtResource("11_ea3"), ExtResource("12_ea4")])
 metadata/_custom_type_script = "uid://hcscc6dcxeho"

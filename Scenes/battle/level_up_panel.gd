@@ -25,8 +25,8 @@ func present(growth: Dictionary) -> void:
 		var bonus: int = growth.bonuses[index]
 		var total: int = growth.attributes[keys[index]]
 		stat_card.get_node("Bonus").text = "+%d" % bonus
-		stat_card.get_node("Value").text = "%d → %d" % [total - bonus, total]
-	$Card/Content/Detail.text = "Vida máxima +%d  ·  Seu poder foi atualizado" % growth.bonuses[0]
+		stat_card.get_node("Value").text = "%d para %d" % [total - bonus, total]
+	$Card/Content/Detail.text = "Vida máxima +%d - Seu poder foi atualizado" % growth.bonuses[0]
 	continue_button.disabled = true
 	card.modulate.a = 0.0
 	show()

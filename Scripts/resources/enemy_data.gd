@@ -25,3 +25,6 @@ extends Resource
 @export var projectile_speed: float = 8.0
 @export var projectile_arc_height: float = 0.0
 @export var projectile_color: Color = Color(1, 1, 1, 1)
+
+@export_group("Ataques do Inimigo")
+@export var attacks: Array[AttackData] = []

@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"warrior_shield_guard"
+display_name = "Postura Firme"
+description = "Aumenta a defesa em +3 por 2 turnos."
+effect_type = "buff"
+accuracy = 100
+max_uses = 4
+buff_stat = "defense"
+buff_amount = 3
+buff_turns = 2
+attack_style = "self"

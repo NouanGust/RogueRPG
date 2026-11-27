@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"enemy_satyr_song"
+display_name = "Canção Perturbadora"
+description = "Reduz o atributo principal do jogador em -2 por 2 turnos."
+effect_type = "debuff"
+accuracy = 90
+debuff_stat = "primary_stat"
+debuff_amount = 2
+debuff_turns = 2
+attack_style = "self"

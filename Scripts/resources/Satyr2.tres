@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://ba43knavutqi2" path="res://Assets/Images/Satyr2/Hurt.png" id="4_ucmo8"]
 [ext_resource type="Texture2D" uid="uid://wfyggv871t7e" path="res://Assets/Images/Satyr2/Idle.png" id="5_l2xfy"]
 [ext_resource type="Texture2D" uid="uid://bdqcki3y8xjg5" path="res://Assets/Images/Satyr2/Walk.png" id="6_8sbta"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="7_atk_script"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_satyr_thrust.tres" id="8_es1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_satyr_slash.tres" id="9_es2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_satyr_forest_step.tres" id="10_es3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_satyr_song.tres" id="11_es4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gloip"]
 atlas = ExtResource("2_fndgq")
@@ -259,6 +264,6 @@ base_hp = 7
 base_attack = 2
 base_defense = 3
 xp_reward = 12
-attack_style = "melee"
 slash_palette = 3
+attacks = Array[ExtResource("7_atk_script")]([ExtResource("8_es1"), ExtResource("9_es2"), ExtResource("10_es3"), ExtResource("11_es4")])
 metadata/_custom_type_script = "uid://hcscc6dcxeho"

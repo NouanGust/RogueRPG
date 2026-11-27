@@ -2,6 +2,11 @@
 
 [ext_resource type="Script" uid="uid://hcscc6dcxeho" path="res://Scripts/resources/enemy_data.gd" id="1_cra7t"]
 [ext_resource type="SpriteFrames" uid="uid://brgu4rojlcw45" path="res://Scripts/resources/Satyr_frames.tres" id="2_3n8ks"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="3_atk_script"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_satyr_thrust.tres" id="4_es1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_satyr_slash.tres" id="5_es2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_satyr_forest_step.tres" id="6_es3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_satyr_song.tres" id="7_es4"]
 
 [resource]
 script = ExtResource("1_cra7t")
@@ -10,6 +15,6 @@ base_hp = 7
 base_attack = 2
 base_defense = 3
 xp_reward = 12
-attack_style = "melee"
 slash_palette = 3
+attacks = Array[ExtResource("3_atk_script")]([ExtResource("4_es1"), ExtResource("5_es2"), ExtResource("6_es3"), ExtResource("7_es4")])
 metadata/_custom_type_script = "uid://hcscc6dcxeho"

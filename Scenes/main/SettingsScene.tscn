@@ -154,5 +154,5 @@ size_flags_vertical = 3
 
 [node name="Back" type="Button" parent="Panel/VBox"]
 layout_mode = 2
-text = "← Voltar"
+text = "Voltar"
 custom_minimum_size = Vector2(0, 48)

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/05.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"warrior_brutal_charge"
+display_name = "Investida Brutal"
+description = "Golpe potente que ignora metade da defesa do inimigo."
+effect_type = "damage"
+power_multiplier = 1.35
+accuracy = 85
+max_uses = 3
+ignore_defense_ratio = 0.5
+attack_style = "melee"
+slash_texture = ExtResource("2_tex")
+slash_palette = 1

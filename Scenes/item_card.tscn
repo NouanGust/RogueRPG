@@ -1,5 +1,8 @@
 [gd_scene format=3 uid="uid://bs1pa3rcorq6k"]
 [ext_resource type="Script" path="res://Scripts/ui/item_card.gd" id="1"]
+[ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="2_confirm"]
+[ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="3_confirm_hover"]
+[ext_resource type="StyleBox" uid="uid://deqy0stw5v850" path="res://Assets/Themes/confirm_button_disable.tres" id="4_confirm_dis"]
 
 [node name="ItemCard" type="PanelContainer"]
 custom_minimum_size = Vector2(0, 108)
@@ -12,7 +15,7 @@ theme_override_constants/separation = 14
 
 [node name="ItemIcon" type="TextureRect" parent="Row"]
 layout_mode = 2
-custom_minimum_size = Vector2(48, 64)
+custom_minimum_size = Vector2(44, 44)
 expand_mode = 1
 stretch_mode = 5
 texture_filter = 1
@@ -36,7 +39,12 @@ autowrap_mode = 2
 theme_override_colors/font_color = Color(0.67, 0.74, 0.68, 1)
 
 [node name="BuyButton" type="Button" parent="Row"]
+custom_minimum_size = Vector2(116, 40)
 layout_mode = 2
 size_flags_vertical = 4
+theme_override_styles/normal = ExtResource("2_confirm")
+theme_override_styles/hover = ExtResource("3_confirm_hover")
+theme_override_styles/pressed = ExtResource("3_confirm_hover")
+theme_override_styles/disabled = ExtResource("4_confirm_dis")
 text = "3 moedas"
 theme_override_font_sizes/font_size = 14

@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"cleric_spirit_awakening"
+display_name = "Despertar Espiritual"
+description = "Grande cura espiritual e +4 de fé por 3 turnos."
+effect_type = "heal"
+power_multiplier = 0.8
+flat_bonus = 6
+accuracy = 100
+max_uses = 1
+buff_stat = "faith"
+buff_amount = 4
+buff_turns = 3
+attack_style = "self"

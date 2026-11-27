@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"enemy_archer_focus"
+display_name = "Olho Firme"
+description = "Aumenta o ataque em +2 por 2 turnos."
+effect_type = "buff"
+accuracy = 100
+buff_stat = "attack"
+buff_amount = 2
+buff_turns = 2
+attack_style = "self"

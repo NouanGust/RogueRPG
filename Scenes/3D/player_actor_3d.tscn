@@ -2,27 +2,30 @@
 
 [ext_resource type="Script" uid="uid://b3ew7v3juberw" path="res://Scenes/3D/Scripts/player_actor_3d.gd" id="1_8ag33"]
 [ext_resource type="SpriteFrames" uid="uid://dwk00sssug7x5" path="res://Gargon.tres" id="2_mhppg"]
-[ext_resource type="Shader" uid="uid://bna3rila3pi0g" path="res://Scenes/Entities/dissolve_shader.gdshader" id="3_ofp8x"]
+[ext_resource type="Shader" path="res://Assets/Shadders/status_aura_outline.gdshader" id="3_aura"]
 [ext_resource type="Script" uid="uid://cvctj0pw14gwt" path="res://Scripts/Components/stats_component.gd" id="7_gbmg4"]
 [ext_resource type="Script" uid="uid://d3tx70s82u3ma" path="res://Scripts/Components/health_component.gd" id="8_fei4s"]
 [ext_resource type="Script" uid="uid://b5js5veqeeo81" path="res://Scripts/Components/combat_component.gd" id="9_rppc2"]
 [ext_resource type="Script" uid="uid://bo8sk2d1tobjf" path="res://Scripts/Components/inventory_component.gd" id="10_21aav"]
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_evjeu"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_evjeu"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_aura"]
 resource_local_to_scene = true
-shader = ExtResource("3_ofp8x")
-shader_parameter/dissolve_noise = SubResource("NoiseTexture2D_evjeu")
-shader_parameter/dissolve_amount = 0.0
-shader_parameter/edge_color = Color(0.8, 0.1, 0.1, 1)
+render_priority = 1
+shader = ExtResource("3_aura")
+shader_parameter/region_rect = Vector4(0, 0, 1, 1)
+shader_parameter/aura_active = false
+shader_parameter/aura_color = Color(1, 0.85, 0.25, 1)
+shader_parameter/outline_pixels = 2.0
+shader_parameter/pulse_speed = 3.5
+shader_parameter/aura_intensity = 1.45
+shader_parameter/hit_flash = false
 
 [node name="PlayerActor3D" type="Node3D" unique_id=1380970242]
 script = ExtResource("1_8ag33")
 frames = ExtResource("2_mhppg")
 
 [node name="AnimSprite" type="AnimatedSprite3D" parent="." unique_id=1166428044]
-material_overlay = SubResource("ShaderMaterial_evjeu")
+material_overlay = SubResource("ShaderMaterial_aura")
 billboard = 2
 alpha_cut = 2
 texture_filter = 0
@@ -50,6 +53,9 @@ metadata/_custom_type_script = "uid://bo8sk2d1tobjf"
 
 [node name="HealthBarAnchor" type="Marker3D" parent="." unique_id=1024869278]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3386022, 0)
+
+[node name="VFXCenter" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.3, 0)
 
 [node name="LevelUpLight" type="OmniLight3D" parent="." unique_id=1805458049]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9825709, 0)

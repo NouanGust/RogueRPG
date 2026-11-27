@@ -3,13 +3,21 @@
 [ext_resource type="Script" uid="uid://jnenpcaop27n" path="res://Scenes/battle/battle_ui.gd" id="1_ehi7y"]
 [ext_resource type="Texture2D" uid="uid://c8xu5mphlnx5k" path="res://Assets/UI/panel-border-022.png" id="2_qxt0f"]
 [ext_resource type="Texture2D" uid="uid://d31vhh6u2yvmy" path="res://Assets/UI/spikecore.png" id="3_x3a1m"]
-[ext_resource type="Texture2D" uid="uid://damjnxbr1b2ge" path="res://icon.svg" id="4_2w0vm"]
 [ext_resource type="PackedScene" uid="uid://b20keqeqxjfwy" path="res://Scenes/inventory_panel.tscn" id="5_70bmn"]
 [ext_resource type="Texture2D" uid="uid://ow8hk2g4viui" path="res://Assets/Images/UI/backpack.png" id="5_qxt0f"]
 [ext_resource type="PackedScene" uid="uid://c5pplqrble7t4" path="res://combat_debug.tscn" id="6_kaufe"]
 [ext_resource type="PackedScene" uid="uid://clpyvtaf75kqa" path="res://Scenes/Entities/loot_panel.tscn" id="7_3iwt2"]
+[ext_resource type="Theme" uid="uid://dog2thwrjj5pg" path="res://Scenes/ui/adventure_theme.tres" id="8_theme"]
+[ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="9_confirm"]
+[ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="10_confirm_hover"]
+[ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="11_quit"]
+[ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="12_quit_hover"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4ro08"]
+content_margin_left = 20.0
+content_margin_top = 10.0
+content_margin_right = 20.0
+content_margin_bottom = 10.0
 texture = ExtResource("2_qxt0f")
 texture_margin_left = 12.0
 texture_margin_top = 12.0
@@ -18,28 +26,42 @@ texture_margin_bottom = 12.0
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ehi7y"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5u8xp"]
-bg_color = Color(0.9440817, 0.10012401, 0.18308142, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hp_bg"]
+bg_color = Color(0.09, 0.1, 0.14, 0.92)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.75, 0.65, 0.42, 0.9)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_yvj2l"]
-bg_color = Color(0.23298621, 0.48855, 0.2073664, 1)
-corner_radius_top_left = 8
-corner_radius_top_right = 8
-corner_radius_bottom_right = 8
-corner_radius_bottom_left = 8
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_enemy_fill"]
+bg_color = Color(0.82, 0.2, 0.24, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_player_fill"]
+bg_color = Color(0.22, 0.72, 0.36, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_lk1r3"]
+content_margin_left = 20.0
+content_margin_top = 14.0
+content_margin_right = 20.0
+content_margin_bottom = 14.0
 texture = ExtResource("3_x3a1m")
 texture_margin_left = 16.0
 texture_margin_top = 16.0
 texture_margin_right = 16.0
 texture_margin_bottom = 16.0
-
-[sub_resource type="Theme" id="Theme_i1ovl"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qxt0f"]
 
@@ -52,6 +74,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("8_theme")
 script = ExtResource("1_ehi7y")
 
 [node name="MarginContainer" type="MarginContainer" parent="BattleUI" unique_id=97673285]
@@ -61,13 +84,14 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 32
-theme_override_constants/margin_top = 32
-theme_override_constants/margin_right = 32
-theme_override_constants/margin_bottom = 32
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 20
 
 [node name="VBoxContainer" type="VBoxContainer" parent="BattleUI/MarginContainer" unique_id=1055116119]
 layout_mode = 2
+theme_override_constants/separation = 10
 
 [node name="PanelContainer" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer" unique_id=1006204706]
 layout_mode = 2
@@ -77,24 +101,23 @@ theme_override_styles/panel = SubResource("StyleBoxTexture_4ro08")
 
 [node name="TitleLabel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/PanelContainer" unique_id=499217304]
 layout_mode = 2
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 24
 text = "Rogue RPG"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="EnemyPanel" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer" unique_id=1423311679]
-custom_minimum_size = Vector2(220, 20)
+custom_minimum_size = Vector2(210, 26)
 layout_mode = 2
 size_flags_horizontal = 6
 size_flags_vertical = 4
 theme_override_styles/panel = SubResource("StyleBoxEmpty_ehi7y")
 
 [node name="EnemyHPBar" type="ProgressBar" parent="BattleUI/MarginContainer/VBoxContainer/EnemyPanel" unique_id=196398989]
-custom_minimum_size = Vector2(0, 20)
+custom_minimum_size = Vector2(210, 26)
 layout_mode = 2
-theme_override_constants/outline_size = 10
-theme_override_styles/background = SubResource("StyleBoxFlat_5u8xp")
-theme_override_styles/fill = SubResource("StyleBoxFlat_yvj2l")
+theme_override_styles/background = SubResource("StyleBoxFlat_hp_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_enemy_fill")
 step = 1.0
 value = 50.0
 show_percentage = false
@@ -104,94 +127,120 @@ layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = -1.5
-offset_bottom = 1.5
 grow_horizontal = 2
 grow_vertical = 2
-size_flags_horizontal = 4
-text = "vida "
+theme_override_colors/font_outline_color = Color(0.05, 0.05, 0.08, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "HP: 10/10"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="LogPanel" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer" unique_id=1093327206]
+visible = false
+custom_minimum_size = Vector2(440, 150)
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+
+[node name="LogPanel" type="RichTextLabel" parent="BattleUI/MarginContainer/VBoxContainer/LogPanel" unique_id=1724685223]
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 14
+bbcode_enabled = true
+scroll_following = true
+text = ""
 
 [node name="Actions" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer" unique_id=511898135]
-custom_minimum_size = Vector2(0, 90)
+custom_minimum_size = Vector2(0, 108)
 layout_mode = 2
 size_flags_vertical = 10
 theme_override_styles/panel = SubResource("StyleBoxTexture_lk1r3")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions" unique_id=820727971]
 layout_mode = 2
-size_flags_vertical = 0
-theme = SubResource("Theme_i1ovl")
-theme_override_constants/separation = 50
-alignment = 1
-
-[node name="PanelContainer" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=1774549601]
-layout_mode = 2
-size_flags_horizontal = 3
-theme_override_styles/panel = SubResource("StyleBoxEmpty_qxt0f")
-
-[node name="TextureRect" type="TextureRect" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=989669624]
-visible = false
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 0
-texture = ExtResource("4_2w0vm")
-stretch_mode = 2
-
-[node name="ProgressBar" type="ProgressBar" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=238705539]
-custom_minimum_size = Vector2(0, 10)
-layout_mode = 2
-size_flags_vertical = 8
-step = 1.0
-value = 50.0
-show_percentage = false
-
-[node name="PlayerHPLAbel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer/ProgressBar" unique_id=1616388180]
-layout_mode = 0
-offset_top = -13.0
-offset_right = 38.0
-offset_bottom = 10.0
-size_flags_horizontal = 0
-size_flags_vertical = 8
-text = "VIDA"
-horizontal_alignment = 1
-vertical_alignment = 1
+size_flags_vertical = 4
+theme_override_constants/separation = 20
+alignment = 0
 
 [node name="ActionsRow" type="HBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=2091459208]
 layout_mode = 2
-size_flags_horizontal = 6
+size_flags_horizontal = 0
 size_flags_vertical = 4
-theme_override_constants/separation = 30
+theme_override_constants/separation = 14
 
 [node name="AttackButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=1187860118]
+custom_minimum_size = Vector2(130, 46)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = ExtResource("9_confirm")
+theme_override_styles/hover = ExtResource("10_confirm_hover")
+theme_override_styles/pressed = ExtResource("10_confirm_hover")
 text = "ATACAR"
 
 [node name="ItemButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=112711313]
-custom_minimum_size = Vector2(100, 20)
+custom_minimum_size = Vector2(130, 46)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_constants/icon_max_width = 24
+theme_override_font_sizes/font_size = 19
 text = "ITEM"
 icon = ExtResource("5_qxt0f")
 expand_icon = true
 
 [node name="EscapeButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/ActionsRow" unique_id=937295147]
+custom_minimum_size = Vector2(130, 46)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 19
+theme_override_styles/normal = ExtResource("11_quit")
+theme_override_styles/hover = ExtResource("12_quit_hover")
+theme_override_styles/pressed = ExtResource("12_quit_hover")
 text = "FUGIR"
 
-[node name="LogPanel" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=1093327206]
-custom_minimum_size = Vector2(0, 160)
+[node name="StatusSection" type="HBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
-size_flags_vertical = 6
+size_flags_vertical = 4
+theme_override_constants/separation = 12
+alignment = 2
 
-[node name="LogPanel" type="RichTextLabel" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/LogPanel" unique_id=1724685223]
+[node name="StatusBadges" type="HBoxContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/StatusSection"]
 layout_mode = 2
-text = "Logs
+size_flags_vertical = 4
+theme_override_constants/separation = 8
 
-"
+[node name="HistoryButton" type="Button" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/StatusSection"]
+custom_minimum_size = Vector2(126, 40)
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_font_sizes/font_size = 15
+text = "HISTÓRICO"
+
+[node name="PanelContainer" type="PanelContainer" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer" unique_id=1774549601]
+custom_minimum_size = Vector2(0, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_styles/panel = SubResource("StyleBoxEmpty_qxt0f")
+
+[node name="ProgressBar" type="ProgressBar" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer" unique_id=238705539]
+custom_minimum_size = Vector2(210, 26)
+layout_mode = 2
+size_flags_vertical = 8
+theme_override_styles/background = SubResource("StyleBoxFlat_hp_bg")
+theme_override_styles/fill = SubResource("StyleBoxFlat_player_fill")
+step = 1.0
+value = 50.0
+show_percentage = false
+
+[node name="PlayerHPLAbel" type="Label" parent="BattleUI/MarginContainer/VBoxContainer/Actions/HBoxContainer/PanelContainer/ProgressBar" unique_id=1616388180]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_outline_color = Color(0.05, 0.05, 0.08, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/font_size = 14
+text = "HP: 10/10"
 horizontal_alignment = 1
 vertical_alignment = 1
 

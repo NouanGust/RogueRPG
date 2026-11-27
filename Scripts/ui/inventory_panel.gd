@@ -3,12 +3,12 @@ extends PanelContainer
 
 signal item_selected(item: ItemData)
 
-@onready var item_grid: GridContainer = $Panel/MarginContainer/VBoxContainer/SlotsGrids
+@onready var title_label: Label = $Panel/MarginContainer/VBoxContainer/Label
+@onready var item_grid: GridContainer = $Panel/MarginContainer/VBoxContainer/Scroll/SlotsGrids
 @onready var close_button: Button = $Panel/MarginContainer/VBoxContainer/CloseBtn
 
 func _ready() -> void:
-	hide() 
-	
+	hide()
 	if close_button:
 		close_button.pressed.connect(close_panel)
 
@@ -21,25 +21,34 @@ func close_panel() -> void:
 	hide()
 
 func refresh_items() -> void:
+	if title_label:
+		title_label.text = "MOCHILA (%d / %d)" % [GameState.inventory.size(), GameState.get_max_inventory_slots()]
+
 	for child in item_grid.get_children():
 		child.queue_free()
-		
+
 	if GameState.inventory.is_empty():
-		var empty_label = Label.new()
+		var empty_label := Label.new()
 		empty_label.text = "Mochila vazia."
+		empty_label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
+		empty_label.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		item_grid.add_child(empty_label)
 		return
-		
+
 	for item in GameState.inventory:
-		var btn = Button.new()
+		if item == null:
+			continue
+		var btn := Button.new()
 		btn.text = item.item_name
 		btn.icon = item.icon
 		btn.expand_icon = true
-		btn.custom_minimum_size = Vector2(150, 50)
+		btn.custom_minimum_size = Vector2(0, 48)
+		btn.size_flags_horizontal = Control.SIZE_EXPAND_FILL
 		btn.alignment = HORIZONTAL_ALIGNMENT_LEFT
-		
+		btn.add_theme_constant_override("icon_max_width", 28)
+		btn.add_theme_font_size_override("font_size", 16)
+		btn.tooltip_text = "%s\n%s" % [item.item_name, item.description]
 		btn.pressed.connect(_on_item_button_pressed.bind(item))
-		
 		item_grid.add_child(btn)
 
 func _on_item_button_pressed(item: ItemData) -> void:

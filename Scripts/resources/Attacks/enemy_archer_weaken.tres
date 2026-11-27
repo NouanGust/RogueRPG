@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Skeleton_Archer/Arrow.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"enemy_archer_weaken"
+display_name = "Flecha Enfraquecedora"
+description = "Causa dano leve e reduz a defesa do jogador em -2 por 2 turnos."
+effect_type = "damage_debuff"
+power_multiplier = 0.8
+accuracy = 90
+debuff_stat = "defense"
+debuff_amount = 2
+debuff_turns = 2
+attack_style = "ranged"
+projectile_texture = ExtResource("2_tex")
+projectile_frame_size = Vector2i(48, 48)
+projectile_flight_frames = 1
+projectile_impact_frames = 0
+projectile_speed = 11.0
+projectile_arc_height = 0.3
+projectile_color = Color(0.85, 0.35, 0.9, 1)

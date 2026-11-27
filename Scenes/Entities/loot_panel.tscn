@@ -3,6 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://c8xu5mphlnx5k" path="res://Assets/UI/panel-border-022.png" id="1_prng2"]
 [ext_resource type="Texture2D" uid="uid://dvos0q3d1hw3o" path="res://Assets/Items/Small Bottle - RED - 0000.png" id="2_25bwk"]
 [ext_resource type="Shader" uid="uid://dhna1dlq7biry" path="res://Assets/Shadders/sweep_shine.gdshader" id="2_p2kyt"]
+[ext_resource type="Theme" uid="uid://dog2thwrjj5pg" path="res://Scenes/ui/adventure_theme.tres" id="3_theme"]
+[ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="4_confirm"]
+[ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="5_confirm_hover"]
+[ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="6_quit"]
+[ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="7_quit_hover"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_p2kyt"]
 texture = ExtResource("1_prng2")
@@ -24,6 +29,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_theme")
 theme_override_styles/panel = SubResource("StyleBoxTexture_p2kyt")
 
 [node name="MarginContainer" type="MarginContainer" parent="." unique_id=23935871]
@@ -37,7 +43,7 @@ theme_override_constants/margin_bottom = 10
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 10
+theme_override_constants/separation = 12
 
 [node name="ItemSprite" type="TextureRect" parent="MarginContainer/VBoxContainer" unique_id=258862624]
 texture_filter = 1
@@ -49,18 +55,28 @@ stretch_mode = 5
 
 [node name="Label" type="Label" parent="MarginContainer/VBoxContainer" unique_id=1346469769]
 layout_mode = 2
+theme_override_font_sizes/font_size = 20
 text = "O Inimigo dropou: Poção"
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="BagButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=607150180]
+custom_minimum_size = Vector2(220, 44)
 layout_mode = 2
-text = "BAG"
+theme_override_styles/normal = ExtResource("4_confirm")
+theme_override_styles/hover = ExtResource("5_confirm_hover")
+theme_override_styles/pressed = ExtResource("5_confirm_hover")
+text = "MOCHILA"
 
 [node name="StashButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=1810043626]
+custom_minimum_size = Vector2(220, 44)
 layout_mode = 2
 text = "BAÚ"
 
 [node name="SellButton" type="Button" parent="MarginContainer/VBoxContainer" unique_id=649821617]
+custom_minimum_size = Vector2(220, 44)
 layout_mode = 2
+theme_override_styles/normal = ExtResource("6_quit")
+theme_override_styles/hover = ExtResource("7_quit_hover")
+theme_override_styles/pressed = ExtResource("7_quit_hover")
 text = "VENDER"

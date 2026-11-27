@@ -1,12 +1,47 @@
-[gd_scene format=3]
+[gd_scene format=3 uid="uid://dq3mvl7neiur2"]
 
-[ext_resource type="Texture2D" path="res://Assets/2D/logs/trunk2.png" id="1_trunk"]
-[ext_resource type="Texture2D" path="res://Assets/2D/bushes/bush22.png" id="2_canopy1"]
-[ext_resource type="Texture2D" path="res://Assets/2D/bushes/bush23.png" id="3_canopy2"]
+[ext_resource type="Texture2D" uid="uid://dl1ug6jckpxn7" path="res://Assets/2D/logs/trunk2.png" id="1_trunk"]
+[ext_resource type="Texture2D" uid="uid://bed0jk8tyiimv" path="res://Assets/2D/bushes/bush22.png" id="2_canopy1"]
+[ext_resource type="Texture2D" uid="uid://1yodlj6utn50" path="res://Assets/2D/bushes/bush23.png" id="3_canopy2"]
+[ext_resource type="Shader" uid="uid://dyfwn58tfv0dk" path="res://Assets/Shadders/foliage_sway.gdshader" id="4_sway"]
 
-[node name="Tree2DProp" type="Node3D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_trunk"]
+render_priority = 0
+shader = ExtResource("4_sway")
+shader_parameter/albedo_texture = ExtResource("1_trunk")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/sway_speed = 1.4
+shader_parameter/sway_strength = 0.025
+shader_parameter/base_sway = 0.0
+shader_parameter/phase_offset = 0.0
+shader_parameter/alpha_scissor = 0.5
 
-[node name="Trunk" type="Sprite3D" parent="."]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_canopy1"]
+render_priority = 0
+shader = ExtResource("4_sway")
+shader_parameter/albedo_texture = ExtResource("2_canopy1")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/sway_speed = 1.55
+shader_parameter/sway_strength = 0.085
+shader_parameter/base_sway = 0.45
+shader_parameter/phase_offset = 0.4
+shader_parameter/alpha_scissor = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_canopy2"]
+render_priority = 0
+shader = ExtResource("4_sway")
+shader_parameter/albedo_texture = ExtResource("3_canopy2")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/sway_speed = 1.8
+shader_parameter/sway_strength = 0.075
+shader_parameter/base_sway = 0.4
+shader_parameter/phase_offset = 1.6
+shader_parameter/alpha_scissor = 0.5
+
+[node name="Tree2DProp" type="Node3D" unique_id=1987248708]
+
+[node name="Trunk" type="Sprite3D" parent="." unique_id=537003852]
+material_override = SubResource("ShaderMaterial_trunk")
 offset = Vector2(0, 40)
 pixel_size = 0.035
 billboard = 2
@@ -15,8 +50,9 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("1_trunk")
 
-[node name="CanopyMain" type="Sprite3D" parent="."]
+[node name="CanopyMain" type="Sprite3D" parent="." unique_id=911839777]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.55, 0.06)
+material_override = SubResource("ShaderMaterial_canopy1")
 pixel_size = 0.055
 billboard = 2
 shaded = true
@@ -24,8 +60,9 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("2_canopy1")
 
-[node name="CanopySide" type="Sprite3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.42, 2.2, -0.05)
+[node name="CanopySide" type="Sprite3D" parent="." unique_id=1733986443]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.049359947, 2.8586953, 0.20132954)
+material_override = SubResource("ShaderMaterial_canopy2")
 pixel_size = 0.045
 billboard = 2
 shaded = true

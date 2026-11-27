@@ -18,6 +18,7 @@ var inventory: Array[ItemData] = []
 
 var selected_class: ClassData
 var rolled_attributes: Dictionary = {}
+var equipped_attacks: Array[AttackData] = []
 var current_enemy: EnemyData
 var current_level: int = 1
 var current_xp: int = 0
@@ -39,6 +40,7 @@ func reset_run() -> void:
 	returning_from_battle = false
 	selected_class = null
 	rolled_attributes = {}
+	equipped_attacks.clear()
 	current_enemy = null
 	current_level = 1
 	current_xp = 0
@@ -49,7 +51,46 @@ func reset_run() -> void:
 
 func set_selected_class(value: ClassData) -> void:
 	selected_class = value
+	equipped_attacks.clear()
+	if selected_class != null:
+		for atk in selected_class.attacks:
+			if atk != null:
+				equipped_attacks.append(atk)
 	class_selected.emit(selected_class)
+
+func get_equipped_attacks() -> Array[AttackData]:
+	if equipped_attacks.is_empty() and selected_class != null:
+		for atk in selected_class.attacks:
+			if atk != null:
+				equipped_attacks.append(atk)
+	return equipped_attacks
+
+func get_random_unlearned_attack() -> AttackData:
+	if selected_class == null or selected_class.unlockable_attacks.is_empty():
+		return null
+	var known_ids: Array[StringName] = []
+	for atk in get_equipped_attacks():
+		if atk != null:
+			known_ids.append(atk.id)
+	var pool: Array[AttackData] = []
+	for candidate in selected_class.unlockable_attacks:
+		if candidate != null and candidate.id not in known_ids:
+			pool.append(candidate)
+	if pool.is_empty():
+		return null
+	return pool.pick_random()
+
+func replace_attack(slot_index: int, new_attack: AttackData) -> bool:
+	if new_attack == null:
+		return false
+	var current := get_equipped_attacks()
+	if current.size() < 4:
+		current.append(new_attack)
+		return true
+	if slot_index < 0 or slot_index >= current.size():
+		return false
+	current[slot_index] = new_attack
+	return true
 	
 
 func set_rolled_attributes(value: Dictionary) -> void:

@@ -1,0 +1,13 @@
+[gd_resource type="Resource" script_class="ItemData" format=3]
+
+[ext_resource type="Script" uid="uid://dclj8oiffd528" path="res://Scripts/resources/item_data.gd" id="1_item"]
+[ext_resource type="Texture2D" uid="uid://ow8hk2g4viui" path="res://Assets/Images/UI/backpack.png" id="2_icon"]
+
+[resource]
+script = ExtResource("1_item")
+item_name = "Espaço de Mochila"
+description = "Aumenta permanentemente em +1 a capacidade da mochila."
+icon = ExtResource("2_icon")
+cost = 45
+item_type = "backpack_upgrade"
+effect_value = 1

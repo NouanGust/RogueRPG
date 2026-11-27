@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"warrior_battle_cry"
+display_name = "Grito de Guerra"
+description = "Aumenta a força em +3 por 3 turnos."
+effect_type = "buff"
+accuracy = 100
+max_uses = 3
+buff_stat = "strength"
+buff_amount = 3
+buff_turns = 3
+attack_style = "self"

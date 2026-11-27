@@ -11,5 +11,5 @@ shaded = false
 double_sided = true
 no_depth_test = false
 texture_filter = 0
-pixel_size = 0.025
+pixel_size = 0.014
 render_priority = 2

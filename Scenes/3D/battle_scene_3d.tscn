@@ -25,8 +25,23 @@
 [ext_resource type="Texture2D" uid="uid://b2tvkd12gvriy" path="res://Assets/Material/Stylized_HandpaintedDirt_01_normalogl.jpg" id="20_bwk33"]
 [ext_resource type="Script" uid="uid://8kwf686gj1kl" path="res://Scripts/Components/dice_roller.gd" id="21_e6731"]
 [ext_resource type="Texture2D" uid="uid://doyrkxnc0gjp5" path="res://Assets/Material/Stylized_HandpaintedDirt_01_roughness.jpg" id="21_np1vh"]
-
 [ext_resource type="PackedScene" path="res://Scenes/battle/level_up_panel.tscn" id="22_levelup"]
+[ext_resource type="PackedScene" uid="uid://dq3mvl7neiur2" path="res://Scenes/3D/Props/tree_2d_prop.tscn" id="23_tree2d"]
+[ext_resource type="Shader" uid="uid://bna3rila3pi0g" path="res://Scenes/Entities/dissolve_shader.gdshader" id="24_71kgn"]
+[ext_resource type="Texture2D" uid="uid://di073ijmd6rbw" path="res://Assets/2D/stone/stone6.png" id="24_stone_sm"]
+[ext_resource type="Texture2D" uid="uid://dvhaxmtmi3fgh" path="res://Assets/2D/stone/stone9.png" id="25_stone_lg"]
+[ext_resource type="Texture2D" uid="uid://bsnv7cu6ws2po" path="res://Assets/2D/logs/stump1.png" id="26_stump"]
+[ext_resource type="Texture2D" uid="uid://cgjsdgqptxmmx" path="res://Assets/2D/logs/trunk3.png" id="27_dead_tree"]
+[ext_resource type="Texture2D" uid="uid://ccs0g1h6dqmsy" path="res://Assets/2D/logs/log1.png" id="28_log"]
+[ext_resource type="Texture2D" uid="uid://cuucbhmss6vdu" path="res://Assets/2D/grass/grass1.png" id="29_grass1"]
+[ext_resource type="Texture2D" uid="uid://h7058fwdpyfe" path="res://Assets/2D/grass/grass3.png" id="30_grass2"]
+[ext_resource type="Texture2D" uid="uid://c6jmkafkltib6" path="res://Assets/2D/grass/grass5.png" id="31_grass3"]
+[ext_resource type="Texture2D" uid="uid://daydqjucagxqw" path="res://Assets/2D/ferns/fern1.png" id="32_fern"]
+[ext_resource type="Texture2D" uid="uid://blc84fkbvv6fq" path="res://Assets/2D/flowers/flower2.png" id="33_flower"]
+[ext_resource type="Texture2D" uid="uid://do1l245gf7ll6" path="res://Assets/2D/mushrooms/mushroom2.png" id="34_mushroom"]
+[ext_resource type="Texture2D" uid="uid://b4uliymwded6y" path="res://Assets/2D/bushes/berry_bush7.png" id="35_bush1"]
+[ext_resource type="Texture2D" uid="uid://dh2scpx25ju8w" path="res://Assets/2D/bushes/bush24.png" id="36_bush2"]
+[ext_resource type="Shader" uid="uid://dyfwn58tfv0dk" path="res://Assets/Shadders/foliage_sway.gdshader" id="37_sway"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_bwk33"]
 panorama = ExtResource("18_sf1r6")
@@ -38,6 +53,11 @@ sky_material = SubResource("PanoramaSkyMaterial_bwk33")
 background_mode = 2
 sky = SubResource("Sky_idpok")
 tonemap_mode = 2
+glow_enabled = true
+glow_intensity = 0.45
+glow_strength = 0.85
+glow_bloom = 0.12
+glow_hdr_threshold = 1.05
 fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.35561672, 0.5253969, 0.49321038, 1)
@@ -57,6 +77,48 @@ uv1_scale = Vector3(20, 20, 20)
 material = SubResource("StandardMaterial3D_plnp8")
 size = Vector2(20, 20)
 
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_evjeu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eix6b"]
+resource_local_to_scene = true
+shader = ExtResource("24_71kgn")
+shader_parameter/dissolve_noise = SubResource("NoiseTexture2D_evjeu")
+shader_parameter/dissolve_amount = 0.0
+shader_parameter/edge_color = Color(0.8, 0.1, 0.1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dead_tree"]
+render_priority = 0
+shader = ExtResource("37_sway")
+shader_parameter/albedo_texture = ExtResource("27_dead_tree")
+shader_parameter/tint_color = Color(0.78, 0.72, 0.68, 1)
+shader_parameter/sway_speed = 1.25
+shader_parameter/sway_strength = 0.03
+shader_parameter/base_sway = 0.0
+shader_parameter/phase_offset = 0.2
+shader_parameter/alpha_scissor = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bush1"]
+render_priority = 0
+shader = ExtResource("37_sway")
+shader_parameter/albedo_texture = ExtResource("35_bush1")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/sway_speed = 1.85
+shader_parameter/sway_strength = 0.055
+shader_parameter/base_sway = 0.0
+shader_parameter/phase_offset = 0.5
+shader_parameter/alpha_scissor = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bush2"]
+render_priority = 0
+shader = ExtResource("37_sway")
+shader_parameter/albedo_texture = ExtResource("36_bush2")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/sway_speed = 1.7
+shader_parameter/sway_strength = 0.055
+shader_parameter/base_sway = 0.0
+shader_parameter/phase_offset = 1.4
+shader_parameter/alpha_scissor = 0.5
+
 [node name="BattleScene3D" type="Node3D" unique_id=1290004777]
 script = ExtResource("1_sakwf")
 enemy_pool = Array[ExtResource("2_newfi")]([ExtResource("4_wjnf6"), ExtResource("5_m157x"), ExtResource("6_e6731"), ExtResource("7_idpok"), ExtResource("8_ty8l0"), ExtResource("9_07vp7")])
@@ -75,7 +137,7 @@ environment = SubResource("Environment_ty8l0")
 transform = Transform3D(0.5274898, 0, 0.8495614, 0, 1, 0, -0.8495614, 0, 0.5274898, 1.0636337, 0.6195564, 2.5123453)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1382959672]
-transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 0, 0)
+transform = Transform3D(10, 0, 0, 0, 10, 0, 0, 0, 10, 0, 1.1920929e-07, 1.1920929e-07)
 mesh = SubResource("PlaneMesh_no5v7")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1893119812]
@@ -90,6 +152,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.666, 0)
 transform = Transform3D(-0.31357816, 0, 0.9495624, 0, 1, 0, -0.9495624, 0, -0.31357816, 0, 0.666, 2.299)
 
 [node name="AnimSprite" parent="PlayerActor3D" index="0" unique_id=1166428044]
+material_overlay = SubResource("ShaderMaterial_eix6b")
 shaded = true
 alpha_cut = 1
 
@@ -98,11 +161,736 @@ alpha_cut = 1
 [node name="LootPanel" parent="UILayer/BattleUI" parent_id_path=PackedInt32Array(760799296, 2146490657) index="3" unique_id=1826055585]
 visible = true
 
-[node name="LevelUpPanel" parent="UILayer/BattleUI" index="4" instance=ExtResource("22_levelup")]
+[node name="LevelUpPanel" parent="UILayer/BattleUI" parent_id_path=PackedInt32Array(760799296, 2146490657) index="4" unique_id=131000923 instance=ExtResource("22_levelup")]
 
 [node name="DiceRoller" type="Node" parent="." unique_id=1341412926]
 script = ExtResource("21_e6731")
 metadata/_custom_type_script = "uid://8kwf686gj1kl"
+
+[node name="Environment2D" type="Node3D" parent="." unique_id=185171540]
+
+[node name="Tree2D_1" parent="Environment2D" unique_id=1060364890 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, 2.7032783)
+
+[node name="Tree2D_11" parent="Environment2D" unique_id=1987248708 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.3649999, 0, 0, 0, 1.05, -4.4, 0, 2.398256)
+
+[node name="Tree2D_12" parent="Environment2D" unique_id=932008974 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, 2.145233)
+
+[node name="Tree2D_13" parent="Environment2D" unique_id=1268995343 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, 1.8118346)
+
+[node name="Tree2D_14" parent="Environment2D" unique_id=1097408762 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, 1.1585846)
+
+[node name="Tree2D_15" parent="Environment2D" unique_id=301328383 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.73499995, 0, 0, 0, 0.84, 0, 0, 0, 1.05, -4.020955, 0, 0.6703119)
+
+[node name="Tree2D_16" parent="Environment2D" unique_id=1415361059 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, 0.95878434)
+
+[node name="Tree2D_17" parent="Environment2D" unique_id=2003366893 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, 0.6537621)
+
+[node name="Tree2D_18" parent="Environment2D" unique_id=687330533 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.3574663, 0, 0, 0, 1.05, -4.4, 0, 0.40073895)
+
+[node name="Tree2D_19" parent="Environment2D" unique_id=2016819408 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, 0.06734061)
+
+[node name="Tree2D_20" parent="Environment2D" unique_id=919993269 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, -0.58590937)
+
+[node name="Tree2D_21" parent="Environment2D" unique_id=1645237632 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.020955, 0, -1.074182)
+
+[node name="Tree2D_22" parent="Environment2D" unique_id=1847366545 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, -1.0690618)
+
+[node name="Tree2D_23" parent="Environment2D" unique_id=84060625 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, -1.374084)
+
+[node name="Tree2D_25" parent="Environment2D" unique_id=522721114 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, -1.9605055)
+
+[node name="Tree2D_26" parent="Environment2D" unique_id=1497903900 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, -2.6137555)
+
+[node name="Tree2D_27" parent="Environment2D" unique_id=1540386934 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.020955, 0, -3.1020281)
+
+[node name="Tree2D_28" parent="Environment2D" unique_id=1733617885 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.73499995, 0, 0, 0, 0.84, 0, 0, 0, 1.05, -4.4, 0, -2.819209)
+
+[node name="Tree2D_29" parent="Environment2D" unique_id=389384973 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, -3.1242313)
+
+[node name="Tree2D_30" parent="Environment2D" unique_id=248314832 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, -3.3772545)
+
+[node name="Tree2D_31" parent="Environment2D" unique_id=7640549 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, -3.7106528)
+
+[node name="Tree2D_32" parent="Environment2D" unique_id=626259821 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.4, 0, -4.363903)
+
+[node name="Tree2D_33" parent="Environment2D" unique_id=465692157 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, -4.020955, 0, -4.8521757)
+
+[node name="Tree2D_34" parent="Environment2D" unique_id=1919049710 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.79203606, 0, 0.689332, 0, 1.0499998, 0, -0.689332, 0, 0.79203606, -3.6283753, 0, 5.2394466)
+
+[node name="Tree2D_35" parent="Environment2D" unique_id=1496418071 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.79203606, 0, 0.689332, 0, 1.0499998, 0, -0.689332, 0, 0.79203606, -3.8286245, 0, 5.009362)
+
+[node name="Tree2D_36" parent="Environment2D" unique_id=1092078377 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.79203606, 0, 0.689332, 0, 1.0499998, 0, -0.689332, 0, 0.79203606, -3.994736, 0, 4.818502)
+
+[node name="Tree2D_37" parent="Environment2D" unique_id=254007127 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.79203606, 0, 0.689332, 0, 1.0499998, 0, -0.689332, 0, 0.79203606, -4.2136145, 0, 4.567013)
+
+[node name="Tree2D_38" parent="Environment2D" unique_id=1912435799 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.86898005, 0, 1.3320959, 0, 1.3473756, 0, -0.75629854, 0, 1.5305659, -4.642477, 0, 4.074253)
+
+[node name="Tree2D_39" parent="Environment2D" unique_id=1329944660 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.79203606, 0, 0.689332, 0, 1.0499998, 0, -0.689332, 0, 0.79203606, -4.6771107, 0, 3.4570935)
+
+[node name="Tree2D_24" parent="Environment2D" unique_id=68222174 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -3.5695715, 0, -10.296891)
+
+[node name="Tree2D_40" parent="Environment2D" unique_id=1083064771 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -3.3236632, 0, -10.477357)
+
+[node name="Tree2D_41" parent="Environment2D" unique_id=849002737 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -3.119677, 0, -10.627057)
+
+[node name="Tree2D_42" parent="Environment2D" unique_id=1882878660 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.2761164, 0, 0.8465066, 0, 0.62122965, -2.850892, 0, -10.824312)
+
+[node name="Tree2D_43" parent="Environment2D" unique_id=318991771 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -2.324244, 0, -11.210805)
+
+[node name="Tree2D_44" parent="Environment2D" unique_id=486828358 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -1.7063391, 0, -11.194105)
+
+[node name="Tree2D_45" parent="Environment2D" unique_id=635106199 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -2.1631656, 0, -11.329017)
+
+[node name="Tree2D_46" parent="Environment2D" unique_id=5949307 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -1.9172575, 0, -11.509482)
+
+[node name="Tree2D_47" parent="Environment2D" unique_id=1803062026 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -1.7132709, 0, -11.659183)
+
+[node name="Tree2D_48" parent="Environment2D" unique_id=728899350 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.4374552, 0, -1.1877321, 0, 1.4699998, 0, 0.5960899, 0, 0.87164634, -1.4444866, 0, -11.856437)
+
+[node name="Tree2D_49" parent="Environment2D" unique_id=154852211 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.54771984, 0, -0.9829968, 0, 1.5749998, 0, 0.74633986, 0, 0.7213963, -0.8997007, 0, -12.24293)
+
+[node name="Tree2D_50" parent="Environment2D" unique_id=1247761225 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -0.29993296, 0, -12.226232)
+
+[node name="Tree2D_51" parent="Environment2D" unique_id=1237406475 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, -0.5283227, 0, -12.528786)
+
+[node name="Tree2D_52" parent="Environment2D" unique_id=2098718000 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.54771984, 0, -0.9829968, 0, 1.5749998, 0, 0.74633986, 0, 0.7213963, -0.13719082, 0, -12.709252)
+
+[node name="Tree2D_53" parent="Environment2D" unique_id=71993344 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.5986571, 0, 0.8465066, 0, 0.62122965, 0.19035661, 0, -13.056207)
+
+[node name="Tree2D_54" parent="Environment2D" unique_id=1677849083 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, 0.71700454, 0, -13.4427)
+
+[node name="Tree2D_55" parent="Environment2D" unique_id=180415262 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, 1.3349094, 0, -13.426001)
+
+[node name="Tree2D_56" parent="Environment2D" unique_id=701754874 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, 0.88264084, 0, -13.564257)
+
+[node name="Tree2D_57" parent="Environment2D" unique_id=846451975 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, 1.1285489, 0, -13.744722)
+
+[node name="Tree2D_58" parent="Environment2D" unique_id=536590073 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.4804463, 0, 0.8465066, 0, 0.62122965, 1.3325353, 0, -13.894423)
+
+[node name="Tree2D_59" parent="Environment2D" unique_id=1721387067 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, 1.6013203, 0, -14.091677)
+
+[node name="Tree2D_60" parent="Environment2D" unique_id=529357431 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.54771984, 0, -0.9829968, 0, 1.5749998, 0, 0.74633986, 0, 0.7213963, 2.755268, 0, -14.47817)
+
+[node name="Tree2D_61" parent="Environment2D" unique_id=349551541 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.62122965, 0, -0.8465066, 0, 1.0499998, 0, 0.8465066, 0, 0.62122965, 2.745874, 0, -14.461472)
+
+[node name="Tree2D_62" parent="Environment2D" unique_id=255311272 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.0243434, 0, -0.23069552, 0, 1.0499998, 0, 0.23069552, 0, 1.0243434, -5.1576924, 0, -8.174293)
+
+[node name="Tree2D_63" parent="Environment2D" unique_id=2022689506 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.0243434, 0, -0.23069552, 0, 1.0499998, 0, 0.23069552, 0, 1.0243434, -5.090676, 0, -8.471862)
+
+[node name="Tree2D_64" parent="Environment2D" unique_id=87451908 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.0243434, 0, -0.23069552, 0, 1.4475422, 0, 0.23069552, 0, 1.0243434, -5.0350847, 0, -8.718702)
+
+[node name="Tree2D_65" parent="Environment2D" unique_id=1212024129 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.2242062, 0, -0.22055829, 0, 1.6900092, 0, 0.27570724, 0, 0.9793316, -5.752495, 0, -9.043954)
+
+[node name="Tree2D_66" parent="Environment2D" unique_id=637179115 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.0243434, 0, -0.23069552, 0, 1.0499998, 0, 0.23069552, 0, 1.0243434, -4.8183074, 0, -9.681242)
+
+[node name="Tree2D_67" parent="Environment2D" unique_id=1642063090 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.0243434, 0, -0.23069552, 0, 1.0499998, 0, 0.23069552, 0, 1.0243434, -4.341246, 0, -10.074305)
+
+[node name="Tree2D_2" parent="Environment2D" unique_id=632317012 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, -5.6, 0, 0.2)
+
+[node name="Tree2D_3" parent="Environment2D" unique_id=1833060201 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -4.8, 0, -2.6)
+
+[node name="Tree2D_4" parent="Environment2D" unique_id=1198811557 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -7.8, 0, -1.2)
+
+[node name="Tree2D_5" parent="Environment2D" unique_id=1511647040 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.3, 0, 0, 0, 1.3, 0, 0, 0, 1.3, -7.2, 0, -4.8)
+
+[node name="Tree2D_6" parent="Environment2D" unique_id=1009934851 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, -5.4)
+
+[node name="Tree2D_7" parent="Environment2D" unique_id=984476188 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, -5.8, 0, -7.6)
+
+[node name="Tree2D_8" parent="Environment2D" unique_id=1321505077 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.05, 0, 0, 0, 1.05, 0, 0, 0, 1.05, 2.8, 0, -4.6)
+
+[node name="Tree2D_9" parent="Environment2D" unique_id=278859677 instance=ExtResource("23_tree2d")]
+transform = Transform3D(1.2, 0, 0, 0, 1.2, 0, 0, 0, 1.2, 3.6, 0, -7.8)
+
+[node name="Tree2D_10" parent="Environment2D" unique_id=964377815 instance=ExtResource("23_tree2d")]
+transform = Transform3D(0.95, 0, 0, 0, 0.95, 0, 0, 0, 0.95, -2.4, 0, -8.8)
+
+[node name="DeadTree2D_1" type="Sprite3D" parent="Environment2D" unique_id=1082655084]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.4, 0, -0.8)
+material_override = SubResource("ShaderMaterial_dead_tree")
+offset = Vector2(0, 32)
+modulate = Color(0.78, 0.72, 0.68, 1)
+pixel_size = 0.038
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("27_dead_tree")
+
+[node name="DeadTree2D_2" type="Sprite3D" parent="Environment2D" unique_id=1041557111]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0, -5.8)
+material_override = SubResource("ShaderMaterial_dead_tree")
+offset = Vector2(0, 32)
+modulate = Color(0.78, 0.72, 0.68, 1)
+pixel_size = 0.038
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("27_dead_tree")
+
+[node name="DeadTree2D_3" type="Sprite3D" parent="Environment2D" unique_id=1367281614]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.4, 0, -6.4)
+material_override = SubResource("ShaderMaterial_dead_tree")
+offset = Vector2(0, 32)
+modulate = Color(0.78, 0.72, 0.68, 1)
+pixel_size = 0.038
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("27_dead_tree")
+
+[node name="BigStone2D_1" type="Sprite3D" parent="Environment2D" unique_id=1894593637]
+transform = Transform3D(3.2, 0, 0, 0, 3.2, 0, 0, 0, 3.2, -6.6, 0, -3.4)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="BigStone2D_2" type="Sprite3D" parent="Environment2D" unique_id=2052343878]
+transform = Transform3D(3.8215046, 0, 0, 0, 2.184, 0, 0, 0, 2.8, -10.0667715, 0, 2.5919926)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="BigStone2D_5" type="Sprite3D" parent="Environment2D" unique_id=1809078757]
+transform = Transform3D(2.5696507, 0, 2.0724792, 0, 2.184, 0, -2.8285675, 0, 1.8827717, -10.725814, 0, 4.983184)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="BigStone2D_6" type="Sprite3D" parent="Environment2D" unique_id=1962028710]
+transform = Transform3D(2.5696507, 0, 2.0724792, 0, 2.184, 0, -2.8285675, 0, 1.8827717, -11.925736, 0, -0.58898115)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="BigStone2D_7" type="Sprite3D" parent="Environment2D" unique_id=545690619]
+transform = Transform3D(5.6643467, 0, 2.6872568, 0, 4.930315, 0, -6.2350836, 0, 2.441275, -14.474449, 0, -0.58898115)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="BigStone2D_8" type="Sprite3D" parent="Environment2D" unique_id=1297697658]
+transform = Transform3D(5.6643467, 0, 2.6872568, 0, 4.930315, 0, -6.2350836, 0, 2.441275, -14.474449, 0, -24.2432)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="BigStone2D_9" type="Sprite3D" parent="Environment2D" unique_id=1647639169]
+transform = Transform3D(3.8313713, 0, 1.7300441, 0, 3.0673482, 0, -4.217418, 0, 1.5716821, -11.879285, 0, -24.2432)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="BigStone2D_10" type="Sprite3D" parent="Environment2D" unique_id=455192668]
+transform = Transform3D(3.8313713, 0, 1.7300441, 0, 3.0673482, 0, -4.217418, 0, 1.5716821, -11.879285, 0, -32.59132)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="BigStone2D_4" type="Sprite3D" parent="Environment2D" unique_id=1367498358]
+transform = Transform3D(2.8, 0, 0, 0, 2.8, 0, 0, 0, 2.8, -11.246671, 0, 3.7941008)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="BigStone2D_3" type="Sprite3D" parent="Environment2D" unique_id=417329879]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 4.2, 0, -6)
+offset = Vector2(0, 16)
+pixel_size = 0.035
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("25_stone_lg")
+
+[node name="Stone2D_1" type="Sprite3D" parent="Environment2D" unique_id=1761712100]
+transform = Transform3D(0.48000002, 0, 0, 0, 0.39999998, 0, 0, 0, 1, -2.5081317, 0, 1.4)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("24_stone_sm")
+
+[node name="Stone2D_2" type="Sprite3D" parent="Environment2D" unique_id=1267429823]
+transform = Transform3D(0.39999998, 0, 0, 0, 0.5, 0, 0, 0, 1, -3.8191926, 0, -2.0022564)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("24_stone_sm")
+
+[node name="Stone2D_5" type="Sprite3D" parent="Environment2D" unique_id=1329643475]
+transform = Transform3D(0.24, 0, 0, 0, 0.35, 0, 0, 0, 0.5, -3.7262988, 0, -2.2027192)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("24_stone_sm")
+
+[node name="Stone2D_3" type="Sprite3D" parent="Environment2D" unique_id=1753529560]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0, -3.4)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("24_stone_sm")
+
+[node name="Stone2D_4" type="Sprite3D" parent="Environment2D" unique_id=1425745700]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, -6.2)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("24_stone_sm")
+
+[node name="Stone2D_6" type="Sprite3D" parent="Environment2D" unique_id=1342069524]
+transform = Transform3D(2.1110969, 0, 0, 0, 1.9416623, 0, 0, 0, 1, -10.337885, 0, -31.69293)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("24_stone_sm")
+
+[node name="Stone2D_7" type="Sprite3D" parent="Environment2D" unique_id=2053791111]
+transform = Transform3D(2.1110969, 0, 0, 0, 1.9416623, 0, 0, 0, 1, -10.911589, 0, -31.69293)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("24_stone_sm")
+
+[node name="Stone2D_8" type="Sprite3D" parent="Environment2D" unique_id=1645384007]
+transform = Transform3D(2.1110969, 0, 0, 0, 1.9416623, 0, 0, 0, 1, -9.408573, 0, -32.47283)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("24_stone_sm")
+
+[node name="TreeStump2D_1" type="Sprite3D" parent="Environment2D" unique_id=817593351]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 0, 0.3)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("26_stump")
+
+[node name="TreeStump2D_3" type="Sprite3D" parent="Environment2D" unique_id=170612908]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7378197, 0, 2.9560454)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("26_stump")
+
+[node name="TreeStump2D_4" type="Sprite3D" parent="Environment2D" unique_id=1344697582]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.7378197, 0, -2.6565342)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("26_stump")
+
+[node name="TreeStump2D_2" type="Sprite3D" parent="Environment2D" unique_id=375404067]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 0, -2.5)
+offset = Vector2(0, 16)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("26_stump")
+
+[node name="WoodLog2D_1" type="Sprite3D" parent="Environment2D" unique_id=1821431702]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.9, 0, -3.8)
+offset = Vector2(0, 16)
+pixel_size = 0.032
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("28_log")
+
+[node name="Bush2D_1" type="Sprite3D" parent="Environment2D" unique_id=13021245]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.6, 0, 1.9)
+material_override = SubResource("ShaderMaterial_bush1")
+offset = Vector2(0, 16)
+pixel_size = 0.038
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("35_bush1")
+
+[node name="Bush2D_2" type="Sprite3D" parent="Environment2D" unique_id=1931016090]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.278681, 0, -0.24433243)
+material_override = SubResource("ShaderMaterial_bush2")
+offset = Vector2(0, 16)
+pixel_size = 0.04
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("36_bush2")
+
+[node name="Bush2D_6" type="Sprite3D" parent="Environment2D" unique_id=1926191524]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.270952, 0, -3.5456448)
+material_override = SubResource("ShaderMaterial_bush2")
+offset = Vector2(0, 16)
+pixel_size = 0.04
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("36_bush2")
+
+[node name="Bush2D_3" type="Sprite3D" parent="Environment2D" unique_id=1225108208]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.4, 0, -4.6)
+material_override = SubResource("ShaderMaterial_bush1")
+offset = Vector2(0, 16)
+pixel_size = 0.038
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("35_bush1")
+
+[node name="Bush2D_4" type="Sprite3D" parent="Environment2D" unique_id=1883311469]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -3.9)
+material_override = SubResource("ShaderMaterial_bush2")
+offset = Vector2(0, 16)
+pixel_size = 0.04
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("36_bush2")
+
+[node name="Bush2D_5" type="Sprite3D" parent="Environment2D" unique_id=1146785917]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -6.5)
+material_override = SubResource("ShaderMaterial_bush1")
+offset = Vector2(0, 16)
+pixel_size = 0.038
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("35_bush1")
+
+[node name="GrassPatch_A1" type="Sprite3D" parent="Environment2D" unique_id=1091843953]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.9, 0, 1.8)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("29_grass1")
+
+[node name="GrassPatch_A2" type="Sprite3D" parent="Environment2D" unique_id=1199972462]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.2, 0, 1.2)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("30_grass2")
+
+[node name="GrassPatch_A3" type="Sprite3D" parent="Environment2D" unique_id=1754749876]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0.7)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("31_grass3")
+
+[node name="GrassPatch_A5" type="Sprite3D" parent="Environment2D" unique_id=1732409938]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, 0.971777)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("31_grass3")
+
+[node name="GrassPatch_A4" type="Sprite3D" parent="Environment2D" unique_id=1597061558]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1, 0, 0.9)
+offset = Vector2(0, 8)
+pixel_size = 0.028
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("33_flower")
+
+[node name="GrassPatch_B1" type="Sprite3D" parent="Environment2D" unique_id=1659887566]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0, -1.4)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("29_grass1")
+
+[node name="GrassPatch_B2" type="Sprite3D" parent="Environment2D" unique_id=619172677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0, -1.9)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("30_grass2")
+
+[node name="GrassPatch_B3" type="Sprite3D" parent="Environment2D" unique_id=1156957073]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.7)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("31_grass3")
+
+[node name="GrassPatch_B4" type="Sprite3D" parent="Environment2D" unique_id=86604064]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.6, 0, -2.1)
+offset = Vector2(0, 8)
+pixel_size = 0.028
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("32_fern")
+
+[node name="GrassPatch_C1" type="Sprite3D" parent="Environment2D" unique_id=501978677]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6, 0, -2)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("29_grass1")
+
+[node name="GrassPatch_C2" type="Sprite3D" parent="Environment2D" unique_id=14732799]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.9, 0, -2.8)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("30_grass2")
+
+[node name="GrassPatch_C3" type="Sprite3D" parent="Environment2D" unique_id=232339669]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -3.5)
+offset = Vector2(0, 8)
+pixel_size = 0.03
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("31_grass3")
+
+[node name="GrassPatch_C4" type="Sprite3D" parent="Environment2D" unique_id=1831814796]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, -2.3)
+offset = Vector2(0, 8)
+pixel_size = 0.025
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("34_mushroom")
+
+[node name="Plant2D_1" type="Sprite3D" parent="Environment2D" unique_id=998123393]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4044342, 0, 2.8039894)
+offset = Vector2(0, 8)
+pixel_size = 0.032
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("32_fern")
+
+[node name="Plant2D_2" type="Sprite3D" parent="Environment2D" unique_id=595773489]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.2, 0, 0.1)
+offset = Vector2(0, 8)
+pixel_size = 0.024
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("34_mushroom")
+
+[node name="Plant2D_3" type="Sprite3D" parent="Environment2D" unique_id=142950895]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7, 0, -3.5)
+offset = Vector2(0, 8)
+pixel_size = 0.032
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("32_fern")
+
+[node name="Plant2D_4" type="Sprite3D" parent="Environment2D" unique_id=180256244]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1, 0, -4)
+offset = Vector2(0, 8)
+pixel_size = 0.026
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("34_mushroom")
+
+[node name="Plant2D_5" type="Sprite3D" parent="Environment2D" unique_id=75515552]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8, 0, -4.4)
+offset = Vector2(0, 8)
+pixel_size = 0.028
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("33_flower")
+
+[node name="Plant2D_6" type="Sprite3D" parent="Environment2D" unique_id=535396481]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.3, 0, -4.2)
+offset = Vector2(0, 8)
+pixel_size = 0.032
+billboard = 2
+shaded = true
+alpha_cut = 1
+texture_filter = 0
+texture = ExtResource("32_fern")
 
 [editable path="PlayerActor3D"]
 [editable path="UILayer"]

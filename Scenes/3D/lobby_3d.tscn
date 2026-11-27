@@ -8,8 +8,6 @@
 [ext_resource type="StyleBox" uid="uid://b5lmuvviual4" path="res://Assets/Themes/confirm_button.tres" id="5_3heu7"]
 [ext_resource type="StyleBox" uid="uid://chx4w0kb4pgjc" path="res://Assets/Themes/confirm_button_hover.tres" id="6_nnteq"]
 [ext_resource type="Script" uid="uid://63cvknfocygk" path="res://Scenes/3D/Scripts/title_menu_ui.gd" id="6_y0unm"]
-[ext_resource type="StyleBox" uid="uid://jwjs7u0sndse" path="res://Assets/Themes/chose_button.tres" id="7_wimh0"]
-[ext_resource type="StyleBox" uid="uid://b4mai6yv25014" path="res://Assets/Themes/chose_button_hover.tres" id="8_y0unm"]
 [ext_resource type="StyleBox" uid="uid://ct4x5o58daw7h" path="res://Assets/Themes/quit_button.tres" id="9_w1iuc"]
 [ext_resource type="StyleBox" uid="uid://dtcbonbkcydbn" path="res://Assets/Themes/quit_button_hover.tres" id="10_mow7t"]
 [ext_resource type="PackedScene" uid="uid://dbqktapaen5q" path="res://Scenes/main/camp.tscn" id="13_wimh0"]
@@ -29,26 +27,26 @@
 [ext_resource type="StyleBox" uid="uid://deqy0stw5v850" path="res://Assets/Themes/confirm_button_disable.tres" id="21_4tnph"]
 [ext_resource type="Script" uid="uid://cgpf5dbvnueia" path="res://Scenes/3D/Scripts/attributes_roll_3d.gd" id="21_d7b66"]
 [ext_resource type="PackedScene" uid="uid://bl1ltw2q8a00m" path="res://Scenes/run/dice_visual.tscn" id="22_l6ubl"]
-[ext_resource type="Texture2D" uid="uid://dvos0q3d1hw3o" path="res://Assets/Items/Small Bottle - RED - 0000.png" id="22_xtjg4"]
-[ext_resource type="Texture2D" uid="uid://br4nmej8jgch1" path="res://Assets/UI/panel-border-003.png" id="23_0iodb"]
 [ext_resource type="Texture2D" uid="uid://bk2fd1a1tnv88" path="res://Assets/UI/dice-solid.png" id="23_d7b66"]
 [ext_resource type="Texture2D" uid="uid://c1mita4rr18lv" path="res://Assets/Images/UI/chest.png" id="25_1l5k2"]
 [ext_resource type="Script" uid="uid://0tofmxykk7xt" path="res://Scenes/3D/Scripts/save_ui.gd" id="25_8qwmk"]
 [ext_resource type="Texture2D" uid="uid://cnnibj3taycqu" path="res://Assets/UI/GUI_4x.png" id="26_1l5k2"]
 [ext_resource type="PackedScene" path="res://Scenes/3D/Props/tree_2d_prop.tscn" id="27_tree2d"]
-[ext_resource type="Texture2D" path="res://Assets/2D/stone/stone6.png" id="28_stone_sm"]
-[ext_resource type="Texture2D" path="res://Assets/2D/stone/stone9.png" id="29_stone_lg"]
-[ext_resource type="Texture2D" path="res://Assets/2D/logs/stump1.png" id="30_stump"]
-[ext_resource type="Texture2D" path="res://Assets/2D/logs/trunk3.png" id="31_dead_tree"]
-[ext_resource type="Texture2D" path="res://Assets/2D/logs/log1.png" id="32_log"]
-[ext_resource type="Texture2D" path="res://Assets/2D/grass/grass1.png" id="33_grass1"]
-[ext_resource type="Texture2D" path="res://Assets/2D/grass/grass3.png" id="34_grass2"]
-[ext_resource type="Texture2D" path="res://Assets/2D/grass/grass5.png" id="35_grass3"]
-[ext_resource type="Texture2D" path="res://Assets/2D/ferns/fern1.png" id="36_fern"]
-[ext_resource type="Texture2D" path="res://Assets/2D/flowers/flower2.png" id="37_flower"]
-[ext_resource type="Texture2D" path="res://Assets/2D/mushrooms/mushroom2.png" id="38_mushroom"]
-[ext_resource type="Texture2D" path="res://Assets/2D/bushes/berry_bush7.png" id="39_bush1"]
-[ext_resource type="Texture2D" path="res://Assets/2D/bushes/bush24.png" id="40_bush2"]
+[ext_resource type="Texture2D" uid="uid://di073ijmd6rbw" path="res://Assets/2D/stone/stone6.png" id="28_stone_sm"]
+[ext_resource type="Texture2D" uid="uid://dvhaxmtmi3fgh" path="res://Assets/2D/stone/stone9.png" id="29_stone_lg"]
+[ext_resource type="Texture2D" uid="uid://bsnv7cu6ws2po" path="res://Assets/2D/logs/stump1.png" id="30_stump"]
+[ext_resource type="Texture2D" uid="uid://cgjsdgqptxmmx" path="res://Assets/2D/logs/trunk3.png" id="31_dead_tree"]
+[ext_resource type="Texture2D" uid="uid://ccs0g1h6dqmsy" path="res://Assets/2D/logs/log1.png" id="32_log"]
+[ext_resource type="Texture2D" uid="uid://cuucbhmss6vdu" path="res://Assets/2D/grass/grass1.png" id="33_grass1"]
+[ext_resource type="Texture2D" uid="uid://h7058fwdpyfe" path="res://Assets/2D/grass/grass3.png" id="34_grass2"]
+[ext_resource type="Texture2D" uid="uid://c6jmkafkltib6" path="res://Assets/2D/grass/grass5.png" id="35_grass3"]
+[ext_resource type="Texture2D" uid="uid://daydqjucagxqw" path="res://Assets/2D/ferns/fern1.png" id="36_fern"]
+[ext_resource type="Texture2D" uid="uid://blc84fkbvv6fq" path="res://Assets/2D/flowers/flower2.png" id="37_flower"]
+[ext_resource type="Texture2D" uid="uid://do1l245gf7ll6" path="res://Assets/2D/mushrooms/mushroom2.png" id="38_mushroom"]
+[ext_resource type="Texture2D" uid="uid://b4uliymwded6y" path="res://Assets/2D/bushes/berry_bush7.png" id="39_bush1"]
+[ext_resource type="Texture2D" uid="uid://dh2scpx25ju8w" path="res://Assets/2D/bushes/bush24.png" id="40_bush2"]
+[ext_resource type="Shader" uid="uid://dyfwn58tfv0dk" path="res://Assets/Shadders/foliage_sway.gdshader" id="41_sway"]
+[ext_resource type="Theme" uid="uid://dog2thwrjj5pg" path="res://Scenes/ui/adventure_theme.tres" id="42_theme"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_y0unm"]
 panorama = ExtResource("3_nnteq")
@@ -67,36 +65,6 @@ albedo_texture = ExtResource("4_wimh0")
 material = SubResource("StandardMaterial3D_qmoyw")
 size = Vector2(20, 20)
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oe6bg"]
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_fyq28"]
-texture = ExtResource("26_1l5k2")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
-region_rect = Rect2(0, 0, 96, 96)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ou0is"]
-texture = ExtResource("26_1l5k2")
-region_rect = Rect2(100, 4, 88, 88)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6atf5"]
-texture = ExtResource("26_1l5k2")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
-region_rect = Rect2(384, 0, 96, 96)
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_75g80"]
-texture = ExtResource("26_1l5k2")
-texture_margin_left = 8.0
-texture_margin_top = 8.0
-texture_margin_right = 8.0
-texture_margin_bottom = 8.0
-region_rect = Rect2(416, 96, 32, 32)
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_bcmnq"]
 bg_color = Color(1, 1, 1, 0)
 
@@ -109,34 +77,6 @@ corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_4tnph"]
-texture = ExtResource("23_0iodb")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_703g4"]
-texture = ExtResource("23_0iodb")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6qvfn"]
-texture = ExtResource("23_0iodb")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
-
-[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_6t4wf"]
-texture = ExtResource("23_0iodb")
-texture_margin_left = 20.0
-texture_margin_top = 20.0
-texture_margin_right = 20.0
-texture_margin_bottom = 20.0
-
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_h14am"]
 texture = ExtResource("26_1l5k2")
 texture_margin_left = 8.0
@@ -144,6 +84,39 @@ texture_margin_top = 8.0
 texture_margin_right = 8.0
 texture_margin_bottom = 8.0
 region_rect = Rect2(384, 0, 96, 96)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dead_tree"]
+render_priority = 0
+shader = ExtResource("41_sway")
+shader_parameter/albedo_texture = ExtResource("31_dead_tree")
+shader_parameter/tint_color = Color(0.78, 0.72, 0.68, 1)
+shader_parameter/sway_speed = 1.25
+shader_parameter/sway_strength = 0.03
+shader_parameter/base_sway = 0.0
+shader_parameter/phase_offset = 0.2
+shader_parameter/alpha_scissor = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bush1"]
+render_priority = 0
+shader = ExtResource("41_sway")
+shader_parameter/albedo_texture = ExtResource("39_bush1")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/sway_speed = 1.85
+shader_parameter/sway_strength = 0.055
+shader_parameter/base_sway = 0.0
+shader_parameter/phase_offset = 0.5
+shader_parameter/alpha_scissor = 0.5
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bush2"]
+render_priority = 0
+shader = ExtResource("41_sway")
+shader_parameter/albedo_texture = ExtResource("40_bush2")
+shader_parameter/tint_color = Color(1, 1, 1, 1)
+shader_parameter/sway_speed = 1.7
+shader_parameter/sway_strength = 0.055
+shader_parameter/base_sway = 0.0
+shader_parameter/phase_offset = 1.4
+shader_parameter/alpha_scissor = 0.5
 
 [node name="Lobby3D" type="Node3D" unique_id=1513798651]
 script = ExtResource("1_fdmty")
@@ -194,6 +167,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("42_theme")
 script = ExtResource("6_y0unm")
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer/TitleMenuUI" unique_id=1686544958]
@@ -227,36 +201,41 @@ custom_minimum_size = Vector2(320, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 10
-theme_override_constants/separation = 40
+theme_override_constants/separation = 16
 
 [node name="NewGameButton" type="Button" parent="UILayer/TitleMenuUI/MarginContainer/ButtonsVBox" unique_id=1849890504]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("5_3heu7")
+theme_override_styles/pressed = ExtResource("6_nnteq")
 theme_override_styles/hover = ExtResource("6_nnteq")
 text = "NOVO JOGO"
 
 [node name="LoadGameButton" type="Button" parent="UILayer/TitleMenuUI/MarginContainer/ButtonsVBox" unique_id=251885478]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("5_3heu7")
+theme_override_styles/pressed = ExtResource("6_nnteq")
 theme_override_styles/hover = ExtResource("6_nnteq")
 text = "CARREGAR"
 
 [node name="SettingsButton" type="Button" parent="UILayer/TitleMenuUI/MarginContainer/ButtonsVBox" unique_id=197149011]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 size_flags_vertical = 0
 theme_override_font_sizes/font_size = 22
-theme_override_styles/normal = ExtResource("7_wimh0")
-theme_override_styles/hover = ExtResource("8_y0unm")
 text = "CONFIGURAÇÕES"
 
 [node name="QuitButton" type="Button" parent="UILayer/TitleMenuUI/MarginContainer/ButtonsVBox" unique_id=1284327865]
+custom_minimum_size = Vector2(0, 52)
 layout_mode = 2
 theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("9_w1iuc")
+theme_override_styles/pressed = ExtResource("10_mow7t")
 theme_override_styles/hover = ExtResource("10_mow7t")
 text = "SAIR"
 
@@ -277,131 +256,7 @@ text = "0.1.0 beta"
 [node name="StashUI" parent="UILayer" unique_id=1886277990 instance=ExtResource("13_wimh0")]
 visible = false
 layout_mode = 3
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-theme = null
 all_items = Array[ExtResource("14_65no0")]([ExtResource("15_3lntg"), ExtResource("16_kjiec"), ExtResource("17_x6xk3"), ExtResource("18_dvk2v"), ExtResource("19_67uv8"), ExtResource("20_ldrhn")])
-
-[node name="Panel" parent="UILayer/StashUI" index="0" unique_id=1525156225]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_oe6bg")
-
-[node name="MarginContainer" parent="UILayer/StashUI" index="1" unique_id=401999161]
-custom_minimum_size = Vector2(400, 300)
-anchors_preset = 15
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="VBoxContainer" parent="UILayer/StashUI/MarginContainer" index="0" unique_id=888460510]
-size_flags_vertical = 4
-alignment = 1
-
-[node name="HBoxContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="0" unique_id=34223340]
-alignment = 1
-
-[node name="ProfileNameLabel" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer" index="0" unique_id=9821723]
-text = "Perfil: Nohan"
-
-[node name="CoinsLabel" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer" index="1" unique_id=1448314825]
-text = "Moedas: 100"
-
-[node name="HSeparator" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="1" unique_id=1297401850]
-layout_mode = 2
-
-[node name="HBoxContainer2" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="2" unique_id=1439542863]
-custom_minimum_size = Vector2(0, 200)
-size_flags_vertical = 1
-alignment = 1
-
-[node name="Shop" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="0" unique_id=1738155814]
-custom_minimum_size = Vector2(200, 0)
-size_flags_horizontal = 1
-size_flags_stretch_ratio = 1.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_fyq28")
-
-[node name="Label" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 1322769989) index="0" unique_id=1240522752]
-size_flags_vertical = 0
-text = "LOJA"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GridContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Shop/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 1322769989) index="1" unique_id=336305228]
-layout_mode = 2
-columns = 2
-
-[node name="VSeparator" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="1" unique_id=110000170]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-
-[node name="Bag" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="2" unique_id=1253661305]
-custom_minimum_size = Vector2(200, 0)
-size_flags_horizontal = 1
-size_flags_stretch_ratio = 1.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_ou0is")
-
-[node name="Label" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 939962613) index="0" unique_id=2098491903]
-size_flags_vertical = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GridContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 939962613) index="1" unique_id=1867560092]
-layout_mode = 2
-size_flags_horizontal = 4
-columns = 3
-
-[node name="VSeparator2" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="3" unique_id=724496127]
-custom_minimum_size = Vector2(50, 0)
-layout_mode = 2
-
-[node name="Stash" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2" index="4" unique_id=143864144]
-custom_minimum_size = Vector2(200, 0)
-size_flags_horizontal = 1
-size_flags_stretch_ratio = 1.0
-theme_override_styles/panel = SubResource("StyleBoxTexture_6atf5")
-
-[node name="Label" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 490230715) index="0" unique_id=436811918]
-size_flags_vertical = 0
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="GridContainer" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer" parent_id_path=PackedInt32Array(1886277990, 490230715) index="1" unique_id=1641259838]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-columns = 3
-
-[node name="Button" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer/GridContainer" index="0" unique_id=2132028987]
-custom_minimum_size = Vector2(40, 40)
-layout_mode = 2
-theme_override_styles/normal = SubResource("StyleBoxTexture_75g80")
-icon = ExtResource("22_xtjg4")
-icon_alignment = 1
-expand_icon = true
-
-[node name="HSeparator2" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="3" unique_id=1245226195]
-layout_mode = 2
-
-[node name="HBoxContainer3" parent="UILayer/StashUI/MarginContainer/VBoxContainer" index="4" unique_id=311269040]
-alignment = 1
-
-[node name="RerollShopButton" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer3" index="0" unique_id=115810777]
-text = "Reroll: 10 moedas"
-
-[node name="StartButton" parent="UILayer/StashUI/MarginContainer/VBoxContainer/HBoxContainer3" index="1" unique_id=170486455]
-custom_minimum_size = Vector2(0, 0)
-text = "COMEÇAR"
 
 [node name="TransitionLayer" type="ColorRect" parent="UILayer" unique_id=1152259390]
 visible = false
@@ -421,6 +276,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("42_theme")
 script = ExtResource("14_rlyvh")
 available_classes = Array[ExtResource("15_ff6bx")]([ExtResource("16_l6ubl"), ExtResource("17_d7b66"), ExtResource("18_8qwmk")])
 class_card_scene = ExtResource("19_5hc7j")
@@ -477,20 +333,24 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="ConfirmButton" type="Button" parent="UILayer/CreationUI/BackgroundPanel/MarginContainer/VBoxContainer/BottomBar" unique_id=321118809]
+custom_minimum_size = Vector2(200, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("5_3heu7")
+theme_override_styles/pressed = ExtResource("6_nnteq")
 theme_override_styles/hover = ExtResource("6_nnteq")
 theme_override_styles/disabled = ExtResource("21_4tnph")
 disabled = true
-text = "COMFIRMAR"
+text = "CONFIRMAR"
 
 [node name="BackButton" type="Button" parent="UILayer/CreationUI/BackgroundPanel/MarginContainer/VBoxContainer/BottomBar" unique_id=1088253609]
+custom_minimum_size = Vector2(180, 48)
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("9_w1iuc")
+theme_override_styles/pressed = ExtResource("10_mow7t")
 theme_override_styles/hover = ExtResource("10_mow7t")
-text = "SAIR"
+text = "VOLTAR"
 
 [node name="AtrributesScene" type="Control" parent="UILayer" unique_id=1548375540 node_paths=PackedStringArray("visual_dice")]
 visible = false
@@ -500,6 +360,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("42_theme")
 script = ExtResource("21_d7b66")
 visual_dice = NodePath("MarginContainer/DiceVisual")
 
@@ -574,14 +435,13 @@ columns = 4
 [node name="StrengthPanel" type="PanelContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=598944213]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_4tnph")
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel" unique_id=2009388681]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="StrengthVBox" type="VBoxContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer" unique_id=1218180508]
 layout_mode = 2
@@ -610,8 +470,6 @@ vertical_alignment = 1
 [node name="StrengthRollButton" type="Button" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/StrengthPanel/MarginContainer/StrengthVBox" unique_id=241784118]
 layout_mode = 2
 size_flags_vertical = 0
-theme_override_styles/normal = ExtResource("7_wimh0")
-theme_override_styles/hover = ExtResource("8_y0unm")
 text = "ROLAR"
 icon = ExtResource("23_d7b66")
 expand_icon = true
@@ -619,14 +477,13 @@ expand_icon = true
 [node name="IntelligencePanel" type="PanelContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=1725475274]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_703g4")
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel" unique_id=1894675491]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="IntelligenceVBox" type="VBoxContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer" unique_id=844164780]
 layout_mode = 2
@@ -654,22 +511,19 @@ vertical_alignment = 1
 [node name="IntelligenceRollButton" type="Button" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/IntelligencePanel/MarginContainer/IntelligenceVBox" unique_id=296232465]
 layout_mode = 2
 theme_override_icons/icon = ExtResource("23_d7b66")
-theme_override_styles/normal = ExtResource("7_wimh0")
-theme_override_styles/hover = ExtResource("8_y0unm")
 text = "ROLAR"
 expand_icon = true
 
 [node name="FaithPanel" type="PanelContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=1833791704]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_6qvfn")
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel" unique_id=861386193]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="FaithVBox" type="VBoxContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer" unique_id=947143451]
 layout_mode = 2
@@ -695,22 +549,19 @@ vertical_alignment = 1
 [node name="FaithRollButton" type="Button" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/FaithPanel/MarginContainer/FaithVBox" unique_id=2000863494]
 layout_mode = 2
 theme_override_icons/icon = ExtResource("23_d7b66")
-theme_override_styles/normal = ExtResource("7_wimh0")
-theme_override_styles/hover = ExtResource("8_y0unm")
 text = "ROLAR"
 expand_icon = true
 
 [node name="AgilityPanel" type="PanelContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid" unique_id=1805883261]
 custom_minimum_size = Vector2(200, 200)
 layout_mode = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_6t4wf")
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel" unique_id=556347707]
 layout_mode = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
 
 [node name="AgilityVBox" type="VBoxContainer" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer" unique_id=416903397]
 layout_mode = 2
@@ -735,8 +586,6 @@ vertical_alignment = 1
 
 [node name="AgilityRollButton" type="Button" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/ClassInfoPanel/ClassInfoMargin/ClassInfoVBox/AttributeGrid/AgilityPanel/MarginContainer/AgilityVBox" unique_id=1401813773]
 layout_mode = 2
-theme_override_styles/normal = ExtResource("7_wimh0")
-theme_override_styles/hover = ExtResource("8_y0unm")
 text = "ROLAR"
 icon = ExtResource("23_d7b66")
 expand_icon = true
@@ -748,32 +597,33 @@ theme_override_constants/separation = 20
 alignment = 1
 
 [node name="BackButton" type="Button" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/BottomBar" unique_id=39075368]
+custom_minimum_size = Vector2(160, 48)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("9_w1iuc")
+theme_override_styles/pressed = ExtResource("10_mow7t")
 theme_override_styles/hover = ExtResource("10_mow7t")
 text = "VOLTAR"
 
 [node name="RollAllButton" type="Button" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/BottomBar" unique_id=830542810]
+custom_minimum_size = Vector2(180, 48)
 layout_mode = 2
-theme_override_styles/normal = ExtResource("7_wimh0")
-theme_override_styles/hover = ExtResource("8_y0unm")
 text = "ROLAR TODOS"
 
 [node name="ConfirmButton" type="Button" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/BottomBar" unique_id=729232118]
+custom_minimum_size = Vector2(180, 48)
 layout_mode = 2
 theme_override_styles/normal = ExtResource("5_3heu7")
+theme_override_styles/pressed = ExtResource("6_nnteq")
 theme_override_styles/hover = ExtResource("6_nnteq")
 theme_override_styles/disabled = ExtResource("21_4tnph")
 disabled = true
 text = "CONFIRMAR"
 
 [node name="Test3DButton" type="Button" parent="UILayer/AtrributesScene/MarginContainer/VBoxContainer/BottomBar" unique_id=1947172152]
+visible = false
 layout_mode = 2
-theme_override_styles/normal = ExtResource("5_3heu7")
-theme_override_styles/hover = ExtResource("6_nnteq")
-theme_override_styles/disabled = ExtResource("21_4tnph")
 disabled = true
-text = "3D!!!!!"
+text = "3D"
 
 [node name="MainUI" type="Control" parent="UILayer" unique_id=1751855373]
 layout_mode = 3
@@ -782,6 +632,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("42_theme")
 
 [node name="MarginContainer" type="MarginContainer" parent="UILayer/MainUI" unique_id=1614625304]
 layout_mode = 1
@@ -790,17 +641,17 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_top = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 24
 
 [node name="ProfileNameLabel" type="Label" parent="UILayer/MainUI/MarginContainer" unique_id=332038612]
 custom_minimum_size = Vector2(80, 20)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 0
-theme_override_font_sizes/font_size = 30
+theme_override_font_sizes/font_size = 24
 text = "Perfil"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -808,43 +659,39 @@ vertical_alignment = 1
 [node name="HBoxContainer" type="HBoxContainer" parent="UILayer/MainUI/MarginContainer" unique_id=466292271]
 layout_mode = 2
 size_flags_horizontal = 8
-theme_override_constants/separation = 50
+theme_override_constants/separation = 16
 
 [node name="StashButton" type="Button" parent="UILayer/MainUI/MarginContainer/HBoxContainer" unique_id=1326952066]
-custom_minimum_size = Vector2(200, 20)
+custom_minimum_size = Vector2(200, 52)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 32
-theme_override_styles/normal = ExtResource("7_wimh0")
-theme_override_styles/pressed = ExtResource("7_wimh0")
-theme_override_styles/hover = ExtResource("8_y0unm")
-theme_override_styles/disabled = ExtResource("21_4tnph")
-text = "ESTOQUE
-"
+theme_override_constants/icon_max_width = 28
+theme_override_font_sizes/font_size = 22
+text = "ESTOQUE"
 icon = ExtResource("25_1l5k2")
 expand_icon = true
 
 [node name="BattleButton" type="Button" parent="UILayer/MainUI/MarginContainer/HBoxContainer" unique_id=857288105]
+custom_minimum_size = Vector2(200, 52)
 layout_mode = 2
 size_flags_horizontal = 8
 size_flags_vertical = 8
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 22
 theme_override_styles/normal = ExtResource("5_3heu7")
-theme_override_styles/pressed = ExtResource("5_3heu7")
+theme_override_styles/pressed = ExtResource("6_nnteq")
 theme_override_styles/hover = ExtResource("6_nnteq")
 theme_override_styles/disabled = ExtResource("21_4tnph")
-text = "BATALHA
-"
+text = "BATALHA"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="UILayer/MainUI/MarginContainer" unique_id=1785687860]
 layout_mode = 2
 size_flags_horizontal = 0
 size_flags_vertical = 8
-theme_override_constants/separation = 50
+theme_override_constants/separation = 24
 
 [node name="Panel" type="Panel" parent="UILayer/MainUI/MarginContainer/HBoxContainer2" unique_id=554947883]
-custom_minimum_size = Vector2(250, 300)
+custom_minimum_size = Vector2(270, 340)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_h14am")
 
@@ -855,17 +702,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/margin_left = 20
-theme_override_constants/margin_top = 20
-theme_override_constants/margin_right = 20
-theme_override_constants/margin_bottom = 20
+theme_override_constants/margin_left = 18
+theme_override_constants/margin_top = 16
+theme_override_constants/margin_right = 18
+theme_override_constants/margin_bottom = 16
 
 [node name="PlayerActorInfos" type="RichTextLabel" parent="UILayer/MainUI/MarginContainer/HBoxContainer2/Panel/MarginContainer" unique_id=629490549]
 layout_mode = 2
 theme_override_colors/default_color = Color(0.19889408, 0.20719731, 0.20719802, 1)
 theme_override_font_sizes/normal_font_size = 16
 bbcode_enabled = true
-text = "asndasndasndjsandjasndjsandjandjasndjanjdsndjansjdnajsdnasjdnajsdnajsdnjadnjandjasndjansjdnjasndjansjdnajsndjansdjnasjdnajsndjasndjanjdsnajdnajsndjandjsndajdnjsandjasndjasndjasndjasndjandjsandjasndajsndjasdnasjdnajsdnajdnajdnjandjsandjnajsdnajsndjansjdnajsndj"
 
 [node name="SaveUI" type="Control" parent="UILayer" unique_id=1429053585]
 visible = false
@@ -875,6 +721,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("42_theme")
 script = ExtResource("25_8qwmk")
 
 [node name="Panel" type="PanelContainer" parent="UILayer/SaveUI" unique_id=47470348]
@@ -953,31 +800,32 @@ title = "Excluir perfil"
 [node name="Models" type="Node3D" parent="." unique_id=51393943]
 transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
 
-[node name="Tree2D_1" parent="Models" instance=ExtResource("27_tree2d")]
+[node name="Tree2D_1" parent="Models" unique_id=1523164511 instance=ExtResource("27_tree2d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.7087054, 0, -1.5771015)
 
-[node name="Tree2D_2" parent="Models" instance=ExtResource("27_tree2d")]
+[node name="Tree2D_2" parent="Models" unique_id=225961607 instance=ExtResource("27_tree2d")]
 transform = Transform3D(1.1, 0, 0, 0, 1.1, 0, 0, 0, 1.1, -5.7087054, 0, -5.4138803)
 
-[node name="Tree2D_3" parent="Models" instance=ExtResource("27_tree2d")]
+[node name="Tree2D_3" parent="Models" unique_id=928187755 instance=ExtResource("27_tree2d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.1674533, 0, -4.060238)
 
-[node name="Tree2D_4" parent="Models" instance=ExtResource("27_tree2d")]
+[node name="Tree2D_4" parent="Models" unique_id=618925730 instance=ExtResource("27_tree2d")]
 transform = Transform3D(1.15, 0, 0, 0, 1.15, 0, 0, 0, 1.15, 0.35831928, 0, -7.2108707)
 
-[node name="Tree2D_5" parent="Models" instance=ExtResource("27_tree2d")]
+[node name="Tree2D_5" parent="Models" unique_id=874437942 instance=ExtResource("27_tree2d")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.607325, 0, -6.597618)
 
-[node name="Tree2D_6" parent="Models" instance=ExtResource("27_tree2d")]
+[node name="Tree2D_6" parent="Models" unique_id=734096121 instance=ExtResource("27_tree2d")]
 transform = Transform3D(1.25, 0, 0, 0, 1.25, 0, 0, 0, 1.25, -4.6095214, 0, -5.227)
 
-[node name="Tree2D_7" parent="Models" instance=ExtResource("27_tree2d")]
+[node name="Tree2D_7" parent="Models" unique_id=769692831 instance=ExtResource("27_tree2d")]
 transform = Transform3D(0.9, 0, 0, 0, 0.9, 0, 0, 0, 0.9, 3.9521422, 0, -7.8789887)
 
-[node name="DeadTree2D_1" type="Sprite3D" parent="Models"]
+[node name="DeadTree2D_1" type="Sprite3D" parent="Models" unique_id=1034320810]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.881631, 0, -6.701056)
-modulate = Color(0.78, 0.72, 0.68, 1)
+material_override = SubResource("ShaderMaterial_dead_tree")
 offset = Vector2(0, 32)
+modulate = Color(0.78, 0.72, 0.68, 1)
 pixel_size = 0.038
 billboard = 2
 shaded = true
@@ -985,10 +833,11 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("31_dead_tree")
 
-[node name="DeadTree2D_2" type="Sprite3D" parent="Models"]
+[node name="DeadTree2D_2" type="Sprite3D" parent="Models" unique_id=1336526598]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.821946, 0, -3.686866)
-modulate = Color(0.78, 0.72, 0.68, 1)
+material_override = SubResource("ShaderMaterial_dead_tree")
 offset = Vector2(0, 32)
+modulate = Color(0.78, 0.72, 0.68, 1)
 pixel_size = 0.038
 billboard = 2
 shaded = true
@@ -996,10 +845,11 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("31_dead_tree")
 
-[node name="DeadTree2D_3" type="Sprite3D" parent="Models"]
+[node name="DeadTree2D_3" type="Sprite3D" parent="Models" unique_id=1404011069]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3742733, 0, -5.4069014)
-modulate = Color(0.78, 0.72, 0.68, 1)
+material_override = SubResource("ShaderMaterial_dead_tree")
 offset = Vector2(0, 32)
+modulate = Color(0.78, 0.72, 0.68, 1)
 pixel_size = 0.038
 billboard = 2
 shaded = true
@@ -1007,10 +857,11 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("31_dead_tree")
 
-[node name="DeadTree2D_4" type="Sprite3D" parent="Models"]
+[node name="DeadTree2D_4" type="Sprite3D" parent="Models" unique_id=1206529936]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79836345, 0, -7.0563)
-modulate = Color(0.78, 0.72, 0.68, 1)
+material_override = SubResource("ShaderMaterial_dead_tree")
 offset = Vector2(0, 32)
+modulate = Color(0.78, 0.72, 0.68, 1)
 pixel_size = 0.038
 billboard = 2
 shaded = true
@@ -1018,7 +869,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("31_dead_tree")
 
-[node name="Stone2D_1" type="Sprite3D" parent="Models"]
+[node name="Stone2D_1" type="Sprite3D" parent="Models" unique_id=2051740172]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6038234, 0, 0.6914089)
 offset = Vector2(0, 16)
 pixel_size = 0.03
@@ -1028,7 +879,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("28_stone_sm")
 
-[node name="Stone2D_2" type="Sprite3D" parent="Models"]
+[node name="Stone2D_2" type="Sprite3D" parent="Models" unique_id=740521821]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5731664, 0, -6.7648883)
 offset = Vector2(0, 16)
 pixel_size = 0.03
@@ -1038,7 +889,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("28_stone_sm")
 
-[node name="Stone2D_3" type="Sprite3D" parent="Models"]
+[node name="Stone2D_3" type="Sprite3D" parent="Models" unique_id=1651897466]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2734523, 0, -6.7648883)
 offset = Vector2(0, 16)
 pixel_size = 0.03
@@ -1048,7 +899,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("28_stone_sm")
 
-[node name="Stone2D_4" type="Sprite3D" parent="Models"]
+[node name="Stone2D_4" type="Sprite3D" parent="Models" unique_id=1221496990]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.2538066, 0, -6.7648883)
 offset = Vector2(0, 16)
 pixel_size = 0.03
@@ -1058,7 +909,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("28_stone_sm")
 
-[node name="Stone2D_5" type="Sprite3D" parent="Models"]
+[node name="Stone2D_5" type="Sprite3D" parent="Models" unique_id=1067102769]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.4886847, 0, -8.076036)
 offset = Vector2(0, 16)
 pixel_size = 0.03
@@ -1068,7 +919,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("28_stone_sm")
 
-[node name="Stone2D_6" type="Sprite3D" parent="Models"]
+[node name="Stone2D_6" type="Sprite3D" parent="Models" unique_id=1145586108]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.8037386, 0, -6.172926)
 offset = Vector2(0, 16)
 pixel_size = 0.03
@@ -1078,7 +929,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("28_stone_sm")
 
-[node name="BigStone2D_1" type="Sprite3D" parent="Models"]
+[node name="BigStone2D_1" type="Sprite3D" parent="Models" unique_id=1603592155]
 transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, 8.94654, 0, -8.552371)
 offset = Vector2(0, 16)
 pixel_size = 0.035
@@ -1088,7 +939,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("29_stone_lg")
 
-[node name="BigStone2D_2" type="Sprite3D" parent="Models"]
+[node name="BigStone2D_2" type="Sprite3D" parent="Models" unique_id=209799289]
 transform = Transform3D(3.5, 0, 0, 0, 3.5, 0, 0, 0, 3.5, -9.881253, 0, -7.251816)
 offset = Vector2(0, 16)
 pixel_size = 0.035
@@ -1098,8 +949,8 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("29_stone_lg")
 
-[node name="BigStone2D_3" type="Sprite3D" parent="Models"]
-transform = Transform3D(3.0, 0, 0, 0, 3.0, 0, 0, 0, 3.0, -5.2671227, 0, -8.295943)
+[node name="BigStone2D_3" type="Sprite3D" parent="Models" unique_id=1607614313]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -5.2671227, 0, -8.295943)
 offset = Vector2(0, 16)
 pixel_size = 0.035
 billboard = 2
@@ -1108,8 +959,8 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("29_stone_lg")
 
-[node name="BigStone2D_4" type="Sprite3D" parent="Models"]
-transform = Transform3D(3.0, 0, 0, 0, 3.0, 0, 0, 0, 3.0, -9.069967, 0, -2.3830838)
+[node name="BigStone2D_4" type="Sprite3D" parent="Models" unique_id=96709389]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, -9.069967, 0, -2.3830838)
 offset = Vector2(0, 16)
 pixel_size = 0.035
 billboard = 2
@@ -1118,7 +969,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("29_stone_lg")
 
-[node name="TreeStump2D_1" type="Sprite3D" parent="Models"]
+[node name="TreeStump2D_1" type="Sprite3D" parent="Models" unique_id=2081315811]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5244114, 0, -3.580154)
 offset = Vector2(0, 16)
 pixel_size = 0.03
@@ -1128,7 +979,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("30_stump")
 
-[node name="TreeStump2D_2" type="Sprite3D" parent="Models"]
+[node name="TreeStump2D_2" type="Sprite3D" parent="Models" unique_id=113277940]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5633345, 0, -3.9480984)
 offset = Vector2(0, 16)
 pixel_size = 0.03
@@ -1138,7 +989,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("30_stump")
 
-[node name="WoodLog2D" type="Sprite3D" parent="Models"]
+[node name="WoodLog2D" type="Sprite3D" parent="Models" unique_id=1608185154]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.7487502, 0, -1.0597612)
 offset = Vector2(0, 16)
 pixel_size = 0.032
@@ -1148,7 +999,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("32_log")
 
-[node name="GrassPatch_A1" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_A1" type="Sprite3D" parent="Models" unique_id=508383433]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.94, 0, -2.8)
 offset = Vector2(0, 8)
 pixel_size = 0.03
@@ -1158,7 +1009,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("33_grass1")
 
-[node name="GrassPatch_A2" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_A2" type="Sprite3D" parent="Models" unique_id=573548978]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.65, 0, -3.15)
 offset = Vector2(0, 8)
 pixel_size = 0.03
@@ -1168,7 +1019,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("34_grass2")
 
-[node name="GrassPatch_A3" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_A3" type="Sprite3D" parent="Models" unique_id=1152164493]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.25, 0, -3.45)
 offset = Vector2(0, 8)
 pixel_size = 0.03
@@ -1178,7 +1029,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("35_grass3")
 
-[node name="GrassPatch_A4" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_A4" type="Sprite3D" parent="Models" unique_id=269348527]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82, 0, -3.55)
 offset = Vector2(0, 8)
 pixel_size = 0.028
@@ -1188,7 +1039,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("37_flower")
 
-[node name="GrassPatch_B1" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_B1" type="Sprite3D" parent="Models" unique_id=1326736866]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, 1.8)
 offset = Vector2(0, 8)
 pixel_size = 0.03
@@ -1198,7 +1049,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("33_grass1")
 
-[node name="GrassPatch_B2" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_B2" type="Sprite3D" parent="Models" unique_id=477511213]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.85, 0, 1.4)
 offset = Vector2(0, 8)
 pixel_size = 0.03
@@ -1208,7 +1059,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("34_grass2")
 
-[node name="GrassPatch_B3" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_B3" type="Sprite3D" parent="Models" unique_id=962997139]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.2, 0, 1.15)
 offset = Vector2(0, 8)
 pixel_size = 0.03
@@ -1218,7 +1069,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("35_grass3")
 
-[node name="GrassPatch_B4" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_B4" type="Sprite3D" parent="Models" unique_id=179028301]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.65, 0, 1.15)
 offset = Vector2(0, 8)
 pixel_size = 0.028
@@ -1228,7 +1079,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("37_flower")
 
-[node name="GrassPatch_C1" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_C1" type="Sprite3D" parent="Models" unique_id=1839109510]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2, 0, 1.8)
 offset = Vector2(0, 8)
 pixel_size = 0.03
@@ -1238,7 +1089,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("33_grass1")
 
-[node name="GrassPatch_C2" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_C2" type="Sprite3D" parent="Models" unique_id=2009105208]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.9, 0, 1.45)
 offset = Vector2(0, 8)
 pixel_size = 0.03
@@ -1248,7 +1099,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("34_grass2")
 
-[node name="GrassPatch_C3" type="Sprite3D" parent="Models"]
+[node name="GrassPatch_C3" type="Sprite3D" parent="Models" unique_id=1100200690]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 1.15)
 offset = Vector2(0, 8)
 pixel_size = 0.03
@@ -1258,8 +1109,8 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("35_grass3")
 
-[node name="GrassPatch_C4" type="Sprite3D" parent="Models"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.0, 0, 1.1)
+[node name="GrassPatch_C4" type="Sprite3D" parent="Models" unique_id=595208522]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 0, 1.1)
 offset = Vector2(0, 8)
 pixel_size = 0.028
 billboard = 2
@@ -1268,7 +1119,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("37_flower")
 
-[node name="Plant2D_1" type="Sprite3D" parent="Models"]
+[node name="Plant2D_1" type="Sprite3D" parent="Models" unique_id=1692002266]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0757432, 0, 0.72833157)
 offset = Vector2(0, 8)
 pixel_size = 0.035
@@ -1278,7 +1129,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("36_fern")
 
-[node name="Plant2D_2" type="Sprite3D" parent="Models"]
+[node name="Plant2D_2" type="Sprite3D" parent="Models" unique_id=2028019179]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.299636, 0, 0.72833157)
 offset = Vector2(0, 8)
 pixel_size = 0.025
@@ -1288,7 +1139,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("38_mushroom")
 
-[node name="Plant2D_3" type="Sprite3D" parent="Models"]
+[node name="Plant2D_3" type="Sprite3D" parent="Models" unique_id=1019970131]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.0757432, 0, -0.9322295)
 offset = Vector2(0, 8)
 pixel_size = 0.035
@@ -1298,7 +1149,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("37_flower")
 
-[node name="Plant2D_4" type="Sprite3D" parent="Models"]
+[node name="Plant2D_4" type="Sprite3D" parent="Models" unique_id=158613072]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.299636, 0, -0.9322295)
 offset = Vector2(0, 8)
 pixel_size = 0.025
@@ -1308,7 +1159,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("36_fern")
 
-[node name="Plant2D_5" type="Sprite3D" parent="Models"]
+[node name="Plant2D_5" type="Sprite3D" parent="Models" unique_id=140028474]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.2096167, 0, -2.2063751)
 offset = Vector2(0, 8)
 pixel_size = 0.035
@@ -1318,7 +1169,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("36_fern")
 
-[node name="Plant2D_6" type="Sprite3D" parent="Models"]
+[node name="Plant2D_6" type="Sprite3D" parent="Models" unique_id=1833594645]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.4335093, 0, -2.2063751)
 offset = Vector2(0, 8)
 pixel_size = 0.025
@@ -1328,7 +1179,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("38_mushroom")
 
-[node name="Plant2D_7" type="Sprite3D" parent="Models"]
+[node name="Plant2D_7" type="Sprite3D" parent="Models" unique_id=1572659401]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8576808, 0, -2.8034923)
 offset = Vector2(0, 8)
 pixel_size = 0.035
@@ -1338,7 +1189,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("37_flower")
 
-[node name="Plant2D_8" type="Sprite3D" parent="Models"]
+[node name="Plant2D_8" type="Sprite3D" parent="Models" unique_id=2105487777]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.6337881, 0, -2.8034923)
 offset = Vector2(0, 8)
 pixel_size = 0.025
@@ -1348,7 +1199,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("36_fern")
 
-[node name="Plant2D_9" type="Sprite3D" parent="Models"]
+[node name="Plant2D_9" type="Sprite3D" parent="Models" unique_id=1377015606]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.355756, 0, -5.3914537)
 offset = Vector2(0, 8)
 pixel_size = 0.035
@@ -1358,7 +1209,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("36_fern")
 
-[node name="Plant2D_10" type="Sprite3D" parent="Models"]
+[node name="Plant2D_10" type="Sprite3D" parent="Models" unique_id=1420356045]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.1318634, 0, -5.3914537)
 offset = Vector2(0, 8)
 pixel_size = 0.025
@@ -1368,7 +1219,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("38_mushroom")
 
-[node name="Plant2D_11" type="Sprite3D" parent="Models"]
+[node name="Plant2D_11" type="Sprite3D" parent="Models" unique_id=548609069]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.0974243, 0, -5.3914537)
 offset = Vector2(0, 8)
 pixel_size = 0.035
@@ -1378,7 +1229,7 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("37_flower")
 
-[node name="Plant2D_12" type="Sprite3D" parent="Models"]
+[node name="Plant2D_12" type="Sprite3D" parent="Models" unique_id=2001590047]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7129691, 0, -5.3914537)
 offset = Vector2(0, 8)
 pixel_size = 0.035
@@ -1388,8 +1239,9 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("36_fern")
 
-[node name="Bush2D_1" type="Sprite3D" parent="Models"]
+[node name="Bush2D_1" type="Sprite3D" parent="Models" unique_id=1943133251]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9261394, 0, -8.270513)
+material_override = SubResource("ShaderMaterial_bush1")
 offset = Vector2(0, 16)
 pixel_size = 0.038
 billboard = 2
@@ -1398,8 +1250,9 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("39_bush1")
 
-[node name="Bush2D_2" type="Sprite3D" parent="Models"]
+[node name="Bush2D_2" type="Sprite3D" parent="Models" unique_id=729078646]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.161721, 0, -5.4620733)
+material_override = SubResource("ShaderMaterial_bush1")
 offset = Vector2(0, 16)
 pixel_size = 0.038
 billboard = 2
@@ -1408,8 +1261,9 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("39_bush1")
 
-[node name="Bush2D_3" type="Sprite3D" parent="Models"]
+[node name="Bush2D_3" type="Sprite3D" parent="Models" unique_id=579356864]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.348634, 0, -5.4620733)
+material_override = SubResource("ShaderMaterial_bush1")
 offset = Vector2(0, 16)
 pixel_size = 0.038
 billboard = 2
@@ -1418,8 +1272,9 @@ alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("39_bush1")
 
-[node name="Bush2D_4" type="Sprite3D" parent="Models"]
+[node name="Bush2D_4" type="Sprite3D" parent="Models" unique_id=280479659]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.90036774, 0, -5.168447)
+material_override = SubResource("ShaderMaterial_bush2")
 offset = Vector2(0, 16)
 pixel_size = 0.04
 billboard = 2
@@ -1427,5 +1282,3 @@ shaded = true
 alpha_cut = 1
 texture_filter = 0
 texture = ExtResource("40_bush2")
-
-[editable path="UILayer/StashUI"]

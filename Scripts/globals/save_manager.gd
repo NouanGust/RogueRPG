@@ -12,6 +12,7 @@ func _default_profile() -> Dictionary:
 		"version": SAVE_VERSION, "coins": 0, "backpack_level": 1,
 		"backpack_items": [], "stash_items": [], "active_class_path": "",
 		"active_attributes": {}, "active_level": 1, "active_xp": 0,
+		"active_attacks": [],
 	}
 
 func _ready() -> void:
@@ -111,6 +112,12 @@ func _valid_profile_data(data: Dictionary) -> bool:
 		for key in ["strength", "intelligence", "faith", "agility"]:
 			if not data.active_attributes.get(key) is int or data.active_attributes[key] < 1:
 				return false
+	if data.has("active_attacks"):
+		if not data.active_attacks is Array:
+			return false
+		for path in data.active_attacks:
+			if not path is String or not path.begins_with("res://Scripts/resources/Attacks/"):
+				return false
 	return true
 
 func _sync_to_game_state() -> void:
@@ -120,6 +127,7 @@ func _sync_to_game_state() -> void:
 		GameState.rolled_attributes = profile_data.active_attributes.duplicate(true)
 		GameState.current_level = profile_data.active_level
 		GameState.current_xp = profile_data.active_xp
+		GameState.equipped_attacks = _load_attacks(profile_data.get("active_attacks", []))
 		GameState.run_active = true
 	GameState.load_inventory_from_save()
 
@@ -149,6 +157,7 @@ func save_active_run(class_resource: ClassData, attributes: Dictionary) -> bool:
 	profile_data.active_attributes = attributes.duplicate(true)
 	profile_data.active_level = GameState.current_level
 	profile_data.active_xp = GameState.current_xp
+	profile_data.active_attacks = _attack_paths(GameState.get_equipped_attacks())
 	return save_game()
 
 func clear_active_run() -> bool:
@@ -156,6 +165,7 @@ func clear_active_run() -> bool:
 	profile_data.active_attributes = {}
 	profile_data.active_level = 1
 	profile_data.active_xp = 0
+	profile_data.active_attacks = []
 	return save_game()
 
 func delete_profile(profile_name: String) -> bool:
@@ -209,8 +219,23 @@ func spend_coins(amount: int) -> bool:
 		return false
 	return true
 
+const MAX_BACKPACK_LEVEL := 8
+
 func get_backpack_limit() -> int:
 	return 2 + profile_data.backpack_level
+
+func can_upgrade_backpack() -> bool:
+	return profile_data.backpack_level < MAX_BACKPACK_LEVEL
+
+func upgrade_backpack(amount: int = 1) -> bool:
+	if not can_upgrade_backpack() or amount <= 0:
+		return false
+	var previous_level: int = profile_data.backpack_level
+	profile_data.backpack_level = mini(MAX_BACKPACK_LEVEL, profile_data.backpack_level + amount)
+	if not save_game():
+		profile_data.backpack_level = previous_level
+		return false
+	return true
 
 func _load_items(paths: Array) -> Array[ItemData]:
 	var items: Array[ItemData] = []
@@ -220,6 +245,22 @@ func _load_items(paths: Array) -> Array[ItemData]:
 			if item != null:
 				items.append(item)
 	return items
+
+func _attack_paths(attacks: Array[AttackData]) -> Array[String]:
+	var paths: Array[String] = []
+	for atk in attacks:
+		if atk != null and atk.resource_path != "":
+			paths.append(atk.resource_path)
+	return paths
+
+func _load_attacks(paths: Array) -> Array[AttackData]:
+	var attacks: Array[AttackData] = []
+	for path in paths:
+		if ResourceLoader.exists(path):
+			var atk := load(path) as AttackData
+			if atk != null:
+				attacks.append(atk)
+	return attacks
 
 func get_saved_backpack() -> Array[ItemData]:
 	return _load_items(profile_data.backpack_items)

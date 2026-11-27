@@ -6,7 +6,17 @@
 [ext_resource type="Texture2D" uid="uid://btwcrp784ikbb" path="res://Assets/Images/Knight_1/Hurt.png" id="4_ju3ue"]
 [ext_resource type="Texture2D" uid="uid://dxpj0sbiua4dv" path="res://Assets/Images/Knight_1/Idle.png" id="5_bqe86"]
 [ext_resource type="Texture2D" uid="uid://4m3ck6ohmocq" path="res://Assets/Images/Knight_1/Walk.png" id="6_qv70t"]
-[ext_resource type="Texture2D" path="res://Assets/2D/Part 1/01.png" id="7_slash"]
+[ext_resource type="Texture2D" uid="uid://d5rne4jyd15x" path="res://Assets/2D/Part 1/01.png" id="7_slash"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="8_atk_script"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/warrior_quick_slash.tres" id="9_atk1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/warrior_heavy_strike.tres" id="10_atk2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/warrior_shield_guard.tres" id="11_atk3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/warrior_battle_cry.tres" id="12_atk4"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/warrior_shield_break.tres" id="13_u1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/warrior_whirlwind.tres" id="14_u2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/warrior_brutal_charge.tres" id="15_u3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/warrior_second_wind.tres" id="16_u4"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/warrior_execute.tres" id="17_u5"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d8xea"]
 atlas = ExtResource("2_n0ugk")
@@ -216,7 +226,7 @@ main_attribute = "strength"
 strength_dice = 10
 intelligence_dice = 4
 faith_dice = 4
-attack_style = "melee"
 slash_texture = ExtResource("7_slash")
-slash_palette = 7
+attacks = Array[ExtResource("8_atk_script")]([ExtResource("9_atk1"), ExtResource("10_atk2"), ExtResource("11_atk3"), ExtResource("12_atk4")])
+unlockable_attacks = Array[ExtResource("8_atk_script")]([ExtResource("13_u1"), ExtResource("14_u2"), ExtResource("15_u3"), ExtResource("16_u4"), ExtResource("17_u5")])
 metadata/_custom_type_script = "uid://dykg8obmcya8q"

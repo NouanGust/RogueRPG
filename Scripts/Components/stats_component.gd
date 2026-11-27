@@ -3,6 +3,7 @@ extends Node
 
 signal stats_changed(current_stats: Dictionary)
 signal buff_status_changed(message: String)
+signal aura_changed(aura_type: String, stat_name: String)
 
 
 var stats := {
@@ -40,6 +41,7 @@ func setup_from_class(class_data: ClassData, rolled_atributes: Dictionary) -> vo
 	
 	_recalculate_derived_stats()
 	stats_changed.emit(stats)
+	aura_changed.emit("none", "")
 
 
 func setup_from_enemy(enemy_data: EnemyData, rolled_value: int) -> void:
@@ -53,13 +55,22 @@ func setup_from_enemy(enemy_data: EnemyData, rolled_value: int) -> void:
 	stats.defense = enemy_data.base_defense + int(rolled_value / 2)
 	stats.max_hp = enemy_data.base_hp + rolled_value
 	stats_changed.emit(stats)
+	aura_changed.emit("none", "")
 	
 
 func apply_buff(stat_name: String, amount: int, turns: int) -> void:
 	active_buff["stat"] = stat_name
 	active_buff["amount"] = amount
 	active_buff["turns"] = turns
-	buff_status_changed.emit("Buff de +%d %s por %d turnos!"  % [amount, stat_name.capitalize(), turns])
+	var aura_type := "debuff" if amount < 0 else "buff"
+	if amount < 0:
+		buff_status_changed.emit("Debuff de %d %s por %d turnos." % [amount, stat_name.capitalize(), turns])
+	else:
+		buff_status_changed.emit("Buff de +%d %s por %d turnos." % [amount, stat_name.capitalize(), turns])
+	aura_changed.emit(aura_type, stat_name)
+
+func apply_debuff(stat_name: String, amount: int, turns: int) -> void:
+	apply_buff(stat_name, -absi(amount), turns)
 
 func tick_buffs() -> void:
 	if active_buff["turns"] > 0:
@@ -67,7 +78,9 @@ func tick_buffs() -> void:
 		if active_buff["turns"] <= 0:
 			var expired_stat = active_buff["stat"]
 			active_buff["stat"] = ""
-			buff_status_changed.emit("O buff de %s acabou." % expired_stat.capitalize())
+			active_buff["amount"] = 0
+			buff_status_changed.emit("O efeito em %s acabou." % expired_stat.capitalize())
+			aura_changed.emit("none", "")
 
 func get_value(stat_name: String) -> int:
 	var base_value: int = stats.get(stat_name, 0)

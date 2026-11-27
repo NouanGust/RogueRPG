@@ -85,7 +85,7 @@ theme_override_colors/font_color = Color(0.93, 0.77, 0.44, 1)
 
 [node name="Value" type="Label" parent="Card/Content/Stats/Strength/VBox"]
 layout_mode = 2
-text = "6 → 8"
+text = "6 para 8"
 theme_override_font_sizes/font_size = 17
 horizontal_alignment = 1
 
@@ -112,7 +112,7 @@ theme_override_colors/font_color = Color(0.93, 0.77, 0.44, 1)
 
 [node name="Value" type="Label" parent="Card/Content/Stats/Intelligence/VBox"]
 layout_mode = 2
-text = "6 → 8"
+text = "6 para 8"
 theme_override_font_sizes/font_size = 17
 horizontal_alignment = 1
 
@@ -139,7 +139,7 @@ theme_override_colors/font_color = Color(0.93, 0.77, 0.44, 1)
 
 [node name="Value" type="Label" parent="Card/Content/Stats/Faith/VBox"]
 layout_mode = 2
-text = "6 → 8"
+text = "6 para 8"
 theme_override_font_sizes/font_size = 17
 horizontal_alignment = 1
 
@@ -166,7 +166,7 @@ theme_override_colors/font_color = Color(0.93, 0.77, 0.44, 1)
 
 [node name="Value" type="Label" parent="Card/Content/Stats/Agility/VBox"]
 layout_mode = 2
-text = "6 → 8"
+text = "6 para 8"
 theme_override_font_sizes/font_size = 17
 horizontal_alignment = 1
 
@@ -179,4 +179,4 @@ horizontal_alignment = 1
 [node name="Continue" type="Button" parent="Card/Content"]
 layout_mode = 2
 custom_minimum_size = Vector2(0, 48)
-text = "Continuar a jornada  →"
+text = "Continuar a jornada"

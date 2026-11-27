@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Fire Wizard/Charge.png" id="2_tex"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"mage_flame_lance"
+display_name = "Lança Incandescente"
+description = "Disparo perfurante que ignora metade da defesa inimiga."
+effect_type = "damage"
+power_multiplier = 1.3
+flat_bonus = 1
+accuracy = 90
+max_uses = 4
+ignore_defense_ratio = 0.5
+attack_style = "ranged"
+projectile_texture = ExtResource("2_tex")
+projectile_frame_size = Vector2i(64, 64)
+projectile_flight_frames = 6
+projectile_impact_frames = 6
+projectile_speed = 10.5
+projectile_color = Color(1, 0.45, 0.1, 1)

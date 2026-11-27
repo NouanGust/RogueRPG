@@ -6,6 +6,11 @@
 [ext_resource type="Texture2D" uid="uid://bpqr58vp7wfop" path="res://Assets/Images/Minotaur/Hurt.png" id="4_0s2hn"]
 [ext_resource type="Texture2D" uid="uid://wctpv3ysw0eq" path="res://Assets/Images/Minotaur/Idle.png" id="5_rk3dx"]
 [ext_resource type="Texture2D" uid="uid://c7u1u4gst2608" path="res://Assets/Images/Minotaur/Walk.png" id="6_663es"]
+[ext_resource type="Script" uid="uid://cu2g5gug10rle" path="res://Scripts/resources/attack_data.gd" id="7_atk_script"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_minotaur_axe.tres" id="8_em1"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_minotaur_charge.tres" id="9_em2"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_minotaur_roar.tres" id="10_em3"]
+[ext_resource type="Resource" path="res://Scripts/resources/Attacks/enemy_minotaur_crush.tres" id="11_em4"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r7xj6"]
 atlas = ExtResource("2_gymyc")
@@ -287,6 +292,5 @@ sprite_frames = SubResource("SpriteFrames_b15yk")
 base_hp = 18
 base_attack = 2
 base_defense = 1
-attack_style = "melee"
-slash_palette = 4
+attacks = Array[ExtResource("7_atk_script")]([ExtResource("8_em1"), ExtResource("9_em2"), ExtResource("10_em3"), ExtResource("11_em4")])
 metadata/_custom_type_script = "uid://hcscc6dcxeho"

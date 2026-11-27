@@ -61,11 +61,16 @@ func _ready() -> void:
 	navigation.add_theme_constant_override("separation", 12)
 	main_ui.add_child(navigation)
 	menu_back_button = Button.new()
-	menu_back_button.text = "← Voltar ao menu"
+	menu_back_button.text = "Voltar ao menu"
+	menu_back_button.custom_minimum_size = Vector2(150, 40)
+	menu_back_button.add_theme_stylebox_override("normal", preload("res://Assets/Themes/quit_button.tres"))
+	menu_back_button.add_theme_stylebox_override("hover", preload("res://Assets/Themes/quit_button_hover.tres"))
+	menu_back_button.add_theme_stylebox_override("pressed", preload("res://Assets/Themes/quit_button_hover.tres"))
 	navigation.add_child(menu_back_button)
 	menu_back_button.pressed.connect(_return_to_title)
 	var config_button := Button.new()
 	config_button.text = "Configurações"
+	config_button.custom_minimum_size = Vector2(150, 40)
 	navigation.add_child(config_button)
 	config_button.pressed.connect(_on_settings_requested)
 	

@@ -1,11 +1,9 @@
 [gd_resource type="Theme" format=3 uid="uid://dog2thwrjj5pg"]
 
-[sub_resource type="StyleBoxFlat" id="Disabled"]
-content_margin_left = 16.0
-content_margin_top = 10.0
-content_margin_right = 16.0
-content_margin_bottom = 10.0
-bg_color = Color(0.1, 0.13, 0.13, 1)
+[ext_resource type="Texture2D" uid="uid://cnnibj3taycqu" path="res://Assets/UI/GUI_4x.png" id="1_gui"]
+[ext_resource type="StyleBox" uid="uid://jwjs7u0sndse" path="res://Assets/Themes/chose_button.tres" id="2_btn_norm"]
+[ext_resource type="StyleBox" uid="uid://b4mai6yv25014" path="res://Assets/Themes/chose_button_hover.tres" id="3_btn_hover"]
+[ext_resource type="StyleBox" uid="uid://deqy0stw5v850" path="res://Assets/Themes/confirm_button_disable.tres" id="4_btn_dis"]
 
 [sub_resource type="StyleBoxFlat" id="Focus"]
 bg_color = Color(0, 0, 0, 0)
@@ -14,80 +12,66 @@ border_width_top = 2
 border_width_right = 2
 border_width_bottom = 2
 border_color = Color(0.92, 0.77, 0.48, 1)
-
-[sub_resource type="StyleBoxFlat" id="Hover"]
-content_margin_left = 16.0
-content_margin_top = 10.0
-content_margin_right = 16.0
-content_margin_bottom = 10.0
-bg_color = Color(0.24, 0.31, 0.24, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.88, 0.7, 0.4, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxFlat" id="Button"]
-content_margin_left = 16.0
-content_margin_top = 10.0
-content_margin_right = 16.0
-content_margin_bottom = 10.0
-bg_color = Color(0.12, 0.2, 0.19, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.38, 0.46, 0.36, 1)
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
 
 [sub_resource type="StyleBoxFlat" id="Fill"]
 content_margin_top = 3.0
 content_margin_bottom = 3.0
-bg_color = Color(0.77, 0.61, 0.35, 1)
+bg_color = Color(0.32156864, 0.5411765, 0.3254902, 1)
 
 [sub_resource type="StyleBoxFlat" id="Track"]
 content_margin_top = 3.0
 content_margin_bottom = 3.0
-bg_color = Color(0.23, 0.29, 0.27, 1)
+bg_color = Color(0.18, 0.22, 0.31, 1)
 
-[sub_resource type="StyleBoxFlat" id="Panel"]
-content_margin_left = 20.0
-content_margin_top = 18.0
-content_margin_right = 20.0
-content_margin_bottom = 18.0
-bg_color = Color(0.055, 0.095, 0.095, 0.96)
-border_width_left = 1
-border_width_top = 2
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.55, 0.43, 0.25, 1)
-corner_radius_top_left = 6
-corner_radius_top_right = 6
-corner_radius_bottom_right = 6
-corner_radius_bottom_left = 6
-shadow_color = Color(0, 0, 0, 0.35)
-shadow_size = 12
+[sub_resource type="StyleBoxTexture" id="Panel"]
+content_margin_left = 18.0
+content_margin_top = 16.0
+content_margin_right = 18.0
+content_margin_bottom = 16.0
+texture = ExtResource("1_gui")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(0, 0, 96, 96)
+
+[sub_resource type="StyleBoxTexture" id="TooltipPanel"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+texture = ExtResource("1_gui")
+texture_margin_left = 8.0
+texture_margin_top = 8.0
+texture_margin_right = 8.0
+texture_margin_bottom = 8.0
+region_rect = Rect2(0, 0, 96, 96)
+modulate_color = Color(1.08, 1.08, 1.12, 0.98)
 
 [resource]
 default_font_size = 16
-Button/colors/font_color = Color(0.95, 0.92, 0.83, 1)
-Button/colors/font_disabled_color = Color(0.5, 0.55, 0.5, 1)
-Button/styles/disabled = SubResource("Disabled")
+Button/colors/font_color = Color(0.96, 0.95, 0.91, 1)
+Button/colors/font_disabled_color = Color(0.65, 0.68, 0.7, 1)
+Button/styles/disabled = ExtResource("4_btn_dis")
 Button/styles/focus = SubResource("Focus")
-Button/styles/hover = SubResource("Hover")
-Button/styles/normal = SubResource("Button")
-Button/styles/pressed = SubResource("Hover")
+Button/styles/hover = ExtResource("3_btn_hover")
+Button/styles/normal = ExtResource("2_btn_norm")
+Button/styles/pressed = ExtResource("3_btn_hover")
 HSeparator/colors/separator = Color(0.55, 0.43, 0.25, 0.6)
 HSlider/styles/grabber_area = SubResource("Fill")
 HSlider/styles/grabber_area_highlight = SubResource("Fill")
 HSlider/styles/slider = SubResource("Track")
-Label/colors/font_color = Color(0.93, 0.9, 0.8, 1)
+Label/colors/font_color = Color(0.96, 0.95, 0.91, 1)
 Panel/styles/panel = SubResource("Panel")
 PanelContainer/styles/panel = SubResource("Panel")
+RichTextLabel/colors/default_color = Color(0.96, 0.95, 0.91, 1)
+TooltipLabel/colors/font_color = Color(0.97, 0.94, 0.86, 1)
+TooltipLabel/colors/font_shadow_color = Color(0.05, 0.06, 0.1, 0.8)
+TooltipLabel/constants/shadow_offset_x = 1
+TooltipLabel/constants/shadow_offset_y = 1
+TooltipLabel/font_sizes/font_size = 14
+TooltipPanel/styles/panel = SubResource("TooltipPanel")

@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+[ext_resource type="Texture2D" path="res://Assets/Images/Fire Wizard/Charge.png" id="2_proj"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"mage_ember_burst"
+display_name = "Chama Rápida"
+description = "Disparo veloz com bônus fixo de dano."
+effect_type = "damage"
+power_multiplier = 0.85
+flat_bonus = 2
+accuracy = 100
+max_uses = 5
+attack_style = "ranged"
+projectile_texture = ExtResource("2_proj")
+projectile_frame_size = Vector2i(64, 64)
+projectile_flight_frames = 6
+projectile_impact_frames = 6
+projectile_speed = 10.5
+projectile_arc_height = 0.0
+projectile_color = Color(1, 0.85, 0.25, 1)

@@ -3,6 +3,8 @@ extends Control
 
 @export var all_items: Array[ItemData] = []
 @export var item_card_scene: PackedScene
+@export var backpack_upgrade_item: ItemData = preload("res://Scripts/resources/Items/backpack_slot.tres")
+@export_range(0.0, 1.0) var backpack_upgrade_shop_chance: float = 0.15
 
 @onready var profile_name_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/ProfileNameLabel
 @onready var coins_label: Label = $MarginContainer/VBoxContainer/HBoxContainer/CoinsLabel
@@ -12,7 +14,24 @@ extends Control
 @onready var backpack_grid: GridContainer = $MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer/Scroll/GridContainer
 @onready var stash_grid: GridContainer = $MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer/Scroll/GridContainer
 
+const GUI_ATLAS: Texture2D = preload("res://Assets/UI/GUI_4x.png")
+
 var stash_items: Array[ItemData] = []
+var _slot_style: StyleBoxTexture
+var _slot_hover_style: StyleBoxTexture
+
+func _get_slot_style(hovered: bool = false) -> StyleBoxTexture:
+	if _slot_style == null:
+		_slot_style = StyleBoxTexture.new()
+		_slot_style.texture = GUI_ATLAS
+		_slot_style.region_rect = Rect2(0, 96, 32, 32)
+		_slot_style.texture_margin_left = 4.0
+		_slot_style.texture_margin_top = 4.0
+		_slot_style.texture_margin_right = 4.0
+		_slot_style.texture_margin_bottom = 4.0
+		_slot_hover_style = _slot_style.duplicate()
+		_slot_hover_style.modulate_color = Color(1.25, 1.25, 1.35, 1.0)
+	return _slot_hover_style if hovered else _slot_style
 func _ready() -> void:
 	refresh_from_profile()
 	
@@ -33,7 +52,7 @@ func _update_ui() -> void:
 	coins_label.text = "Moedas: %d" %SaveManager.get_coins()
 
 func _update_backpack_ui() -> void:
-	$MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer/Label.text = "MOCHILA  %d / %d" % [GameState.inventory.size(), GameState.get_max_inventory_slots()]
+	$MarginContainer/VBoxContainer/HBoxContainer2/Bag/VBoxContainer/Label.text = "MOCHILA (%d / %d)" % [GameState.inventory.size(), GameState.get_max_inventory_slots()]
 	for child in backpack_grid.get_children():
 		child.queue_free()
 		
@@ -46,11 +65,12 @@ func _update_backpack_ui() -> void:
 	for i in range(max_size - GameState.inventory.size()):
 		var empty_slot = Panel.new()
 		empty_slot.custom_minimum_size = Vector2(64, 64)
-		empty_slot.modulate.a = 0.3 
+		empty_slot.add_theme_stylebox_override("panel", _get_slot_style(false))
+		empty_slot.modulate.a = 0.45
 		backpack_grid.add_child(empty_slot)
 
 func _update_stash_ui() -> void:
-	$MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer/Label.text = "BAÚ  ·  %d" % stash_items.size()
+	$MarginContainer/VBoxContainer/HBoxContainer2/Stash/VBoxContainer/Label.text = "BAÚ (%d)" % stash_items.size()
 	for child in stash_grid.get_children():
 		child.queue_free()
 	
@@ -69,6 +89,9 @@ func _create_item_button(item: ItemData) -> Button:
 	btn.vertical_icon_alignment = VERTICAL_ALIGNMENT_CENTER
 	btn.custom_minimum_size = Vector2(64, 64)
 	btn.add_theme_constant_override("icon_max_width", 36)
+	btn.add_theme_stylebox_override("normal", _get_slot_style(false))
+	btn.add_theme_stylebox_override("hover", _get_slot_style(true))
+	btn.add_theme_stylebox_override("pressed", _get_slot_style(true))
 	btn.tooltip_text = item.item_name + "\n" + item.description
 	
 	btn.pivot_offset = Vector2(32, 32)
@@ -85,13 +108,17 @@ func _generate_shop() -> void:
 	if all_items.is_empty():
 		push_warning("CampController: Lista de itens vazia")
 		return
-	
+
+	var upgrade_slot := -1
+	if backpack_upgrade_item != null and SaveManager.can_upgrade_backpack() and randf() <= backpack_upgrade_shop_chance:
+		upgrade_slot = randi_range(0, 2)
+
 	for i in range(3):
-		var random_item = _roll_item_rng()
-		if random_item and item_card_scene:
+		var offer_item: ItemData = backpack_upgrade_item if i == upgrade_slot else _roll_item_rng()
+		if offer_item and item_card_scene:
 			var card = item_card_scene.instantiate() as ItemCard
 			shop_grid.add_child(card)
-			card.setup(random_item, self)
+			card.setup(offer_item, self)
 
 func _roll_item_rng() -> ItemData:
 	var pool: Array[ItemData] = []
@@ -113,6 +140,24 @@ func buy_item(item: ItemData, card_node: Control) -> bool:
 		trigger_ui_error(coins_label)
 		trigger_ui_error(card_node)
 		return false
+
+	if item.item_type == "backpack_upgrade":
+		if not SaveManager.can_upgrade_backpack():
+			$MarginContainer/VBoxContainer/Status.text = "Sua mochila já está na capacidade máxima."
+			AudioManager.play_ui_cancel()
+			trigger_ui_error(card_node)
+			return false
+		var previous_data := SaveManager.profile_data.duplicate(true)
+		SaveManager.profile_data.coins -= item.cost
+		if not SaveManager.upgrade_backpack(maxi(1, item.effect_value)):
+			SaveManager.profile_data = previous_data
+			return false
+		$MarginContainer/VBoxContainer/Status.text = "Capacidade da mochila aumentada para %d espaços." % SaveManager.get_backpack_limit()
+		_update_ui()
+		_update_backpack_ui()
+		AudioManager.play_ui_choose()
+		return true
+
 	if not GameState.has_inventory_space():
 		$MarginContainer/VBoxContainer/Status.text = "Mochila cheia. Guarde um item no baú para liberar espaço."
 		AudioManager.play_ui_cancel()

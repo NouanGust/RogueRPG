@@ -1,0 +1,15 @@
+[gd_resource type="Resource" script_class="AttackData" format=3]
+
+[ext_resource type="Script" path="res://Scripts/resources/attack_data.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+id = &"cleric_healing_light"
+display_name = "Luz Curativa"
+description = "Restaura vida com base na fé do personagem."
+effect_type = "heal"
+power_multiplier = 0.5
+flat_bonus = 4
+accuracy = 100
+max_uses = 3
+attack_style = "self"
